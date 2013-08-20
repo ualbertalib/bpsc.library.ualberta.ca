@@ -55,6 +55,11 @@ class Exhibits extends CI_Controller{
 			)
 		);
 
+
+	if (!$this->ion_auth->logged_in())
+		{
+			redirect('/login');
+	}else{	
 		//check that the form validation passes
 		if ($this->form_validation->run() === FALSE){
 			$this->load->view('common/header', $data);
@@ -109,7 +114,7 @@ class Exhibits extends CI_Controller{
 
     			redirect('exhibits');
     		}
-		
+		}
 	}
 	public function edit($slug){
 		$data['exhibit_item'] = $this->exhibit_model->get_exhibit($slug);
@@ -134,26 +139,36 @@ class Exhibits extends CI_Controller{
 		);
 
 
+	if (!$this->ion_auth->logged_in())
+		{
+			redirect('/login');
+	}else{	
 		if ($this->form_validation->run() === FALSE){
 			$this->load->view('common/header', $data);
 			$this->load->view('exhibits/edit');
 			$this->load->view('common/footer');
 		}
 		else{
-			
+			$this->exhibit_model->set_onnow_exhibit();
 			$this->exhibit_model->update_exhibit($slug);
 			$this -> session -> set_flashdata('message', 'Your exhibit was updated.');
 
     		redirect('admin');
 		}
 	}
+	}
 	public function delete($slug){
+
+	if (!$this->ion_auth->logged_in())
+		{
+			redirect('/login');
+	}else{	
 		$this->load->database();
 		$this->load->helper('url');
         $this->db->delete('exhibits', array('slug' => $slug));
         $this -> session -> set_flashdata('message', 'This exhibit was deleted.');
 
     	redirect('admin');
-
+	}
 	}
 }

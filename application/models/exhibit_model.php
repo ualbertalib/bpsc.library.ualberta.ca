@@ -53,6 +53,8 @@ class Exhibit_model extends CI_Model{
 		return $this->db->update('exhibits', $data);
 	}
 	public function set_onnow_exhibit(){
+		$this->load->helper('url');
+		
 		if($this->input->post('on_now')==1){
 			$this->db->where('on_now', 1);
 			$this->db->set('on_now', 0);

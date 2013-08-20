@@ -38,6 +38,7 @@
 |
 */
 $route['admin'] = 'admin/index';
+$route['login'] = 'auth/login';
 $route['exhibits/edit/(:any)'] = 'exhibits/edit/$1';
 $route['exhibits/create'] = 'exhibits/create';
 $route['exhibits/delete/(:any)'] = 'exhibits/delete/$1';

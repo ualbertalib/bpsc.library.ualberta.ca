@@ -247,8 +247,11 @@ text-decoration: none;
   box-shadow: 0 0 10px #888;
   border:solid 2px #fff;
 }
-.acollection img{
-
+#logout{
+  font-size: 12px;
+  padding: 5px;
+  float: right;
+  margin-top: -5px;
 }
 .acollection a h2{
   font-size: 16px;
@@ -448,6 +451,13 @@ input{
   float: left;
   margin-top: 17px;
 }
+.rem label{
+  float: left;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+  margin-top: 4px;
+}
     .myButton {
        
         -moz-box-shadow:inset 0px 1px 0px 0px #54a3f7;
@@ -511,11 +521,17 @@ input{
         #noleftmargin{
           margin-left: 0;
         }
-         #actions:hover, #noleftmargin:hover{
+         #actions:hover, #noleftmargin:hover, #logout:hover{
           color: #efefef;
         }
     .slide1{
       font-size: 12px;
+    }
+    .rem{
+      margin: 0;
+    }
+    .rem .myButton{
+      margin-left: 0;
     }
 #btnDel, #btnAdd{
         -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -566,6 +582,9 @@ input{
         top:1px;
     }
    
+ul.admin-list{
+  margin-top: 20px;
+}
 ul.admin-list li{
   float: left;
   width: 120px;

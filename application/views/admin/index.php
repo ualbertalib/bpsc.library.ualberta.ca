@@ -4,6 +4,7 @@
      <?php if ($this->session->flashdata('message') != ''): ?>
          <script type="text/javascript">
           $(document).ready(function() {  
+               $.jGrowl.defaults.position = 'top-left';
            $.jGrowl("<?php echo $this->session->flashdata('message') ?>");  
           });
          </script>
@@ -15,10 +16,9 @@
 <div class="row-fluid">
   <div class="span12 main-content">
     <div class="container">
-      <h2>Admin</h2>
+      <h2>Admin <a href="auth/logout" class="myButton" id="logout">logout</a> </h2>
 
-            <a href="collections/create" class="myButton" id="noleftmargin">Create a new Collection</a>
-             <a href="exhibits/create" class="myButton" id="noleftmargin">Create a new link to an Online Exhibit</a>
+    
      
     
     </div>
@@ -27,6 +27,8 @@
 <div class="row-fluid top-margin">
   <div class="span12 main-content">
     <h3>Research Collections</h3>
+    
+            <a href="collections/create" class="myButton" id="noleftmargin">Create a new Collection</a>
     <ul class="admin-list">
       <?php foreach ($collections as $collection_item): ?>
         <li> 
@@ -43,6 +45,7 @@
 <div class="row-fluid top-margin">
   <div class="span12 main-content">
     <h3>Online Exhibits</h3>
+             <a href="exhibits/create" class="myButton" id="noleftmargin">Create a new link to an Online Exhibit</a>
     <ul class="admin-list">
       <?php foreach ($exhibits as $exhibit_item): ?>
         <li>

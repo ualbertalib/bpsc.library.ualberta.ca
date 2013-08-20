@@ -4,6 +4,7 @@
          <?php if ($this->session->flashdata('message') != ''): ?>
          <script type="text/javascript">
           $(document).ready(function() {  
+                $.jGrowl.defaults.position = 'top-left';
            $.jGrowl("<?php echo $this->session->flashdata('message') ?>");  
           });
          </script>

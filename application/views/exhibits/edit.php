@@ -13,7 +13,7 @@
 	<div class="row-fluid top-margin">
     <div class="span6">
       <div class="row-fluid">
-    <label class="cr"><input type="checkbox" name="on_now" value="1" id="on-now">I would like this exhibit to be on the ON NOW exhibit on the home page.</label>
+    <label class="cr"><input type="checkbox" name="on_now" value="1" id="on-now" <?php if(!empty($exhibit_item['on_now'])&&($exhibit_item['on_now']==1)){echo "checked=checked";} ?>>I would like this exhibit to be on the ON NOW exhibit on the home page.</label>
 </div>
 <div class="row-fluid on-now-info">
   <div class="row-fluid">

@@ -5,6 +5,7 @@ class Collections extends CI_Controller{
 		$this->load->model('collection_model');
 		$this->load->library('session');
 		$this->load->helper('url');
+		$this->load->library('ion_auth');
 
 		$this->data['subjects_array'] = array('english-literature', 'american-literature', 'canadian-literature','history-of-the-book','small-presses','art-books','canadian-history','education', 'biological-science','law','religious-studies','native-studies');
 		$this->data['types_array'] = array('books', 'journals', 'newspapers', 'letters', 'diaries','manuscripts','reports', 'oversized folio', 'photographs', 'slides', 'video', 'audio', 'maps', 'paintings','artbooks', 'ephemra','artifcats', 'pamphlets');
@@ -54,7 +55,10 @@ class Collections extends CI_Controller{
 			)
 		);
 
-		
+	if (!$this->ion_auth->logged_in())
+		{
+			redirect('/login');
+	}else{	
     
 		//check that the form validation passes
 		if ($this->form_validation->run() === FALSE){
@@ -98,7 +102,7 @@ class Collections extends CI_Controller{
 			
     			redirect('collections');
     		}
-		
+		}
 	}
 	public function edit($slug){
 		$data['collection_item'] = $this->collection_model->get_collection($slug);
@@ -121,6 +125,11 @@ class Collections extends CI_Controller{
 			)
 		);
 
+	if (!$this->ion_auth->logged_in())
+		{
+			redirect('/login');
+	}else{	
+		
 		if ($this->form_validation->run() === FALSE){
 			$this->load->view('common/header', $data);
 			$this->load->view('collections/edit');
@@ -133,13 +142,20 @@ class Collections extends CI_Controller{
     		redirect('admin');
 		}
 	}
+}
 	public function delete($slug){
+
+	if (!$this->ion_auth->logged_in())
+		{
+			redirect('/login');
+	}else{	
 		$this->load->database();
 		$this->load->helper('url');
         $this->db->delete('collections', array('slug' => $slug));
         $this -> session -> set_flashdata('message', 'This collection was deleted.');
 			
     	redirect('admin');
+    }
 
 	}
 }
