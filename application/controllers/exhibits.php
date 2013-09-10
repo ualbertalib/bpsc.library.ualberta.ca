@@ -5,6 +5,7 @@ class Exhibits extends CI_Controller{
 		$this->load->model('exhibit_model');
 		$this->load->library('session');
 		$this->load->helper('url');
+		$this->load->library('ion_auth');
 
 		$this->data['ex_subjects_array'] = array('english-literature', 'american-literature', 'canadian-literature','history-of-the-book','small-presses','art-books','canadian-history','education', 'biological-science','law','religious-studies','native-studies');
 		$this->data['ex_types_array'] = array('books', 'journals', 'newspapers', 'letters', 'diaries','manuscripts','reports', 'oversized folio', 'photographs', 'slides', 'video', 'audio', 'maps', 'paintings','artbooks', 'ephemra','artifcats', 'pamphlets');
@@ -122,8 +123,10 @@ class Exhibits extends CI_Controller{
 		$this->load->library('form_validation');
 		$this->load->helper('url');
 		$this->load->helper('ckeditor');
+		$this->load->library('upload');
 
 		$data['title'] = 'Update Link to an Online Exhibit';
+		$data['upload_error'] = '';
 		$slug = $slug;
 
 		$this->form_validation->set_rules('title', 'Title', 'required');
@@ -139,23 +142,46 @@ class Exhibits extends CI_Controller{
 		);
 
 
-	if (!$this->ion_auth->logged_in())
-		{
+	if (!$this->ion_auth->logged_in()){
 			redirect('/login');
 	}else{	
 		if ($this->form_validation->run() === FALSE){
 			$this->load->view('common/header', $data);
 			$this->load->view('exhibits/edit');
 			$this->load->view('common/footer');
-		}
-		else{
+		
+		}else{
+			$config['upload_path'] = './assets/uploads/display';
+            $config['allowed_types'] = 'jpg|png';               
+            $config['file_name'] = $slug;
+            $config['max_size'] = '800'; 
+            $config['overwrite'] = TRUE;
+            $this->upload->initialize($config); 
+            $field_name ="display";
+            if (!$this->upload->do_upload($field_name)){
+             	$data['upload_error'] = $this->upload->display_errors(); 
+
+            	$this->load->view('common/header', $data);
+				$this->load->view('exhibits/edit', $data);
+				$this->load->view('common/footer');
+			}
 			$this->exhibit_model->set_onnow_exhibit();
 			$this->exhibit_model->update_exhibit($slug);
 			$this -> session -> set_flashdata('message', 'Your exhibit was updated.');
 
     		redirect('admin');
+			}
 		}
 	}
+	public function deleteImage($slug){
+		$path_to_file = 'assets/uploads/display/'.$slug.'.jpg';
+		if(unlink($path_to_file)) {
+     		echo 'deleted successfully';
+     		redirect('exhibits/edit/'.$slug);
+		}
+		else{
+     		echo 'errors occured';
+		}		
 	}
 	public function delete($slug){
 

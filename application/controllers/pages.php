@@ -34,12 +34,12 @@ class Pages extends CI_Controller {
 	}else{
 		$this->cisimplepie->set_feed_url('http://bpsclibrary.blogspot.ca/feeds/pages/default?alt=rss');
 		$this->cisimplepie->init();
-		$data['about_rss'] = $this->cisimplepie->get_item(1);
-		$data['visit_rss'] = $this->cisimplepie->get_item(2);
-		$data['classes_rss'] = $this->cisimplepie->get_item(0);  
-		$data['contact_rss'] = $this->cisimplepie->get_item(4);
-		$data['slides_rss'] = $this->cisimplepie->get_item(0);
-
+		$data['bookclass_rss'] = $this->cisimplepie->get_item(0); 
+		$data['classes_rss'] = $this->cisimplepie->get_item(1); 
+		$data['slides_rss'] = $this->cisimplepie->get_item(2);
+		$data['about_rss'] = $this->cisimplepie->get_item(3);
+		$data['visit_rss'] = $this->cisimplepie->get_item(4);
+		$data['contact_rss'] = $this->cisimplepie->get_item(5);
 		
 		$this->load->view('common/header', $data);
 	}

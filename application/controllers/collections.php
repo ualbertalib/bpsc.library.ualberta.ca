@@ -110,9 +110,12 @@ class Collections extends CI_Controller{
 		$this->load->library('form_validation');
 		$this->load->helper('url');
 		$this->load->helper('ckeditor');
+		$this->load->library('upload');
 
 		$data['title'] = 'Update collection';
+		$data['upload_error'] = '';
 		$slug = $slug;
+
 
 		$this->form_validation->set_rules('title', 'Title', 'required');
 			//add the ckeditor for the essay form element
@@ -125,17 +128,28 @@ class Collections extends CI_Controller{
 			)
 		);
 
-	if (!$this->ion_auth->logged_in())
-		{
+	if (!$this->ion_auth->logged_in()){
 			redirect('/login');
 	}else{	
-		
 		if ($this->form_validation->run() === FALSE){
 			$this->load->view('common/header', $data);
 			$this->load->view('collections/edit');
 			$this->load->view('common/footer');
-		}
-		else{
+		}else{
+			$config['upload_path'] = './assets/uploads/display';
+            $config['allowed_types'] = 'jpg|png';               
+            $config['file_name'] = $slug;
+            $config['max_size'] = '800'; 
+            $config['overwrite'] = TRUE;
+            $this->upload->initialize($config); 
+            $field_name ="display";
+            if (!$this->upload->do_upload($field_name)){
+             	$data['upload_error'] = $this->upload->display_errors(); 
+
+            	$this->load->view('common/header', $data);
+				$this->load->view('collections/edit', $data);
+				$this->load->view('common/footer');
+			}
 			$this->collection_model->update_collection($slug);
 			$this -> session -> set_flashdata('message', 'Your collection was updated.');
 			
@@ -143,6 +157,16 @@ class Collections extends CI_Controller{
 		}
 	}
 }
+	public function deleteImage($slug){
+		$path_to_file = 'assets/uploads/display/'.$slug.'.jpg';
+		if(unlink($path_to_file)) {
+     		echo 'deleted successfully';
+     		redirect('collections/edit/'.$slug);
+		}
+		else{
+     		echo 'errors occured';
+		}		
+	}
 	public function delete($slug){
 
 	if (!$this->ion_auth->logged_in())

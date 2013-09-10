@@ -126,10 +126,11 @@ h3{
 .left-padding li{
   margin-bottom: 10px;
 }
-.container p{
+.container p, .container li{
   font-size: 15px;
   line-height: 27px;
 }
+
 .front-column{
   background-color: #fff;
 
@@ -240,7 +241,7 @@ text-decoration: none;
 }
 .acollection{
   width: 130px;
-  height: 250px;
+  height: 280px;
   margin: 0 30px 30px 0;  
   -moz-box-shadow: 0 0 10px #888;
   -webkit-box-shadow: 0 0 10px #888;
@@ -458,7 +459,7 @@ input{
   font-weight: normal;
   margin-top: 4px;
 }
-    .myButton {
+    .myButton, .container p span a, .container li span a{
        
         -moz-box-shadow:inset 0px 1px 0px 0px #54a3f7;
         -webkit-box-shadow:inset 0px 1px 0px 0px #54a3f7;
@@ -494,7 +495,7 @@ input{
         margin-left: 43%;
         
     }
-    .myButton:hover {
+    .myButton:hover, .container p span a:hover, .container li span a:hover{
         
         background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #0061a7), color-stop(1, #007dc1));
         background:-moz-linear-gradient(top, #0061a7 5%, #007dc1 100%);
@@ -506,9 +507,20 @@ input{
         
         background-color:#0061a7;
     }
-    .myButton:active {
+    .myButton:active , .container p span a:active, .container li span a:active{
         position:relative;
         top:1px;
+    }
+    .container p span a{
+      margin:30px 0 0 30px;
+
+    }
+    .container li span a{
+      margin:10px 0 0 10px;
+   
+    }
+    .container li span{
+      display: block;
     }
     #actions{
       text-transform: lowercase;
@@ -592,6 +604,11 @@ ul.admin-list li{
   list-style: none; 
   margin-top: 0;
   padding-top: 0;
+  height: 250px;
+  border: 1px solid #007dc1;
+  margin-right: 10px;
+  text-align: center;
+  padding-top: 5px;
 }
 ul.admin-list h3{
   line-height: 23px;

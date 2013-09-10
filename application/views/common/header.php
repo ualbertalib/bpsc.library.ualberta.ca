@@ -58,11 +58,7 @@
                   </li>
                 </ul>
               </nav>
-              <div class="blade-search">
-                <i class="icon-search"></i>
-                <input type="search" class="search-query" placeholder="search">
-                <button type="submit" class="btn btn-grey btn-small global-search-btn">Search</button>
-              </div>
+            
             </div>
           </div>
         </div>
@@ -76,10 +72,10 @@
          <ul class="main-nav span7 offset2">
               <li class="span2"><a href="/exhibits" class="line">Online Exhibits</a></li>
                <li class="span2"><a href="/collections" class="line">Research Collections</a></li>
-                 <li class="span2"><a href="/classes">Classes</a></li>
-                   <li class="span2"><a href="/visit">Visit</a></li>
-                      <li class="span2"><a href="/about" >About</a></li>
-              <li class="span2"><a href="/contact">Contact</a></li>
+                 <li class="span2"><a href="/info/classes">Classes</a></li>
+                   <li class="span2"><a href="/info/visit">Visit</a></li>
+                      <li class="span2"><a href="/info/about" >About</a></li>
+              <li class="span2"><a href="/info/contact">Contact</a></li>
           
           </ul>
         </div>

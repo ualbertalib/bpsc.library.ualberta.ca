@@ -2,12 +2,16 @@
 <h2>Update <em><?php echo $exhibit_item['title']; ?></em></h2>
 <p class="note">The exhibit title cannot be edited</p>
 
-
+<div class="errors">
+    <?php if ($upload_error != ''): ?>
+        <?php echo $upload_error; ?>
+    <?php endif?>
 <?php echo validation_errors(); ?>
-<?php $slug=$exhibit_item['slug'] ?>
-<?php echo form_open('/exhibits/edit/'+$slug) ?>
 
-      
+</div>
+
+<?php $slug=$exhibit_item['slug'] ?>
+<?php echo form_open_multipart('/exhibits/edit/'+$slug) ?>
       
 	<input type="hidden" name="title" value="<?php echo $exhibit_item['title']?>"/>
 	<div class="row-fluid top-margin">
@@ -67,20 +71,43 @@
 </div>
 
  <div class="row-fluid">
+    <div class="span12">
+      <h3>Update Display Image</h3>
+    </div>
     <div class="span4 labels">
-       <label for="display">Display Image</label>
-      <span class="help-block">This image will appear on the exhibit list page.<br/> <strong>130px wide by 160px high</strong></span>
-    </div>
-    <div class="span8">
-       <input type="file" name="exdisplay" size="20" />
-    </div>
-  </div>
-   <div class="row-fluid">
+      
+        <?php if (file_exists("assets/uploads/display/".$exhibit_item['slug'].".jpg")): ?>
+          <label for="display">Replace Display Image with a New Image</label><span class="help-block">This image will appear on the exhibit list page.<br/> <strong>130px wide by 160px high</strong></span>
+        <?php else: ?>
+          <label for="display">Add Display Image</label><span class="help-block">This image will appear on the exhibit list page.<br/> <strong>130px wide by 160px high</strong></span>
+        <?php endif?> 
+      </div>   
+                   
+             <div class="span4">
+              
+                     <input type="file" name="display" size="20" />
+               </div>
+           
+                 <div class="span3">
+                 <?php if (file_exists("assets/uploads/display/".$exhibit_item['slug'].".jpg")): ?>
+            <img src="/assets/uploads/display/<?php echo $exhibit_item['slug'] ?>.jpg"/></br>
+            <a href="/exhibits/deleteimage/<?php echo $exhibit_item['slug'] ?>" class="myButton" id="actions" onclick="return confirm('Delete content?');" >Delete Image</a>
+
+
+           <?php else: ?>
+         <p><strong>no display image</strong></p>
+           <?php endif?> 
+             </div>
+
+
+
+</div>
+   <div class="row-fluid top-margin">
     <div class="span12 labels">
-  <p>All online exhibits <strong>must</strong> have an external URL. Would you like: <p>
-  <label class="cr"><input type="radio" name="exhibit_type" value="0" <?php if(!empty($exhibit_item['exhibit_type']) && ($exhibit_item['exhibit_type']) != 1){echo "checked='checked'";} ?>>to link directly to the external exhibit<br/></label>
+  <p>All online exhibits <strong>must</strong> have an external URL. Would you like: 
+  <label class="cr"><input type="radio" name="exhibit_type" value="0" <?php if($exhibit_item['exhibit_type'] != 1){echo "checked='checked'";} ?>>to link directly to the external exhibit<br/></label>
   
-  <label class="cr"><input type="radio" name="exhibit_type" value="1" <?php if(!empty($exhibit_item['exhibit_type']) && ($exhibit_item['exhibit_type']) != 0){echo "checked='checked'";} ?>>create an intermediate page with more information about the exhibit</label>
+  <label class="cr"><input type="radio" name="exhibit_type" id ="inter" value="1" <?php if($exhibit_item['exhibit_type'] != 0){echo "checked='checked'";} ?>>create an intermediate page with more information about the exhibit</label>
   </div>
 </div>
 
@@ -117,7 +144,7 @@
     </div>
 </div>
 </div>
-<div class="row-fluid">s
+<div class="row-fluid">
 <div class="span12 offset6">
     <input type="button" id="btnAdd" value="add another slide image" class="span3"/>
     <input type="button" id="btnDel" value="remove image" class="span3" />
@@ -140,20 +167,24 @@
 </form>
 </div>
 <script>
-$(document).ready(function(){ 
-      $(":radio:eq(1)").click(function(){
-             $("#exhibit-more-info").fadeIn(800);
+        $(document).ready(function(){ 
+          if ($('#on-now').is(":checked")){
+            $(".on-now-info").show();
+          } 
+          if ($("#inter").is(":checked")){
+            $("#exhibit-more-info").show();
+          }
+          $(":radio:eq(1)").click(function(){
+            $("#exhibit-more-info").fadeIn(800);
           });
 
           $(":radio:eq(0)").click(function(){
              $("#exhibit-more-info").fadeOut(800);
           });
+         
           $("#on-now").click(function(){
-            
              $(".on-now-info").fadeToggle(400);
-       
-        
           });
 
-});
+        });
 </script>

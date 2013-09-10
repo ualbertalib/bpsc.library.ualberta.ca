@@ -30,8 +30,11 @@
       
          
             <div class="col">
-                  <a href="collections/<?php echo $collection_item['slug'] ?>"><img src="/assets/uploads/display/<?php echo $collection_item['slug'] ?>.jpg"/>   </a>
-       
+              <?php if (file_exists("assets/uploads/display/".$collection_item['slug'].".jpg")): ?>
+                <a href="collections/<?php echo $collection_item['slug'] ?>"><img src="/assets/uploads/display/<?php echo $collection_item['slug'] ?>.jpg"/>   </a>
+              <?php else: ?>
+                <a href="<?php echo $collection_item['external_url'] ?>"><img src="/assets/img/noimage.jpg"/></a> 
+              <?php endif?>
               <a href="collections/<?php echo $collection_item['slug'] ?>" class="col-details"><p><?php echo $collection_item['short_description'] ?></p></a>
             </div>
                  <a href="collections/<?php echo $collection_item['slug'] ?>"><h2><?php echo $collection_item['title'] ?></h2></a>

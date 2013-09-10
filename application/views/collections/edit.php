@@ -2,9 +2,16 @@
 <h2>Update <em><?php echo $collection_item['title']; ?></em></h2>
 <p class="note">The collection title cannot be edited</p>
 
+<div class="errors">
+    <?php if ($upload_error != ''): ?>
+        <?php echo $upload_error; ?>
+    <?php endif?>
 <?php echo validation_errors(); ?>
+
+</div>
+
 <?php $slug=$collection_item['slug'] ?>
-<?php echo form_open('/collections/edit/'+$slug) ?>
+<?php echo form_open_multipart('/collections/edit/'+$slug) ?>
 <div class="row-fluid">
     <div class="span7">
 
@@ -95,8 +102,31 @@
         <h3>Display Image</h3>
            
                
-	              
-                <img src="/assets/uploads/display/<?php echo $collection_item['slug'] ?>.jpg"/>
+	               <?php if (file_exists("assets/uploads/display/".$collection_item['slug'].".jpg")): ?>
+            <img src="/assets/uploads/display/<?php echo $collection_item['slug'] ?>.jpg"/>
+            <a href="/collections/deleteimage/<?php echo $collection_item['slug'] ?>" class="myButton" id="actions" onclick="return confirm('Delete content?');" >Delete Image</a>
+
+
+           <?php else: ?>
+         <p><strong>no display image</strong></p>
+           <?php endif?> 
+             
+
+                 <div class="row-fluid">
+                <div class="span6 labels">
+                     <?php if (file_exists("assets/uploads/display/".$collection_item['slug'].".jpg")): ?>
+          <label for="display">Replace Display Image with a New Image</label>
+           <?php else: ?>
+        <label for="display">Add Display Image</label>
+           <?php endif?> 
+                     
+                    <span class="help-block">This image will appear on the collection list page.<br/> <strong>130px wide by 160px high</strong></span>
+                </div>
+                <div class="span6">
+                     <input type="file" name="display" size="20" />
+                </div>
+            </div>
+
          
         <div class="row-fluid top-margin">
     <div class="span12">

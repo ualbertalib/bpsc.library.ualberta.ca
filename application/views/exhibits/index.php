@@ -25,8 +25,13 @@
          
               <?php if($exhibit_item['exhibit_type'] != '1'): ?>
                <div class="col">
-               <a href="<?php echo $exhibit_item['external_url'] ?>">
-              <img src="/assets/uploads/display/<?php echo $exhibit_item['slug'] ?>.jpg"/></a>
+                  <?php if (file_exists("assets/uploads/display/".$exhibit_item['slug'].".jpg")): ?>
+               <a href="<?php echo $exhibit_item['external_url'] ?>"><img src="/assets/uploads/display/<?php echo $exhibit_item['slug'] ?>.jpg"/></a>
+                  <?php else: ?>
+                <a href="<?php echo $exhibit_item['external_url'] ?>"><img src="/assets/img/noimage.jpg"/></a> 
+              <?php endif?>
+    
+             
               <a href="<?php echo $exhibit_item['external_url'] ?>" class="col-details"> <p><?php echo $exhibit_item['short_description'] ?></p><a>
             </div>
 
@@ -34,8 +39,12 @@
                 <h2><?php echo $exhibit_item['title'] ?></h2></a>
               <?php else: ?>
                <div class="col">
-                 <a href="exhibits/<?php echo $exhibit_item['slug'] ?>">
-              <img src="/assets/uploads/display/<?php echo $exhibit_item['slug'] ?>.jpg"/></a>
+                 <?php if (file_exists("assets/uploads/display/".$exhibit_item['slug'].".jpg")): ?>
+                <a href="exhibits/<?php echo $exhibit_item['slug'] ?>"><img src="/assets/uploads/display/<?php echo $exhibit_item['slug'] ?>.jpg"/></a>
+              <?php else: ?>
+                <a href="<?php echo $exhibit_item['external_url'] ?>"><img src="/assets/img/noimage.jpg"/></a> 
+              <?php endif?>
+                 
                <a href="exhibits/<?php echo $exhibit_item['slug'] ?>" class="col-details"> <p><?php echo $exhibit_item['short_description'] ?></p><a>
             </div>
 
