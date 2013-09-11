@@ -27,7 +27,7 @@ Special Collections is a closed stack library. <a href="info/visit">Visitors</a>
                   <a href="exhibits/<?php echo $on_now_item['slug'] ?>">
                 <?php endif?>  
                 
-                <a href="http://www.library.ualberta.ca/specialcollections/exhibits/current/index.cfm">
+            
                   <div class="on-now"><img src="/assets/uploads/onnow/<?php echo $on_now_item['slug']; ?>.jpg"/>
                     <div class="on-now-details">
                       <p>
@@ -36,7 +36,7 @@ Special Collections is a closed stack library. <a href="info/visit">Visitors</a>
                     </div>
                   </div>
                 </a>
-                <h2 class="dates"><?php echo $on_now_item['on_now_dates']; ?></h2>
+                <h2 class="dates"><?php echo $on_now_item['on_now_dates']; ?> </h2>
               <?php endif?>  
             <?php endforeach?>
           <?php else: ?>

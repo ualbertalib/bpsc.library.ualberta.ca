@@ -165,6 +165,19 @@ class Exhibits extends CI_Controller{
 				$this->load->view('exhibits/edit', $data);
 				$this->load->view('common/footer');
 			}
+			 $config['upload_path'] = './assets/uploads/slides';
+            $config['allowed_types'] = 'jpg|png';               
+          
+            $config['max_size'] = '1200'; 
+            $this->upload->initialize($config); 
+              for($i = 1; $i < 6; $i++) {
+        		/* Handle the file upload */
+        		$upload = $this->upload->do_upload('slide'.$i);
+        		/* File failed to upload - continue */
+        		if($upload === FALSE) continue;
+        		/* Get the data about the file */
+			}
+
 			$this->exhibit_model->set_onnow_exhibit();
 			$this->exhibit_model->update_exhibit($slug);
 			$this -> session -> set_flashdata('message', 'Your exhibit was updated.');

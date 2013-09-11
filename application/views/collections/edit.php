@@ -128,18 +128,38 @@
             </div>
 
          
-        <div class="row-fluid top-margin">
-    <div class="span12">
-        <h3>Slide Image(s)</h3>
-
-    
-                <?php for($i = 0; $i < 6; $i++) {
+        <div class="row-fluid">
+    <div class="span6 labels">
+        <label for="slide">Slide Image(s)</label>
+        <span class="help-block">add up to 6 images for each collection.<br/><strong>570px by 570px</strong></span>
+    </div>
+        <?php for($i = 0; $i < 6; $i++) {
         $image = $collection_item['slug'].$i;
         if (file_exists("assets/uploads/slides/".$image.".jpg")){
             echo ("<img src='/assets/uploads/slides/".$image.".jpg' class='slide-edit' />");
         }
     } 
     ?>
+    <div class="span6">
+    <div id="input1" style="margin-bottom:4px;" class="clonedInput ">
+        <input type="file" name="slide1" id="slide1" size="20" class="slides"/>
+        <input type="text" name="caption1" id="caption1" class="span10 captions"  value="<?php if(!empty($_POST['caption1'])){echo ($_POST['caption1']);} ?>"/>
+          <label for="caption" class="span10 caption-label">Image Caption</label>
+    </div>
+</div>
+</div>
+<div class="row-fluid more-images-buttons">
+<div class="span12 offset6">
+    <input type="button" id="btnAdd" value="add another slide image" class="span3"/>
+    <input type="button" id="btnDel" value="remove image" class="span3" />
+</div>
+  
+    </div>
+</div>
+</div>
+</div>
+    
+            
 </div>
 </div>
 
@@ -168,6 +188,44 @@
             $("div.types").html('<input type="hidden" value="'+types+'" name="collection_type"/>');
             
              });
+
+            $('#btnAdd').click(function() {
+                var num     = $('.clonedInput').length; // how many "duplicatable" input fields we currently have
+                var newNum  = new Number(num + 1);      // the numeric ID of the new input field being added
+ 
+                // create the new element via clone(), and manipulate it's ID using newNum value
+                var newElem = $('#input' + num).clone().attr('id', 'input' + newNum);
+ 
+                // manipulate the name/id values of the input inside the new element
+                newElem.find('.slides').attr('id', 'slide' + newNum).attr('name', 'slide' + newNum);
+                newElem.find('.captions').attr('id', 'caption' + newNum).attr('name', 'caption' + newNum);
+
+                // insert the new element after the last "duplicatable" input field
+                $('#input' + num).after(newElem);
+ 
+                // enable the "remove" button
+                $('#btnDel').show();
+ 
+                // you can only add 6 slides
+                if (newNum == 6)
+                    $('#btnAdd').hide();
+            });
+ 
+            $('#btnDel').click(function() {
+                var num = $('.clonedInput').length; // how many "duplicatable" input fields we currently have
+                $('#input' + num).remove();     // remove the last element
+ 
+              
+ 
+                // if only one element remains, disable the "remove" button
+                if (num-1 == 1)
+                    $('#btnDel').hide();
+                 // you can only add 6 slides
+                if (num < 7)
+                    $('#btnAdd').show();
+            });
+ 
+     
           });
     </script>
 
