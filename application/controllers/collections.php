@@ -172,7 +172,26 @@ class Collections extends CI_Controller{
 	}
 }
 	public function deleteImage($slug){
+		if (!$this->ion_auth->logged_in())
+		{
+			redirect('/login');
+	}else{
 		$path_to_file = 'assets/uploads/display/'.$slug.'.jpg';
+		if(unlink($path_to_file)) {
+     		echo 'deleted successfully';
+     		redirect('collections/edit/'.$slug);
+		}
+		else{
+     		echo 'errors occured';
+		}	
+		}	
+	}
+	public function deleteSlideImage($slug, $image){
+			if (!$this->ion_auth->logged_in())
+		{
+			redirect('/login');
+	}else{
+		$path_to_file = 'assets/uploads/slides/'.$image.'.jpg';
 		if(unlink($path_to_file)) {
      		echo 'deleted successfully';
      		redirect('collections/edit/'.$slug);
@@ -181,6 +200,7 @@ class Collections extends CI_Controller{
      		echo 'errors occured';
 		}		
 	}
+}
 	public function delete($slug){
 
 	if (!$this->ion_auth->logged_in())

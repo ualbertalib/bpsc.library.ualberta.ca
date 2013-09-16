@@ -133,30 +133,41 @@
         <?php echo display_ckeditor($ckeditor); ?>
     </div>
   </div>
-      <div class="row-fluid">
-    <div class="span6 labels">
-        <label for="slide">Slide Image(s)</label>
-        <span class="help-block">add up to 6 images for each collection.<br/><strong>570px by 570px</strong></span>
-    </div>
-    <div class="span6">
-    <div id="input1" style="margin-bottom:4px;" class="clonedInput ">
+        
+        <div class="row-fluid top-margin">
+           <h3>Slide Images</h3> 
+
+  <?php 
+        for($i = 0; $i < 6; $i++) {
+          $slug = $exhibit_item['slug'];
+          $image = $exhibit_item['slug'].$i;
+          if (file_exists("assets/uploads/slides/".$image.".jpg")){
+            echo ("<div class='row-fluid'><div class='span6'><img src='/assets/uploads/slides/".$image.".jpg' class='slide-edit' /></div><div class='span6'> <a href='/collections/deleteslideimage/".$slug."/".$image."' class='myButton' id='actions' onclick='return confirm(\"Delete content?\");'>Delete Image</a></div></div>");
+          }
+         
+        }
+    ?>
+  </div>
+        <div class="row-fluid">
+            <div class="span6 labels">
+                <label for="display">Add Slide Image(s)</label>
+                <span class="help-block">add up to 6 images for each collection.<br/><strong>570px by 570px</strong></span>
+              </div>
+
+    <div id="input1" style="margin-bottom:4px;" class="clonedInput span6">
         <input type="file" name="slide1" id="slide1" size="20" class="slides"/>
         <input type="text" name="caption1" id="caption1" class="span10 captions"  value="<?php if(!empty($_POST['caption1'])){echo ($_POST['caption1']);} ?>"/>
           <label for="caption" class="span10 caption-label">Image Caption</label>
     </div>
-</div>
-</div>
+
 <div class="row-fluid more-images-buttons">
-<div class="span12 offset6">
+<div class="span12 offset3">
     <input type="button" id="btnAdd" value="add another slide image" class="span3"/>
     <input type="button" id="btnDel" value="remove image" class="span3" />
 </div>
-  
-    </div>
 </div>
 </div>
 </div>
-
 
 <div class="row-fluid top-margin">
 

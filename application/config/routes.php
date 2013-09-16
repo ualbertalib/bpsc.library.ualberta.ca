@@ -50,6 +50,7 @@ $route['collections/create'] = 'collections/create';
 $route['upload'] = 'uploader';
 $route['collections/delete/(:any)'] = 'collections/delete/$1';
 $route['collections/deleteimage/(:any)'] = 'collections/deleteimage/$1';
+$route['collections/deleteslideimage/(:any)'] = 'collections/deleteslideimage/$1/$2';
 $route['collections/(:any)'] = 'collections/view/$1';
 $route['collections'] = 'collections/index';
 $route['default_controller'] = 'pages/view';

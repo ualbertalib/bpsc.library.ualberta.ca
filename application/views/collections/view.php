@@ -66,7 +66,7 @@
 <p><strong>collector:</strong> <?php echo $collection_item['collector']; ?></p>
 <?php endif?>
 <?php if ($collection_item['collection_type'] != ''): ?>
-	<p><strong>type of collection:</strong> <?php echo str_replace(',', ', ', $collection_item['collection_type']); ?></p>
+	<p><strong>collection format:</strong> <?php echo str_replace(',', ', ', $collection_item['collection_type']); ?></p>
 <?php endif?>
 
 <p><strong>subjects</strong>  (click to see related collections): 

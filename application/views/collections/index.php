@@ -10,14 +10,7 @@
          </script>
       <?php endif ?>
       <h2>Research Collections</h2>
-      <ul id="filters">        
-        <li><a href="#" data-filter="*"><strong>Show All</strong></a></li>
-
-         <?php foreach ($subjects_array as $sub): ?>
-           
-        <li><a href="#" data-filter=".<?php echo $sub ?>"><?php echo ucfirst(str_replace('-', ' ', $sub)) ?></a></li>     
-         <?php endforeach ?>
-      </ul>
+    
     </div>
   </div>
 </div>
