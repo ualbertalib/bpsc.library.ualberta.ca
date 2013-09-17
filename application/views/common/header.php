@@ -69,7 +69,7 @@
         <div class="container">
           <h1 class="span3"><a href="/">Bruce Peel Special
            Collections Library</a></h1>
-         <ul class="main-nav span7 offset2">
+         <ul class="main-nav span8 offset1">
               <li class="span2"><a href="/exhibits" class="line">Online Exhibits</a></li>
                <li class="span2"><a href="/collections" class="line">Research Collections</a></li>
                  <li class="span2"><a href="/info/classes">Classes</a></li>

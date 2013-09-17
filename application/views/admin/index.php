@@ -56,12 +56,21 @@
         
           <a href="/exhibits/edit/<?php echo $exhibit_item['slug'] ?>" class="myButton" id="actions">Edit</a> 
           <a href="/exhibits/delete/<?php echo $exhibit_item['slug'] ?>" onclick="return confirm('Delete content?');" class="myButton" id="actions">Delete</a>
-           <?php if (file_exists("assets/uploads/display/".$exhibit_item['slug'].".jpg")): ?>
-            <a href="<?php echo $exhibit_item['external_url'] ?>"><img src="/assets/uploads/display/<?php echo $exhibit_item['slug'] ?>.jpg" width="100px"/></a> 
-          <?php else: ?>
-             <a href="<?php echo $exhibit_item['external_url'] ?>"><img src="/assets/img/noimage.jpg" width="100px"/></a> 
-           <?php endif?>
-          <h3><a href="<?php echo $exhibit_item['external_url'] ?>"><?php echo $exhibit_item['title'] ?></a></h3>
+           <?php if($exhibit_item['exhibit_type'] != '1'): ?>
+              <?php if (file_exists("assets/uploads/display/".$exhibit_item['slug'].".jpg")): ?>
+                <a href="<?php echo $exhibit_item['external_url'] ?>"><img src="/assets/uploads/display/<?php echo $exhibit_item['slug'] ?>.jpg" width="100px"/></a> 
+              <?php else: ?>
+                <a href="<?php echo $exhibit_item['external_url'] ?>"><img src="/assets/img/noimage.jpg" width="100px"/></a> 
+              <?php endif?>
+              <h3><a href="<?php echo $exhibit_item['external_url'] ?>"><?php echo $exhibit_item['title'] ?></a></h3>
+            <?php else: ?>
+              <?php if (file_exists("assets/uploads/display/".$exhibit_item['slug'].".jpg")): ?>
+                <a href="exhibits/<?php echo $exhibit_item['slug'] ?>"><img src="/assets/uploads/display/<?php echo $exhibit_item['slug'] ?>.jpg" width="100px"/></a> 
+              <?php else: ?>
+                <a href="exhibits/<?php echo $exhibit_item['slug'] ?>"><img src="/assets/img/noimage.jpg" width="100px"/></a> 
+              <?php endif?>
+              <h3><a href="exhibits/<?php echo $exhibit_item['slug'] ?>"><?php echo $exhibit_item['title'] ?></a></h3>
+            <?php endif?>
         </li>
       <?php endforeach ?>
     </ul>

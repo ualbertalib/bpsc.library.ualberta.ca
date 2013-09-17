@@ -64,7 +64,7 @@ Special Collections is a closed stack library. <a href="info/visit">Visitors</a>
             <?php endforeach; ?>
 
                </ul>
-               <p class="social"><a href="https://twitter.com"><img src="/assets/img/twitter_32.png"></a><a href="https://www.facebook.com"><img src="/assets/img/facebook_32.png"></a><a href="http://www.youtube.com"><img src="/assets/img/youtube_32.png"></a><a href="http://wordpress.com/"><img src="/assets/img/wordpress_32.png"></a></p>
+               <p class="social"><a href="https://twitter.com"><img src="/assets/img/twitter_32.png"></a><a href="http://www.youtube.com/user/ualibrary2010"><img src="/assets/img/youtube_32.png"></a><a href="http://bpsclibrary.blogspot.ca/"><img src="/assets/img/blogger_32.png"></a></p>
               
             </div>
           </div>

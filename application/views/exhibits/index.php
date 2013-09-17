@@ -42,7 +42,7 @@
                  <?php if (file_exists("assets/uploads/display/".$exhibit_item['slug'].".jpg")): ?>
                 <a href="exhibits/<?php echo $exhibit_item['slug'] ?>"><img src="/assets/uploads/display/<?php echo $exhibit_item['slug'] ?>.jpg"/></a>
               <?php else: ?>
-                <a href="<?php echo $exhibit_item['external_url'] ?>"><img src="/assets/img/noimage.jpg"/></a> 
+                <a href="exhibits/<?php echo $exhibit_item['slug'] ?>"><img src="/assets/img/noimage.jpg"/></a> 
               <?php endif?>
                  
                <a href="exhibits/<?php echo $exhibit_item['slug'] ?>" class="col-details"> <p><?php echo $exhibit_item['short_description'] ?></p><a>

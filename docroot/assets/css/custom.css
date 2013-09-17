@@ -214,6 +214,7 @@ text-decoration: none;
  .front-column p.social{
   margin:0;
   padding: 13px 23px;
+  text-align: center;
  }
  .social a{
   padding: 0 10px;
@@ -280,7 +281,6 @@ text-decoration: none;
   color:#fff;
   font-size: 1.25em;
   line-height: 25px;
-
 }
 .main-nav li a.line{
     padding:31px 10px;
