@@ -121,6 +121,8 @@
     <div class="span6">
     <div id="input1" style="margin-bottom:4px;" class="clonedInput ">
         <input type="file" name="slide1" id="slide" size="20"/>
+         <input type="text" name="caption1" id="caption1" class="span10 captions"  value="<?php if(!empty($_POST['caption1'])){echo ($_POST['caption1']);} ?>"/>
+          <label for="caption" class="span10 caption-label">Image Caption</label>
     </div>
 </div>
 </div>
@@ -161,6 +163,43 @@ $(document).ready(function(){
        
         
           });
+          $('#btnAdd').click(function() {
+                var num     = $('.clonedInput').length; // how many "duplicatable" input fields we currently have
+                var newNum  = new Number(num + 1);      // the numeric ID of the new input field being added
+ 
+                // create the new element via clone(), and manipulate it's ID using newNum value
+                var newElem = $('#input' + num).clone().attr('id', 'input' + newNum);
+ 
+                // manipulate the name/id values of the input inside the new element
+                newElem.find('.slides').attr('id', 'slide' + newNum).attr('name', 'slide' + newNum);
+                newElem.find('.captions').attr('id', 'caption' + newNum).attr('name', 'caption' + newNum);
+
+                // insert the new element after the last "duplicatable" input field
+                $('#input' + num).after(newElem);
+ 
+                // enable the "remove" button
+                $('#btnDel').show();
+ 
+                // you can only add 6 slides
+                if (newNum == 6)
+                    $('#btnAdd').hide();
+            });
+ 
+            $('#btnDel').click(function() {
+                var num = $('.clonedInput').length; // how many "duplicatable" input fields we currently have
+                $('#input' + num).remove();     // remove the last element
+ 
+              
+ 
+                // if only one element remains, disable the "remove" button
+                if (num-1 == 1)
+                    $('#btnDel').hide();
+                 // you can only add 6 slides
+                if (num < 7)
+                    $('#btnAdd').show();
+            });
+ 
+     
 
 });
 </script>
