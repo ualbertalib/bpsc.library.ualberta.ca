@@ -45,13 +45,20 @@ body.creamy{
   font-weight: bold;
 }
 em{
-  font-weight: 700;
+
   font-style:italic;
-  color: 
+
 }
 a{
   color:#007C41;
   font-weight: 500;
+}
+.small{
+ line-height: 10px;
+  font-size: 12px;
+}
+.filter-title{
+  font-size: 15px;
 }
 .white{
   background-color: #fff;
@@ -77,6 +84,9 @@ display: block;
 }
 .top-margin{
   margin-top: 30px;
+}
+.bottom-margin{
+  margin-bottom: 30px;
 }
 .left-padding{
   padding-right: 20px;
@@ -233,7 +243,7 @@ text-decoration: none;
   font-size: 15px;
   font-family: serif;
   font-weight: normal;
-  line-height: 20px;
+  line-height: 19px;
   letter-spacing: 1px;
   padding: 8px;
 }
@@ -626,10 +636,6 @@ ul.admin-list img{
 column-count: 3;
 column-gap: 1.2em;
 margin-left: 0;
-}
-.types{
-  margin-bottom: 0px;
-border-bottom: 4px solid #efefef;
 }
 
 

@@ -1,10 +1,10 @@
 
- <div class="row top-margin">
+ <div class="row">
  	<div class="span12">
  		<h2><?php echo $collection_item['title']; ?></h2>
  	</div>
 </div>
- 	 <div class="row">
+ 	 <div class="row bottom-margin">
 <div class="span6">
 
 	<p class="right-padding"><?php echo $collection_item['essay']; ?></p>
@@ -65,19 +65,27 @@
 <?php if ($collection_item['collector'] != ''): ?>
 <p><strong>collector:</strong> <?php echo $collection_item['collector']; ?></p>
 <?php endif?>
-<?php if ($collection_item['collection_type'] != ''): ?>
-	<p><strong>collection format:</strong> <?php echo str_replace(',', ', ', $collection_item['collection_type']); ?></p>
-<?php endif?>
+	
+     <?php 
+      $first = true;
+      foreach ($collection_item['collection_type'] as $format){
+        if ($format != '0'){
+          if(!$first) {
+          }else{
+            echo "<p><strong>Collection Formats</strong>: ";
+            $first = false;
+          }
+          $clean_format = ucwords(str_replace('-', ' ', $format));
+          if ($format === end($collection_item['collection_type'])){
+            echo ('<a href="/collections#'.$format.'">'.$clean_format.'</a><br/><span class="small">click a link to see other collections with this format</span>');
+          }else{
+            echo ('<a href="/collections#'.$format.'">'.$clean_format.'</a>, ');  
+          }
+        }  
+      } ?>
+    </p>
 
-<p><strong>subjects</strong>  (click to see related collections): 
-  <?php foreach($collection_item['subjects'] as $subject){
-  		$clean_subject = ucwords(str_replace('-', ' ', $subject));
-  		 if ($subject === end($collection_item['subjects'])){
-			echo ('<a href="/collections#'.$subject.'">'.$clean_subject.'</a>');
-		}else{
-			echo ('<a href="/collections#'.$subject.'">'.$clean_subject.'</a>, ');	
-		} 
-	} ?></p>
+
 
 
 </div>

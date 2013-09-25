@@ -29,6 +29,8 @@ class Collections extends CI_Controller{
 
 		$data['collection_item']['subjects'] = explode(',', $data['collection_item']['subjects']);
 		
+		$data['collection_item']['collection_type'] = explode(',', $data['collection_item']['collection_type']);
+		
 		$this->load->view('common/header', $data);
 		$this->load->view('collections/view', $data);
 		$this->load->view('common/footer');
@@ -153,8 +155,8 @@ class Collections extends CI_Controller{
 
 			 $config['upload_path'] = './assets/uploads/slides';
             $config['allowed_types'] = 'jpg|png';               
-          
-            $config['max_size'] = '1200'; 
+            $config['overwrite'] = FALSE;
+            $config['max_size'] = '2000'; 
             $this->upload->initialize($config); 
               for($i = 1; $i < 6; $i++) {
         		/* Handle the file upload */

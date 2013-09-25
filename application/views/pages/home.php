@@ -8,7 +8,7 @@
         
           <div class="row-fluid">
             <div class="span6 front-column">
-                 <p class="welcome">The <em>Bruce Peel Special Collections Library</em> is located in the lower level of Rutherford South. Among its 100,000+ volumes are many <a href="http://bpsclibrary.blogspot.ca/2013/04/some-of-our-treasures.html">treasures</a>, including beautiful, rare and unusual books.
+                 <p class="welcome">The <em><strong>Bruce Peel Special Collections Library</strong></em> is located in the lower level of Rutherford South. Among its 100,000+ volumes are many <a href="http://bpsclibrary.blogspot.ca/2013/04/some-of-our-treasures.html">treasures</a>, including beautiful, rare and unusual books.
 
 Special Collections is a closed stack library. <a href="info/visit">Visitors</a> are always welcome, and the Library has an <a href="exhibits">exhibition</a> program with exceptional opportunities for learning and discovery.</p>
            

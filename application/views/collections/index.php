@@ -9,7 +9,7 @@
           });
          </script>
       <?php endif ?>
-      <h2>Research Collections</h2>
+      <h2>Research Collections<span class="filter-title"></span></h2>
     
     </div>
   </div>
@@ -61,7 +61,7 @@
       else if (selector==".new"){
         var ft="New and Current Exhibits";
       }
-      $('.filter-title').text(ft);
+      $('.filter-title').html(" with the format <strong><em>"+f+"</em></strong>");
     }
     else{
       var selector='*';

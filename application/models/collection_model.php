@@ -47,7 +47,13 @@ class Collection_model extends CI_Model{
 			'collection_type' => $this->input->post('collection_type'),
 			'subjects' => $this->input->post('subjects'),
 			'short_description' => $this->input->post('short_description'),
-			'essay' => $this->input->post('essay')
+			'essay' => $this->input->post('essay'),
+			'caption1' => $this->input->post('caption1'),
+			'caption2' => $this->input->post('caption2'),
+			'caption3' => $this->input->post('caption3'),
+			'caption4' => $this->input->post('caption4'),
+			'caption5' => $this->input->post('caption5'),
+			'caption6' => $this->input->post('caption6')
 			);
 		$this->db->where('slug', $slug);
 		return $this->db->update('collections', $data);

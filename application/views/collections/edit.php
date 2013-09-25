@@ -23,6 +23,7 @@
 		 </div>
     <div class="span9">
 	<input type="input" name="collector" value="<?php echo set_value('collector', $collection_item['collector'])?>"/>
+
 </div>
 </div>
 <div class="row-fluid">
@@ -56,9 +57,9 @@
             
         </ul>
     </div>
-        <div class="types"></div>
+       
 </div>
-	
+	<hr/>
 <div class="row-fluid">
       <div class="span3 labels">
      <h3>Subjects</h3>
@@ -115,7 +116,7 @@
                 <div class="span6 labels">
                      <?php if (file_exists("assets/uploads/display/".$collection_item['slug'].".jpg")): ?>
           <label for="display">Replace Display Image with a New Image</label>
-           <?php else: ?>
+           <?php else: ?> 
         <label for="display">Add Display Image</label>
            <?php endif?> 
                      
@@ -126,19 +127,28 @@
                 </div>
             </div>
 
-         
+          <hr/>
         <div class="row-fluid top-margin">
            <h3>Slide Images</h3> 
-
+           <?php if (file_exists("assets/uploads/slides/".$slug.".jpg")): ?>
+              <div class='row-fluid'><div class='span6'><img src="/assets/uploads/slides/<?php echo $collection_item['slug']; ?>.jpg" class="slide-edit" /></div><div class='span6'> <a href='/collections/deleteslideimage/<?php echo $collection_item['slug']; ?>/<?php echo $collection_item['slug']; ?>' class='myButton' id='actions' onclick='return confirm("Delete content?");'>Delete Image</a></div></div>
+            <div class='row-fluid'><div class='span2'><label for="caption" class="caption-label">Image Caption</label></div><div class='span6'><input type='text' name='caption1' id='caption1' class='captions' value='<?php echo set_value('caption1', $collection_item['caption1'])?>'/></div> </div>
+          <hr/>
+          <?php endif?> 
   <?php 
         for($i = 0; $i < 6; $i++) {
           $slug = $collection_item['slug'];
           $image = $collection_item['slug'].$i;
           if (file_exists("assets/uploads/slides/".$image.".jpg")){
+            $cap = $i+1;
+            $capname = 'caption'.$cap;
             echo ("<div class='row-fluid'><div class='span6'><img src='/assets/uploads/slides/".$image.".jpg' class='slide-edit' /></div><div class='span6'> <a href='/collections/deleteslideimage/".$slug."/".$image."' class='myButton' id='actions' onclick='return confirm(\"Delete content?\");'>Delete Image</a></div></div>");
+            echo ("<div class='row-fluid'><div class='span2'><label for='caption' class='caption-label'>Image Caption</label></div><div class='span6'><input type='text' name='".$capname."' id='".$capname."' class='captions' value='".set_value($capname, $collection_item[$capname])."'/></div></div> <hr/>");
           }
-         
         }
+         if (!file_exists("assets/uploads/slides/".$slug.".jpg")){
+          $cap = 0;
+         }
     ?>
   </div>
         <div class="row-fluid">
@@ -146,10 +156,10 @@
                 <label for="display">Add Slide Image(s)</label>
                 <span class="help-block">add up to 6 images for each collection.<br/><strong>570px by 570px</strong></span>
               </div>
-
-    <div id="input1" style="margin-bottom:4px;" class="clonedInput span6">
-        <input type="file" name="slide1" id="slide1" size="20" class="slides"/>
-        <input type="text" name="caption1" id="caption1" class="span10 captions"  value="<?php if(!empty($_POST['caption1'])){echo ($_POST['caption1']);} ?>"/>
+ <div class="span6">
+    <div id="input1" style="margin-bottom:4px;" class="clonedInput">
+        <input type="file" name="slide<?php echo $cap+1; ?>" id="slide<?php echo $cap+1; ?>" size="20" class="slides"/>
+        <input type="text" name="caption<?php echo $cap+1; ?>" id="caption<?php echo $cap+1; ?>" class="span10 captions" />
           <label for="caption" class="span10 caption-label">Image Caption</label>
     </div>
 </div>
@@ -196,7 +206,7 @@
              });
 
             $('#btnAdd').click(function() {
-                var num     = $('.clonedInput').length; // how many "duplicatable" input fields we currently have
+                var num     = <?php echo $cap+1; ?>; // how many "duplicatable" input fields we currently have
                 var newNum  = new Number(num + 1);      // the numeric ID of the new input field being added
  
                 // create the new element via clone(), and manipulate it's ID using newNum value
