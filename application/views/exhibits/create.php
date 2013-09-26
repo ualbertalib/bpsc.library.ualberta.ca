@@ -118,10 +118,10 @@
         <label for="slide">Slide Image(s)</label>
         <span class="help-block">add up to 6 images for each collection.<br/><strong>570px by 570px</span>
     </div>
-    <div class="span6">
+  <div class="span6">
     <div id="input1" style="margin-bottom:4px;" class="clonedInput ">
-        <input type="file" name="slide1" id="slide" size="20"/>
-         <input type="text" name="caption1" id="caption1" class="span10 captions"  value="<?php if(!empty($_POST['caption1'])){echo ($_POST['caption1']);} ?>"/>
+        <input type="file" name="slide1" id="slide1" size="20" class="slides"/>
+        <input type="text" name="caption1" id="caption1" class="span10 captions"  value="<?php if(!empty($_POST['caption1'])){echo ($_POST['caption1']);} ?>"/>
           <label for="caption" class="span10 caption-label">Image Caption</label>
     </div>
 </div>

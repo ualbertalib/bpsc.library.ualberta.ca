@@ -131,7 +131,7 @@
         <div class="row-fluid top-margin">
            <h3>Slide Images</h3> 
            <?php if (file_exists("assets/uploads/slides/".$slug.".jpg")): ?>
-              <div class='row-fluid'><div class='span6'><img src="/assets/uploads/slides/<?php echo $collection_item['slug']; ?>.jpg" class="slide-edit" /></div><div class='span6'> <a href='/collections/deleteslideimage/<?php echo $collection_item['slug']; ?>/<?php echo $collection_item['slug']; ?>' class='myButton' id='actions' onclick='return confirm("Delete content?");'>Delete Image</a></div></div>
+              <div class='row-fluid'><div class='span6'><img src="/assets/uploads/slides/<?php echo $collection_item['slug']; ?>.jpg" class="slide-edit" /></div><div class='span6'> <a href='/collections/deleteslideimage/<?php echo $collection_item['slug']; ?>/<?php echo $collection_item['slug']; ?>' class='myButton' id='actions' onclick='return confirm("Delete Image?");'>Delete Image</a></div></div>
             <div class='row-fluid'><div class='span2'><label for="caption" class="caption-label">Image Caption</label></div><div class='span6'><input type='text' name='caption1' id='caption1' class='captions' value='<?php echo set_value('caption1', $collection_item['caption1'])?>'/></div> </div>
           <hr/>
           <?php endif?> 
@@ -142,9 +142,12 @@
           if (file_exists("assets/uploads/slides/".$image.".jpg")){
             $cap = $i+1;
             $capname = 'caption'.$cap;
-            echo ("<div class='row-fluid'><div class='span6'><img src='/assets/uploads/slides/".$image.".jpg' class='slide-edit' /></div><div class='span6'> <a href='/collections/deleteslideimage/".$slug."/".$image."' class='myButton' id='actions' onclick='return confirm(\"Delete content?\");'>Delete Image</a></div></div>");
+            echo ("<div class='row-fluid'><div class='span6'><img src='/assets/uploads/slides/".$image.".jpg' class='slide-edit' /></div><div class='span6'> <a href='/collections/deleteslideimage/".$slug."/".$image."' class='myButton' id='actions' onclick='return confirm(\"Delete Image?\");'>Delete Image</a></div></div>");
             echo ("<div class='row-fluid'><div class='span2'><label for='caption' class='caption-label'>Image Caption</label></div><div class='span6'><input type='text' name='".$capname."' id='".$capname."' class='captions' value='".set_value($capname, $collection_item[$capname])."'/></div></div> <hr/>");
           }
+        }
+        if ((file_exists("assets/uploads/slides/".$slug.".jpg"))&&(!file_exists("assets/uploads/slides/".$slug."1.jpg"))){
+            $cap = 1;
         }
          if (!file_exists("assets/uploads/slides/".$slug.".jpg")){
           $cap = 0;
@@ -206,7 +209,7 @@
              });
 
             $('#btnAdd').click(function() {
-                var num     = <?php echo $cap+1; ?>; // how many "duplicatable" input fields we currently have
+                var num     = $('.clonedInput').length; // how many "duplicatable" input fields we currently have
                 var newNum  = new Number(num + 1);      // the numeric ID of the new input field being added
  
                 // create the new element via clone(), and manipulate it's ID using newNum value
@@ -241,7 +244,5 @@
                     $('#btnAdd').show();
             });
  
-     
-          });
+        });
     </script>
-

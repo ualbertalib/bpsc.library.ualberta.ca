@@ -43,6 +43,7 @@ $route['exhibits/edit/(:any)'] = 'exhibits/edit/$1';
 $route['exhibits/create'] = 'exhibits/create';
 $route['exhibits/delete/(:any)'] = 'exhibits/delete/$1';
 $route['exhibits/deleteimage/(:any)'] = 'exhibits/deleteimage/$1';
+$route['exhibits/deleteslideimage/(:any)'] = 'exhibits/deleteslideimage/$1/$2';
 $route['exhibits/(:any)'] = 'exhibits/view/$1';
 $route['exhibits'] = 'exhibits/index';
 $route['collections/edit/(:any)'] = 'collections/edit/$1';

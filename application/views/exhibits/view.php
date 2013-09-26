@@ -6,9 +6,9 @@
  	</div>
 </div>
  	 <div class="row bottom-margin">
-<div class="span6">
+<div class="span6 right-padding">
 
-	<p class="right-padding"><?php echo $exhibit_item['essay']; ?></p>
+	<?php echo $exhibit_item['essay']; ?>
 </div>
 <div class="span6"> 
 	
@@ -17,6 +17,7 @@
 <p><strong>collector:</strong> <?php echo $exhibit_item['exhibitor']; ?></p>
 <?php endif?>
  <?php if (file_exists("assets/uploads/slides/".$exhibit_item['slug'].".jpg")): ?>
+  <?php if (file_exists("assets/uploads/slides/".$exhibit_item['slug']."1.jpg")): ?>
 	<div class="slider">
     <div id="myCarousel" class="carousel slide">
        
@@ -47,6 +48,10 @@
                 <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
               </div>
             </div>
+          <?php else: ?>
+            <img src="/assets/uploads/slides/<?php echo $exhibit_item['slug']; ?>.jpg"/>
+                    <p class='captioning'><?php echo $exhibit_item['caption1'];?></p>
+    <?php endif?>
 <?php endif?>
 
 </div>

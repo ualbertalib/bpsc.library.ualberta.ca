@@ -134,46 +134,69 @@
     </div>
   </div>
         
+           <hr/>
         <div class="row-fluid top-margin">
            <h3>Slide Images</h3> 
-
+           <?php if (file_exists("assets/uploads/slides/".$exhibit_item['slug'].".jpg")): ?>
+              <div class='row-fluid'><div class='span6'><img src="/assets/uploads/slides/<?php echo $exhibit_item['slug']; ?>.jpg" class="slide-edit" /></div><div class='span6'> <a href='/exhibits/deleteslideimage/<?php echo $exhibit_item['slug']; ?>/<?php echo $exhibit_item['slug']; ?>' class='myButton' id='actions' onclick='return confirm("Delete Image?");'>Delete Image</a></div></div>
+            <div class='row-fluid'><div class='span2'><label for="caption" class="caption-label">Image Caption</label></div><div class='span6'><input type='text' name='caption1' id='caption1' class='captions' value='<?php echo set_value('caption1', $exhibit_item['caption1'])?>'/></div> </div>
+          <hr/>
+          <?php endif?> 
   <?php 
         for($i = 0; $i < 6; $i++) {
           $slug = $exhibit_item['slug'];
           $image = $exhibit_item['slug'].$i;
           if (file_exists("assets/uploads/slides/".$image.".jpg")){
-            echo ("<div class='row-fluid'><div class='span6'><img src='/assets/uploads/slides/".$image.".jpg' class='slide-edit' /></div><div class='span6'> <a href='/collections/deleteslideimage/".$slug."/".$image."' class='myButton' id='actions' onclick='return confirm(\"Delete content?\");'>Delete Image</a></div></div>");
+            $cap = $i+1;
+            $capname = 'caption'.$cap;
+            echo ("<div class='row-fluid'><div class='span6'><img src='/assets/uploads/slides/".$image.".jpg' class='slide-edit' /></div><div class='span6'> <a href='/exhibits/deleteslideimage/".$slug."/".$image."' class='myButton' id='actions' onclick='return confirm(\"Delete Image?\");'>Delete Image</a></div></div>");
+            echo ("<div class='row-fluid'><div class='span2'><label for='caption' class='caption-label'>Image Caption</label></div><div class='span6'><input type='text' name='".$capname."' id='".$capname."' class='captions' value='".set_value($capname, $exhibit_item[$capname])."'/></div></div> <hr/>");
           }
-         
         }
+        if ((file_exists("assets/uploads/slides/".$slug.".jpg"))&&(!file_exists("assets/uploads/slides/".$slug."1.jpg"))){
+            $cap = 1;
+        }
+         if (!file_exists("assets/uploads/slides/".$slug.".jpg")){
+          $cap = 0;
+         }
     ?>
   </div>
         <div class="row-fluid">
             <div class="span6 labels">
                 <label for="display">Add Slide Image(s)</label>
-                <span class="help-block">add up to 6 images for each collection.<br/><strong>570px by 570px</strong></span>
+                <span class="help-block">add up to 6 images for each exhibit.<br/><strong>570px by 570px</strong></span>
               </div>
-
-    <div id="input1" style="margin-bottom:4px;" class="clonedInput span6">
-        <input type="file" name="slide1" id="slide1" size="20" class="slides"/>
-        <input type="text" name="caption1" id="caption1" class="span10 captions"  value="<?php if(!empty($_POST['caption1'])){echo ($_POST['caption1']);} ?>"/>
+ <div class="span6">
+    <div id="input1" style="margin-bottom:4px;" class="clonedInput">
+        <input type="file" name="slide<?php echo $cap+1; ?>" id="slide<?php echo $cap+1; ?>" size="20" class="slides"/>
+        <input type="text" name="caption<?php echo $cap+1; ?>" id="caption<?php echo $cap+1; ?>" class="span10 captions" />
           <label for="caption" class="span10 caption-label">Image Caption</label>
     </div>
-
+</div>
+</div>
 <div class="row-fluid more-images-buttons">
 <div class="span12 offset3">
     <input type="button" id="btnAdd" value="add another slide image" class="span3"/>
     <input type="button" id="btnDel" value="remove image" class="span3" />
 </div>
+  
+    </div>
+</div>
+</div>
+</div>
+    
+            
+</div>
+</div>
+
 </div>
 </div>
 </div>
 
 <div class="row-fluid top-margin">
-
     
 <div class="span12">
-  <input type="submit" name="submit" value="Update Exhibit" class="myButton" id="submit"/> 
+  <input type="submit" name="submit" value="Update Collection" class="myButton" id="submit"/> 
 </div>
     </div>
 
@@ -198,7 +221,7 @@
           $("#on-now").click(function(){
              $(".on-now-info").fadeToggle(400);
           });
-            $('#btnAdd').click(function() {
+           $('#btnAdd').click(function() {
                 var num     = $('.clonedInput').length; // how many "duplicatable" input fields we currently have
                 var newNum  = new Number(num + 1);      // the numeric ID of the new input field being added
  
@@ -235,6 +258,4 @@
             });
  
         });
-
-      
-</script>
+    </script>

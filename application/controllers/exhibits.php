@@ -166,7 +166,8 @@ class Exhibits extends CI_Controller{
 				$this->load->view('common/footer');
 			}
 			 $config['upload_path'] = './assets/uploads/slides';
-            $config['allowed_types'] = 'jpg|png';               
+            $config['allowed_types'] = 'jpg|png';  
+             $config['overwrite'] = FALSE;             
           
             $config['max_size'] = '1200'; 
             $this->upload->initialize($config); 
@@ -196,6 +197,21 @@ class Exhibits extends CI_Controller{
      		echo 'errors occured';
 		}		
 	}
+	public function deleteSlideImage($slug, $image){
+			if (!$this->ion_auth->logged_in())
+		{
+			redirect('/login');
+	}else{
+		$path_to_file = 'assets/uploads/slides/'.$image.'.jpg';
+		if(unlink($path_to_file)) {
+     		echo 'deleted successfully';
+     		redirect('exhibits/edit/'.$slug);
+		}
+		else{
+     		echo 'errors occured';
+		}		
+	}
+}
 	public function delete($slug){
 
 	if (!$this->ion_auth->logged_in())

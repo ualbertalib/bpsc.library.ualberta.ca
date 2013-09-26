@@ -5,9 +5,9 @@
  	</div>
 </div>
  	 <div class="row bottom-margin">
-<div class="span6">
+<div class="span6 right-padding">
 
-	<p class="right-padding"><?php echo $collection_item['essay']; ?></p>
+	<?php echo $collection_item['essay']; ?>
 </div>
 <div class="span6"> 
   <?php if ($collection_item['catalogue_id'] != ''): ?>
@@ -27,6 +27,7 @@
   </form>
 <?php endif?>
   <?php if (file_exists("assets/uploads/slides/".$collection_item['slug'].".jpg")): ?>
+   <?php if (file_exists("assets/uploads/slides/".$collection_item['slug']."1.jpg")): ?>
 	<div class="slider">
     <div id="myCarousel" class="carousel slide">
      
@@ -57,6 +58,10 @@
                 <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
               </div>
             </div>
+            <?php else: ?>
+            <img src="/assets/uploads/slides/<?php echo $collection_item['slug']; ?>.jpg"/>
+                    <p class='captioning'><?php echo $collection_item['caption1'];?></p>
+    <?php endif?>
 <?php endif?>
 
 
