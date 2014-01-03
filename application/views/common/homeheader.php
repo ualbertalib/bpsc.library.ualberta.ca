@@ -20,6 +20,8 @@
    <script src="/assets/js/bootstrap.min.js"></script>
   <script src="/assets/js/supersized.js"></script>
    <script src="/assets/js/supersized.shutter.min.js"></script>
+      <script src="/assets/js/jquery.hoverIntent.minified.js"></script>
+ 
 
     <script type="text/javascript">
 

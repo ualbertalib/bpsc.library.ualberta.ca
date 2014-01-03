@@ -45,39 +45,22 @@
 </div>
 <div class="row-fluid">
     <div class="span3 labels">
-	<label for="collection_type">Collection Type</label> 
-    </div>
-       <div class="span9 checks">
+    <label for="collection_type">Collection Type</label> 
+     </div>
+     <div class="span9 checks">
    <ul class="types">
   
             <?php foreach ($types_array as $type): ?>
-               <li><input type="checkbox" id="<?php echo $type ?>" value="<?php echo $type ?>" class="type-checkbox" <?php if(!empty($collection_item['collection_type']) && (strpos($collection_item['collection_type'], $type) !== false)){echo "checked=checked";} ?>/>
+               <li><input type="checkbox" id="<?php echo $type ?>" value="<?php echo $type ?>" class="type-checkbox" <?php if(!empty($_POST['collection_type']) && (strpos($_POST['collection_type'], $type) !== false)){echo "checked=checked";} ?>/>
                <label for="<?php echo $type ?>"><?php echo ucfirst(str_replace('-', ' ', $type)) ?></label></li>
             <?php endforeach ?>
             
         </ul>
     </div>
-       
+        <div class="types"></div>
 </div>
-	<hr/>
-<div class="row-fluid">
-      <div class="span3 labels">
-     <h3>Subjects</h3>
-       <span class="help-block">subjects that describe this collection</span>
-    </div>
-       <div class="span9 checks">
-        <ul class="subs">
-            <?php foreach ($subjects_array as $sub): ?>
-               <li><input type="checkbox" id="<?php echo $sub ?>" value="<?php echo $sub ?>" class="sub-checkbox" <?php if(!empty($collection_item['subjects']) && (strpos($collection_item['subjects'], $sub) !== false)){echo "checked=checked";} ?>/>
-               <label for="<?php echo $sub ?>"><?php echo ucfirst(str_replace('-', ' ', $sub)) ?></label></li>
-            <?php endforeach ?>
-            
-        </ul>
-        <div class="subjects"></div>
-    </div>
- 
 
-</div>
+
 <div class="row-fluid">
     <div class="span3 labels">
 	<label for="short_description">Short Description</label>

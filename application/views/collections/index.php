@@ -18,10 +18,7 @@
   <div class="span12 main-content">
     <div class="container" id="collections">
       <?php foreach ($collections as $collection_item): ?>
-        <div class="acollection <?php echo str_replace(',', ' ', $collection_item['subjects']) ?> <?php echo $collection_item['collection_type'] ?>">
-       
-      
-         
+        <div class="acollection <?php echo str_replace(',', ' ', $collection_item['collection_type'])?>">
             <div class="col">
               <?php if (file_exists("assets/uploads/display/".$collection_item['slug'].".jpg")): ?>
                 <a href="collections/<?php echo $collection_item['slug'] ?>"><img src="/assets/uploads/display/<?php echo $collection_item['slug'] ?>.jpg"/>   </a>
@@ -49,19 +46,8 @@
     var f=document.URL.split('#')[1];
     if (f!=undefined){
       var selector="."+f;
-      if (selector==".american-literature"){
-        var ft="Web Exhibits";
-      }
-      else if (selector==".major"){
-        var ft="Major Holdings";
-      }
-      else if (selector==".other"){
-        var ft="Other Collections";
-      }
-      else if (selector==".new"){
-        var ft="New and Current Exhibits";
-      }
-      $('.filter-title').html(" with the format <strong><em>"+f+"</em></strong>");
+      var cleanf=f.replace('-', ' ').toUpperCase();
+      $('.filter-title').html(" with the format <strong><em>"+cleanf+"</em></strong>");
     }
     else{
       var selector='*';

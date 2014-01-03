@@ -75,7 +75,7 @@ Special Collections is a closed stack library. <a href="info/visit">Visitors</a>
  <div> 
   </div>
 <script>
-$(".on-now").hover(function () {
+$(".on-now").hoverIntent(function () {
   $(".on-now-details").fadeToggle(600);
   return false;
 });

@@ -1,0 +1,7 @@
+<?php 
+    echo '<h2>'.$visit_rss->get_title().'</h2>';
+    echo $visit_rss->get_description();
+?>
+<div class="row-fluid top-margin">
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0" id="_360_krpano_id_786263" name="_360_krpano_name_786263" width="900" height="500"><param name="movie" value="http://www.360cities.net/javascripts/krpano/krpano.swf"/><param name="quality" value="autohigh"/><param name="allowScriptAccess" value="always"/><param name="flashvars" value="pano=http://www.360cities.net/krpano/external_embed/bruce-peel.xml&epd=http://www.360cities.net/data/embed/plugin_data/bruce-peel"/><param name="allowFullScreen" value="true"/><embed src="http://www.360cities.net/javascripts/krpano/krpano.swf" pluginspage="http://www.macromedia.com/go/getflashplayer" width="900" height="500" allowFullScreen="true" allowScriptAccess="always" quality="autohigh" flashvars="pano=http://www.360cities.net/krpano/external_embed/bruce-peel.xml&epd=http://www.360cities.net/data/embed/plugin_data/bruce-peel"></embed></object><br/><a title="panorama photos of Bruce Peel Special Collections on 360cities.net" href="http://www.360cities.net/image/bruce-peel">Bruce Peel Special Collections</a> in <a href="http://www.360cities.net/area/canada" title="panoramic images from Canada">Canada</a>
+</div>

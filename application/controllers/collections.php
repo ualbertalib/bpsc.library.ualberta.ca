@@ -8,7 +8,8 @@ class Collections extends CI_Controller{
 		$this->load->library('ion_auth');
 
 		$this->data['subjects_array'] = array('english-literature', 'american-literature', 'canadian-literature','history-of-the-book','small-presses','art-books','canadian-history','education', 'biological-science','law','religious-studies','native-studies');
-		$this->data['types_array'] = array('books', 'journals', 'newspapers', 'letters', 'diaries','manuscripts','reports', 'oversized folio', 'photographs', 'slides', 'video', 'audio', 'maps', 'paintings','artbooks', 'ephemra','artifcats', 'pamphlets');
+		//Array for the Collection Type metadata - if you add an option add it in a url friendly way - lowercase and dashes instead of spaces.
+		$this->data['types_array'] = array('16th-century', '17th-century', '18th-century', '19th-century', '20th-century','21st-century','art-work', 'artists-books', 'books', 'correspondence', 'ephemera', 'fine-press-books', 'incunables', 'limited-edition-books','manuscripts', 'newspapers','photographs', 'postcards', 'specialty-bindings');
 		$this->load->vars($this->data);
 	}
 	public function index(){

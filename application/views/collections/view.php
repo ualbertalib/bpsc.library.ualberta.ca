@@ -82,7 +82,7 @@
           }
           $clean_format = ucwords(str_replace('-', ' ', $format));
           if ($format === end($collection_item['collection_type'])){
-            echo ('<a href="/collections#'.$format.'">'.$clean_format.'</a><br/><span class="small">click a link to see other collections with this format</span>');
+            echo ('<a href="/collections#'.$format.'">'.$clean_format.'</a><span class="small"> -- click to see other collections with this format</span>');
           }else{
             echo ('<a href="/collections#'.$format.'">'.$clean_format.'</a>, ');  
           }

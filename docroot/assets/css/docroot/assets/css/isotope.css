@@ -1,0 +1,216 @@
+/* Start: Recommended Isotope styles */
+
+/**** Isotope Filtering ****/
+
+.isotope-item {
+  z-index: 2;
+}
+
+.isotope-hidden.isotope-item {
+  pointer-events: none;
+  z-index: 1;
+}
+
+/**** Isotope CSS3 transitions ****/
+
+.isotope,
+.isotope .isotope-item {
+  -webkit-transition-duration: 0.8s;
+     -moz-transition-duration: 0.8s;
+          transition-duration: 0.8s;
+}
+
+.isotope {
+  -webkit-transition-property: height, width;
+     -moz-transition-property: height, width;
+          transition-property: height, width;
+}
+
+.isotope .isotope-item {
+  -webkit-transition-property: -webkit-transform, opacity;
+     -moz-transition-property:    -moz-transform, opacity;
+          transition-property:         transform, opacity;
+}
+
+/**** disabling Isotope CSS3 transitions ****/
+
+.isotope.no-transition,
+.isotope.no-transition .isotope-item,
+.isotope .isotope-item.no-transition {
+  -webkit-transition-duration: 0s;
+     -moz-transition-duration: 0s;
+          transition-duration: 0s;
+}
+
+/* End: Recommended Isotope styles */
+
+
+
+/* disable CSS transitions for containers with infinite scrolling*/
+.isotope.infinite-scrolling {
+  -webkit-transition: none;
+     -moz-transition: none;
+          transition: none;
+}
+
+/**** Isotope styles ****/
+
+/* required for containers to inherit vertical size from window */
+html,
+body {
+  height: 99%;margin:0;padding:0;
+}
+
+#container {
+background-color:#000;
+margin-top:1em;
+margin-right:1em;
+}
+#options{
+  width:200px;
+  float:left;
+  padding-right:30px;
+}
+.collection {
+  width:160px;  
+  overflow:hidden;
+    height: 274px;
+  margin:5px;
+    float: left;
+    overflow: hidden;
+    position: relative;
+  -webkit-border-bottom-right-radius: 0.8em;
+    -moz-border-radius-bottomright: 0.8em;
+    border-bottom-right-radius: 0.8em;
+  border:3px solid #fff;
+  background-color:#fff;
+}
+.collection.wide{
+width: 336px;
+}
+.collection.long{
+  width:160px;
+  height:564px;
+}
+.collection.biggest{
+    height:564px;
+    width: 336px;
+}
+.collection * {
+  margin: 0;
+}
+.collection img{
+  border:5px solid #000;
+}
+.collection h2{
+  background-color:#fff;
+  width:145px;
+  left:5px;
+  height:40px;
+  text-align:center;
+  font-size:13px;
+  padding:8px 3px 0 3px;
+  line-height:18px;
+  font-family:sans-serif;
+  font-weight:bold;
+  letter-spacing:0.1em;
+  color:#000;
+  top:225px;
+    position: absolute;
+}
+.collection a{
+  display:block;
+  color:#000;
+  text-decoration:none; 
+}
+.collection h2.triggered{
+text-shadow:#fff 2px 2px;
+border-bottom:6px solid #e5e6e6;
+}
+.collection.wide h2{
+  width:320px;
+}
+.collection.long h2{
+  top:515px;
+  width:154px;
+}
+.collection.biggest h2{
+  top:515px;
+  width:320px;
+}
+.collection div.details{
+  width:130px;
+  top:5px;
+  left:5px;
+  padding:5px 10px;
+  display:none;
+  color:#000;
+  font-family:sans-serif;
+  font-size:14px;
+  line-height:21px;
+    position: absolute;
+  letter-spacing:0px;
+}
+.collection.wide div.details{
+  width:300px;
+}
+.collection.biggest div.details{
+  width:280px;
+  height:500px;
+  margin-left:30px;
+  margin-top:100px;
+}
+.collection div.details p{
+  margin-right:5px;
+  margin-bottom:10px;
+
+}
+.collection div.details p.info{
+  font-style:italic;
+  font-weight:bold;
+}
+.collection p.sdate, .collection p.adate{
+  display:none;
+}
+#options ul{
+  margin:0;
+  padding:0;
+}
+#options li a{
+  background-color:#FFF;
+  color:#000;
+  padding:10px;
+  display:block;
+  border-bottom:1px dotted #333;
+  text-decoration:none;
+}
+#options li a:hover, #sort-by li a:hover{
+  background-color:#d8e2d6;
+}
+#options h2{
+  color:#fff;
+  font-size:14px;
+  background-color:#000;
+  padding:5px;
+}
+#sort h2{
+  color:#000;
+  margin:0px 10px 10px 10px;
+  padding:0;
+}
+#sort-by li{
+  list-style:none;
+  display:inline;
+}
+#sort-by li a{
+  padding:10px;
+  background-color:#FFF;
+  color:#000;
+  text-decoration:none;
+  margin-left:2px;
+}
+
+/* The Magnificent Clearfix: nicolasgallagher.com/micro-clearfix-hack/ */
+.clearfix:before, .clearfix:after { content: ""; display: table; }
+.clearfix:after { clear: both; }
+.clearfix { zoom: 1; }
