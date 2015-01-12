@@ -9,25 +9,35 @@
           });
          </script>
       <?php endif ?>
-      <h2>Research Collections<span class="filter-title"></span></h2>
+      <h2 class="span6">Research Collections<span class="filter-title"></span></h2>
+
+      <div class="collection-search">
+        <form id="search" method="post" action="search">
+          <input type="text" size="20" name="query" placeholder="search collections"/>
+          <input type="submit" value="Search" class="myButton search-btn"/>          
+      </form>
+    </div>
     
     </div>
   </div>
 </div>
 <div class="row-fluid top-margin">
   <div class="span12 main-content">
+    <?php if (isset($query)): ?>
+     <p class="search-results-hd">Your search for <em><strong><?php echo $query ?></strong></em> returned the following results:</p>
+   <?php endif ?>
     <div class="container" id="collections">
       <?php foreach ($collections as $collection_item): ?>
         <div class="acollection <?php echo str_replace(',', ' ', $collection_item['collection_type'])?>">
             <div class="col">
               <?php if (file_exists("assets/uploads/display/".$collection_item['slug'].".jpg")): ?>
-                <a href="collections/<?php echo $collection_item['slug'] ?>"><img src="/assets/uploads/display/<?php echo $collection_item['slug'] ?>.jpg"/>   </a>
+                <a href="collections/<?php echo $collection_item['slug'] ?>"><img src="/assets/uploads/display/<?php echo $collection_item['slug'] ?>.jpg" alt="image for <?php echo $collection_item['title'] ?>"/>   </a>
               <?php else: ?>
                 <a href="<?php echo $collection_item['external_url'] ?>"><img src="/assets/img/noimage.jpg"/></a> 
               <?php endif?>
               <a href="collections/<?php echo $collection_item['slug'] ?>" class="col-details"><p><?php echo $collection_item['short_description'] ?></p></a>
             </div>
-                 <a href="collections/<?php echo $collection_item['slug'] ?>"><h2><?php echo $collection_item['title'] ?></h2></a>
+                 <a href="collections/<?php echo $collection_item['slug'] ?>"><h2 class="<?php echo $collection_item['slug'] ?>"><?php echo $collection_item['title'] ?></h2></a>
         </div>
       <?php endforeach ?>
     </div>

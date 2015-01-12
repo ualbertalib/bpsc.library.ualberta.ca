@@ -1,4 +1,4 @@
-<h2>Create a Link to an Online Exhibit</h2>
+<h2>Create an Exhibition</h2>
 
 <div class="errors">
   <?php if ($upload_error != ''): ?>
@@ -13,7 +13,7 @@
 <div class="row-fluid top-margin">
     <div class="span6">
       <div class="row-fluid">
-    <label class="cr"><input type="checkbox" name="on_now" value="1" id="on-now">I would like this exhibit to be on the ON NOW exhibit on the home page.</label>
+    <label class="cr"><input type="checkbox" name="on_now" value="1" id="on-now">I would like this exhibition to be on the ON NOW exhibit on the home page.</label>
 </div>
 <div class="row-fluid on-now-info">
   <div class="row-fluid">
@@ -47,7 +47,7 @@
 </div>
 <div class="row-fluid">
     <div class="span4 labels">
-     <label for="title" class="required">Exhibit Title</label> 
+     <label for="title" class="required">Exhibition Title</label> 
     </div>
     <div class="span8">
      <input type="input" name="title" value="<?php if(!empty($_POST['title'])){echo set_value('title', $_POST['title']);} ?>"/>
@@ -62,6 +62,22 @@
     </div>
 </div>
 
+<div class="row-fluid">
+    <div class="span4 labels">
+    <label for="collection_type">Exhibition Type</label> 
+     </div>
+     <div class="span8 checks">
+   <ul class="types">
+  
+            <?php foreach ($ex_subjects_array as $type): ?>
+               <li><input type="checkbox" id="<?php echo $type ?>" value="<?php echo $type ?>" class="sub-checkbox"/>
+               <label for="<?php echo $type ?>"><?php echo ucfirst(str_replace('-', ' ', $type)) ?></label></li>
+            <?php endforeach ?>
+            
+        </ul>
+    </div>
+        <div class="subjects"></div>
+</div>
 
 <div class="row-fluid">
     <div class="span4 labels">
@@ -72,7 +88,15 @@
      <textarea name="short_description" class="description"><?php if(!empty($_POST['short_description'])){echo set_value('short_description', $_POST['short_description']);} ?></textarea>
     </div>
 </div>
-
+<div class="row-fluid">
+    <div class="span4 labels">
+     <label for="exhibit_year">Exhibit Year</label>
+        <span class="help-block">The year in which the exhibit started</span>
+     </div>
+    <div class="span8">
+     <input type="input" name="exhibit_year"><?php if(!empty($_POST['exhibit_year'])){echo set_value('exhibit_year', $_POST['exhibit_year']);} ?> </input>
+    </div>
+</div>
  <div class="row-fluid">
     <div class="span4 labels">
        <label for="display">Display Image</label>
@@ -84,7 +108,7 @@
   </div>
    <div class="row-fluid">
     <div class="span12 labels">
-  <p>All online exhibits <strong>must</strong> have an external URL. Would you like: <p>
+  <p>Would you like: <p>
   <label class="cr"><input type="radio" name="exhibit_type" value="0" <?php if(!empty($_POST['exhibit_type']) && ($_POST['exhibit_type']) != 1){echo "checked='checked'";} ?>>to link directly to the external exhibit<br/></label>
   
   <label class="cr"><input type="radio" name="exhibit_type" value="1" <?php if(!empty($_POST['exhibit_type']) && ($_POST['exhibit_type']) != 0){echo "checked='checked'";} ?>>create an intermediate page with more information about the exhibit</label>
@@ -150,6 +174,13 @@
 </div>
 <script>
 $(document).ready(function(){ 
+      $( ".sub-checkbox" ).on( "click", function() {
+          var subjects = $('input:checkbox:checked.sub-checkbox').map(function () {
+          return this.value;
+        }).get().join(',');
+        $("div.subjects").html('<input type="hidden" value="'+subjects+'" name="subjects"/>');
+      });
+        
       $(":radio:eq(1)").click(function(){
              $("#exhibit-more-info").fadeIn(800);
           });
@@ -198,6 +229,10 @@ $(document).ready(function(){
                 if (num < 7)
                     $('#btnAdd').show();
             });
+
+                 
+            
+          
  
      
 

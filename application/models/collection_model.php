@@ -5,6 +5,7 @@ class Collection_model extends CI_Model{
 	}
 	public function get_collection($slug = FALSE){
 		if($slug === FALSE){
+			$this->db->order_by("title", "acs");
 			$query = $this->db->get('collections');
 			return $query->result_array();
 		}
@@ -57,5 +58,13 @@ class Collection_model extends CI_Model{
 			);
 		$this->db->where('slug', $slug);
 		return $this->db->update('collections', $data);
+	}
+	public function get_search() {
+  		$match = $this->input->post('query');
+  		$this->db->like('title',$match);
+  		$this->db->or_like('essay',$match);
+  		$this->db->or_like('collection_type',$match);
+  		$query = $this->db->get('collections');
+  		return $query->result_array();
 	}
 }

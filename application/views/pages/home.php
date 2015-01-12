@@ -8,9 +8,7 @@
         
           <div class="row-fluid">
             <div class="span6 front-column">
-                 <p class="welcome">The <em><strong>Bruce Peel Special Collections Library</strong></em> is located in the lower level of Rutherford South. Among its 100,000+ volumes are many <a href="http://bpsclibrary.blogspot.ca/2013/04/some-of-our-treasures.html">treasures</a>, including beautiful, rare and unusual books.
-
-Special Collections is a closed stack library. <a href="info/visit">Visitors</a> are always welcome, and the Library has an <a href="exhibits">exhibition</a> program with exceptional opportunities for learning and discovery.</p>
+                 <p class="welcome">The Bruce Peel Special Collections Library is located in the lower level of Rutherford South.  Thanks to visionary collectors and generous donors, the library houses a world class collection of more than 150,000 rare books and a growing collection of archival materials which explore a range of local and international subjects.  </p>
            
            
             </div>
@@ -59,13 +57,11 @@ Special Collections is a closed stack library. <a href="info/visit">Visitors</a>
        
            <h2>News </h2>
            <ul>
-            <?php foreach($posts_rss as $item): ?>
-                <li><a href="<?php echo $item->get_link(); ?>"><h3><?php echo $item->get_title(); ?></h3><p><?php echo substr($item->get_description(), 0, 80); ?></p></a></li>
-            <?php endforeach; ?>
-
+           
+                <li><a href="https://drive.google.com/file/d/0Bz9kMaVtdRpUdmVPMW01V0VNTHc/view?usp=sharing">The Bruce Peel Special Collections Library will be closed for renovations from approximately April 2015 to January 2016.  For more information, click here.</a></li>
+           
                </ul>
-               <p class="social"><a href="https://twitter.com"><img src="/assets/img/twitter_32.png"></a><a href="http://www.youtube.com/user/ualibrary2010"><img src="/assets/img/youtube_32.png"></a><a href="http://bpsclibrary.blogspot.ca/"><img src="/assets/img/blogger_32.png"></a></p>
-              
+           
             </div>
           </div>
         </div>

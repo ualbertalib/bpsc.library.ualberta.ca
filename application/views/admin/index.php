@@ -49,7 +49,7 @@
 <div class="row-fluid top-margin">
   <div class="span12 main-content">
     <h3>Online Exhibits</h3>
-             <a href="exhibits/create" class="myButton" id="noleftmargin">Create a new link to an Online Exhibit</a>
+             <a href="exhibits/create" class="myButton" id="noleftmargin">Create a new Exhibition</a>
     <ul class="admin-list">
       <?php foreach ($exhibits as $exhibit_item): ?>
         <li>

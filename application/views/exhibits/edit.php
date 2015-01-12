@@ -1,31 +1,30 @@
 
 <h2>Update <em><?php echo $exhibit_item['title']; ?></em></h2>
 <p class="note">The exhibit title cannot be edited</p>
-
 <div class="errors">
-    <?php if ($upload_error != ''): ?>
-        <?php echo $upload_error; ?>
-    <?php endif?>
-<?php echo validation_errors(); ?>
-
+  <?php if ($upload_error != ''): ?>
+    <?php echo $upload_error; ?>
+  <?php endif?>
+  <?php echo validation_errors(); ?>
 </div>
 
 <?php $slug=$exhibit_item['slug'] ?>
 <?php echo form_open_multipart('/exhibits/edit/'+$slug) ?>
-      
-	<input type="hidden" name="title" value="<?php echo $exhibit_item['title']?>"/>
-	<div class="row-fluid top-margin">
-    <div class="span6">
-      <div class="row-fluid">
-    <label class="cr"><input type="checkbox" name="on_now" value="1" id="on-now" <?php if(!empty($exhibit_item['on_now'])&&($exhibit_item['on_now']==1)){echo "checked=checked";} ?>>I would like this exhibit to be on the ON NOW exhibit on the home page.</label>
-</div>
-<div class="row-fluid on-now-info">
-  <div class="row-fluid">
-    <div class="span4 labels">
-     <label for="on-now-info">On Now Details</label> 
-     <span class="help-block">Maximum 160 characters</strong></span>
+<input type="hidden" name="title" value="<?php echo $exhibit_item['title']?>"/>
+<div class="row-fluid top-margin">
+  <div class="span6">
+    <div class="row-fluid">
+      <label class="cr">
+        <input type="checkbox" name="on_now" value="1" id="on-now" <?php if(!empty($exhibit_item['on_now'])&&($exhibit_item['on_now']==1)){echo "checked=checked";} ?>>I would like this exhibit to be on the ON NOW exhibit on the home page.
+      </label>
     </div>
-    <div class="span8">
+    <div class="row-fluid on-now-info">
+      <div class="row-fluid">
+        <div class="span4 labels">
+          <label for="on-now-info">On Now Details</label> 
+          <span class="help-block">Maximum 160 characters</strong></span>
+        </div>
+      <div class="span8">
      <textarea name="on_now_details" class="description"><?php echo set_value('on_now_details', $exhibit_item['on_now_details'])?></textarea>
     </div>
   </div>
@@ -59,6 +58,26 @@
     </div>
 </div>
 
+<div class="row-fluid">
+    <div class="span4 labels">
+    <label for="collection_type">Exhibition Type</label> 
+     </div>
+     <div class="span8 checks">
+   <ul class="types">
+  
+            <?php foreach ($ex_subjects_array as $type): ?>
+               <li><input type="checkbox" id="<?php echo $type ?>" value="<?php echo $type ?>" class="sub-checkbox" 
+                <?php if  ($exhibit_item['subjects']== $type): ?> 
+                  checked="checked"
+                <?php endif?> 
+                />
+               <label for="<?php echo $type ?>"><?php echo ucfirst(str_replace('-', ' ', $type)) ?></label></li>
+            <?php endforeach ?>
+          
+        </ul>
+    </div>
+        <div class="subjects"></div>
+</div>
 
 <div class="row-fluid">
     <div class="span4 labels">
@@ -69,7 +88,15 @@
      <textarea name="short_description" class="description"><?php echo set_value('short_description', $exhibit_item['short_description'])?></textarea>
     </div>
 </div>
-
+<div class="row-fluid">
+    <div class="span4 labels">
+     <label for="exhibit_year">Exhibit Year</label>
+        <span class="help-block">The year in which the exhibit started</span>
+     </div>
+    <div class="span8">
+     <input type="input" name="exhibit_year" value="<?php echo $exhibit_item['exhibit_year'] ?>" />
+    </div>
+</div>
  <div class="row-fluid">
     <div class="span12">
       <h3>Update Display Image</h3>
@@ -203,7 +230,14 @@
 </form>
 </div>
 <script>
-        $(document).ready(function(){ 
+    $(document).ready(function(){ 
+         $("div.subjects").html('<input type="hidden" value="<?php echo $exhibit_item['subjects'] ?>" name="subjects"/>');
+           $( ".sub-checkbox" ).on( "click", function() {
+          var subjects = $('input:checkbox:checked.sub-checkbox').map(function () {
+          return this.value;
+        }).get().join(',');
+        $("div.subjects").html('<input type="hidden" value="'+subjects+'" name="subjects"/>');
+      });
           if ($('#on-now').is(":checked")){
             $(".on-now-info").show();
           } 

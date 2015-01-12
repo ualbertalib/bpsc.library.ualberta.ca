@@ -10,6 +10,7 @@
     <!-- jquery and google font plugin styles -->
     <link href="/assets/css/jgrowl.css" rel="stylesheet" media="screen">
     <link href="/assets/css/isotope.css" rel="stylesheet" media="screen">
+    <link href="/assets/css/slick.css" rel="stylesheet" media="screen">
     <link href="/assets/css/supersized.css" rel="stylesheet" media="screen">
     <link href="/assets/css/supersized.shutter.css" rel="stylesheet" media="screen">
     <link href='http://fonts.googleapis.com/css?family=Dosis' rel='stylesheet' type='text/css'>
@@ -22,7 +23,7 @@
    <script src="/assets/js/easing.js"></script>
    <script src="/assets/js/jquery.isotope.min.js"></script> 
    <script src="/assets/js/jquery.hoverIntent.minified.js"></script>
- 
+
   </head>
   <body class="creamy">     
    <div id="wrap">
@@ -70,12 +71,12 @@
           <h1 class="span3"><a href="/">Bruce Peel Special
            Collections Library</a></h1>
          <ul class="main-nav span8 offset1">
-              <li class="span2"><a href="/exhibits" class="line">Online Exhibits</a></li>
+              <li class="span2"><a href="/exhibits">Exhibitions</a></li>
                <li class="span2"><a href="/collections" class="line">Research Collections</a></li>
-                 <li class="span2"><a href="/info/classes">Classes</a></li>
+                    <li class="span2"><a href="/info/classes" class="line">Book <br/>a Class</a></li>
                    <li class="span2"><a href="/info/visit">Visit</a></li>
-                      <li class="span2"><a href="/info/about" >About</a></li>
-              <li class="span2"><a href="/info/contact">Contact</a></li>
+                      <li class="span2"><a href="/info/about" class="line">About<br/>&amp; FAQs</a></li>
+              <li class="span2"><a href="/info/contact" class="line last">Contact<br/>&amp; Credits</a></li>
           
           </ul>
         </div>

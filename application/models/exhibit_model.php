@@ -5,6 +5,8 @@ class Exhibit_model extends CI_Model{
 	}
 	public function get_exhibit($slug = FALSE){
 		if($slug === FALSE){
+			$this->db->order_by("exhibit_year", "desc");
+			$this->db->order_by("title", "asc");
 			$query = $this->db->get('exhibits');
 			return $query->result_array();
 		}
@@ -26,11 +28,13 @@ class Exhibit_model extends CI_Model{
 			'exhibitor' => $this->input->post('exhibitor'),
 			'external_url' => $this->input->post('external_url'),
 			'exhibit_type'  => $this->input->post('exhibit_type'),
+			'subjects'  => $this->input->post('subjects'),
 			'short_description' => $this->input->post('short_description'),
 			'on_now' => $this->input->post('on_now'),
 			'on_now_details' => $this->input->post('on_now_details'),
 			'on_now_dates' => $this->input->post('on_now_dates'),
 			'essay' => $this->input->post('essay'),
+			'exhibit_year' => $this->input->post('exhibit_year'),
 			'caption1' => $this->input->post('caption1'),
 			'caption2' => $this->input->post('caption2'),
 			'caption3' => $this->input->post('caption3'),
@@ -48,12 +52,14 @@ class Exhibit_model extends CI_Model{
 			'slug' => $slug,
 			'exhibitor' => $this->input->post('exhibitor'),
 			'exhibit_type'  => $this->input->post('exhibit_type'),
+			'subjects'  => $this->input->post('subjects'),
 			'external_url' => $this->input->post('external_url'),
 			'short_description' => $this->input->post('short_description'),
 			'on_now' => $this->input->post('on_now'),
 			'on_now_details' => $this->input->post('on_now_details'),
 			'on_now_dates' => $this->input->post('on_now_dates'),
 			'essay' => $this->input->post('essay'),
+			'exhibit_year' => $this->input->post('exhibit_year'),
 			'caption1' => $this->input->post('caption1'),
 			'caption2' => $this->input->post('caption2'),
 			'caption3' => $this->input->post('caption3'),

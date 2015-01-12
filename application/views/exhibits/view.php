@@ -1,8 +1,13 @@
 
  <div class="row top-margin">
  	<div class="span12">
- 		<h2><?php echo $exhibit_item['title']; ?><a href="<?php echo $exhibit_item['external_url'] ?>" class="exhibit-button">Go to the <em><?php echo $exhibit_item['title']; ?></em> online exhibit</a></h2>
-        
+ 		<h2><?php echo $exhibit_item['title']; ?>
+        <?php if ($exhibit_item['external_url'] != ''): ?>
+        <a href="<?php echo $exhibit_item['external_url'] ?>" class="exhibit-button">
+          Go to the <em><?php echo $exhibit_item['title']; ?></em> online exhibit
+        </a>
+       <?php endif?>
+      </h2> 
  	</div>
 </div>
  	 <div class="row bottom-margin">

@@ -189,6 +189,16 @@ class Collections extends CI_Controller{
 		}	
 		}	
 	}
+
+	public function search(){
+		$data['collections'] = $this->collection_model->get_search();
+		$data['query'] = $this->input->post('query');
+		
+		$this->load->view('common/header', $data);
+		$this->load->view('collections/index', $data);
+		$this->load->view('common/footer');
+	}
+
 	public function deleteSlideImage($slug, $image){
 			if (!$this->ion_auth->logged_in())
 		{

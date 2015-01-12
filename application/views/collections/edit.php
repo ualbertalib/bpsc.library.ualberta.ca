@@ -1,5 +1,6 @@
 
 <h2>Update <em><?php echo $collection_item['title']; ?></em></h2>
+
 <p class="note">The collection title cannot be edited</p>
 
 <div class="errors">
@@ -50,8 +51,11 @@
      <div class="span9 checks">
    <ul class="types">
   
-            <?php foreach ($types_array as $type): ?>
-               <li><input type="checkbox" id="<?php echo $type ?>" value="<?php echo $type ?>" class="type-checkbox" <?php if(!empty($_POST['collection_type']) && (strpos($_POST['collection_type'], $type) !== false)){echo "checked=checked";} ?>/>
+            <?php foreach ($types_array as $type): ?> 
+               <li><input type="checkbox" id="<?php echo $type ?>" value="<?php echo $type ?>" class="type-checkbox" 
+                  <?php if  (strpos ($collection_item['collection_type'], $type) !== false): ?> 
+                  checked="checked"
+                <?php endif?> />
                <label for="<?php echo $type ?>"><?php echo ucfirst(str_replace('-', ' ', $type)) ?></label></li>
             <?php endforeach ?>
             
@@ -179,6 +183,7 @@
 </form>
  <script type="text/javascript">
         $(document).ready(function() {
+          $("div.types").html('<input type="hidden" value="<?php echo $collection_item['collection_type'] ?>" name="collection_type"/>');
           $( ".sub-checkbox, .type-checkbox" ).on( "click", function() {
                 var subjectlist = $('input:checkbox:checked.sub-checkbox').map(function () {
                     return this.value;
@@ -188,7 +193,6 @@
                 }).get().join(',');
             $("div.subjects").html('<input type="hidden" value="'+subjectlist+'" name="subjects"/>');
             $("div.types").html('<input type="hidden" value="'+types+'" name="collection_type"/>');
-            
              });
 
             $('#btnAdd').click(function() {

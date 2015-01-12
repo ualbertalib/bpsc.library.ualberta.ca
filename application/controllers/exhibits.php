@@ -7,16 +7,23 @@ class Exhibits extends CI_Controller{
 		$this->load->helper('url');
 		$this->load->library('ion_auth');
 
-		$this->data['ex_subjects_array'] = array('english-literature', 'american-literature', 'canadian-literature','history-of-the-book','small-presses','art-books','canadian-history','education', 'biological-science','law','religious-studies','native-studies');
-		$this->data['ex_types_array'] = array('books', 'journals', 'newspapers', 'letters', 'diaries','manuscripts','reports', 'oversized folio', 'photographs', 'slides', 'video', 'audio', 'maps', 'paintings','artbooks', 'ephemra','artifcats', 'pamphlets');
+		$this->data['ex_subjects_array'] = array('current', 'online', 'past');
 		$this->load->vars($this->data);
 	}
 	public function index(){
 		$data['exhibits'] = $this->exhibit_model->get_exhibit();
-		$data['title'] = "Our exhibits";
+		$data['on_now'] = $this->exhibit_model->get_onnow();
 
 		$this->load->view('common/header', $data);
 		$this->load->view('exhibits/index', $data);
+		$this->load->view('common/footer');
+	}
+		public function past(){
+		$data['exhibits'] = $this->exhibit_model->get_exhibit();
+		
+
+		$this->load->view('common/header', $data);
+		$this->load->view('exhibits/past', $data);
 		$this->load->view('common/footer');
 	}
 	public function view($slug){
@@ -42,7 +49,6 @@ class Exhibits extends CI_Controller{
 		$data['upload_error'] =  '';
 
 		$this->form_validation->set_rules('title', 'Title', 'required');
-		$this->form_validation->set_rules('external_url', 'External Url', 'required');
 		$this->form_validation->set_rules('short_description', 'Short Description', 'max_length[80]');
 		$this->form_validation->set_rules('on_now_details', 'Short Description', 'max_length[160]');
 

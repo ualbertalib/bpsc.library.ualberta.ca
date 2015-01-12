@@ -10,15 +10,58 @@
           });
          </script>
       <?php endif?>
-      <h2>Online Exhibits</h2>
-      
+
+<div class="row-fluid">
+        <div class="span12"><h2>Exhibitions</h2></div>  
+    
+      </div>
     </div>
   </div>
 </div>
+<div class="row-fluid">
+  <div class="span12 main-content">
+
+      <div class="current-exhibit">
+        <h3><a name="current"></a>Current In-House Exhibition</h3>
+         <?php if (!empty($on_now)): ?>
+            <?php foreach ($on_now as $on_now_item): ?>
+              <?php if ($on_now_item['on_now'] != '0'): ?>
+               
+                
+           <p class="info">
+               <?php if($on_now_item['exhibit_type'] != '1'): ?>
+                
+                <?php endif?>   <img src="/assets/uploads/onnow/<?php echo $on_now_item['slug']; ?>.jpg" class="on-now-image" />
+                   
+                     <?php if($on_now_item['exhibit_type'] != '1'): ?>
+                 
+               
+                <?php endif?>   
+                <h2><?php echo $on_now_item['title']; ?></h2>
+                 <h3 class="dates"><?php echo $on_now_item['on_now_dates']; ?> </h3>
+                        <?php echo $on_now_item['essay']; ?>
+                       
+                      </p>
+                 
+                 
+              
+                
+              <?php endif?>  
+            <?php endforeach?>
+              <?php endif?>  
+      </div>
+    
+    </div></div>
+     <a href="/exhibits/past" class="myButton top-margin" id="past">Previous In-House Exhibitions</a>
 <div class="row-fluid top-margin">
   <div class="span12 main-content">
     <div class="container" id="collections">
+      <div class="row-fluid bottom-margin">
+         <h3><a name="online"></a>Online Exhibitions</h3>
+       </div>
+       <div class="container" id="exhibits">
       <?php foreach ($exhibits as $exhibit_item): ?>
+       <?php if ($exhibit_item['subjects'] == 'online'): ?>
       	<div class="acollection <?php echo $exhibit_item['subjects'] ?> <?php echo str_replace(',', ' ', $exhibit_item['subjects']) ?> ">
          
          
@@ -51,56 +94,24 @@
                  <a href="exhibits/<?php echo $exhibit_item['slug'] ?>">
                 <h2><?php echo $exhibit_item['title'] ?></h2></a>
            <?php endif?>
+            
         </div>
+         <?php endif?> 
       <?php endforeach ?>
+    </div>
     </div>
   </div>
 </div>
-<script>
-  $(".acollection").hoverIntent(function () {
-    $(this).find(".col-details").fadeToggle(600);
 
-    return false;
-  });
-</script>
- <script>
-  $(document).ready(function() {  
-    var $container = $('#collections');
-    var f=document.URL.split('#')[1];
-    if (f!=undefined){
-      var selector="."+f;
-      if (selector==".american-literature"){
-        var ft="Web Exhibits";
-      }
-      else if (selector==".major"){
-        var ft="Major Holdings";
-      }
-      else if (selector==".other"){
-        var ft="Other Collections";
-      }
-      else if (selector==".new"){
-        var ft="New and Current Exhibits";
-      }
-      $('.filter-title').text(ft);
-    }
-    else{
-      var selector='*';
-    }
-      // initialize isotope
-      $container.isotope({
-        filter: selector,
+<script>
+
+  var $container = $('#exhibits');
+   $container.isotope({
       layoutMode : 'fitRows' 
 
       });
-
-        // filter items when filter link is clicked
-      $('#filters a, #types a').click(function(){
-      var selector = $(this).attr('data-filter');
-      $container.isotope({ filter: selector });
-      return false;
-      });
-      $('.carousel').carousel({
-        interval: 6000
-      })
-});
-  </script>
+  $(".acollection").hoverIntent(function () {
+    $(this).find(".col-details").fadeToggle(600);
+    return false;
+  });
+</script>
