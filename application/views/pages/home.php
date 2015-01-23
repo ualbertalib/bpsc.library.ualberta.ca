@@ -8,11 +8,12 @@
         
           <div class="row-fluid">
             <div class="span6 front-column">
-                 <p class="welcome">The Bruce Peel Special Collections Library is located in the lower level of Rutherford South.  Thanks to visionary collectors and generous donors, the library houses a world class collection of more than 150,000 rare books and a growing collection of archival materials which explore a range of local and international subjects.  </p>
+                 <p class="welcome">The Bruce Peel Special Collections Library is located in the lower level of Rutherford South.  Thanks to visionary collectors and generous donors, the library houses a world class collection of more than more than 100,000 rare books and a growing collection of archival materials which explore a range of local and international subjects.  </p>
            
            
             </div>
-  <div class="span3 hidden-phone">
+
+  <div class="span3">
     <div class="row-fluid ">
       <div class="span12 front-column">
         <h2>ON NOW </h2>
@@ -24,17 +25,18 @@
                 <?php else: ?>
                   <a href="exhibits/<?php echo $on_now_item['slug'] ?>">
                 <?php endif?>  
-                
             
-                  <div class="on-now"><img src="/assets/uploads/onnow/<?php echo $on_now_item['slug']; ?>.jpg"/>
+                  <div class="on-now hidden-phone"><img src="/assets/uploads/onnow/<?php echo $on_now_item['slug']; ?>.jpg"/>
                     <div class="on-now-details">
                       <p>
                         <?php echo $on_now_item['on_now_details']; ?>
                       </p>
                     </div>
                   </div>
+                  <h2 class="dates hidden-phone"><?php echo $on_now_item['on_now_dates']; ?> </h2>
+                  <p class="visible-phone det"><?php echo $on_now_item['on_now_details']; ?> <?php echo $on_now_item['on_now_dates']; ?></p>
                 </a>
-                <h2 class="dates"><?php echo $on_now_item['on_now_dates']; ?> </h2>
+                
               <?php endif?>  
             <?php endforeach?>
           <?php else: ?>
@@ -58,7 +60,7 @@
            <h2>News </h2>
            <ul>
            
-                <li><a href="https://drive.google.com/file/d/0Bz9kMaVtdRpUdmVPMW01V0VNTHc/view?usp=sharing">The Bruce Peel Special Collections Library will be closed for renovations from approximately April 2015 to January 2016.  For more information, click here.</a></li>
+                <li><a href="https://library.ualberta.ca/2012assets/closure.pdf">The Bruce Peel Special Collections Library <strong><em>will be closed</em></strong> for renovations from approximately April 2015 to January 2016.  For a pdf with more information, click here.</a></li>
            
                </ul>
            

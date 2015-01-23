@@ -14,10 +14,10 @@
 </ul>
 </div>
 	<h3><a name="finding"></a>Finding Library Materials</h3>
-<img src="/assets/img/int4.jpg" class="int3" alt="photograph of the interior of the special collections library"/>
+<img src="/assets/img/int4.jpg" class="int3 hidden-phone" alt="photograph of the interior of the special collections library"/>
 <p>Books housed in the Bruce Peel Special Collections Library are listed in the <a href="http://search.ebscohost.com/login.aspx?authtype=ip,guest&amp;custid=s5940188&amp;groupid=main&amp;profid=eds">University of Alberta Library's "Classic Catalogue."</a> You can narrow your search to the Peel Library by selecting “University of Alberta Bruce Peel Special Collections” under “Location.”  For each book you want to use, please record the call number, title, and author, and bring this information with you so that the book(s) can be retrieved when you arrive in the library.</p> 
 
-<p>The library’s archival collections (i.e. photographs, correspondence, diaries, business records, etc.) are rarely listed in the library catalogue. Researchers can search for such materials using print or electronic finding aids. Further information related to <a href="/collections">research collections</a> in the Peel Library is available in various formats, including online and in-house <a href="/exhibits">exhibitions</a>.  If you require research assistance, please feel free to contact a member of the <a href="contact">library staff</a>.</p> 
+<p>The library’s archival collections (i.e., photographs, correspondence, diaries, business records, etc.) are rarely listed in the library catalogue. Researchers can search for such materials using print or electronic finding aids. Further information related to <a href="/collections">research collections</a> in the Peel Library is available in various formats, including online and in-house <a href="/exhibits">exhibitions</a>.  If you require research assistance, please feel free to contact a member of the <a href="contact">library staff</a>.</p> 
 
 <p>There is no need to request materials in advance unless they are housed elsewhere. Theses and some other items housed in the Book and Record Depository (BARD) have “non-loan” status, which means that they cannot be checked out and removed from the library. However, these items can be requested for use in the Reading Room in the Peel Library. Should you wish to access non-circulating material from the Book and Record Depository (BARD), please contact the Peel Library at <a href="mailto:bpsc@ualberta.ca">bpsc@ualberta.ca</a> or drop-in to make arrangements for the transfer of non-circulating item(s) to the Peel Library for your use.</p>
 
@@ -34,7 +34,7 @@
 
 
 
-<h3><a name="policy"></a>Reading Room Policies</h3><img src="/assets/img/int5.jpg" class="int2" alt="photograph of the interior of the special collections library"/>
+<h3><a name="policy"></a>Reading Room Policies</h3><img src="/assets/img/int5.jpg" class="int2 hidden-phone" alt="photograph of the interior of the special collections library"/>
 
 <p>The following are general rules for using library materials housed in the Peel Library. For more specific guidelines for <a href="#books">handling books</a>,  <a href="#artbooks">artists’ books</a>, <a href="#archives">archives</a>, and <a href="#photos">photographic materials</a>, please follow the links.</p> 
 <ul>
@@ -78,7 +78,7 @@
 </ul>
 <h3><a name="photos"></a>Handling Photographic Materials</h3>
 <p>Photographic materials include the following: encased photographs, lantern slides, glass plate negatives, negatives on film, black &amp; white and coloured photographic prints, etc. </p> 
-<img src="/assets/img/int3.jpg" class="int3" alt="photograph of the interior of the special collections library"/><ul>	
+<img src="/assets/img/int3.jpg" class="int3 hidden-phone" alt="photograph of the interior of the special collections library"/><ul>	
 <li>Many of these items are housed in protective archival sleeves for preservation purposes. Please do not remove them from their sleeves.</li> 
 <li>Gloves will be provided for handling photographic materials. </li> 
 <li>Please handle all items along their edges and never touch the image surface as this will cause damage.</li>  

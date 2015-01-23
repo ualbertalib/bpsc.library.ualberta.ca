@@ -73,10 +73,10 @@
          <ul class="main-nav span8 offset1">
               <li class="span2"><a href="/exhibits">Exhibitions</a></li>
                <li class="span2"><a href="/collections" class="line">Research Collections</a></li>
-                    <li class="span2"><a href="/info/classes" class="line">Book <br/>a Class</a></li>
+                    <li class="span2"><a href="/info/classes" class="line">Book <br/> a Class</a></li>
                    <li class="span2"><a href="/info/visit">Visit</a></li>
-                      <li class="span2"><a href="/info/about" class="line">About<br/>&amp; FAQs</a></li>
-              <li class="span2"><a href="/info/contact" class="line last">Contact<br/>&amp; Credits</a></li>
+                      <li class="span2"><a href="/info/about" class="line">About<br/> &amp; FAQs</a></li>
+              <li class="span2"><a href="/info/contact" class="line last">Contact<br/> &amp; Credits</a></li>
           
           </ul>
         </div>

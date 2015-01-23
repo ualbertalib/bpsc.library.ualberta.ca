@@ -11,7 +11,7 @@
       <?php endif ?>
       <h2 class="span6">Research Collections<span class="filter-title"></span></h2>
 
-      <div class="collection-search">
+      <div class="collection-search hidden-phone">
         <form id="search" method="post" action="search">
           <input type="text" size="20" name="query" placeholder="search collections"/>
           <input type="submit" value="Search" class="myButton search-btn"/>          

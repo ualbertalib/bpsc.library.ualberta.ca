@@ -7,11 +7,15 @@
 
     <div id="footer">
       <div class="container">
+        <div class="row">
+          <div class="span5">
       	<?php if (uri_string() == ""):?>
-      	<p><a href="info/slide-info" class="slide-info">Information about slide images</a>
+      	<p class="hidden-phone"><a href="info/slide-info" class="slide-info">Source information for background images</a></p>
       	<?php endif ?>
-        <p class="muted credit">Copyright 2013 <a href="http://www.library.ualberta.ca">University of Alberta Libraries</a> Edmonton, AB, Canada T6G 2R3 :: <a href="http://www.library.ualberta.ca/privacy/">Web Site Privacy Policy</a></p>
       </div>
+        <p class="span7">Copyright 2015 &copy; <a href="http://www.library.ualberta.ca">University of Alberta Libraries</a>, Bruce Peel Special Collections Library, B7 Rutherford South, Edmonton, AB, Canada T6G 2J4 :: <a href="http://www.library.ualberta.ca/privacy/">Web Site Privacy Policy</a></p>
+      </div>
+    </div>
     </div>
   </body>
 </html>

@@ -3,7 +3,7 @@
 <h2>Contact</h2>
 <div class="row">
 	<div class="span9">
-	<img src="/assets/img/interior.jpg" class="contact-image"/>
+	<img src="/assets/img/interior.jpg" class="contact-image hidden-phone"/>
 	<strong> Mailing address:</strong><br/>
 Bruce Peel Special Collections Library<br/>
 University of Alberta<br/>
@@ -87,7 +87,7 @@ Library Assistant<br />
 <li class="first"><strong>Photography and Scanning:</strong> Jeff Papineau</li>
 <li><strong>Editing:</strong> Robert Desmarais and Cheryl Cundell</li>
 <li><strong>Content:</strong> Linda Quirk, Carolyn Morgan, Kymberly Sobchyshyn, Collette Leung, Michele Pagliuso, Denis Lacroix, and Lynn McPherson</li>
-<li><strong>Web Design:</strong> Natasha Nunn</li>
+<li><strong>Web Programming and Design:</strong> Natasha Nunn</li>
 </ul>
 
 </div>
