@@ -11,11 +11,11 @@
     <link href="/assets/css/isotope.css" rel="stylesheet" media="screen">
     <link href="/assets/css/supersized.css" rel="stylesheet" media="screen">
     <link href="/assets/css/supersized.shutter.css" rel="stylesheet" media="screen">
-    <link href='http://fonts.googleapis.com/css?family=Dosis' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Dosis' rel='stylesheet' type='text/css'>
     <!--main custom style sheet-->
     <link href="/assets/css/custom.css" rel="stylesheet" media="screen">
     
-    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="https://code.jquery.com/jquery.js"></script>
     
    <script src="/assets/js/bootstrap.min.js"></script>
   <script src="/assets/js/supersized.js"></script>
