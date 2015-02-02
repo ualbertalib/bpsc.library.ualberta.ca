@@ -24,7 +24,7 @@
 <div class="row-fluid top-margin">
   <div class="span12 main-content">
     <?php if (isset($query)): ?>
-     <p class="search-results-hd">Your search for <em><strong><?php echo $query ?></strong></em> returned the following results:</p>
+     <p class="search-results-hd">Your search for <em><strong><?php echo htmlspecialchars($query) ?></strong></em> returned the following results:</p>
    <?php endif ?>
     <div class="container" id="collections">
       <?php foreach ($collections as $collection_item): ?>
