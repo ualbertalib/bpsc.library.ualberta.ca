@@ -14,7 +14,7 @@
 	well before the beginning of each term. </p>
 
 	<p><span>
-<a href="http://specialcollections-test.library.ualberta.ca/info/book-visit">Professors can book a visit here</a></span></p>
+<a href="/info/book-visit">Professors can book a visit here</a></span></p>
 </div>
 <div class="span5 getting">
 	<h3>Rules for Class Visits</h3>
