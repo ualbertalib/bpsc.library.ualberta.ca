@@ -40,7 +40,7 @@
               <?php endif?>  
             <?php endforeach?>
           <?php else: ?>
-            <a href="http://www.library.ualberta.ca/specialcollections/exhibits">
+            <a href="/exhibits">
               <div class="on-now"><img src="/assets/img/noexhibit.jpg"/>
                 <div class="on-now-details">
                   <p>
