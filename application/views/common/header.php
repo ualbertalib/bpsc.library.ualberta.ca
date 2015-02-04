@@ -18,11 +18,7 @@
     <link href="/assets/css/custom.css" rel="stylesheet" media="screen">
     
     <script src="https://code.jquery.com/jquery.js"></script>
-       <script src="/assets/js/jgrowl.js"></script>
-   <script src="/assets/js/bootstrap.min.js"></script>
-   <script src="/assets/js/easing.js"></script>
-   <script src="/assets/js/jquery.isotope.min.js"></script> 
-   <script src="/assets/js/jquery.hoverIntent.minified.js"></script>
+    <script src="/assets/js/all-min.js"></script>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

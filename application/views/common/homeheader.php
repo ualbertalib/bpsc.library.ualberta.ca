@@ -16,43 +16,7 @@
     <link href="/assets/css/custom.css" rel="stylesheet" media="screen">
     
     <script src="https://code.jquery.com/jquery.js"></script>
-    
-   <script src="/assets/js/bootstrap.min.js"></script>
-  <script src="/assets/js/supersized.js"></script>
-   <script src="/assets/js/supersized.shutter.min.js"></script>
-      <script src="/assets/js/jquery.hoverIntent.minified.js"></script>
- 
-
-    <script type="text/javascript">
-
-      jQuery(function($){
-
-        $.supersized({
-
-          // Functionality
-          slide_interval          :   5000,    // Length between transitions
-          transition              :   1,      // 0-None, 1-Fade, 2-Slide Top, 3-Slide Right, 4-Slide Bottom, 5-Slide Left, 6-Carousel Right, 7-Carousel Left
-          transition_speed    : 1000,   // Speed of transition
-          start_slide             :   0,
-
-          // Components             
-          slide_links       : 'blank',  // Individual links for each slide (Options: false, 'number', 'name', 'blank')
-          slides          :   [     // Slideshow Images
-                  {image : '/assets/img/1.jpg', title : 'The Sam Steele Collection', thumb : '', url : 'http://www.library.ualberta.ca'},
-                  {image : '/assets/img/2.jpg', title : 'The Sam Steele Collection', thumb : '', url : 'http://www.library.ualberta.ca'},
-                  {image : '/assets/img/3.jpg', title : 'The Sam Steele Collection', thumb : '', url : 'http://www.library.ualberta.ca'},
-                  {image : '/assets/img/4.jpg', title : 'The Sam Steele Collection', thumb : '', url : 'http://www.library.ualberta.ca'},
-                  {image : '/assets/img/6.jpg', title : 'The Sam Steele Collection', thumb : '', url : 'http://www.library.ualberta.ca'},
-                  {image : '/assets/img/7.jpg', title : 'The Sam Steele Collection', thumb : '', url : 'http://www.library.ualberta.ca'},
-                  {image : '/assets/img/8.jpg', title : 'The Sam Steele Collection', thumb : '', url : 'http://www.library.ualberta.ca'},
-                  {image : '/assets/img/9.jpg', title : 'The Sam Steele Collection', thumb : '', url : 'http://www.library.ualberta.ca'},
-                    ]
-
-        });
-
-        });
-
-    </script>
+   <script src="/assets/js/home-all-min.js"></script>
 
   </head>
    <body>     
