@@ -86,7 +86,7 @@ Library Assistant<br />
 <ul class="bottom-margin">
 <li class="first"><strong>Photography and Scanning:</strong> Jeff Papineau</li>
 <li><strong>Editing:</strong> Robert Desmarais and Cheryl Cundell</li>
-<li><strong>Content:</strong> Linda Quirk, Carolyn Morgan, Kymberly Sobchyshyn, Collette Leung, Michele Pagliuso, Denis Lacroix, and Lynn McPherson</li>
+<li><strong>Content:</strong> Linda Quirk, Carolyn Morgan, Kymberly Sobchyshyn, Colette Leung, Michele Pagliuso, Denis Lacroix, and Lynn McPherson</li>
 <li><strong>Web Programming and Design:</strong> Natasha Nunn</li>
 </ul>
 
