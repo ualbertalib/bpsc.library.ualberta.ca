@@ -16,7 +16,7 @@
   <div class="span3">
     <div class="row-fluid ">
       <div class="span12 front-column">
-        <h2>ON NOW </h2>
+        <h2>EXHIBITION</h2>
           <?php if (!empty($on_now)): ?>
             <?php foreach ($on_now as $on_now_item): ?>
               <?php if ($on_now_item['on_now'] != '0'): ?>
@@ -26,7 +26,7 @@
                   <a href="exhibits/<?php echo $on_now_item['slug'] ?>">
                 <?php endif?>  
             
-                  <div class="on-now hidden-phone"><img src="/assets/uploads/onnow/<?php echo $on_now_item['slug']; ?>.jpg"/>
+                  <div class="on-now hidden-phone"><img src="/assets/uploads/display/<?php echo $on_now_item['slug']; ?>.jpg"/>
                     <div class="on-now-details">
                       <p>
                         <?php echo $on_now_item['on_now_details']; ?>
