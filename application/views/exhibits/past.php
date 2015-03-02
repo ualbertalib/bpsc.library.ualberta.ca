@@ -1,4 +1,4 @@
-<h2>Previous In-House Exhibitions<a href="/exhibits" class="myButton" id="back">Back to Exhibits</a></h2>
+<h2>Previous In-House Exhibitions<a href="/exhibits" class="myButton" id="back">Back to Exhibitions</a></h2>
 
 	<?php foreach ($exhibits as $exhibit_item): ?>
        <?php if ($exhibit_item['subjects'] == 'past'): ?>
