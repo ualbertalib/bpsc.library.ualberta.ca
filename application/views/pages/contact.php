@@ -43,11 +43,6 @@ Cataloguing Librarian<br />
 </div>
 <div class="span3">
 
-<strong>Lynn McPherson</strong><br />
- Archivist<br />
-<a href="mailto:lmcphers@library.ualberta.ca ">lynn.mcpherson@ualberta.ca </a><br />
-780-492-5151<br />
-<br />
 
 <strong>Jeff Papineau</strong><br />
 Library Assistant<br />

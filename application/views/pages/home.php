@@ -44,12 +44,12 @@
               <div class="on-now"><img src="/assets/img/noexhibit.jpg"/>
                 <div class="on-now-details">
                   <p>
-                    Currently there is no exhibit
+                    The exhibition program will resume in early 2016 once the renovation is complete.
                   </p>
                 </div>
               </div>
             </a>
-            <h2 class="dates">new exhibit coming soon</h2>      
+            <h2 class="dates">Closed for renovations</h2>      
           <?php endif?>  
           
             </div>
