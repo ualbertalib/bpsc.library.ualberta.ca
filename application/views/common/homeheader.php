@@ -71,8 +71,8 @@
     <div class="row-fluid">
       <div class="span12 logo-nav">
         <div class="container">
-          <h1 class="span3"><a href="/">Bruce Peel Special
-           Collections Library</a></h1>
+          <h1 class="span3"><a href="/">Bruce Peel Special Collections &amp;
+Archives</a></h1>
           <ul class="main-nav span8 offset1">
               <li class="span2"><a href="/exhibits">Exhibitions</a></li>
                <li class="span2"><a href="/collections" class="line">Research Collections</a></li>
