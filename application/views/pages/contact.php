@@ -5,7 +5,7 @@
 	<div class="span9">
 	<img src="/assets/img/interior.jpg" class="contact-image hidden-phone"/>
 	<strong> Mailing address:</strong><br/>
-Bruce Peel Special Collections Library<br/>
+Bruce Peel Special Collections &amp; Archives<br/>
 University of Alberta<br/>
 B7 Rutherford South<br/>
 Edmonton, AB  T6G 2J4<br/><br/>

@@ -1,7 +1,8 @@
 
 <div class="row">
 <div class="span7">
-	<h2>Bring Your Class to the Bruce Peel Special Collections Library</h2>
+	<h2>Bring Your Class to the Bruce Peel Special Collections &amp;
+Archives</h2>
 
 	<h3>A very popular program!</h3>
 <p>In recent years, class visits to the Peel Library have helped to support the activities of eighteen faculties, 

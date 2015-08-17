@@ -1,4 +1,5 @@
-<h2>Book a Class Visit to the Bruce Peel Special Collections Library</h2>
+<h2>Book a Class Visit to the Bruce Peel Special Collections &amp;
+Archives</h2>
 <div class="page">
 	<p>There are several options for your class visit to the Bruce Peel Special Collections Library:</p>
 	<h3>Librarian-led Class <a href="https://docs.google.com/forms/d/1kTdk-dBOVpQAUfaT-zaZBdYkJKDpJRmAr1zKHr1FMQU/viewform?c=0&amp;w=1&amp;usp=mail_form_link" class="myButton" id="book">Book It</a></h3> 

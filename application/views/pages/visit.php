@@ -3,7 +3,7 @@
 <div class="row page">
 
 	<div class="span9">
-		<h2>Visiting the Bruce Peel Special Collections Library</h2>
+		<h2>Visiting the Bruce Peel Special Collections &amp; Archives</h2>
 	<div class="row">
 		<ul class="inpage-nav">
 	<li><a href="#finding">Finding Library Materials</a></li>
