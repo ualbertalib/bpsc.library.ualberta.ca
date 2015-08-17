@@ -8,7 +8,7 @@
         
           <div class="row-fluid">
             <div class="span6 front-column">
-                 <p class="welcome">The Bruce Peel Special Collections Library is located in the lower level of Rutherford South.  Thanks to visionary collectors and generous donors, the library houses a world class collection of more than 100,000 rare books and a growing collection of archival materials which explore a range of local and international subjects.  </p>
+                 <p class="welcome">The Bruce Peel Special Collections &amp; Archives is located in the lower level of Rutherford South.  Thanks to visionary collectors and generous donors, the library houses a world class collection of more than 100,000 rare books and a growing collection of archival materials which explore a range of local and international subjects.  </p>
            
            
             </div>
