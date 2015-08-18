@@ -320,7 +320,7 @@ text-decoration: none;
   display: none;
 }
 .main-nav li a{
-  padding:56px 10px;
+ padding:56px 10px;
   height: 2px;
   vertical-align: center;
   display: block;
@@ -328,6 +328,7 @@ text-decoration: none;
   font-size: 1.25em;
   line-height: 25px;
   background-color: rgba(40, 46, 48, 0.2);
+  margin-right: 20px;
 }
 .main-nav li a.last{
   border-right: none;

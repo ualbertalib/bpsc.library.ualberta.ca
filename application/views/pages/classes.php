@@ -5,7 +5,7 @@
 Archives</h2>
 
 	<h3>A very popular program!</h3>
-<p>In recent years, class visits to the Peel Library have helped to support the activities of eighteen faculties, 
+<p>In recent years, class visits to the Peel library have helped to support the activities of eighteen faculties, 
 	departments, and programs at the University of Alberta in addition to those of several community-service organizations 
 	and other local post-secondary institutions. Librarians provide instruction in a wide range of subject areas and 
 	serve the needs of students of all ages and abilities. A significant proportion of students are – perhaps more than 
@@ -21,7 +21,7 @@ Archives</h2>
 	<h3>Rules for Class Visits</h3>
 	<ul class="visit-rules">
 
-<li>No open food or drink should come to the Peel Library; to clarify, a wrapped sandwich in a backpack is fine, but a cup of coffee is not!</li>
+<li>No open food or drink should come to the Peel library; to clarify, a wrapped sandwich in a backpack is fine, but a cup of coffee is not!</li>
 
 <li>All bags, laptop sleeves, backpacks, totes, etc. must be deposited at the reception desk before entering the classroom. Outerwear (i.e., 
 	coats and jackets) should be left on coatracks in the reception area. </li>

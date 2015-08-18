@@ -8,7 +8,7 @@
         
           <div class="row-fluid">
             <div class="span6 front-column">
-                 <p class="welcome">The Bruce Peel Special Collections &amp; Archives is located in the lower level of Rutherford South.  Thanks to visionary collectors and generous donors, the library houses a world class collection of more than 100,000 rare books and a growing collection of archival materials which explore a range of local and international subjects.  </p>
+                 <p class="welcome">Bruce Peel Special Collections &amp; Archives includes the Peel library, located in the lower level of Rutherford South, and the University Archives, located in the Book and Record Depository (BARD). Thanks to visionary collectors and generous donors, the two locations house a world class collection of more than 100,000 rare books and a significant collection of archival materials which explore a range of local and international subjects.</p>
            
            
             </div>
@@ -60,7 +60,7 @@
            <h2>News </h2>
            <ul>
            
-                <li><a href="https://www.library.ualberta.ca/aboutus/bpsc-closure">The Bruce Peel Special Collections Library <strong><em>will be closed</em></strong> for renovations from 3 April 2015 to approximately January 2016. Click here for more information.</a></li>
+                <li><a href="https://www.library.ualberta.ca/aboutus/bpsc-closure">The Peel library <strong><em>will be closed</em></strong> for renovations from 3 April 2015 to approximately January 2016. Click here for more information.</a></li>
            
                </ul>
            

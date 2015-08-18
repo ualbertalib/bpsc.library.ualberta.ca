@@ -13,17 +13,17 @@ Archives</h2>
     	The Librarian will be nearby throughout the class to provide ongoing advice about handling (as needed) and   
     	to enforce the library’s security protocols.  The professor is expected to provide library staff with a complete   
     	list of library materials requested (including author, title, and call number) at least one week before the class,   
-    	and the materials will then be available for the professor to examine in the Peel Library’s Reading Room   
+    	and the materials will then be available for the professor to examine in the Peel library’s Reading Room   
     	during normal hours (Monday-Friday 12:00-4:30pm) during the two days immediately prior to the class visit.  
     	Remember to book early!</p>
     <h3>Morning Exhibition Visit <a href="https://docs.google.com/forms/d/1kTdk-dBOVpQAUfaT-zaZBdYkJKDpJRmAr1zKHr1FMQU/viewform?c=0&amp;w=1&amp;usp=mail_form_link" class="myButton" id="book">Book It</a></h3> 
-    <p>The Peel Library stages a wide variety of curated in-house exhibitions which are free to  
+    <p>The Peel library stages a wide variety of curated in-house exhibitions which are free to  
      visitors for quiet viewing – without prior arrangements – during normal hours (Monday-Friday 12:00-4:30pm). 
       It is possible to book a class visit to discuss an exhibition in the mornings only.  We cannot book  
        these visits in the afternoons when the Gregory Javitch Reading Room is open for quiet research.</p> 
     <h3>Peel Reading List</h3>  
     <p>When it is more important for students to handle/examine items than it is for them to 
-      visit the Peel Library as a group, we recommend working with us to create a Peel Reading List for your  
+      visit the Peel library as a group, we recommend working with us to create a Peel Reading List for your  
        students.  A list of 5-15 items, with up to a paragraph of commentary on each item, would create a kind of  
         self-guided tour for your students.  Peel staff will verify call numbers and add handling and location notes.  In our experience, students are more  
           likely to follow through if the Peel Reading List is clearly connected with a particular assignment, but this is   not required. 

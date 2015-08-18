@@ -7,7 +7,7 @@
 
 <li>Canadian Dept. of Immigration and Colonization. <em>Canada West</em>. (FC 3204.2 C2116 1921)</li>
 
-<li>Photo by Jeff Papineau of folio volumes in Peel Library stacks.</li>
+<li>Photo by Jeff Papineau of folio volumes in Peel library stacks.</li>
 
 
 

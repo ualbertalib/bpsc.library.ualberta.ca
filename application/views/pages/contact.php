@@ -77,7 +77,7 @@ Library Assistant<br />
 <div class="span3 getting credits">
 
 <h3>Credits</h3>
-		<p>Thank you to the following people for their contributions to the Peel Library website:<p>
+		<p>Thank you to the following people for their contributions to the Peel library website:<p>
 <ul class="bottom-margin">
 <li class="first"><strong>Photography and Scanning:</strong> Jeff Papineau</li>
 <li><strong>Editing:</strong> Robert Desmarais and Cheryl Cundell</li>
