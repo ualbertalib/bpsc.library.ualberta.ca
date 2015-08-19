@@ -183,9 +183,9 @@ h3{
   padding: 15px 25px;
 }
 .front-column p.welcome{
-  font-size: 19px;
-    line-height: 35px;
-      padding: 35px 25px 19px 25px;
+  font-size: 17px;
+    line-height: 34px;
+      padding: 20px 20px 10px 20px;
 }
 .front-column ul{
   margin: 0;
@@ -198,7 +198,7 @@ h3{
 .front-column li a{
   color: #333;
    padding: 10px 20px;
-   font-size: 16px;
+   font-size: 18px;
 }
 .front-column li a:hover, .front-column li a:active, .front-column li a:focus{
   color: #000;
@@ -310,9 +310,10 @@ text-decoration: none;
 }
 .main-nav{
   margin:0; 
+  padding-left: 30px;
 }
 .main-nav li{
-  float: right;
+  float: left;
   list-style: none;
   border-bottom: 1px solid #333;
 }
@@ -320,7 +321,7 @@ text-decoration: none;
   display: none;
 }
 .main-nav li a{
- padding:56px 10px;
+ padding:56px 15px;
   height: 2px;
   vertical-align: center;
   display: block;
@@ -328,13 +329,13 @@ text-decoration: none;
   font-size: 1.25em;
   line-height: 25px;
   background-color: rgba(40, 46, 48, 0.2);
-  margin-right: 20px;
+  margin-left: 20px;
 }
 .main-nav li a.last{
   border-right: none;
   }
 .main-nav li a.line{
-    padding:31px 10px;
+  padding:31px 15px;
   height: 52px;
 }
 .main-nav li a:hover{
@@ -844,7 +845,7 @@ float: left;
   }
    .front-column li a{
   background-color:#f4eea0;
-   padding: 15px 25px 20px 30px;
+   padding: 35px 25px 35px 30px;
  }
  
 }
