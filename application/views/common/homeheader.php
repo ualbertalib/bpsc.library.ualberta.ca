@@ -73,7 +73,7 @@
         <div class="container">
           <h1 class="span3"><a href="/">Bruce Peel Special Collections &amp;
 Archives</a></h1>
-          <ul class="main-nav span8 offset1">
+          <ul class="main-nav span9">
                <li><a href="/exhibits">Exhibitions</a></li>
                 <li><a href="/collections" class="line">Research <br/> Collections</a></li>
                 <li><a href="http://library.ualberta.ca/aboutus/archives/" class="line">University <br/> Archives</a></li>
