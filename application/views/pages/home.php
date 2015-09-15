@@ -60,7 +60,7 @@
            <h2>News </h2>
            <ul>
            
-                <li><a href="https://www.library.ualberta.ca/aboutus/bpsc-closure">The Peel library <strong><em>will be closed</em></strong> for renovations from 3 April 2015 to approximately January 2016. Click here for more information.</a></li>
+                <li><a href="https://www.library.ualberta.ca/aboutus/bpsc-closure">Bruce Peel Special Collections will be closed for renovations until early May 2016. Click here for more information.</a></li>
            
                </ul>
            
