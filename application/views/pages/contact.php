@@ -1,7 +1,7 @@
 <h2> WE HAVE TWO LOCATIONS!</h2>
 <div class="row">
 	<div class="span9">
-		<h2>Bruce Peel Special Collections:</h2>
+		<h2>Bruce Peel <br />Special Collections:</h2>
 			<div class="row">
 				<div class="span9">
 					<img src="/assets/img/interior.jpg" class="contact-image hidden-phone"/>
@@ -16,7 +16,7 @@
 
 					<strong> General phone:</strong><br/>
 					780-492-5998 (Mon-Fri 12:00-4:30pm)<br/>
-					<br/>
+				
 				</div>
 			</div>
 			<div class="row">
@@ -137,6 +137,7 @@
 				</div>
 			</div>
 			<p>If you are unsure who to contact, you can write to any one of us and we will forward your message to the appropriate person.</p>
+		<br />	<br />	
 		</div>
 					
 	</div>
