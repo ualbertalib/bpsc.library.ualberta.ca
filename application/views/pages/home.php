@@ -44,7 +44,7 @@
               <div class="on-now"><img src="/assets/img/noexhibit.jpg"/>
                 <div class="on-now-details">
                   <p>
-                    The exhibition program will resume in early 2016 once the renovation is complete.
+                    The exhibition program will resume in early 2016 once the renovation is complete.<br /> 
                   </p>
                 </div>
               </div>
