@@ -60,7 +60,9 @@
            <h2>News </h2>
            <ul>
            
-                <li><a href="https://www.library.ualberta.ca/aboutus/bpsc-closure">Bruce Peel Special Collections will be closed for renovations until early May 2016. Click here for more information.</a></li>
+              <li><a href="https://www.library.ualberta.ca/aboutus/bpsc-closure">Bruce Peel Special Collections will be closed for renovations until early May 2016. Click here for more information.</a></li>
+              <li><a href="http://bpsclibrarynews.blogspot.ca/2015/10/after-going-through-necessary-channels.html">Renovation Update</a></li>
+              <li><a href="http://bpsclibrarynews.blogspot.ca/2015/10/dear-friends-renovation-project-to.html">Renovation Update #2</a></li>
            
                </ul>
            
