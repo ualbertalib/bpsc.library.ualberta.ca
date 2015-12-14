@@ -126,11 +126,7 @@
 				</div>
 				<div class="span3">
 
-						<strong>Krista Jamieson</strong><br />
-						Sessional Archivist<br />
-					Human Rights Institute of Canada Project<br />
-					<a href="mailto:kjamieso@ualberta.ca">kjamieso@ualberta.ca</a><br />
-					780-248-1771<br />
+					
 
 					<br />	
 
