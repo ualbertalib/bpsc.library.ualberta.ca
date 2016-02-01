@@ -58,7 +58,7 @@
 	is held by one of the libraries at the University of Alberta.  Where possible, the database includes 
 	digital copies of items that are full-text searchable.  If you wish to find a print copy of an item 
 	listed in the database, you can look for it in the 
-	University of Alberta <a href="https://www.library.uablerta.ca">library catalogue</a>. 
+	University of Alberta <a href="https://www.library.ualberta.ca">library catalogue</a>. 
 	If the item you seek is not available through the University of Alberta Libraries, 
 	you can search for books in libraries around the world using <a href="http://firstsearch.oclc.org/fsip?autho=100338439">OCLC WorldCat</a>
 	and for archival materials (letters, photographs, documents, etc.) in local institutions through the Archives Society of Alberta's <a href="http://www.albertaonrecord.ca/">Alberta on Record</a> database. The Bruce Peel Special Collections Library is one of many libraries that may hold a print copy of an item that you find listed in the <a href="http://peel.library.ualberta.ca/index.html">Peel’s Prairies Provinces database</a>.</p>
@@ -76,7 +76,7 @@
 
 
 <p class="question">What does the Peel library collect?</p>
-<p>The Peel library acquires materials by purchase or donation to support research and teaching at the University of Alberta. Please consult the <a href="http://www.library.ualberta.ca/aboutus/collection/policy/index.cfm">collection policy</a> for more information.</p> 
+<p>The Peel library acquires materials by purchase or donation to support research and teaching at the University of Alberta. Please consult the <a href="https://www.library.ualberta.ca/about-us/collections/collection-policy">collection policy</a> for more information.</p> 
 
 
 

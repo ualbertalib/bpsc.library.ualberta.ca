@@ -76,7 +76,7 @@ Archives</a></h1>
           <ul class="main-nav span9">
                <li><a href="/exhibits">Exhibitions</a></li>
                 <li><a href="/collections" class="line">Research <br/> Collections</a></li>
-                <li><a href="http://library.ualberta.ca/aboutus/archives/" class="line">University <br/> Archives</a></li>
+                <li><a href="http://archives.library.ualberta.ca/" class="line">University <br/> Archives</a></li>
                 <li><a href="/info/classes" class="line">Book <br/> a Class</a></li>
                 <li><a href="/info/visit">Visit</a></li>
                 <li><a href="/info/about" class="line">About<br/> &amp; FAQs</a></li>
