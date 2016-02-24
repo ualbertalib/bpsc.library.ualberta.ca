@@ -44,12 +44,12 @@
               <div class="on-now"><img src="/assets/img/noexhibit.jpg"/>
                 <div class="on-now-details">
                   <p>
-                    The exhibition program will resume in early 2016 once the renovation is complete.<br /> 
+                ]
                   </p>
                 </div>
               </div>
             </a>
-            <h2 class="dates">Closed for renovations</h2>      
+            <h2 class="dates">No Current Exhibit</h2>      
           <?php endif?>  
           
             </div>
@@ -60,9 +60,9 @@
            <h2>News </h2>
            <ul>
            
-              <li><a href="https://www.library.ualberta.ca/aboutus/bpsc-closure">Bruce Peel Special Collections will be closed for renovations until early May 2016. Click here for more information.</a></li>
-              <li><a href="http://bpsclibrarynews.blogspot.ca/2015/10/after-going-through-necessary-channels.html">Renovation Update</a></li>
-              <li><a href="http://bpsclibrarynews.blogspot.ca/2015/10/dear-friends-renovation-project-to.html">Renovation Update #2</a></li>
+              <li><a href="https://www.library.ualberta.ca/aboutus/bpsc-closure">Bruce Peel Special Collections will be closed for renovations until May 19th, 2016. Click here for more information.</a></li>
+               <li><a href="http://bpsclibrarynews.blogspot.ca/2016/01/service-change.html">Service Change</a></li>
+              <li><a href="http://bpsclibrarynews.blogspot.ca/">Renovation Updates</a></li>
            
                </ul>
            

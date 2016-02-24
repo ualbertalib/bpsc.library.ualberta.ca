@@ -13,17 +13,22 @@
 	<li><a href="#reproduction">Reproduction of Library Materials</a></li>
 </ul>
 </div>
+<p>*NEW* Submit your Retrieval Request Form at least 24 hours before your visit to ensure that library materials are available for your use.</p>
 	<h3><a name="finding"></a>Finding Library Materials</h3>
 <img src="/assets/img/int4.jpg" class="int3 hidden-phone" alt="photograph of the interior of the special collections library"/>
-<p>Books housed in the Bruce Peel Special Collections Library are listed in the <a href="https://neos.library.ualberta.ca/uhtbin/cgisirsi/x/0/0/57/49?user_id=WUAARCHIVE">University of Alberta Library's "Classic Catalogue."</a> You can narrow your search to the Peel library by selecting “University of Alberta Bruce Peel Special Collections” under “Libraries.”  For each book you want to use, please record the call number, title, and author, and bring this information with you so that the book(s) can be retrieved when you arrive in the library.</p> 
+<p>Books housed in Bruce Peel Special Collectio are listed in the 
+	<a href="https://neos.library.ualberta.ca/uhtbin/cgisirsi/x/0/0/57/49?user_id=WUAARCHIVE">University of Alberta Libraries' "Classic Catalogue."</a>
+You can narrow your search to the Peel library by selecting “University of Alberta Bruce Peel Special Collections” under “Libraries.”  The 
+library’s archival collections (i.e., photographs, correspondence, diaries, business records, etc.) are rarely listed in the library catalogue. 
+Researchers can search for such materials using print or electronic finding aids. Further information related to <a href="/collections">research 
+collections</a> in the Peel library is available in various formats, including online and in-house <a href="/exhibits">exhibitions</a>.  
+If you require research assistance, please feel free to contact a member of the <a href="contact">library staff</a>.</p> 
 
-<p>The library’s archival collections (i.e., photographs, correspondence, diaries, business records, etc.) are rarely listed in the library catalogue. Researchers can search for such materials using print or electronic finding aids. Further information related to <a href="/collections">research collections</a> in the Peel library is available in various formats, including online and in-house <a href="/exhibits">exhibitions</a>.  If you require research assistance, please feel free to contact a member of the <a href="contact">library staff</a>.</p> 
-
-<p>There is no need to request materials in advance unless they are housed elsewhere. Theses and some other items housed in the Book and Record Depository (BARD) have “non-loan” status, which means that they cannot be checked out and removed from the library. However, these items can be requested for use in the Reading Room in the Peel library. Should you wish to access non-circulating material from the Book and Record Depository (BARD), please contact the Peel library at <a href="mailto:bpsc@ualberta.ca">bpsc@ualberta.ca</a> or drop-in to make arrangements for the transfer of non-circulating item(s) to the Peel library for your use.</p>
+<p>Theses and some other items housed in the Book and Record Depository (BARD) have “no-loan” status, which means that they cannot be checked out and removed from the library. However, these items can be requested for use in the Reading Room in the Peel library. Should you wish to access non-circulating material from the Book and Record Depository (BARD), please contact the Peel library at <a href="mailto:bpsc@ualberta.ca">bpsc@ualberta.ca</a> or drop-in to make arrangements for the transfer of non-circulating item(s) to the Peel library for your use.</p>
 
 <h3><a name="using"></a>Using Library Materials</h3>
 
-<p>The materials in the Peel library are available for use by students, staff, and the general public in the library’s supervised reading room upon presentation of valid photo identification (e.g., ONEcard, driver’s license, passport, or citizenship card with photo).</p> 
+<p>Provided that they are requested at least 24 hours in advance using the Retrieval Request Form, the materials in the Peel library are available for use by students, staff, and the general public in the library’s supervised reading room upon presentation of valid photo identification (e.g., ONEcard, driver’s license, passport, or citizenship card with photo).</p> 
 <p>For the security of researchers, staff, and the collection, there are security cameras throughout the space that are continuously monitored.</p> 
 <p>There are no computer workstations in the Peel library’s reading room, but researchers are permitted to bring laptops with them. The University of Alberta’s wireless network is available in the library.</p> 
 
