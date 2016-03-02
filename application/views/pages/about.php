@@ -1,7 +1,7 @@
 
 <div class="row">
 	<div class="span7">
-				<h2>About Bruce Peel Special Collections Library</h2>
+				<h2>About Bruce Peel Special Collections &amp; Archives</h2>
 
 		<p>Thanks to visionary collectors and generous donors, a range of important collections in 
 			Bruce Peel Special Collections &amp; Archives record the history of the University of Alberta 
