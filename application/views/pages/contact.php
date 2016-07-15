@@ -49,19 +49,15 @@
 					<br />
 
 
-					<strong>Carol Irwin</strong><br />
-					Library Assistant<br />
-					<a href="mailto:carol.irwin@ualberta.ca">carol.irwin@ualberta.ca</a><br />
-					780-492-7311<br />
+					 <strong>Carolyn Morgan </strong><br />
+					Conservator <br />
+					<a href="mailto:carolyn.morgan@ualberta.ca">carolyn.morgan@ualberta.ca</a><br />
+					780-492-1902<br />
 					<br />
 				</div>
 				<div class="span3">
 
-					 <strong>Carolyn Morgan </strong><br />
-					Conservator <br />
-					<a href="mailto:carolyn.morgan@ualberta.ca ">carolyn.morgan@ualberta.ca </a><br />
-					780-492-1902<br />
-					<br />
+					
 
 					<strong>Brian Stearns</strong><br />
 					Cataloguing Librarian<br />
