@@ -113,7 +113,7 @@ If you require research assistance, please feel free to contact a member of the 
 
 <p>The Bruce Peel Special Collections Library is in the lower level of Rutherford South and is accessible via the staircases from the main level. The library is open year round, <strong>Monday through Friday from 12:00pm to 4:30pm, excluding holidays</strong>.  For researchers with mobility issues, access to the library is also available via elevator from the main floor of the School of Library and Information Studies. If you require use of the elevator, please make arrangements with a <a href="contact">staff member</a> in advance.</p> 
 
-<p>You can get to the University of Alberta via the <a href="http://www.edmonton.ca/transportation/edmonton-transit-system-ets.aspx">Edmonton Transit Service (ETS)</a>, both on the LRT (University Station) and on numerous bus routes. Visitor parking is available on campus; for further information, please consult the <a href="http://www.campusmap.ualberta.ca/">campus map</a>  (Rutherford South is marked “RS” on the map).</p> 
+<p>You can get to the University of Alberta via the <a href="http://www.edmonton.ca/edmonton-transit-system-ets.aspx">Edmonton Transit Service (ETS)</a>, both on the LRT (University Station) and on numerous bus routes. Visitor parking is available on campus; for further information, please consult the <a href="http://www.campusmap.ualberta.ca/">campus map</a>  (Rutherford South is marked “RS” on the map).</p> 
 
 
 </div>
