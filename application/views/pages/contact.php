@@ -63,8 +63,16 @@
 					Cataloguing Librarian<br />
 					<a href="mailto:brian.stearns@ualberta.ca">brian.stearns@ualberta.ca</a><br />
 					780-492-7603<br /><br />
+					
+					
+					<strong>Kevin Zak</strong><br />
+					Exhibitions & Collections Assistant<br />
+					<a href="mailto:kzak@ualberta.ca">kzak@ualberta.ca</a><br />
+					780-492-9381<br /><br />
 
 				</div>
+				
+			
 			</div>
 			<p>If you are unsure who to contact, you can write to any one of us and we will forward your message to the appropriate person.</p>
 		</div>
