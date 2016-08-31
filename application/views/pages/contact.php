@@ -121,8 +121,8 @@
 				</div>
 				<div class="span3">
 					<strong>Alicia Odeen</strong><br />
-					Archives Assistant<br />
-					<a href="mailto:alicia.odeen@ualberta.ca ">odeen@ualberta.ca</a><br />
+					Archives &amp; Special Collections Assistant<br />
+					<a href="mailto:alicia.odeen@ualberta.ca">odeen@ualberta.ca</a><br />
 					780-248-1302<br />
 					<br />
 
@@ -130,9 +130,11 @@
 				</div>
 				<div class="span3">
 
-					
-
-					<br />	
+					<strong>Krista Jamieson</strong><br />
+					Digital Archivist<br />
+					<a href="mailto:kjamieso@ualberta.ca">kjamieso@ualberta.ca</a><br />
+					780-492-7733<br />
+					<br />
 
 				</div>
 			</div>
