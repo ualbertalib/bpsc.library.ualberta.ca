@@ -18,7 +18,12 @@ class Pages extends CI_Controller {
 	$this->cisimplepie->handle_content_type();
 	$this->cisimplepie->set_cache_duration(100);
 	$this->load->database();
-
+	
+	
+	$this->load->library('rssparser');
+	$this->rssparser->set_feed_url('http://bpsclibrarynews.blogspot.com/feeds/posts/default?alt=rss');
+	$this->rssparser->set_cache_life(30);
+	$data['rss_news'] = $this->rssparser->getFeed(4); 
 
 	
 	$data['title'] = ucfirst($page); // Capitalize the first letter
