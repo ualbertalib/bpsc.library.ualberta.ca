@@ -143,9 +143,9 @@ class RSSParser {
 		// Do we need to write the cache file?
 		if ($this->write_cache_flag)
 		{
-			if (!$fp = @fopen($filename, 'wb'))
+			if (!$fp = @fopen('../' . $filename, 'wb'))
 			{
-				echo "RSSParser error";
+				echo "RSSParser error unable to write to cache file";
 				log_message('error', "Unable to write cache file: ".$filename);
 				return;
 			}
