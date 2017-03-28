@@ -8,9 +8,11 @@
         
           <div class="row-fluid">
             <div class="span6 front-column">
-                 <p class="welcome">Bruce Peel Special Collections &amp; Archives includes the Peel library, located in the lower level of Rutherford South, and the University Archives, located in the Book and Record Depository (BARD). Thanks to visionary collectors and generous donors, the two locations house a world class collection of more than 100,000 rare books and a significant collection of archival materials which explore a range of local and international subjects.</p>
-           
-           
+                 <p class="welcome">Thanks to visionary collectors and generous donors, Bruce Peel Special Collections 
+                  houses a world class collection of more than 100,000 rare books and a significant collection of archival 
+                  materials that explore a range of local and international subjects. Open on weekday afternoons throughout 
+                  the year, researchers and visitors are welcome to browse the current exhibition or examine rare materials 
+                  in the Gregory Javitch Reading Room.</p>
             </div>
 
   <div class="span3">
@@ -60,7 +62,9 @@
            <h2>News</h2>
 		   
            <ul>
-				<?php foreach($rss_news as $row){
+				<?php 
+
+          foreach($rss_news as $row){
 					echo "<li><a href='{$row['link']}'>" . $row['title'] . "</a></li>";
 					
 				} ?>

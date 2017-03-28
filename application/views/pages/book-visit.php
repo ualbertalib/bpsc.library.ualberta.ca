@@ -1,12 +1,11 @@
-<h2>Book a Class Visit to the Bruce Peel Special Collections &amp;
-Archives</h2>
+<h2>Book a Class Visit to Bruce Peel Special Collections</h2>
 <div class="page">
-	<p>There are several options for your class visit to the Bruce Peel Special Collections Library:</p>
+	<p>There are several options for your class visit to Bruce Peel Special Collections:</p>
 	<h3>Librarian-led Class <a href="https://docs.google.com/forms/d/1kTdk-dBOVpQAUfaT-zaZBdYkJKDpJRmAr1zKHr1FMQU/viewform?c=0&amp;w=1&amp;usp=mail_form_link" class="myButton" id="book">Book It</a></h3> 
 	<p>Librarians teach visiting classes in a wide range of subject areas.  For each class, a librarian will select relevant 
 		library materials based on the course syllabus and the professor’s stated goals for the visit, offering 
 		detailed commentary on selected rare materials, in addition to explaining proper handling procedures for rare materials and 
-		relevant research methods for Peel collections.</p>
+		relevant research methods for Peel collections. <b>Remember to book early!</b></p>
     <h3>Professor-led Class <a href="https://docs.google.com/forms/d/1kTdk-dBOVpQAUfaT-zaZBdYkJKDpJRmAr1zKHr1FMQU/viewform?c=0&amp;w=1&amp;usp=mail_form_link" class="myButton" id="book">Book It</a></h3>  
     <p>A professor can teach her own visiting class after a Librarian first offers the class instruction 
     	in proper handling procedures for rare materials and in research methods for Peel collections.  
@@ -20,12 +19,6 @@ Archives</h2>
     <p>The Peel library stages a wide variety of curated in-house exhibitions which are free to  
      visitors for quiet viewing – without prior arrangements – during normal hours (Monday-Friday 12:00-4:30pm). 
       It is possible to book a class visit to discuss an exhibition in the mornings only.  We cannot book  
-       these visits in the afternoons when the Gregory Javitch Reading Room is open for quiet research.</p> 
-    <h3>Peel Reading List</h3>  
-    <p>When it is more important for students to handle/examine items than it is for them to 
-      visit the Peel library as a group, we recommend working with us to create a Peel Reading List for your  
-       students.  A list of 5-15 items, with up to a paragraph of commentary on each item, would create a kind of  
-        self-guided tour for your students.  Peel staff will verify call numbers and add handling and location notes.  In our experience, students are more  
-          likely to follow through if the Peel Reading List is clearly connected with a particular assignment, but this is   not required. 
-           The list (with complete bibliographical information and call numbers) should be submitted at least two weeks prior to the date it should be posted.</p>
+       these visits in the afternoons when the Gregory Javitch Reading Room is open for quiet research. Remember to book well in advance.</p> 
+   
 </div>

@@ -3,7 +3,7 @@
 <div class="row page">
 
 	<div class="span9">
-		<h2>Visiting the Bruce Peel Special Collections &amp; Archives</h2>
+		<h2>Visiting Bruce Peel Special Collections</h2>
 	<div class="row">
 		<ul class="inpage-nav">
 	<li><a href="#finding">Finding Library Materials</a></li>
@@ -13,10 +13,10 @@
 	<li><a href="#reproduction">Reproduction of Library Materials</a></li>
 </ul>
 </div>
-<p>*NEW* Submit your <a href="https://docs.google.com/a/ualberta.ca/forms/d/126ZJ6r6L42AeoWVyOQRWdY9b0SYv7VxUljx6V1d56Po/edit">Retrieval Request Form</a> at least 24 hours before your visit to ensure that library materials are available for your use.</p>
+<p>Submit a <a href="https://docs.google.com/a/ualberta.ca/forms/d/126ZJ6r6L42AeoWVyOQRWdY9b0SYv7VxUljx6V1d56Po/edit">Retrieval Request Form</a> at least 24 hours before your visit to ensure that library materials are available for your use.</p>
 	<h3><a name="finding"></a>Finding Library Materials</h3>
 <img src="/assets/img/int4.jpg" class="int3 hidden-phone" alt="photograph of the interior of the special collections library"/>
-<p>Books housed in Bruce Peel Special Collections are listed in the 
+<p>Books housed in Bruce Peel Special Collection are listed in the 
 	<a href="https://neos.library.ualberta.ca/uhtbin/cgisirsi/x/0/0/57/49?user_id=WUAARCHIVE">University of Alberta Libraries' "Classic Catalogue."</a>
 You can narrow your search to the Peel library by selecting “University of Alberta Bruce Peel Special Collections” under “Libraries.”  The 
 library’s archival collections (i.e., photographs, correspondence, diaries, business records, etc.) are rarely listed in the library catalogue. 
@@ -102,18 +102,42 @@ If you require research assistance, please feel free to contact a member of the 
 <li>Researchers must ensure that they are not in violation of the <a href="http://laws-lois.justice.gc.ca/eng/acts/C-42/Index.html">Canadian Copyright Act</a> which outlines the standards for fair use by researchers.</li>  
 </ul>
 <h3><a name="reproduction"></a>Reproduction of Library Materials</h3>
+<p>Photographs, scans, or photocopies are allowed on the condition that they will not damage rare materials, so we always 
+	consider the condition of the original before giving permission for any kind of reproduction.</p>  
+<p>We can provide high-resolution professional quality images at a cost of $20 each.  
+	Contact Jeff Papineau (see <a herf="info/contact">Contacts</a>) 
+	to be sure that your images are created to the exact specifications needed and to arrange for payment. 
+	Researchers are welcome to take photographs themselves using a phone or camera without flash as a less 
+	damaging and cheaper alternative to asking our staff to provide photocopies (50¢ each, cash only). </p> 
 
-<p>Requests for reproduction will be considered on a case-by-case basis. Please contact us directly to obtain publication rights and detailed costs for image reproduction. Photocopies can only be made by library staff. In some cases, reproduction will not be possible due to copyright, donor restrictions, or the physical condition of library materials. Given the potential for damage involved with photocopying, the use of digital photography is preferred.</p> 
+<p>If an image is needed for publication or exhibition use, it is necessary to first obtain permission from the 
+	copyright owner, who is normally the author or creator. For more information, you can follow up with the 
+	<a href="http://www.copyright.ualberta.ca/">University of Alberta Copyright Office</a></p>
 
-<p>All requests for reproduction and rights should include the author and title of the book/article being published, the name of the publisher, date of publication, and plans for distribution (including the planned print run). Usage fees will be scaled to the size of the publication. If permission is granted to reproduce materials, we require the following citation: “Image courtesy of the Bruce Peel Special Collections Library, University of Alberta.”</p> 
+<p>Libraries have traditionally charged a fee for the use of images of library materials. Like other U of A Libraries, 
+	Bruce Peel Special Collections has waived usage fees on the condition that proper copyright permissions have been 
+	obtained (if applicable) and that the following citation is displayed with the image: “Image courtesy of Bruce Peel 
+	Special Collections, University of Alberta.”</p>
+
 </div>
 
 	<div class="span3 getting">
-<h3>Getting to the Library</h3>
+<h3>Hours</h3>
+<p>Bruce Peel Special Collections is open year round, Monday through Friday from 12:00pm to 4:30pm, excluding holidays.</p>
 
-<p>The Bruce Peel Special Collections Library is in the lower level of Rutherford South and is accessible via the staircases from the main level. The library is open year round, <strong>Monday through Friday from 12:00pm to 4:30pm, excluding holidays</strong>.  For researchers with mobility issues, access to the library is also available via elevator from the main floor of the School of Library and Information Studies. If you require use of the elevator, please make arrangements with a <a href="contact">staff member</a> in advance.</p> 
+<h3>Location</h3>
+<p>The University of Alberta is accessible via Edmonton Transit Service (link), either through the LRT (University Station) 
+	or numerous bus routes.</p>
 
-<p>You can get to the University of Alberta via the <a href="http://www.edmonton.ca/edmonton-transit-system-ets.aspx">Edmonton Transit Service (ETS)</a>, both on the LRT (University Station) and on numerous bus routes. Visitor parking is available on campus; for further information, please consult the <a href="http://www.campusmap.ualberta.ca/">campus map</a>  (Rutherford South is marked “RS” on the map).</p> 
+<p>Bruce Peel Special Collections is located on the University of Alberta’s North Campus, in the basement of Rutherford South. 
+	The basement can be reached via the staircases on the west and east sides of the main level of Rutherford South.</p>
+
+<h3>Accessibility</h3>
+<p>Researchers with mobility restrictions can access the library using the elevator located on the main floor of the School 
+	of Library and Information Studies (SLIS). The entrance to SLIS (which is wheelchair accessible) is located on the southwest 
+	corner of Rutherford South. The elevator is located past the second set of doors. To reach the Peel library, take the elevator 
+	to the basement floor (B), turn right and right again, and ring the doorbell of room B12. If you are unsure how to reach the 
+	library, or require further assistance to access it, please <a herf="info/contact">contact us</a>.</p>
 
 
 </div>
