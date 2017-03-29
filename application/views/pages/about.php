@@ -1,34 +1,25 @@
 
 <div class="row">
 	<div class="span7">
-				<h2>About Bruce Peel Special Collections &amp; Archives</h2>
+				<h2>About Bruce Peel Special Collections</h2>
 
 		<p>Thanks to visionary collectors and generous donors, a range of important collections in 
-			Bruce Peel Special Collections &amp; Archives record the history of the University of Alberta 
-			and treat numerous local and international subjects, from the Aboriginal peoples of North and South 
+			Bruce Peel Special Collections treat numerous local and international subjects, from the Aboriginal peoples of North and South 
 			America to Historic Entomology and from Book History to the Chinese Experience in Canada.</p> 
 
 		<p>Bruce Braden Peel (1916–1998) was Chief Librarian at the University of Alberta from 1955 to 1982. 
 			The publication of his <em>A Bibliography of the Prairie Provinces</em> in 1956 was a landmark achievement that 
 			documents the early settlement and publishing history of western Canada, and his bibliography continues to 
 			grow today as an online database called "Peel's Prairie Provinces." Named to honour Peel's accomplishments, 
-			Bruce Peel Special Collections &amp; Archives houses a world-class collection of more than 100,000 rare books 
-			and a significant collection of archival materials in two locations. Located in the basement of the Rutherford 
+			Bruce Peel Special Collections houses a world-class collection of more than 100,000 rare books 
+			and a significant collection of archival materials. Located in the basement of the Rutherford 
 			South building on the main university campus, researchers and visitors are welcome to visit Special Collections 
 			(also called the "Peel library") to browse the current <a href="/exhibits">exhibition</a> or examine rare materials in the Gregory 
-			Javitch Reading Room on weekday afternoons throughout the year. Currently located off campus (on 50th Street), 
-			but expected to relocate in 2017 to the Research &amp; Collections Resource Facility (RCRF) to be built on South Campus, 
-			the University Archives Reading Room is open to researchers by appointment. Detailed 
-			information on visiting both of our locations can be found <a href="visit">here</a>.</p>
+			Javitch Reading Room on weekday afternoons throughout the year. </p>
 
-		<p>The University Archives is the official repository for the permanently valuable records of the university and its affiliated 
-			institutions. Archival materials that are of continuing administrative, legal, or historical value include administrative 
-			and academic records, university publications, and select private papers of faculty, staff, students, alumni, and various 
-			university-related organizations. The Archives also holds the records of many notable individuals and organizations relating 
-			to local, provincial, and federal politics, the oil sands, education, and western settlement.</p>
 
 		<p>The Peel library offers custom teaching programs for visiting <a href="classes">classes</a> from eighteen faculties and departments at U of A, 
-			as well as from other local universities, schools, and community groups. The library’s popular exhibitions and award-winning 
+			as well as from other local universities, schools, and community groups. The library’s popular exhibitions and award-winning exhibition 
 			catalogues allow visitors to view library treasures with guidance from expert curators on range of topics from the culture 
 			and history of the Canadian Prairies to modern artists’ books and from Virginia Woolf’s Hogarth Press to that archetypal Mountie, Sam Steele.</p>
 
@@ -61,7 +52,9 @@
 	University of Alberta <a href="https://www.library.ualberta.ca">library catalogue</a>. 
 	If the item you seek is not available through the University of Alberta Libraries, 
 	you can search for books in libraries around the world using <a href="http://firstsearch.oclc.org/fsip?autho=100338439">OCLC WorldCat</a>
-	and for archival materials (letters, photographs, documents, etc.) in local institutions through the Archives Society of Alberta's <a href="http://www.albertaonrecord.ca/">Alberta on Record</a> database. The Bruce Peel Special Collections Library is one of many libraries that may hold a print copy of an item that you find listed in the <a href="http://peel.library.ualberta.ca/index.html">Peel’s Prairies Provinces database</a>.</p>
+	and for archival materials (letters, photographs, documents, etc.) in local institutions through t
+	he Archives Society of Alberta's <a href="http://www.albertaonrecord.ca/">Alberta on Record</a> database. 
+	Bruce Peel Special Collections is one of many libraries that may hold a print copy of an item that you find listed in the <a href="http://peel.library.ualberta.ca/index.html">Peel’s Prairies Provinces database</a>.</p>
 
 <p class="question">How much is my old book worth?</p>
  
