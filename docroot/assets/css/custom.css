@@ -324,7 +324,7 @@ text-decoration: none;
   display: none;
 }
 .main-nav li a{
- padding:56px 15px;
+ padding:56px 25px;
   height: 2px;
   vertical-align: center;
   display: block;
@@ -338,7 +338,7 @@ text-decoration: none;
   border-right: none;
   }
 .main-nav li a.line{
-  padding:31px 15px;
+  padding:31px 25px;
   height: 52px;
 }
 .main-nav li a:hover{
@@ -774,7 +774,7 @@ float: left;
   line-height: 30px;
 }
 .getting h3{
-  background-color: #fff;
+ 
   margin: 0;
   padding:15px;
   border: 2px solid #efefef;

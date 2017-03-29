@@ -105,7 +105,7 @@ If you require research assistance, please feel free to contact a member of the 
 <p>Photographs, scans, or photocopies are allowed on the condition that they will not damage rare materials, so we always 
 	consider the condition of the original before giving permission for any kind of reproduction.</p>  
 <p>We can provide high-resolution professional quality images at a cost of $20 each.  
-	Contact Jeff Papineau (see <a herf="info/contact">Contacts</a>) 
+	Contact Jeff Papineau (see <a href="contact">Contacts</a>) 
 	to be sure that your images are created to the exact specifications needed and to arrange for payment. 
 	Researchers are welcome to take photographs themselves using a phone or camera without flash as a less 
 	damaging and cheaper alternative to asking our staff to provide photocopies (50¢ each, cash only). </p> 
@@ -137,7 +137,7 @@ If you require research assistance, please feel free to contact a member of the 
 	of Library and Information Studies (SLIS). The entrance to SLIS (which is wheelchair accessible) is located on the southwest 
 	corner of Rutherford South. The elevator is located past the second set of doors. To reach the Peel library, take the elevator 
 	to the basement floor (B), turn right and right again, and ring the doorbell of room B12. If you are unsure how to reach the 
-	library, or require further assistance to access it, please <a herf="info/contact">contact us</a>.</p>
+	library, or require further assistance to access it, please <a href="contact">contact us</a>.</p>
 
 
 </div>
