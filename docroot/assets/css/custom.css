@@ -774,12 +774,15 @@ float: left;
   line-height: 30px;
 }
 .getting h3{
- 
+  background-color: #fff;
   margin: 0;
   padding:15px;
   border: 2px solid #efefef;
     border-top-right-radius: 10px;
      border-top-left-radius: 10px;
+}
+.getting h3.no-back{
+   background-color: transparent;
 }
 .visit-rules{
   margin: 10px 50px;
@@ -788,7 +791,6 @@ float: left;
 .contact-image{
   float: right;
  margin-right: 100px;
- margin-top: -20px;
  width: 450px;
 }
 .int{

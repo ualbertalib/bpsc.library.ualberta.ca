@@ -1,6 +1,6 @@
 
 <div class="row">
-	<h2>Contact Bruce Peel Special Collections</h2>
+	
 	<div class="span9">
 		
 			<div class="row">

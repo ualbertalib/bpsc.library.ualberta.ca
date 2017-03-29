@@ -122,17 +122,17 @@ If you require research assistance, please feel free to contact a member of the 
 </div>
 
 	<div class="span3 getting">
-<h3>Hours</h3>
+<h3 class="no-back">Hours</h3>
 <p>Bruce Peel Special Collections is open year round, Monday through Friday from 12:00pm to 4:30pm, excluding holidays.</p>
 
-<h3>Location</h3>
+<h3 class="no-back">Location</h3>
 <p>The University of Alberta is accessible via Edmonton Transit Service (link), either through the LRT (University Station) 
 	or numerous bus routes.</p>
 
 <p>Bruce Peel Special Collections is located on the University of Alberta’s North Campus, in the basement of Rutherford South. 
 	The basement can be reached via the staircases on the west and east sides of the main level of Rutherford South.</p>
 
-<h3>Accessibility</h3>
+<h3 class="no-back">Accessibility</h3>
 <p>Researchers with mobility restrictions can access the library using the elevator located on the main floor of the School 
 	of Library and Information Studies (SLIS). The entrance to SLIS (which is wheelchair accessible) is located on the southwest 
 	corner of Rutherford South. The elevator is located past the second set of doors. To reach the Peel library, take the elevator 
