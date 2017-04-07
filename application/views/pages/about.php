@@ -52,8 +52,8 @@
 	University of Alberta <a href="https://www.library.ualberta.ca">library catalogue</a>. 
 	If the item you seek is not available through the University of Alberta Libraries, 
 	you can search for books in libraries around the world using <a href="http://firstsearch.oclc.org/fsip?autho=100338439">OCLC WorldCat</a>
-	and for archival materials (letters, photographs, documents, etc.) in local institutions through t
-	he Archives Society of Alberta's <a href="http://www.albertaonrecord.ca/">Alberta on Record</a> database. 
+	and for archival materials (letters, photographs, documents, etc.) in local institutions through 
+	the Archives Society of Alberta's <a href="http://www.albertaonrecord.ca/">Alberta on Record</a> database. 
 	Bruce Peel Special Collections is one of many libraries that may hold a print copy of an item that you find listed in the <a href="http://peel.library.ualberta.ca/index.html">Peel’s Prairies Provinces database</a>.</p>
 
 <p class="question">How much is my old book worth?</p>
@@ -64,7 +64,7 @@
 
 <p class="question">Do you accept donations of rare books?</p>
  
-<p>The generosity of donors plays an instrumental role in the development of our research collections. To discuss whether the Peel library is the best place for your rare book(s), please contact Robert Desmarais, Special Collections Librarian and Unit Head, at 780-492-7929 or  <a href="mailto:robert.desmarais@ualberta.ca">robert.desmarais@ualberta.ca</a>. </p>
+<p>The generosity of donors plays an instrumental role in the development of our research collections. To discuss whether the Peel library is the best place for your rare book(s), please contact Robert Desmarais, Special Collections Librarian and Unit Head, at 780-492-7929 or <a href="mailto:robert.desmarais@ualberta.ca">email us</a>. </p>
  
 
 
