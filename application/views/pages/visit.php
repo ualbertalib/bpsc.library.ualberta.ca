@@ -54,7 +54,7 @@ If you require research assistance, please feel free to contact a member of the 
 <li>Library materials are not to be marked or altered in any way.</li> 
 <li>Do not trace on any library materials or use any library materials as a pad for your paper.</li> 
 <li>Please do not place items (notebooks, phones, tablets, etc.) on the library materials.</li> 
-<li>Turn off audio and communication functions on all devices (laptops, cell phones, cameras, etc.) prior to entering the library. For persons with visual or hearing impairments, headphones and other assistive devices are permitted.</li> 
+<li>Audio functions on cell phones and other devices should be turned to silent while in the Peel library. Telephone conversations may disturb other researchers and are therefore not permitted in the reading room, classroom, or lobby. For persons with visual or hearing impairments, headphones and other assistive devices are permitted.</li> 
 <li>Return all materials to the reference desk after use. Researchers who need to leave the reading room for more than 15 minutes should return materials to the reference desk.</li>  
 <li>Please notify library staff if you plan on returning later in the week to further consult the materials as they may be placed on hold for you.</li> 
 </ul>
