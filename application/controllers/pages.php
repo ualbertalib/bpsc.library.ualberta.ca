@@ -23,7 +23,7 @@ class Pages extends CI_Controller {
 	$this->load->library('rssparser');
 	$this->rssparser->set_feed_url('http://bpsclibrarynews.blogspot.com/feeds/posts/default?alt=rss');
 	$this->rssparser->set_cache_life(30);
-	$data['rss_news'] = $this->rssparser->getFeed(4); 
+	$data['rss_news'] = $this->rssparser->getFeed(6); 
 
 	
 	$data['title'] = ucfirst($page); // Capitalize the first letter

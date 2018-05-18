@@ -18,11 +18,6 @@
 			Javitch Reading Room on weekday afternoons throughout the year. </p>
 
 
-		<p>The Peel library offers custom teaching programs for visiting <a href="classes">classes</a> from eighteen faculties and departments at U of A, 
-			as well as from other local universities, schools, and community groups. The library’s popular exhibitions and award-winning exhibition 
-			catalogues allow visitors to view library treasures with guidance from expert curators on range of topics from the culture 
-			and history of the Canadian Prairies to modern artists’ books and from Virginia Woolf’s Hogarth Press to that archetypal Mountie, Sam Steele.</p>
-
 		<p>The Peel library is a climate-controlled space: ideally maintaining a steady temperature (18-20°C) and relative humidity (45-55%) all year 
 			round. It is a secure, closed-stack library, which offers visitors access to library materials in a supervised reading room. 
 			As the stewards of this collection, staff members are committed to both preservation and conservation. “Preservation” refers 
@@ -30,6 +25,15 @@
 			vandalism, displacement, shocks/vibrations, fire, water, light (visible and ultraviolet), temperature, humidity, pests, dust, and other 
 			pollutants. “Conservation” is the examination, documentation, treatment, and preventive care of cultural property on behalf of 
 			present and future generations.</p>
+
+			<h3>PROPER HANDLING PROCEDURES ARE CRUCIAL!</h3>
+			<ul class="archive-vids">
+<li><a href="https://www.youtube.com/watch?v=UOv0SOQ8B68&feature=youtu.be">Introduction to Handling Rare Materials</a> (from Harvard University Special Collections)</li> 
+<li><a href="https://www.youtube.com/watch?v=aHVjQb4izSw&feature=youtu.be">Handling Rare Books</a> and <a href="https://www.youtube.com/watch?v=8RWAOajffZg&feature=youtu.be">Handling Archival Collections</a> (from Special Collections at University of San Antonio)</li> 
+<li><a href="https://www.youtube.com/watch?v=Mcx5l5czVTc&feature=youtu.be">Handling Photographic Prints</a> and <a href="https://www.youtube.com/watch?v=PY830qtl0k4&feature=youtu.be">Handling Photographic Albums</a> (from University of Glasgow Archives &amp; Special Collections)</li> 
+</ul>
+
+
 
 			<iframe src="https://www.360cities.net/embed_iframe/bruce-peel" class="hidden-phone" width="600" height="400" frameborder="0" bgcolor="#000000" target="_blank" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe><br/><a title="Panorama photos of Bruce Peel Special Collections on 360cities.net" href="http://www.360cities.net/image/bruce-peel" class="hidden-phone">Bruce Peel Special Collections</a>
 </div>
@@ -52,8 +56,8 @@
 	University of Alberta <a href="https://www.library.ualberta.ca">library catalogue</a>. 
 	If the item you seek is not available through the University of Alberta Libraries, 
 	you can search for books in libraries around the world using <a href="http://firstsearch.oclc.org/fsip?autho=100338439">OCLC WorldCat</a>
-	and for archival materials (letters, photographs, documents, etc.) in local institutions through 
-	the Archives Society of Alberta's <a href="http://www.albertaonrecord.ca/">Alberta on Record</a> database. 
+	and for archival materials (letters, photographs, documents, etc.) in local institutions through t
+	he Archives Society of Alberta's <a href="http://www.albertaonrecord.ca/">Alberta on Record</a> database. 
 	Bruce Peel Special Collections is one of many libraries that may hold a print copy of an item that you find listed in the <a href="http://peel.library.ualberta.ca/index.html">Peel’s Prairies Provinces database</a>.</p>
 
 <p class="question">How much is my old book worth?</p>
@@ -64,7 +68,7 @@
 
 <p class="question">Do you accept donations of rare books?</p>
  
-<p>The generosity of donors plays an instrumental role in the development of our research collections. To discuss whether the Peel library is the best place for your rare book(s), please contact Robert Desmarais, Special Collections Librarian and Unit Head, at 780-492-7929 or <a href="mailto:robert.desmarais@ualberta.ca">email us</a>. </p>
+<p>The generosity of donors plays an instrumental role in the development of our research collections. To discuss whether the Peel library is the best place for your rare book(s), please contact Robert Desmarais, Special Collections Librarian and Unit Head, at 780-492-7929 or  <a href="mailto:robert.desmarais@ualberta.ca">robert.desmarais@ualberta.ca</a>. </p>
  
 
 

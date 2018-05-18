@@ -77,7 +77,7 @@
           <ul class="main-nav span9">
                 <li><a href="/exhibits">Exhibitions</a></li>
                 <li><a href="/collections" class="line">Research <br/> Collections</a></li>
-                <li><a href="/info/classes" class="line">Book <br/> a Class</a></li>
+                <li><a href="/info/workshops" class="line">Peel <br/> Workshops</a></li>
                 <li><a href="/info/visit">Visit</a></li>
                 <li><a href="/info/about" class="line">About<br/> &amp; FAQs</a></li>
                 <li><a href="/info/contact" class="line last">Contact<br/> &amp; Credits</a></li>

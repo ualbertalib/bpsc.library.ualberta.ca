@@ -57,7 +57,7 @@
   <div class="span12 main-content">
     <div class="container" id="collections">
       <div class="row-fluid bottom-margin">
-         <h3><a name="online"></a>Online Exhibitions</h3>
+         <h3><a name="online"></a>Digital Exhibitions</h3>
        </div>
        <div class="container" id="exhibits">
       <?php foreach ($exhibits as $exhibit_item): ?>
