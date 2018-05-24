@@ -1,11 +1,11 @@
 
 <div class="row">
-	<h2>Contact Bruce Peel Special Collections</h2>
+	
 	<div class="span9">
 		
 			<div class="row">
 				<div class="span9">
-					<img src="/assets/img/interior.jpg" class="contact-image hidden-phone"/>
+					<img src="/assets/img/contact.jpg" class="contact-image hidden-phone"/>
 					<strong> Mailing address:</strong><br/>
 					Bruce Peel Special Collections<br/>
 					University of Alberta<br/>

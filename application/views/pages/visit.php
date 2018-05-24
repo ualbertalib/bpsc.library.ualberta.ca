@@ -15,7 +15,7 @@
 </div>
 <p>Submit a <a href="https://docs.google.com/a/ualberta.ca/forms/d/126ZJ6r6L42AeoWVyOQRWdY9b0SYv7VxUljx6V1d56Po/edit">Retrieval Request Form</a> at least 24 hours before your visit to ensure that library materials are available for your use.</p>
 	<h3><a name="finding"></a>Finding Library Materials</h3>
-<img src="/assets/img/int4.jpg" class="int3 hidden-phone" alt="photograph of the interior of the special collections library"/>
+<img src="/assets/img/finding.jpg" class="int3 hidden-phone" alt="photograph of the interior of the special collections library"/>
 <p>Books housed in Bruce Peel Special Collection are listed in the 
 	<a href="https://neos.library.ualberta.ca/uhtbin/cgisirsi/x/0/0/57/49?user_id=WUAARCHIVE">University of Alberta Libraries' "Classic Catalogue."</a>
 You can narrow your search to the Peel library by selecting “University of Alberta Bruce Peel Special Collections” under “Libraries.”  The 

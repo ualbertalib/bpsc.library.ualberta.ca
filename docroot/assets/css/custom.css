@@ -35,7 +35,7 @@ body.creamy{
   padding:0;
 }
 .slide-area{
-  height: 250px;
+  height: 200px;
 }
 .main-content{
   background-color: rgba(255, 255, 255, 0.5);
@@ -154,95 +154,39 @@ h3{
   font-size: 15px;
   line-height: 27px;
 }
-
-.front-column{
+.front{
   background-color: #fff;
-  max-height: 275px;
-  overflow: scroll;
-
+  height: 320px;
 }
-.front-column h2{
-  font-size:19px;
-  font-weight: 600;
-  color: #333;
-  padding: 0 20px;
-  margin:0;
-  background-color: #fff;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+.front h2{
+  font-size:20px;
+  margin:0 0 0 10px;
+  padding:0;
 }
-.front-column h2.dates{
- background-color: #333;
- color: #fff;
- text-align: center;
- text-transform: none;
-  padding: 1px 0;
-  font-size: 17px;
-  }
-.front-column p, address{
-  font-size: 15px;
-  line-height: 27px;
-  padding: 15px 25px;
-}
-.front-column p.welcome{
-  font-size: 17px;
-    line-height: 34px;
-      padding: 18px 20px 9px 20px;
-}
-.front-column ul{
-  margin: 0;
-}
-.front-column li{
+.front ul{
   list-style: none;
-  margin:0 0 6px 0;
-}
-.front-column li a{
-  color: #333;
-   padding: 10px 20px;
-   font-size: 18px;
-}
-.front-column li a:hover, .front-column li a:active, .front-column li a:focus{
-  color: #000;
-  background-color: #e8e298;
-text-decoration: none;
-}
-.front-column li h3{
   margin: 0;
   padding: 0;
-    font-size:17px;
-  font-family: 'Dosis', sans-serif;
-  line-height: 28px;
-  }
-.front-column li p{
-  margin: 0;
-  padding: 0;
-  line-height: 19px;
-  font-size: 13px;
-  }
-  .on-now{
-    position: relative;
-  }
-.front-column a{
-  margin: 0px;
-  padding:0px;
-  display: block;
 }
-.front-column p.det{
-  font-size: 18px;
-  padding: 0px 20px;
+.front ul li a{
+  padding: 5px 15px;
+  background-color: #efefef; 
+  display:block;
+  margin-bottom: 3px;
+}
+.front ul li a:hover{
+  background-color: #ddddde; 
+  }
+.container p.welcome{
+  font-size: 16px;
+  margin: 16px 16px 0 16px;
 }
 .col img{
   width: 130px;
   height: 160px;
 }
-.on-now-details, .col-details{
-  height: 192px;
-  width: 270px;
-   background-color: rgba(40, 46, 48, 0.85);
-  position: absolute;
-  top:0;
-  left:0;
-  display: none;
+.on-now img{
+  width: 100%;
 }
 .col-details{
   height: 160px;
@@ -285,6 +229,11 @@ text-decoration: none;
   -webkit-box-shadow: 0 0 10px #888;
   box-shadow: 0 0 10px #888;
   border:solid 2px #fff;
+  float: left;
+}
+.current-exhibit{
+  padding-right:40px;
+
 }
 #logout{
   font-size: 12px;
@@ -311,7 +260,7 @@ text-decoration: none;
 }
 .main-nav{
   margin:0; 
-  padding-left: 30px;
+  padding-left: 20px;
 }
 .main-nav li{
   float: left;
@@ -620,6 +569,10 @@ input{
       margin:10px 0 0 10px;
    
     }
+    .container p.sm-workshop{
+      font-size: 12px;
+      padding:120px 80px 0 0;
+    }
     .container li span{
       display: block;
     }
@@ -646,12 +599,14 @@ input{
     .rem{
       margin: 0;
     }
-    .rem .myButton, #past{
+    .rem .myButton, #past, .workshops .myButton{
       margin-left: 0;
     }
+    .archive-vids{
+      margin-bottom: 60px;
+    }
     #past{
-      float:right;
-      margin: 20px 0; 
+    
     }
 #btnDel, #btnAdd{
         -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;

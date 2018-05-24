@@ -9,7 +9,7 @@
 
 </div>
 <div class="span5 getting">
-	
+	<img src="/assets/img/workshop.jpg" class="hidden-phone" style="margin: 20px;" />
 <p>Bruce Peel Special Collections is home to important collections of rare and sometimes fragile materials. Like researchers and other visitors, Peel Workshop participants are asked to help preserve these materials for future generations. Here is what you need to know before you come to a workshop:</p>
 
 	<ul class="visit-rules">

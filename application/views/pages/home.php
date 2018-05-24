@@ -10,7 +10,9 @@
                   houses a world class collection of more than 100,000 rare books and a significant collection of archival 
                   materials that explore a range of local and international subjects. Open on weekday afternoons throughout 
                   the year, researchers and visitors are welcome to browse the current exhibition or examine rare materials 
-                  in the Gregory Javitch Reading Room.</p><p class="welcome"><strong>Please Note</strong> - Visitors must submit either a <a href="https://docs.google.com/forms/d/126ZJ6r6L42AeoWVyOQRWdY9b0SYv7VxUljx6V1d56Po">Retrieval Request Form (for books)</a> or a <a href="https://docs.google.com/forms/d/1-L6cAek91koI7lU5_4j6kpp_4-AUYIhETM26Xjg1uEw">Discover Archives Retrieval Request Form (for archival materials)</a> at least 24 hours before their visit.</p>
+                  in the Gregory Javitch Reading Room.</p>
+                   <p class="welcome">Researchers must submit either a <a href="https://docs.google.com/forms/d/126ZJ6r6L42AeoWVyOQRWdY9b0SYv7VxUljx6V1d56Po">Retrieval Request Form (for books)</a> or a <a href="https://docs.google.com/forms/d/1-L6cAek91koI7lU5_4j6kpp_4-AUYIhETM26Xjg1uEw">Discover Archives Retrieval Request Form (for archival materials)</a> before 8am on the day of their visit in order to be sure that library materials have been retrieved from storage and are available for their use.</p>
+                
                 </div>
           
     <div class="span2 front">

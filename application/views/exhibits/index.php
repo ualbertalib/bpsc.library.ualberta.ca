@@ -11,15 +11,10 @@
          </script>
       <?php endif?>
 
-<div class="row-fluid">
-        <div class="span12"><h2>Exhibitions</h2></div>  
-    
-      </div>
-    </div>
-  </div>
-</div>
-<div class="row-fluid">
-  <div class="span12 main-content">
+        <div class="span5 main-content"><h2>Exhibitions</h2>
+ 
+ 
+
 
       <div class="current-exhibit">
         <h3><a name="current"></a>Current In-House Exhibition</h3>
@@ -51,18 +46,18 @@
               <?php endif?>  
       </div>
     
-    </div></div>
+    
      <a href="/exhibits/past" class="myButton top-margin" id="past">Previous In-House Exhibitions</a>
-<div class="row-fluid top-margin">
-  <div class="span12 main-content">
-    <div class="container" id="collections">
-      <div class="row-fluid bottom-margin">
-         <h3><a name="online"></a>Digital Exhibitions</h3>
-       </div>
-       <div class="container" id="exhibits">
+     </div>
+
+
+  <div class="span7 main-content online-exhibits">
+    
+         <h2>Digital Exhibitions</h2>
+     
       <?php foreach ($exhibits as $exhibit_item): ?>
        <?php if ($exhibit_item['subjects'] == 'online'): ?>
-      	<div class="acollection <?php echo $exhibit_item['subjects'] ?> <?php echo str_replace(',', ' ', $exhibit_item['subjects']) ?> ">
+        <div class="acollection <?php echo $exhibit_item['subjects'] ?> <?php echo str_replace(',', ' ', $exhibit_item['subjects']) ?> ">
          
          
          
@@ -105,11 +100,6 @@
 
 <script>
 
-  var $container = $('#exhibits');
-   $container.isotope({
-      layoutMode : 'fitRows' 
-
-      });
   $(".acollection").hoverIntent(function () {
     $(this).find(".col-details").fadeToggle(600);
     return false;

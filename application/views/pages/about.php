@@ -2,6 +2,7 @@
 <div class="row">
 	<div class="span7">
 				<h2>About Bruce Peel Special Collections</h2>
+					<img src="/assets/img/faq.jpg" class="hidden-phone on-now-image"/>
 
 		<p>Thanks to visionary collectors and generous donors, a range of important collections in 
 			Bruce Peel Special Collections treat numerous local and international subjects, from the Aboriginal peoples of North and South 
