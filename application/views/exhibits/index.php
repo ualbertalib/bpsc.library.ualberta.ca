@@ -47,13 +47,14 @@
       </div>
     
     
-     <a href="/exhibits/past" class="myButton top-margin" id="past">Previous In-House Exhibitions</a>
+    
      </div>
 
 
   <div class="span7 main-content online-exhibits">
-    
-         <h2>Digital Exhibitions</h2>
+    <p>The Peel library has offered a fascinating array of exhibitions since moving to the basement of Rutherford South in 1984. Numerous awards demonstrate that the exhibition catalogues published by Bruce Peel Special Collections are some of the best in North America. They are distributed internationally by University of Alberta Press and continue to be actively used by local researchers. For information on past exhibitions and the availability of exhibition catalogues, see <a href="/exhibits/past">Previous in-house Exhibitions</a>.</p>
+ <a href="/exhibits/past" class="myButton" id="past">Previous In-House Exhibitions</a>
+         <h2 class="top-margin">Digital Exhibitions</h2>
      
       <?php foreach ($exhibits as $exhibit_item): ?>
        <?php if ($exhibit_item['subjects'] == 'online'): ?>
