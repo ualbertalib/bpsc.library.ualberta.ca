@@ -191,6 +191,10 @@ h3{
 .col-details{
   height: 160px;
   width: 130px;
+   position: absolute;
+top:0;
+left:0;
+display: none;
  }
  .front-column p.social{
   margin:0;
