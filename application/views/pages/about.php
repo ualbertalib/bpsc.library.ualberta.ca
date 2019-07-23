@@ -4,14 +4,12 @@
 				<h2>About Bruce Peel Special Collections</h2>
 					<img src="/assets/img/faq.jpg" class="hidden-phone on-now-image"/>
 
-		<p>Thanks to visionary collectors and generous donors, a range of important collections in 
-			Bruce Peel Special Collections treat numerous local and international subjects, from the Aboriginal peoples of North and South 
-			America to Historic Entomology and from Book History to the Chinese Experience in Canada.</p> 
+		<p>Thanks to visionary collectors and generous donors, a range of important collections in Bruce Peel Special Collections treat numerous local and international subjects, from the Indigenous peoples of North and South America to Historic Entomology and from Book History to the Chinese Experience in Canada.</p> 
 
 		<p>Bruce Braden Peel (1916–1998) was Chief Librarian at the University of Alberta from 1955 to 1982. 
 			The publication of his <em>A Bibliography of the Prairie Provinces</em> in 1956 was a landmark achievement that 
 			documents the early settlement and publishing history of western Canada, and his bibliography continues to 
-			grow today as an online database called "Peel's Prairie Provinces." Named to honour Peel's accomplishments, 
+			grow today as an online database called "<a href="http://peel.library.ualberta.ca/index.html">Peel's Prairie Provinces</a>." Named to honour Peel's accomplishments, 
 			Bruce Peel Special Collections houses a world-class collection of more than 100,000 rare books 
 			and a significant collection of archival materials. Located in the basement of the Rutherford 
 			South building on the main university campus, researchers and visitors are welcome to visit Special Collections 
@@ -26,6 +24,7 @@
 			vandalism, displacement, shocks/vibrations, fire, water, light (visible and ultraviolet), temperature, humidity, pests, dust, and other 
 			pollutants. “Conservation” is the examination, documentation, treatment, and preventive care of cultural property on behalf of 
 			present and future generations.</p>
+			<p>To maintain the integrity of materials housed at Bruce Peel Special Collections, proper handling procedures must be understood and followed by all. Researchers are encouraged to read the Peel library’s <a href="/info/visit#policy">Reading Room Policies</a> prior to their visit. Instructive resources produced by our colleagues in other special collections libraries, such as those linked here, demonstrate correct handling procedures.</p>
 
 			<h3>PROPER HANDLING PROCEDURES ARE CRUCIAL!</h3>
 			<ul class="archive-vids">
@@ -33,10 +32,13 @@
 <li><a href="https://www.youtube.com/watch?v=aHVjQb4izSw&feature=youtu.be">Handling Rare Books</a> and <a href="https://www.youtube.com/watch?v=8RWAOajffZg&feature=youtu.be">Handling Archival Collections</a> (from Special Collections at University of San Antonio)</li> 
 <li><a href="https://www.youtube.com/watch?v=Mcx5l5czVTc&feature=youtu.be">Handling Photographic Prints</a> and <a href="https://www.youtube.com/watch?v=PY830qtl0k4&feature=youtu.be">Handling Photographic Albums</a> (from University of Glasgow Archives &amp; Special Collections)</li> 
 </ul>
+<video width="650" height="400" controls>
+  <source src="/assets/bpsc-vid.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
 
 
-
-			<iframe src="https://www.360cities.net/embed_iframe/bruce-peel" class="hidden-phone" width="600" height="400" frameborder="0" bgcolor="#000000" target="_blank" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe><br/><a title="Panorama photos of Bruce Peel Special Collections on 360cities.net" href="http://www.360cities.net/image/bruce-peel" class="hidden-phone">Bruce Peel Special Collections</a>
+	<h4>A stretched panorama shot of the Peel library</h4>
 </div>
 <div class="span5 getting">
 	<h3>FAQs</h3>
@@ -57,9 +59,8 @@
 	University of Alberta <a href="https://www.library.ualberta.ca">library catalogue</a>. 
 	If the item you seek is not available through the University of Alberta Libraries, 
 	you can search for books in libraries around the world using <a href="http://firstsearch.oclc.org/fsip?autho=100338439">OCLC WorldCat</a>
-	and for archival materials (letters, photographs, documents, etc.) in local institutions through t
-	he Archives Society of Alberta's <a href="http://www.albertaonrecord.ca/">Alberta on Record</a> database. 
-	Bruce Peel Special Collections is one of many libraries that may hold a print copy of an item that you find listed in the <a href="http://peel.library.ualberta.ca/index.html">Peel’s Prairies Provinces database</a>.</p>
+	and for archival materials (letters, photographs, documents, etc.) in local institutions through the Archives Society of Alberta's <a href="http://www.albertaonrecord.ca/">Alberta on Record</a> database. 
+	Bruce Peel Special Collections is one of many libraries that may hold a print copy of an item that you find listed in the <a href="http://peel.library.ualberta.ca/index.html">Peel’s Prairie Provinces database</a>.</p>
 
 <p class="question">How much is my old book worth?</p>
  
@@ -74,7 +75,11 @@
 
 
 <p class="question">What does the Peel library collect?</p>
-<p>The Peel library acquires materials by purchase or donation to support research and teaching at the University of Alberta. Please consult the <a href="https://www.library.ualberta.ca/about-us/collections/collection-policy">collection policy</a> for more information.</p> 
+<p>In accordance with the <a href="https://www.library.ualberta.ca/about-us/collection/collection-policy">University of Alberta Libraries Collection Development Policy</a>, the Peel library acquires materials by purchase or donation to support research and teaching at the University of Alberta, which includes a wide variety of formats: printed books, manuscripts, photographs, prints and drawings, maps, and print ephemera (e.g., posters, playbills, postcards, advertisements, etc.). Donations of gifts-in-kind are also an integral part of the Peel library’s collection development policy. In this regard, the Head of Special Collections works with donors to acquire books and collections that offer substantial research potential based on one or more of the following criteria:</p>
+<ol class="collect-info"> <li>books or ephemera printed before 1800 anywhere;</li> 
+<li>books or ephemera printed before 1867 in Canada; </li> 
+<li>books or ephemera printed before 1900 in the Prairie Provinces;</li> 
+<li>books or printed ephemera with significant research potential.</li> </ol> <p>Preference is also given to materials that complement and build upon existing collection strengths.</p> 
 
 
 

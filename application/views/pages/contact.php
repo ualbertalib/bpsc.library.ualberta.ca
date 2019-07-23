@@ -83,8 +83,8 @@
 			<p>Thank you to the following people for their contributions to the Peel library website:<p>
 			<ul class="bottom-margin">
 				<li class="first"><strong>Photography and Scanning:</strong> Jeff Papineau</li>
-				<li><strong>Editing:</strong> Robert Desmarais and Cheryl Cundell</li>
-				<li><strong>Content:</strong> Linda Quirk, Carolyn Morgan, Jesse Carson, Kymberly Sobchyshyn, Colette Leung, Michele Pagliuso, Denis Lacroix, Lynn McPherson, Louis Chor, Michaela Stang, Paul Gifford, and Sara Tokay.</li>
+				<li><strong>Editing:</strong>  Robert Desmarais, Cheryl Cundell, Linda Quirk, and Samantha Nugent</li>
+				<li><strong>Content:</strong> Linda Quirk, Carolyn Morgan, Jesse Carson, Michaela Stang, Cori Sanderson, Kymberly Sobchyshyn, Colette Leung, Michele Pagliuso, Denis Lacroix, Lynn McPherson, Louis Chor, Paul Gifford, and Sara Tokay.</li>
 				<li><strong>Web Programming and Design:</strong> Natasha Nunn</li>
 			</ul>
 		</div>

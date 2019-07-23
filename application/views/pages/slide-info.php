@@ -3,20 +3,16 @@
 <ul class="front-sources">
 	<li>Tinctor, Jean. <em>Invectives Contre la Secte de Vauderie</em>. (BF 1565 T587 1465)</li>
 
+
 <li>Melhorn-Boe, Lise. <em>Once Upon a House</em>. (N 7433.4 M522 A6 O58 1998) </li>
 
-<li>Canadian Dept. of Immigration and Colonization. <em>Canada West</em>. (FC 3204.2 C2116 1921)</li>
-
-<li>Photo by Jeff Papineau of folio volumes in Peel library stacks.</li>
-
-
-
-<li>Postcard with the caption: "The car that won 3rd prize in the automobile parade / Aug. 1st 1913 Saskatoon," published by G.S. Free. (PC15445)</li>
+<li>Terry, Astley. <em>The Insects of South India</em>. (QL 466 T47 1860) </li>
+<li>Helwig, Christoph. <em>The Historical and Chronological Theatre of Christopher Helvicus : Distributed into Equal Intervals of Tens, Fifties and Hundreds : With an Assignation of Empires, Kingdoms, Governments, Kings, Electours, Princes, Roman Popes, Turkish Emperours, and Other Famous and Illustrious Men, Prophets, Divines, Lawyers, Physicians, Philosophers, Oratours, Poets, Historians, Hereticks, Rabbins, Councils, Synods, Academies, &C. and also of the Usual Epochaes.</em> (D 18 H49 1687)</li>
 
 
 
-<li><em>Sammlung der Gesetze, Welche Unter der Glorreichsten Regierung des Kaiser Franz des II in den Sämtlichen K. K. Erblanden Erschienen Sind, in Einer Chronoligischen Ordung, von Joseph Kropatschek</em>. (DB 81 A93)</li>
+<li>19th century Lontar (palm-leaf manuscript) with Javanese script. (Z 110 P34 1800b folio) </li>
 
-<li>Cowper, William. <em>The Diverting History of John Gilpin: Showing How He Went Farther Than He Intended, and Came Safe Home Again</em>. (PR 3382 D55 1878)</li>
+<li>Peacock. <em>Northern Canadian Canoe Trip</em>. (ND 249 P43 A64 1886)  </li>
 
-<li>Letter dated 14 Dec. 1869 from Louis Riel in Fort Garry to Eustache Prudhomme in Montreal. (FC 3217.1 R53 R54 1869)</li>
+<li>Roberts, David, Joseph Nash, and Louis Haghe. <em>Dickinson's Comprehensive Pictures of the Great Exhibition of 1851: From the Originals Painted for His Royal Highness Prince Albert</em>. London: Dickinson, Brothers ..., 1852.</li>

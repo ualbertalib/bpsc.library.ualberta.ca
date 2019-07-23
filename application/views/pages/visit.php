@@ -13,22 +13,21 @@
 	<li><a href="#reproduction">Reproduction of Library Materials</a></li>
 </ul>
 </div>
-<p>Submit a <a href="https://docs.google.com/a/ualberta.ca/forms/d/126ZJ6r6L42AeoWVyOQRWdY9b0SYv7VxUljx6V1d56Po/edit">Retrieval Request Form</a> at least 24 hours before your visit to ensure that library materials are available for your use.</p>
+<p>Researchers must request materials in advance, either using the “Request Me” option in the U of A library catalogue or by submitting a <a href="https://docs.google.com/a/ualberta.ca/forms/d/126ZJ6r6L42AeoWVyOQRWdY9b0SYv7VxUljx6V1d56Po/edit">Retrieval Request Form (for books)</a> or a <a href="https://docs.google.com/forms/d/1-L6cAek91koI7lU5_4j6kpp_4-AUYIhETM26Xjg1uEw/viewform?edit_requested=true">Discover Archives Retrieval Request Form (for archival materials)</a> before 8am on the day of their visit in order to be sure that library materials have been retrieved from storage and are available for their use.  at least 24 hours before your visit to ensure that library materials are available for your use.</p>
 	<h3><a name="finding"></a>Finding Library Materials</h3>
 <img src="/assets/img/finding.jpg" class="int3 hidden-phone" alt="photograph of the interior of the special collections library"/>
-<p>Books housed in Bruce Peel Special Collection are listed in the 
-	<a href="https://neos.library.ualberta.ca/uhtbin/cgisirsi/x/0/0/57/49?user_id=WUAARCHIVE">University of Alberta Libraries' "Classic Catalogue."</a>
+<p> Books housed in Bruce Peel Special Collection are listed in the <a href="https://www.library.ualberta.ca/">U of A Libraries catalogue</a>, and can be requested from a catalogue record using the “Request Me” option.
 You can narrow your search to the Peel library by selecting “University of Alberta Bruce Peel Special Collections” under “Libraries.”  The 
 library’s archival collections (i.e., photographs, correspondence, diaries, business records, etc.) are rarely listed in the library catalogue. 
-Researchers can search for such materials using print or electronic finding aids. Further information related to <a href="/collections">research 
+Researchers can search for such materials using print finding aids in the Peel library or digital finding aids through <a href="https://discoverarchives.library.ualberta.ca/index.php/bruce-peel-special-collections">U of A Libraries Discover Archives</a>. Further information related to <a href="/collections">research 
 collections</a> in the Peel library is available in various formats, including online and in-house <a href="/exhibits">exhibitions</a>.  
 If you require research assistance, please feel free to contact a member of the <a href="contact">library staff</a>.</p> 
 
-<p>Theses and some other items housed in the Book and Record Depository (BARD) have “no-loan” status, which means that they cannot be checked out and removed from the library. However, these items can be requested for use in the Reading Room in the Peel library. Should you wish to access non-circulating material from the Book and Record Depository (BARD), please contact the Peel library at <a href="mailto:bpsc@ualberta.ca">bpsc@ualberta.ca</a> or drop-in to make arrangements for the transfer of non-circulating item(s) to the Peel library for your use.</p>
+<p>Theses and some other items housed in the Research and Collections Resource Facility (RCRF) have “no-loan” status, which means that they cannot be checked out and removed from the library. However, these items can be requested for use in the supervised reading room in the Peel library during normal hours (Monday-Friday 12-4:30pm) by selecting “Request Me” in the <br/><a href="https://www.library.ualberta.ca/">U of A Libraries catalogue</a>.</p>
 
 <h3><a name="using"></a>Using Library Materials</h3>
 
-<p>Provided that they are requested at least 24 hours in advance using the <a href="https://docs.google.com/a/ualberta.ca/forms/d/126ZJ6r6L42AeoWVyOQRWdY9b0SYv7VxUljx6V1d56Po/edit">Retrieval Request Form</a>, the materials in the Peel library are available for use by students, staff, and the general public in the library’s supervised reading room upon presentation of valid photo identification (e.g., ONEcard, driver’s license, passport, or citizenship card with photo).</p> 
+<p>Provided that they are requested in advance using the “Request Me” option in the U of A Libraries catalogue or a <a href="https://docs.google.com/a/ualberta.ca/forms/d/126ZJ6r6L42AeoWVyOQRWdY9b0SYv7VxUljx6V1d56Po/edit">Retrieval Request Form</a>, the materials in the Peel library are available for use by students, staff, and the general public in the library’s supervised reading room upon presentation of valid photo identification (e.g., ONEcard, driver’s license, passport, or citizenship card with photo).</p> 
 <p>For the security of researchers, staff, and the collection, there are security cameras throughout the space that are continuously monitored.</p> 
 <p>There are no computer workstations in the Peel library’s reading room, but researchers are permitted to bring laptops with them. The University of Alberta’s wireless network is available in the library.</p> 
 
@@ -39,7 +38,7 @@ If you require research assistance, please feel free to contact a member of the 
 
 
 
-<h3><a name="policy"></a>Reading Room Policies</h3><img src="/assets/img/int5.jpg" class="int2 hidden-phone" alt="photograph of the interior of the special collections library"/>
+<h3><a name="policy"></a>Reading Room Policies</h3><img src="/assets/img/ReadingroomB.jpg" class="int2 hidden-phone" alt="photograph of the interior of the special collections library"/>
 
 <p>The following are general rules for using library materials housed in the Peel library. For more specific guidelines for <a href="#books">handling books</a>,  <a href="#artbooks">artists’ books</a>, <a href="#archives">archives</a>, and <a href="#photos">photographic materials</a>, please follow the links.</p> 
 <ul>
@@ -126,17 +125,14 @@ If you require research assistance, please feel free to contact a member of the 
 <p>Bruce Peel Special Collections is open year round, Monday through Friday from 12:00pm to 4:30pm, excluding holidays.</p>
 
 <h3 class="no-back">Location</h3>
-<p>The University of Alberta is accessible via Edmonton Transit Service (link), either through the LRT (University Station) 
+<p>The University of Alberta is accessible via <a href="https://www.edmonton.ca/edmonton-transit-system-ets.aspx">Edmonton Transit Service</a>, either through the LRT (University Station) 
 	or numerous bus routes.</p>
 
 <p>Bruce Peel Special Collections is located on the University of Alberta’s North Campus, in the basement of Rutherford South. 
 	The basement can be reached via the staircases on the west and east sides of the main level of Rutherford South.</p>
 
 <h3 class="no-back">Accessibility</h3>
-<p>Researchers with mobility restrictions can access the library using the elevator located on the main floor of the School 
-	of Library and Information Studies (SLIS). The entrance to SLIS (which is wheelchair accessible) is located on the southwest 
-	corner of Rutherford South. The elevator is located past the second set of doors. To reach the Peel library, take the elevator 
-	to the basement floor (B), turn right and right again, and ring the doorbell of room B12. If you are unsure how to reach the 
+<p>Researchers with mobility restrictions can access the library using the elevator located in the southwest corner of Rutherford South building. The elevator can be reached inside through Rutherford South or via the southwest external door (which has a ramp). If you are unsure how to reach the 
 	library, or require further assistance to access it, please <a href="contact">contact us</a>.</p>
 
 
