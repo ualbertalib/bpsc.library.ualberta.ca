@@ -11,13 +11,17 @@
          </script>
       <?php endif?>
 
-        <div class="span5 main-content"><h2>Exhibitions</h2>
- 
- 
+       <h1>Exhibitions</h1>
+   <p class="top-margin">Bruce Peel Special Collections has offered a fascinating array of exhibitions since moving to the basement of Rutherford South in 1984. Numerous awards, for exhibition catalogues and for a recent digital exhibition, demonstrate that the exhibitions produced by the Peel library are some of the best in North America. Exhibition catalogues are distributed internationally by University of Alberta Press and continue to be actively used by local researchers. For information on past exhibitions, as well as the availability and prices of past exhibition catalogues, follow the link below.</p>
+ <a href="/exhibits/past" class="myButton" id="past">Previous In-House Exhibitions</a>
+
+</div>
+         <div class="row-fluid">
+   <div class="span5 main-content">
 
 
       <div class="current-exhibit">
-        <h3><a name="current"></a>Current In-House Exhibition</h3>
+        <h2><a name="current"></a>Current In-House Exhibition</h2>
          <?php if (!empty($on_now)): ?>
             <?php foreach ($on_now as $on_now_item): ?>
               <?php if ($on_now_item['on_now'] != '0'): ?>
@@ -52,9 +56,7 @@
 
 
   <div class="span7 main-content online-exhibits">
-    <p>The Peel library has offered a fascinating array of exhibitions since moving to the basement of Rutherford South in 1984. Numerous awards demonstrate that the exhibition catalogues published by Bruce Peel Special Collections are some of the best in North America. They are distributed internationally by University of Alberta Press and continue to be actively used by local researchers. For information on past exhibitions and the availability of exhibition catalogues, see <a href="/exhibits/past">Previous in-house Exhibitions</a>.</p>
- <a href="/exhibits/past" class="myButton" id="past">Previous In-House Exhibitions</a>
-         <h2 class="top-margin">Digital Exhibitions</h2>
+  <h2 class="top-margin">Digital Exhibitions</h2>
      
       <?php foreach ($exhibits as $exhibit_item): ?>
        <?php if ($exhibit_item['subjects'] == 'online'): ?>
