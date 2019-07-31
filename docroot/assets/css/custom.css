@@ -27,7 +27,8 @@ body.creamy{
 }
 .uofa-blade img{
   float: left;
-  padding-bottom: 5px;
+  padding: 5px 0;
+  height: 38px;
 }
 
 .logo-nav{

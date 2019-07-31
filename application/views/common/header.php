@@ -4,6 +4,9 @@
     <title>BPSC Library</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+    <link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#5bbad5">
     <!-- Bootstrap -->
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="/assets/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
@@ -37,8 +40,8 @@
 
           <div class="blade-inner">
 
-            <div class="span2 uofa-blade hidden-phone">
-              <a href="http://www.ualberta.ca"><img src="/assets/img/blade.jpg" /></a>
+            <div class="span3 uofa-blade hidden-phone">
+              <a href="https://library.ualberta.ca"><img src="/assets/img/blade.jpg" /></a>
         </div>
          <a href="http://www.ualberta.ca"><img src="/assets/img/small-logo.png" class="small-logo visible-phone"/></a>
               <nav class="blade-navigation">

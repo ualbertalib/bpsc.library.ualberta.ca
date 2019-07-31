@@ -20,13 +20,14 @@
 		<p>The Peel library is a climate-controlled space: ideally maintaining a steady temperature (18-20°C) and relative humidity (45-55%) all year 
 			round. It is a secure, closed-stack library, which offers visitors access to library materials in a supervised reading room. 
 			As the stewards of this collection, staff members are committed to both preservation and conservation. “Preservation” refers 
-			to the actions taken to minimize the chemical and physical deterioration and damage to cultural property that can occur through theft, 
+			to the actions taken to minimize the chemical and physical deterioration and damage to collections that can occur through theft, 
 			vandalism, displacement, shocks/vibrations, fire, water, light (visible and ultraviolet), temperature, humidity, pests, dust, and other 
 			pollutants. “Conservation” is the examination, documentation, treatment, and preventive care of cultural property on behalf of 
-			present and future generations.</p>
-			<p>To maintain the integrity of materials housed at Bruce Peel Special Collections, proper handling procedures must be understood and followed by all. Researchers are encouraged to read the Peel library’s <a href="/info/visit#policy">Reading Room Policies</a> prior to their visit. Instructive resources produced by our colleagues in other special collections libraries, such as those linked here, demonstrate correct handling procedures.</p>
+			present and future generations.</p><br/><br/>
+			
 
-			<h3>PROPER HANDLING PROCEDURES ARE CRUCIAL!</h3>
+			<h2>PROPER HANDLING PROCEDURES ARE CRUCIAL!</h2>
+			<p>To maintain the integrity of materials housed at Bruce Peel Special Collections, proper handling procedures must be understood and followed by all. Researchers are encouraged to read the Peel library’s <a href="/info/visit#policy">Reading Room Policies</a> prior to their visit. Instructive resources produced by our colleagues in other special collections libraries, such as those linked here, demonstrate correct handling procedures.</p>
 			<ul class="archive-vids">
 <li><a href="https://www.youtube.com/watch?v=UOv0SOQ8B68&feature=youtu.be">Introduction to Handling Rare Materials</a> (from Harvard University Special Collections)</li> 
 <li><a href="https://www.youtube.com/watch?v=aHVjQb4izSw&feature=youtu.be">Handling Rare Books</a> and <a href="https://www.youtube.com/watch?v=8RWAOajffZg&feature=youtu.be">Handling Archival Collections</a> (from Special Collections at University of San Antonio)</li> 

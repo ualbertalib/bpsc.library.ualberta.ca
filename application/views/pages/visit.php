@@ -13,17 +13,17 @@
 	<li><a href="#reproduction">Reproduction of Library Materials</a></li>
 </ul>
 </div>
-<p>Researchers must request materials in advance, either using the “Request Me” option in the U of A library catalogue or by submitting a <a href="https://docs.google.com/a/ualberta.ca/forms/d/126ZJ6r6L42AeoWVyOQRWdY9b0SYv7VxUljx6V1d56Po/edit">Retrieval Request Form (for books)</a> or a <a href="https://docs.google.com/forms/d/1-L6cAek91koI7lU5_4j6kpp_4-AUYIhETM26Xjg1uEw/viewform?edit_requested=true">Discover Archives Retrieval Request Form (for archival materials)</a> before 8am on the day of their visit in order to be sure that library materials have been retrieved from storage and are available for their use.  at least 24 hours before your visit to ensure that library materials are available for your use.</p>
+<p>   Researchers must request materials in advance, either using the “Request Me” option in the University of Alberta Libraries <a href="https://www.library.ualberta.ca/">catalogue</a> or by submitting a <a href="https://docs.google.com/forms/d/126ZJ6r6L42AeoWVyOQRWdY9b0SYv7VxUljx6V1d56Po">Retrieval Request Form (for books)</a> or a <a href="https://docs.google.com/forms/d/1-L6cAek91koI7lU5_4j6kpp_4-AUYIhETM26Xjg1uEw">Discover Archives Retrieval Request Form (for archival materials)</a> before 8am on the day of their visit in order to be sure that library materials have been retrieved from storage and are available for their use.</p>
 	<h3><a name="finding"></a>Finding Library Materials</h3>
 <img src="/assets/img/finding.jpg" class="int3 hidden-phone" alt="photograph of the interior of the special collections library"/>
-<p> Books housed in Bruce Peel Special Collection are listed in the <a href="https://www.library.ualberta.ca/">U of A Libraries catalogue</a>, and can be requested from a catalogue record using the “Request Me” option.
+<p> Books housed in Bruce Peel Special Collections are listed in the <a href="https://www.library.ualberta.ca/">U of A Libraries catalogue</a>, and can be requested from a catalogue record using the “Request Me” option.
 You can narrow your search to the Peel library by selecting “University of Alberta Bruce Peel Special Collections” under “Libraries.”  The 
 library’s archival collections (i.e., photographs, correspondence, diaries, business records, etc.) are rarely listed in the library catalogue. 
 Researchers can search for such materials using print finding aids in the Peel library or digital finding aids through <a href="https://discoverarchives.library.ualberta.ca/index.php/bruce-peel-special-collections">U of A Libraries Discover Archives</a>. Further information related to <a href="/collections">research 
 collections</a> in the Peel library is available in various formats, including online and in-house <a href="/exhibits">exhibitions</a>.  
 If you require research assistance, please feel free to contact a member of the <a href="contact">library staff</a>.</p> 
 
-<p>Theses and some other items housed in the Research and Collections Resource Facility (RCRF) have “no-loan” status, which means that they cannot be checked out and removed from the library. However, these items can be requested for use in the supervised reading room in the Peel library during normal hours (Monday-Friday 12-4:30pm) by selecting “Request Me” in the <br/><a href="https://www.library.ualberta.ca/">U of A Libraries catalogue</a>.</p>
+<p>Theses and some other items housed in the Research and Collections Resource Facility (RCRF) have “no loan” status, which means that they cannot be checked out and removed from the library. However, these items can be requested for use in the supervised reading room in the Peel library during normal hours (Monday-Friday 12-4:30pm) by selecting “Request Me” in the <br/><a href="https://www.library.ualberta.ca/">U of A Libraries catalogue</a>.</p>
 
 <h3><a name="using"></a>Using Library Materials</h3>
 
@@ -111,7 +111,7 @@ If you require research assistance, please feel free to contact a member of the 
 
 <p>If an image is needed for publication or exhibition use, it is necessary to first obtain permission from the 
 	copyright owner, who is normally the author or creator. For more information, you can follow up with the 
-	<a href="http://www.copyright.ualberta.ca/">University of Alberta Copyright Office</a></p>
+	<a href="http://www.copyright.ualberta.ca/">University of Alberta Copyright Office</a>.</p>
 
 <p>Libraries have traditionally charged a fee for the use of images of library materials. Like other U of A Libraries, 
 	Bruce Peel Special Collections has waived usage fees on the condition that proper copyright permissions have been 
