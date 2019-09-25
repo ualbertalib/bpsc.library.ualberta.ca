@@ -23,7 +23,7 @@ Researchers can search for such materials using print finding aids in the Peel l
 collections</a> in the Peel library is available in various formats, including online and in-house <a href="/exhibits">exhibitions</a>.  
 If you require research assistance, please feel free to contact a member of the <a href="contact">library staff</a>.</p> 
 
-<p>Theses and some other items housed in the Research and Collections Resource Facility (RCRF) have “no loan” status, which means that they cannot be checked out and removed from the library. However, these items can be requested for use in the supervised reading room in the Peel library during normal hours (Monday-Friday 12-4:30pm) by selecting “Request Me” in the <br/><a href="https://www.library.ualberta.ca/">U of A Libraries catalogue</a>.</p>
+<p>Theses and some other items housed in the Research and Collections Resource Facility (RCRF) have “no loan” status, which means that they cannot be checked out and removed from the library. However, these items can be requested for use in the supervised reading room in the Peel library during normal hours (Monday-Friday 12:30-4:30pm) by selecting “Request Me” in the <br/><a href="https://www.library.ualberta.ca/">U of A Libraries catalogue</a>.</p>
 
 <h3><a name="using"></a>Using Library Materials</h3>
 
@@ -122,7 +122,7 @@ If you require research assistance, please feel free to contact a member of the 
 
 	<div class="span3 getting">
 <h3 class="no-back">Hours</h3>
-<p>Bruce Peel Special Collections is open year round, Monday through Friday from 12:00pm to 4:30pm, excluding holidays.</p>
+<p>Bruce Peel Special Collections is open year round, Monday through Friday from 12:00pm to 4:30pm, excluding holidays. <strong>As of November 18th, BPSC hours will be 12:30pm to 4:30pm</strong>.</p>
 
 <h3 class="no-back">Location</h3>
 <p>The University of Alberta is accessible via <a href="https://www.edmonton.ca/edmonton-transit-system-ets.aspx">Edmonton Transit Service</a>, either through the LRT (University Station) 
