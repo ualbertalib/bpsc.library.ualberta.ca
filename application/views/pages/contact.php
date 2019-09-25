@@ -16,7 +16,7 @@
 					<a href="mailto:bpsc@ualberta.ca">bpsc@ualberta.ca</a><br/><br/>
 
 					<strong> General phone:</strong><br/>
-					780-492-5998 (Mon-Fri 12:00-4:30pm)<br/>
+					780-492-5998 (Mon-Fri 12:30-4:30pm)<br/>
 				
 				</div>
 			</div>
