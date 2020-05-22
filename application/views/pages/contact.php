@@ -64,7 +64,7 @@
 					Cataloguing Librarian<br />
 					<a href="mailto:brian.stearns@ualberta.ca">brian.stearns@ualberta.ca</a><br />
 					
-					
+					<br />
 					
 					<strong>Kevin Zak</strong><br />
 					Exhibitions & Collections Assistant<br />
