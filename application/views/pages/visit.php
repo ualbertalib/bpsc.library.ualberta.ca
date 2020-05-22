@@ -122,7 +122,7 @@ If you require research assistance, please feel free to contact a member of the 
 
 	<div class="span3 getting">
 <h3 class="no-back">Hours</h3>
-<p>Bruce Peel Special Collections is open year round, Monday through Friday from 12:00pm to 4:30pm, excluding holidays. <strong>As of November 18th, BPSC hours will be 12:30pm to 4:30pm</strong>.</p>
+<p>For current information about the Peel library's hours of operation, check the NEWS section on the main page of the <a href="https://bpsc.library.ualberta.ca/">Peel website</a>.</strong>.</p>
 
 <h3 class="no-back">Location</h3>
 <p>The University of Alberta is accessible via <a href="https://www.edmonton.ca/edmonton-transit-system-ets.aspx">Edmonton Transit Service</a>, either through the LRT (University Station) 
@@ -135,7 +135,14 @@ If you require research assistance, please feel free to contact a member of the 
 <p>Researchers with mobility restrictions can access the library using the elevator located in the southwest corner of Rutherford South building. The elevator can be reached inside through Rutherford South or via the southwest external door (which has a ramp). If you are unsure how to reach the 
 	library, or require further assistance to access it, please <a href="contact">contact us</a>.</p>
 		
-	
+		<h3 class="no-back">Visiting Researchers</h3>
+<p>All researchers are welcome to make use of rare materials in the supervised reading room in Bruce Peel Special Collections upon presenting a University of Alberta ONEcard or government-issued photo ID, always provided that they follow proper handling and other protocols as directed.  Although nothing additional is needed for access to Bruce Peel Special Collections, visiting researchers who may want access to other libraries or resources at the University of Alberta should consider the following options:</p>
+<ul>
+	<li>Researchers who are University of Alberta alumni can apply for an <a href="https://www.library.ualberta.ca/services/library-cards-and-borrowing/alumni">Alumni ONEcard</a>. </li> 
+<li>Researchers with library privileges at another Canadian academic institution can apply for a borrower card under one of several <a href="https://www.library.ualberta.ca/services/library-cards-and-borrowing/alumni">reciprocal agreements.</li>https://www.library.ualberta.ca/services/library-cards-and-borrowing/reciprocal-agreements
+<li>Researchers who are residents of Canada can apply for an External Borrower Card even if they are not students, staff, or alumni at the University of Alberta.</li>
+<li>Academic Visitors who plan to spend more than a month at the University of Alberta in order to collaborate with U of A researchers may want to check with the University of Alberta's Academic Visitor Office to learn about the campus privileges, including library privileges, that are available to researchers who meet certain criteria.</li>
+	</ul>
 
 
 </div>
