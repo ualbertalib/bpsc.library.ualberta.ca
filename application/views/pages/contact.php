@@ -16,7 +16,7 @@
 					<a href="mailto:bpsc@ualberta.ca">bpsc@ualberta.ca</a><br/><br/>
 
 					<strong> General phone:</strong><br/>
-					780-492-5998 (Mon-Fri 12:30-4:30pm)<br/>
+					780-492-5998<br/>
 				
 				</div>
 			</div>
@@ -25,16 +25,16 @@
 				<div class="span3">
 
 					<strong>Robert Desmarais</strong><br />
-					Head Special Collections Librarian<br />
+					Head, Special Collections<br />
 					<a href="mailto:robert.desmarais@ualberta.ca">robert.desmarais@ualberta.ca</a><br />
-					780-492-7929<br/>
+					
 
 					<br />
 
 					<strong>Linda Quirk</strong><br />
-					Librarian<br />
+					Special Collections Librarian<br />
 					<a href="mailto:linda.quirk@ualberta.ca">linda.quirk@ualberta.ca</a><br />
-					780-492-7928<br />
+					
 
 					<br />
 
@@ -46,14 +46,14 @@
 					<strong>Jeff Papineau</strong><br />
 					Library Assistant<br />
 					<a href="mailto:jeff.papineau@ualberta.ca">jeff.papineau@ualberta.ca</a><br />
-					780-492-7311<br />
+					
 					<br />
 
 
 					 <strong>Carolyn Morgan </strong><br />
 					Conservator <br />
 					<a href="mailto:carolyn.morgan@ualberta.ca">carolyn.morgan@ualberta.ca</a><br />
-					780-492-1902<br />
+					
 					<br />
 				</div>
 				<div class="span3">
@@ -63,13 +63,13 @@
 					<strong>Brian Stearns</strong><br />
 					Cataloguing Librarian<br />
 					<a href="mailto:brian.stearns@ualberta.ca">brian.stearns@ualberta.ca</a><br />
-					780-492-7603<br /><br />
+					
 					
 					
 					<strong>Kevin Zak</strong><br />
 					Exhibitions & Collections Assistant<br />
 					<a href="mailto:kzak@ualberta.ca">kzak@ualberta.ca</a><br />
-					780-492-9381<br /><br />
+					
 
 				</div>
 				
