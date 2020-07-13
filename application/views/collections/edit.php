@@ -12,7 +12,7 @@
 </div>
 
 <?php $slug=$collection_item['slug'] ?>
-<?php echo form_open_multipart('/collections/edit/'+$slug) ?>
+<?php echo form_open_multipart('/collections/edit/'.$slug) ?>
 <div class="row-fluid">
     <div class="span7">
 
