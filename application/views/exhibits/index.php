@@ -12,7 +12,7 @@
       <?php endif?>
 
        <h1>Exhibitions</h1>
-   <p class="top-margin">Bruce Peel Special Collections has offered a fascinating array of exhibitions since moving to the basement of Rutherford South in 1984. Numerous awards, for exhibition catalogues and for a recent digital exhibition, demonstrate that the exhibitions produced by the Peel library are some of the best in North America. Exhibition catalogues are distributed internationally by University of Alberta Press and continue to be actively used by local researchers. For information on past exhibitions, as well as the availability and prices of past exhibition catalogues, follow the link below.</p>
+   <p class="top-margin">Bruce Peel Special Collections has offered a fascinating array of exhibitions since moving to the basement of Rutherford South in 1984. Numerous awards, for exhibition catalogues (see <a href="/exhibits/past">previous in-house exhibitions</a>) and for digital exhibitions (Tinctor's Foul Treatise and soon-to-launch Photographies) demonstrate that the exhibitions produced by the Peel library are some of the best in North America. Exhibition catalogues are distributed internationally by University of Alberta Press and continue to be actively used by local researchers. For information on past exhibitions, as well as the availability and prices of past exhibition catalogues, follow the link below.</p>
  <a href="/exhibits/past" class="myButton" id="past">Previous In-House Exhibitions</a>
 
 </div>
