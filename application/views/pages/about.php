@@ -35,7 +35,7 @@
 </ul>
 <video width="650" height="400" controls>
   <source src="/assets/bpsc-vid.mp4" type="video/mp4">
-Your browser does not support the video tag.
+	Your browser does not support the video tag.</source>
 </video>
 
 
@@ -71,7 +71,7 @@ Your browser does not support the video tag.
 
 <p class="question">Do you accept donations of rare books?</p>
  
-<p>The generosity of donors plays an instrumental role in the development of our research collections. To discuss whether the Peel library is the best place for your rare book(s), please contact Robert Desmarais, Special Collections Librarian and Unit Head, at 780-492-7929 or  <a href="mailto:robert.desmarais@ualberta.ca">robert.desmarais@ualberta.ca</a>. </p>
+<p>The generosity of donors plays an instrumental role in the development of our research collections. To discuss whether the Peel library is the best place for your rare book(s), please contact Robert Desmarais, Head, Special Collections, at <a href="mailto:robert.desmarais@ualberta.ca">robert.desmarais@ualberta.ca</a>. </p>
  
 
 
