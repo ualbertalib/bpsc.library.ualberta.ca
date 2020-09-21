@@ -13,10 +13,10 @@
 	<li><a href="#reproduction">Reproduction of Library Materials</a></li>
 </ul>
 </div>
-<p>   Researchers must request materials in advance, either using the “Request Me” option in the University of Alberta Libraries <a href="https://www.library.ualberta.ca/">catalogue</a> or by submitting a <a href="https://docs.google.com/forms/d/126ZJ6r6L42AeoWVyOQRWdY9b0SYv7VxUljx6V1d56Po">Retrieval Request Form (for books)</a> or a <a href="https://docs.google.com/forms/d/1-L6cAek91koI7lU5_4j6kpp_4-AUYIhETM26Xjg1uEw">Discover Archives Retrieval Request Form (for archival materials)</a> before 8am on the day of their visit in order to be sure that library materials have been retrieved from storage and are available for their use.</p>
+<p>   Researchers must request materials in advance, either using the “Request This” option in the University of Alberta Libraries <a href="https://www.library.ualberta.ca/">catalogue</a> or by submitting a <a href="https://docs.google.com/forms/d/126ZJ6r6L42AeoWVyOQRWdY9b0SYv7VxUljx6V1d56Po">Retrieval Request Form (for books)</a> or a <a href="https://docs.google.com/forms/d/1-L6cAek91koI7lU5_4j6kpp_4-AUYIhETM26Xjg1uEw">Discover Archives Retrieval Request Form (for archival materials)</a> before 8am on the day of their visit in order to be sure that library materials have been retrieved from storage and are available for their use.</p>
 	<h3><a name="finding"></a>Finding Library Materials</h3>
 <img src="/assets/img/finding.jpg" class="int3 hidden-phone" alt="photograph of the interior of the special collections library"/>
-<p> Books housed in Bruce Peel Special Collections are listed in the <a href="https://www.library.ualberta.ca/">U of A Libraries catalogue</a>, and can be requested from a catalogue record using the “Request Me” option.
+<p> Books housed in Bruce Peel Special Collections are listed in the <a href="https://www.library.ualberta.ca/">U of A Libraries catalogue</a>, and can be requested from a catalogue record using the “Request This” option.
 You can narrow your search to the Peel library by selecting “University of Alberta Bruce Peel Special Collections” under “Libraries.”  The 
 library’s archival collections (i.e., photographs, correspondence, diaries, business records, etc.) are rarely listed in the library catalogue. 
 Researchers can search for such materials using print finding aids in the Peel library or digital finding aids through <a href="https://discoverarchives.library.ualberta.ca/index.php/bruce-peel-special-collections">U of A Libraries Discover Archives</a>. Further information related to <a href="/collections">research 
@@ -27,7 +27,7 @@ If you require research assistance, please feel free to contact a member of the 
 
 <h3><a name="using"></a>Using Library Materials</h3>
 
-<p>Provided that they are requested in advance using the “Request Me” option in the U of A Libraries catalogue or a <a href="https://docs.google.com/a/ualberta.ca/forms/d/126ZJ6r6L42AeoWVyOQRWdY9b0SYv7VxUljx6V1d56Po/edit">Retrieval Request Form</a>, the materials in the Peel library are available for use by students, staff, and the general public in the library’s supervised reading room upon presentation of valid photo identification (e.g., ONEcard, driver’s license, passport, or citizenship card with photo).</p> 
+<p>Provided that they are requested in advance using the “Request This” option in the U of A Libraries catalogue or a <a href="https://docs.google.com/a/ualberta.ca/forms/d/126ZJ6r6L42AeoWVyOQRWdY9b0SYv7VxUljx6V1d56Po/edit">Retrieval Request Form</a>, the materials in the Peel library are available for use by students, staff, and the general public in the library’s supervised reading room upon presentation of valid photo identification (e.g., ONEcard, driver’s license, passport, or citizenship card with photo).</p> 
 <p>For the security of researchers, staff, and the collection, there are security cameras throughout the space that are continuously monitored.</p> 
 <p>There are no computer workstations in the Peel library’s reading room, but researchers are permitted to bring laptops with them. The University of Alberta’s wireless network is available in the library.</p> 
 
