@@ -56,7 +56,7 @@
 
 
   <div class="span7 main-content online-exhibits">
-  <h2 class="top-margin">Digital Exhibitions</h2>
+  <h2 class="top-margin">Digital Exhibitions (most recent first)</h2>
      
       <?php foreach ($exhibits as $exhibit_item): ?>
        <?php if ($exhibit_item['subjects'] == 'online'): ?>
