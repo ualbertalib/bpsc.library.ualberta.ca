@@ -10,7 +10,7 @@
          </script>
       <?php endif ?>
       <h2 class="span12">Research Collections<span class="filter-title"></span></h2>
-      <p>The research collections described below represent some of the highlights of the rare materials housed in Bruce Peel Special Collections. This page is necessarily a work in progress, with new content and images being added on an ongoing basis. You can search the collection descriptions using the search box right under this paragraph and you can use hotlinks within the descriptions to find interrelated materials. You can also find Peel library materials in the <a href="https://library.ualberta.ca">U of A Libraries catalogue</a> and in the finding aids in the <a href="https://discoverarchives.library.ualberta.ca/index.php/bruce-peel-special-collections">U of A Libraries Discover Archives</a>.</p>
+      <p>The research collections described below represent some of the highlights of the rare materials housed in Bruce Peel Special Collections. This page is necessarily a work in progress, with new content and images being added on an ongoing basis. You can search the collection descriptions using the search box right under this paragraph and you can use hotlinks within the descriptions to find interrelated materials. You can also find Peel library materials in the <a href="https://library.ualberta.ca">U of A Libraries catalogue</a> and in <a href="https://discoverarchives.library.ualberta.ca/index.php/bruce-peel-special-collections">Peel's digital finding aids</a>.</p>
 
       <div class="collection-search hidden-phone">
         <form id="search" method="post" action="search">

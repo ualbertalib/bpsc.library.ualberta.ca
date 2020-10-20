@@ -58,7 +58,7 @@
 	digital copies of items that are full-text searchable.  If you wish to find a print copy of an item 
 	listed in the database, you can look for it in the 
 	University of Alberta <a href="https://www.library.ualberta.ca">library catalogue</a>. 
-	If the item you seek is not available through the University of Alberta Libraries, 
+	If the item you seek is not available through the University of Alberta Library, 
 	you can search for books in libraries around the world using <a href="http://firstsearch.oclc.org/fsip?autho=100338439">OCLC WorldCat</a>
 	and for archival materials (letters, photographs, documents, etc.) in local institutions through the Archives Society of Alberta's <a href="http://www.albertaonrecord.ca/">Alberta on Record</a> database. 
 	Bruce Peel Special Collections is one of many libraries that may hold a print copy of an item that you find listed in the <a href="http://peel.library.ualberta.ca/index.html">Peel’s Prairie Provinces database</a>.</p>
@@ -76,7 +76,7 @@
 
 
 <p class="question">What does the Peel library collect?</p>
-<p>In accordance with the <a href="https://www.library.ualberta.ca/about-us/collection/collection-policy">University of Alberta Libraries Collection Development Policy</a>, the Peel library acquires materials by purchase or donation to support research and teaching at the University of Alberta, which includes a wide variety of formats: printed books, manuscripts, photographs, prints and drawings, maps, and print ephemera (e.g., posters, playbills, postcards, advertisements, etc.). Donations of gifts-in-kind are also an integral part of the Peel library’s collection development policy. In this regard, the Head of Special Collections works with donors to acquire books and collections that offer substantial research potential based on one or more of the following criteria:</p>
+<p>In accordance with the <a href="https://www.library.ualberta.ca/about-us/collection/collection-policy">University of Alberta Library Collection Development Policy</a>, the Peel library acquires materials by purchase or donation to support research and teaching at the University of Alberta, which includes a wide variety of formats: printed books, manuscripts, photographs, prints and drawings, maps, and print ephemera (e.g., posters, playbills, postcards, advertisements, etc.). Donations of gifts-in-kind are also an integral part of the Peel library’s collection development policy. In this regard, the Head of Special Collections works with donors to acquire books and collections that offer substantial research potential based on one or more of the following criteria:</p>
 <ol class="collect-info"> <li>books or ephemera printed before 1800 anywhere;</li> 
 <li>books or ephemera printed before 1867 in Canada; </li> 
 <li>books or ephemera printed before 1900 in the Prairie Provinces;</li> 
