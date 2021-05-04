@@ -138,8 +138,8 @@ If you require research assistance, please feel free to contact a member of the 
 		<h3 class="no-back">Visiting Researchers</h3>
 <p>All researchers are welcome to make use of rare materials in the supervised reading room in Bruce Peel Special Collections upon presenting a University of Alberta ONEcard or government-issued photo ID, always provided that they follow proper handling and other protocols as directed.  Although nothing additional is needed for access to Bruce Peel Special Collections, visiting researchers who may want access to other libraries or resources at the University of Alberta should consider the following options:</p>
 <ul>
-	<li>Researchers who are University of Alberta alumni can apply for an <a href="https://www.library.ualberta.ca/services/library-cards-and-borrowing/alumni">Alumni ONEcard</a>. </li> 
-<li>Researchers with library privileges at another Canadian academic institution can apply for a borrower card under one of several <a href="https://www.library.ualberta.ca/services/library-cards-and-borrowing/alumni">reciprocal agreements.</a></li>
+	<li>Researchers who are University of Alberta alumni can apply for an <a href="https://alumni.library.ualberta.ca/">Alumni ONEcard</a>. </li> 
+<li>Researchers with library privileges at another Canadian academic institution can apply for a borrower card under one of several <a href="https://www.library.ualberta.ca/services/library-cards-and-borrowing/other-patrons">reciprocal agreements.</a></li>
 <li>Researchers who are residents of Canada can apply for an External Borrower Card even if they are not students, staff, or alumni at the University of Alberta.</li>
 <li>Academic Visitors who plan to spend more than a month at the University of Alberta in order to collaborate with U of A researchers may want to check with the University of Alberta's Academic Visitor Office to learn about the campus privileges, including library privileges, that are available to researchers who meet certain criteria.</li>
 	</ul>
