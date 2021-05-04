@@ -31,7 +31,6 @@
 			<ul class="archive-vids">
 <li><a href="https://www.youtube.com/watch?v=UOv0SOQ8B68&feature=youtu.be">Introduction to Handling Rare Materials</a> (from Harvard University Special Collections)</li> 
 <li><a href="https://www.youtube.com/watch?v=aHVjQb4izSw&feature=youtu.be">Handling Rare Books</a> and <a href="https://www.youtube.com/watch?v=8RWAOajffZg&feature=youtu.be">Handling Archival Collections</a> (from Special Collections at University of San Antonio)</li> 
-<li><a href="https://www.youtube.com/watch?v=Mcx5l5czVTc&feature=youtu.be">Handling Photographic Prints</a> and <a href="https://www.youtube.com/watch?v=PY830qtl0k4&feature=youtu.be">Handling Photographic Albums</a> (from University of Glasgow Archives &amp; Special Collections)</li> 
 </ul>
 <video width="650" height="400" controls>
   <source src="/assets/bpsc-vid.mp4" type="video/mp4">
