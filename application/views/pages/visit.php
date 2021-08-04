@@ -13,7 +13,13 @@
 	<li><a href="#reproduction">Reproduction of Library Materials</a></li>
 </ul>
 </div>
-<p>   Researchers must request materials in advance, either using the “Request This” option in the University of Alberta Library <a href="https://www.library.ualberta.ca/">catalogue</a> or by submitting a <a href="https://docs.google.com/forms/d/126ZJ6r6L42AeoWVyOQRWdY9b0SYv7VxUljx6V1d56Po">Retrieval Request Form (for books)</a> or a <a href="https://docs.google.com/forms/d/1-L6cAek91koI7lU5_4j6kpp_4-AUYIhETM26Xjg1uEw">Retrieval Request Form (for archival materials)</a> before 8am on the day of their visit in order to be sure that library materials have been retrieved from storage and are available for their use.</p>
+<p><strong>The University of Alberta Library recognizes that our catalogue and resource descriptions contain language that reflects the biases, norms, and 
+	perspectives of the time in which they were created. In particular, for resources about persons and groups, this language is often outdated and harmful. 
+	These descriptions also incorporate controlled vocabularies, such as the Library of Congress Subject Headings, which include some headings 
+	(e.g., Indians of North America), that are offensive or inappropriate. We use international standards for description, but support and actively 
+	participate in efforts to update and change these practices as we strive for descriptions that are inclusive, respectful, and do not cause harm. 
+	We acknowledge the critical importance of community consultation in these efforts, and as residents on Treaty 6 territory and Métis Region 4 we 
+	commit to working together with our local communities to make these changes.</strong></p>
 	<h3><a name="finding"></a>Finding Library Materials</h3>
 <img src="/assets/img/finding.jpg" class="int3 hidden-phone" alt="photograph of the interior of the special collections library"/>
 <p> Books housed in Bruce Peel Special Collections are listed in the <a href="https://www.library.ualberta.ca/">U of A Library catalogue</a>, and can be requested from a catalogue record using the “Request This” option.
