@@ -22,10 +22,15 @@
 	commit to working together with our local communities to make these changes.</strong></p>
 	<h3><a name="finding"></a>Finding Library Materials</h3>
 <img src="/assets/img/finding.jpg" class="int3 hidden-phone" alt="photograph of the interior of the special collections library"/>
-<p> Books housed in Bruce Peel Special Collections are listed in the <a href="https://www.library.ualberta.ca/">U of A Library catalogue</a>, and can be requested from a catalogue record using the “Request This” option.
+<p> Books housed in Bruce Peel Special Collections are listed in the <a href="https://www.library.ualberta.ca/">U of A Library catalogue</a>, 
+	and can be requested from a catalogue record using the “Request This” option.
 You can narrow your search to the Peel library by selecting “University of Alberta Bruce Peel Special Collections” under “Libraries.”  The 
 library’s archival collections (i.e., photographs, correspondence, diaries, business records, etc.) are rarely listed in the library catalogue. 
-Researchers can search for such materials using print finding aids in the Peel library or <a href="https://discoverarchives.library.ualberta.ca/index.php/bruce-peel-special-collections">digital finding aids</a>. Further information related to <a href="/collections">research 
+Researchers can search for such materials using print finding aids in the Peel library 
+	or <a href="https://discoverarchives.library.ualberta.ca/index.php/bruce-peel-special-collections">digital finding aids</a>. Researchers should be 
+	attentive to the search terms that they employ and the ways that shifting vocabularies are tied to particular times and places: as explained above, 
+	the vocabularies in library catalogues and finding aids are in a constant state of flux, so it may be necessary to think expansively about search terms.
+	Further information related to <a href="/collections">research 
 collections</a> in the Peel library is available in various formats, including online and in-house <a href="/exhibits">exhibitions</a>.  
 If you require research assistance, please feel free to contact a member of the <a href="contact">library staff</a>.</p> 
 
