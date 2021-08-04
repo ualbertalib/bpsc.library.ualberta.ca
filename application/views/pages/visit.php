@@ -133,7 +133,7 @@ If you require research assistance, please feel free to contact a member of the 
 
 	<div class="span3 getting">
 <h3 class="no-back">Hours</h3>
-<p>For current information about the Peel library's hours of operation, check the NEWS section on the main page of the <strong><a href="https://bpsc.library.ualberta.ca/">Peel website</a>.</strong>.</p>
+<p>The Peel library is open by appointment only.  For information about current services, including requesting a research appointment, check the NEWS section on the main page of the <strong><a href="https://bpsc.library.ualberta.ca/">Peel website</a></strong>.</p>
 
 <h3 class="no-back">Location</h3>
 <p>The University of Alberta is accessible via <a href="https://www.edmonton.ca/edmonton-transit-system-ets.aspx">Edmonton Transit Service</a>, either through the LRT (University Station) 
