@@ -22,8 +22,10 @@
 	commit to working together with our local communities to make these changes.</strong></p>
 	<h3><a name="finding"></a>Finding Library Materials</h3>
 <img src="/assets/img/finding.jpg" class="int3 hidden-phone" alt="photograph of the interior of the special collections library"/>
-<p> Books housed in Bruce Peel Special Collections are listed in the <a href="https://www.library.ualberta.ca/">U of A Library catalogue</a>, 
-	and can be requested from a catalogue record using the “Request This” option.
+<p> Books housed in Bruce Peel Special Collections are listed in the <a href="https://www.library.ualberta.ca/">U of A Library catalogue</a>. 
+	To view materials held in Bruce Peel Special Collections, please write to us at <a href="mailto:bpsc@ualberta.ca">bpsc@ualberta.ca</a> to request 
+	an appointment well in advance, listing the requested materials including author, title, and call number for each item, and indicating which 
+	weekday afternoons would work (appointments are generally available Monday-Thursday 1-4pm).
 You can narrow your search to the Peel library by selecting “University of Alberta Bruce Peel Special Collections” under “Libraries.”  The 
 library’s archival collections (i.e., photographs, correspondence, diaries, business records, etc.) are rarely listed in the library catalogue. 
 Researchers can search for such materials using print finding aids in the Peel library 
@@ -34,11 +36,11 @@ Researchers can search for such materials using print finding aids in the Peel l
 collections</a> in the Peel library is available in various formats, including online and in-house <a href="/exhibits">exhibitions</a>.  
 If you require research assistance, please feel free to contact a member of the <a href="contact">library staff</a>.</p> 
 
-<p>Theses and some other items housed in the Research and Collections Resource Facility (RCRF) have “no loan” status, which means that they cannot be checked out and removed from the library. However, these items can be requested for use in the supervised reading room in the Peel library during normal hours (Monday-Friday 12:30-4:30pm) by selecting “Request This” in the <br/><a href="https://www.library.ualberta.ca/">U of A Library catalogue</a>.</p>
+<p>Theses and some other items housed in the Research and Collections Resource Facility (RCRF) have “no loan” status, which means that they cannot be checked out and removed from the library. However, these items can be viewed <em>by appointment</em> in the supervised reading room in the Peel library.</p>
 
 <h3><a name="using"></a>Using Library Materials</h3>
 
-<p>Provided that they are requested in advance using the “Request This” option in the U of A Library catalogue or a <a href="https://docs.google.com/a/ualberta.ca/forms/d/126ZJ6r6L42AeoWVyOQRWdY9b0SYv7VxUljx6V1d56Po/edit">Retrieval Request Form</a>, the materials in the Peel library are available for use by students, staff, and the general public in the library’s supervised reading room upon presentation of valid photo identification (e.g., ONEcard, driver’s license, passport, or citizenship card with photo).</p> 
+<p>Provided that materials are requested in advance, the materials in the Peel library are available for use by students, staff, and the general public by appointment in the library’s supervised reading room upon presentation of valid photo identification (e.g., ONEcard, driver’s license, passport, or citizenship card with photo).</p> 
 <p>For the security of researchers, staff, and the collection, there are security cameras throughout the space that are continuously monitored.</p> 
 <p>There are no computer workstations in the Peel library’s reading room, but researchers are permitted to bring laptops with them. The University of Alberta’s wireless network is available in the library.</p> 
 
