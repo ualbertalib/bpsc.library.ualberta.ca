@@ -41,7 +41,7 @@
           <div class="blade-inner">
 
             <div class="span3 uofa-blade hidden-phone">
-              <a href="https://library.ualberta.ca"><img src="/assets/img/blade.jpg" /></a>
+              <a href="https://www.ualberta.ca"><img src="https://www.ualberta.ca/_assets/images/ua-logo-green.svg" /></a>
         </div>
          <a href="http://www.ualberta.ca"><img src="/assets/img/small-logo.png" class="small-logo visible-phone"/></a>
               <nav class="blade-navigation">
@@ -62,7 +62,7 @@
                       <li role="menuitem"><a href="http://www.campusmap.ualberta.ca/">Maps</a></li>
                       <li role="menuitem"><a href="http://apps.ualberta.ca/">Email &amp; Apps</a></li>
                       <li role="menuitem"><a href="https://eclass.srv.ualberta.ca/portal/">eClass</a></li>
-                      <li role="menuitem"><a href="http://www.library.ualberta.ca/">Libraries</a></li>
+                      <li role="menuitem"><a href="http://www.library.ualberta.ca/">Library</a></li>
                     </ul>
                   </li>
                 </ul>
