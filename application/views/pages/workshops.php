@@ -10,7 +10,7 @@
 
 </div>
 <div class="span5 getting">
-	<h2>For First-time Workshop Participants</h2>
+	<h2>For those participating in in-person workshops</h2>
 	
 <p>Bruce Peel Special Collections is home to important collections of rare and sometimes fragile materials. Like researchers and other visitors, Peel Workshop participants are asked to help preserve these materials for future generations. Here is what you need to know before you come to a workshop:</p>
 
