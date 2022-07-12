@@ -8,7 +8,7 @@
 
 		<p>Bruce Braden Peel (1916–1998) was Chief Librarian at the University of Alberta from 1955 to 1982. 
 			The publication of his <em>A Bibliography of the Prairie Provinces</em> in 1956 was a landmark achievement that 
-			documents the early settlement and publishing history of western Canada, and his bibliography continues to 
+			documents the publishing history of western Canada, and his bibliography continues to 
 			grow today as an online database called "<a href="http://peel.library.ualberta.ca/index.html">Peel's Prairie Provinces</a>." Named to honour Peel's accomplishments, 
 			Bruce Peel Special Collections houses a world-class collection of more than 100,000 rare books 
 			and a significant collection of archival materials. Located in the basement of the Rutherford 
