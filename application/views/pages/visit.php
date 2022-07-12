@@ -23,9 +23,7 @@
 	<h3><a name="finding"></a>Finding Library Materials</h3>
 <img src="/assets/img/finding.jpg" class="int3 hidden-phone" alt="photograph of the interior of the special collections library"/>
 <p> Books housed in Bruce Peel Special Collections are listed in the <a href="https://www.library.ualberta.ca/">U of A Library catalogue</a>. 
-	To view materials held in Bruce Peel Special Collections, please write to us at <a href="mailto:bpsc@ualberta.ca">bpsc@ualberta.ca</a> to request 
-	an appointment well in advance, listing the requested materials including author, title, and call number for each item, and indicating which 
-	weekday afternoons would work (appointments are generally available Monday-Thursday 1-4pm).
+	To view materials held in Bruce Peel Special Collections, please write to us at <a href="mailto:bpsc@ualberta.ca">bpsc@ualberta.ca</a> to request an appointment well in advance, listing the requested materials including author, title, and call number for each item, and indicating which weekday afternoons would work best for you.
 You can narrow your search to the Peel library by selecting “University of Alberta Bruce Peel Special Collections” under “Libraries.”  The 
 library’s archival collections (i.e., photographs, correspondence, diaries, business records, etc.) are rarely listed in the library catalogue. 
 Researchers can search for such materials using print finding aids in the Peel library 
@@ -135,7 +133,7 @@ If you require research assistance, please feel free to contact a member of the 
 
 	<div class="span3 getting">
 <h3 class="no-back">Hours</h3>
-<p>The Peel library is open by appointment only.  For information about current services, including requesting a research appointment, check the NEWS section on the main page of the <strong><a href="https://bpsc.library.ualberta.ca/">Peel website</a></strong>.</p>
+<p>For up-to-date information, please check Peel's <strong><a href="http://bpsclibrarynews.blogspot.com/2021/07/peel-reopens-on-august-16th-with.html">current hours and services</a></strong>.</p>
 
 <h3 class="no-back">Location</h3>
 <p>The University of Alberta is accessible via <a href="https://www.edmonton.ca/edmonton-transit-system-ets.aspx">Edmonton Transit Service</a>, either through the LRT (University Station) 
