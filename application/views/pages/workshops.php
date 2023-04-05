@@ -17,16 +17,10 @@
 	<ul class="visit-rules">
 
 <li>No open food or drink should come to the Peel library; to clarify, a wrapped sandwich in a backpack is fine, but a cup of coffee is not!</li>
-
-
-
-<li>Please be on time. Students who are late may miss important information about proper handling procedures for various types of rare materials, and therefore may not be admitted.</li>
-<li>You will be required to leave all bags, backpacks, totes, outerwear, etc. in Peel’s secure reception area.</li>
-
+<li>Please be on time. Workshop participants who are late may miss important information about proper handling procedures for various types of rare materials, and therefore may not be admitted.</li>
+<li>Please note that you will be required to leave all bags, backpacks, totes, outerwear, etc. in Peel’s secure reception area before entering the classroom.</li>
 <li>Rare materials should be handled only with freshly-washed hands.</li>
-
 <li>Rare materials may be photographed on the condition that no flash is used, but instructors may not be photographed or recorded without prior permission.</li>
-
 </ul>
 </div>
 <p class="sm-workshop">Advance registration is required and numbers are strictly limited. Workshops are open to University of Alberta students (both graduate and undergraduate), and sometimes to staff, faculty, and others, as indicated. Each individual may sign up for a maximum of two Peel Workshops per term. Those who register and then find that they cannot attend should cancel their registration at least 24 hours in advance.</p>
