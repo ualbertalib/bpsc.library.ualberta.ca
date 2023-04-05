@@ -40,7 +40,7 @@
 					<strong>Cori Sanderson</strong><br />
 					Temporary Librarian (Archival Collections)<br />
 					<a href="mailto:cfsander@ualberta.ca">cfsander@ualberta.ca</a><br />
-					</br>
+					<br />
 					
 				</div>
 				<div class="span3">
@@ -72,7 +72,7 @@
 					Reference & Processing Specialist<br />
 					<a href="mailto:mmstang@ualberta.ca">mmstang@ualberta.ca</a>
 
-					</br>
+					<br />
 					
 
 				</div>
