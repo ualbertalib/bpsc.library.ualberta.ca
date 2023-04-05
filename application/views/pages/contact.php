@@ -37,7 +37,10 @@
 					
 
 					<br />
-
+					<strong>Cori Sanderson</strong><br />
+					Temporary Librarian (Archival Collections)<br />
+					<a href="mailto:cfsander@ualberta.ca">cfsander@ualberta.ca</a><br />
+					</br>
 					
 				</div>
 				<div class="span3">
@@ -63,8 +66,13 @@
 					<strong>Brian Stearns</strong><br />
 					Cataloguing Librarian<br />
 					<a href="mailto:brian.stearns@ualberta.ca">brian.stearns@ualberta.ca</a><br />
+					<br/>
 					
-					
+					<strong>Michaela Stang</strong><br />
+					Reference & Processing Specialist<br />
+					<a href="mailto:mmstang@ualberta.ca">mmstang@ualberta.ca</a>
+
+					</br>
 					
 
 				</div>
