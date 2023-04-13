@@ -24,11 +24,11 @@ class UserController extends BaseController
 		$data['new_password']='';
 		
 		$session = \Config\Services::session();
-		print_r($session);
+		//print_r($session);
 		
 		$user = auth()->user();
 		echo "<hr>";
-		print_r($user);
+		//print_r($user);
 	
 	
 
@@ -55,11 +55,12 @@ class UserController extends BaseController
 			]);
 			
 			$users->save($user);
+			// echo "password reset";
 			$session->setFlashData('message',"Your password has been saved");
-			redirect()->to('/admin/user/resetpassword');
+			return redirect()->to('/admin/user/resetpassword');
 		}else{
 			$session->setFlashData('message',"Your password does not match or is not valid");
-			redirect()->to('/admin/user/resetpassword');
+			return redirect()->to('/admin/user/resetpassword');
 		
 		}
 	  
@@ -74,8 +75,8 @@ class UserController extends BaseController
 	   
 	   
 			$newUser = [
-				'username' => 'bob', 
-				'email'    => 'jhennig@ualberta.ca', 
+				'username' => 'Bob', 
+				'email'    => 'bob@bob.com', 
 				'password' => 'secret', 
 			];
 			
@@ -118,7 +119,7 @@ class UserController extends BaseController
 	public function deleteUser(){
 		
 		$deleted='';
-		$userId = 29;
+		$userId = 3;
 		
 		
 		$users = model('UserModel');

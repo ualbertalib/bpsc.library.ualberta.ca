@@ -1,5 +1,9 @@
 <h1><?php echo "Reset Password"; ?></h1>
 
+<?php 
+	$session = \Config\Services::session();
+ echo "<div class='alert-success'>" . $session->getFlashdata('message') ."</div>"; ?>
+
 <div id="infoMessage"><?php echo $message;?></div>
 
 <?php echo form_open('/admin/user/resetpassword/' . $code);?>
