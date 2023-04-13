@@ -1,6 +1,5 @@
-*/config/development
-*/logs/log-*.php
-*/logs/!index.html
-*/cache/*
-*/cache/!index.html
-*/config/database.php
+*/writeable
+*/vendor
+*/docroot/assets/uploads/display/*.jpg
+*/docroot/assets/uploads/onnow/*.jpg
+*/docroot/assets/uploads/slides/*.jpg
