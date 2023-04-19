@@ -13,5 +13,8 @@ writable/uploads/*
 writable/debugbar/*
 !writable/debugbar/.gitkeep
 
-vendor/
+app/Config/*.rpmnew
+*.env.rpmnew
+
+
 composer.lock

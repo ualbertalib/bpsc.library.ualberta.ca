@@ -26,16 +26,15 @@ $routes->set404Override();
  * Route Definitions
  * --------------------------------------------------------------------
  */
- 
-
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
+
 $routes->get('/', 'Pages::view');
 
-$routes->get('exhibits/past', 'Exhibits::past');
 $routes->get('exhibits', 'Exhibits::index');
+$routes->get('exhibits/past', 'Exhibits::past');
 $routes->get('exhibits/(:any)', 'Exhibits::view/$1');
 $routes->get('collections', 'Collections::index');
 $routes->post('search', 'Collections::search');
@@ -90,6 +89,8 @@ $routes->group('admin', ['filter' => 'group:admin,superadmin'], static function 
 			
 
 });
+
+
 
 service('auth')->routes($routes);
 
