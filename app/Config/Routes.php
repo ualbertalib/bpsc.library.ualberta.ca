@@ -37,6 +37,7 @@ $routes->get('exhibits', 'Exhibits::index');
 $routes->get('exhibits/past', 'Exhibits::past');
 $routes->get('exhibits/(:any)', 'Exhibits::view/$1');
 $routes->get('collections', 'Collections::index');
+$routes->get('collections/(:any)', 'Collections::view/$1');
 $routes->post('search', 'Collections::search');
 $routes->get('info/(:any)', 'Pages::view/$1');
 

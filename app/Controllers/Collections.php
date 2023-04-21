@@ -43,6 +43,28 @@ class Collections extends BaseController
 	}
 	
 	
+	/**
+	* View
+	*/
+	public function view($slug){
+		$collectionModel = new \App\Models\CollectionModel();
+		//$data['collections'] = $collectionModel->get_collection($slug);
+		
+		$data['collection_item'] = $collectionModel->get_collection($slug);
+		if (empty($data['collection_item'])){
+			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+		}
+
+		$data['title'] = $data['collection_item']['title'];
+
+		$data['collection_item']['subjects'] = explode(',', $data['collection_item']['subjects']);
+		
+		$data['collection_item']['collection_type'] = explode(',', $data['collection_item']['collection_type']);
+		
+		return view('common/header', $data) .	view('collections/view', $data) .	view('common/footer');
+		
+	}
+	
 	
 	
 	public function create(){

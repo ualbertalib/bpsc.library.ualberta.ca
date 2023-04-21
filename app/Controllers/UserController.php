@@ -119,7 +119,7 @@ class UserController extends BaseController
 	public function deleteUser(){
 		
 		$deleted='';
-		$userId = 3;
+		$userId = 34;
 		
 		
 		$users = model('UserModel');
