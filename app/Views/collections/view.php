@@ -28,24 +28,57 @@
       } ?>
 </div>
 <div class="span6"> 
-   
+	<?php 
+		// The file name is calculated based on the slug. It can be in 1 of 3 different formats.
+		// the new version of code igniter adds an underscore so this had to be accomodated
+		//$files[] = "assets/uploads/slides/".$collection_item['slug'].".jpg" ;
+		//$files[] = "assets/uploads/slides/".$collection_item['slug']."1.jpg" ;
+		//$files[] = "assets/uploads/slides/".$collection_item['slug']."_1.jpg" ;
+		for($i = 0; $i <= 6; $i++) {
+			$files[] = "assets/uploads/slides/".$collection_item['slug']."{$i}.jpg" ;
+			//$files[] = "assets/uploads/slides/".$collection_item['slug']."_{$i}.jpg" ;
+		}
+	   
 
-  <?php if (file_exists("assets/uploads/slides/".$collection_item['slug'].".jpg")): ?>
-   <?php if (file_exists("assets/uploads/slides/".$collection_item['slug']."1.jpg")): ?>
+  
+	foreach($files as $file){
+			
+			if(file_exists($file)){				
+				$imgs[] = $file;				
+			}
+	}
+	
+	
+	if(isset($imgs)){
+  ?>
+   
 	<div class="slider">
-    <div id="myCarousel" class="carousel slide">
+		<div id="myCarousel" class="carousel slide">
      
                 <div class="carousel-inner">
-                  <div class="item active">
-                    <img src="/assets/uploads/slides/<?php echo $collection_item['slug']; ?>.jpg"/>
-                    <?php if ($collection_item['caption1'] != ''): ?>
-                      <p class='captioning'><?php echo $collection_item['caption1'];?></p>
-               <?php endif?>
-                  </div>
+				
+				  <?php 
+				     $count = 0;
+				    foreach($imgs as $img){
+					  if(! is_null($img) ){
+							$active = $count==1?'active':'';
+							echo "<div class='item {$active}'> <img src='/{$img}' />";					 
+							  if (isset($collection_item["caption{$count}"]) && $collection_item["caption{$count}"] != ''){
+								 echo "<p class='captioning'>" . $collection_item["caption{$count}"] . "</p>"; 
+							   }
+							 echo "</div>";
+							 $count +=1;
+						}
+					}
                  
-                  <?php 
+                   
+                
+               
+                  echo "</div>";
                   
-                    for($i = 0; $i < 6; $i++) {
+                  
+                  
+                    /*for($i = 0; $i < 6; $i++) {
 		                  $image = $collection_item['slug'].$i;
                       $capNum = $i + 1;
                       $captionNum = 'caption'.$capNum;
@@ -59,22 +92,18 @@
                               echo ("</div>");
                             }
 		                  }
-	                 } 
+	                 } */
                  
 	               ?>
                 
-                  </div>
+			
               
                 <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
                 <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
               </div>
             </div>
-            <?php else: ?>
-            <img src="/assets/uploads/slides/<?php echo $collection_item['slug']; ?>.jpg"/>
-                    <p class='captioning'><?php echo $collection_item['caption1'];?></p>
-    <?php endif?>
-<?php endif?>
-
+    
+	<?php }?>
 
 
 
@@ -83,7 +112,7 @@
 <?php endif?>
 	
 
-    </p>
+   <!-- </p> -->
 
   <?php if ($collection_item['catalogue_id'] != ''): ?>
   <div class="col-search row">

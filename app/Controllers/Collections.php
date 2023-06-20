@@ -158,16 +158,26 @@ class Collections extends BaseController
 					if($key == 'display'){
 						$filepath = './assets/uploads/display';
 						$overwrite = true;
+						$fileName = $slug . "." . $file->guessExtension();
 						
-						
-					}else{
+					}else{ 
 						// this section is for slides. Note that in the original code slides weren't allowed to be overwritten so I kept the same functionality.
 						// however the original also didn't allow new slides to be added. This version allows that. Thus I added the $count variable to the 'else' side of the if statement.
+						
+						// the input name starts with the word 'slide' this removes 'slide' and we are left with the number. Example slide4 becomes just 4.
+						// This gives us the image number which can then be put in the filename.
+						$imagePosition = str_replace('slide','',$key);
+						if(! is_numeric($imagePosition)){
+							$this->session->setFlashdata('message', 'There is a problem with the file input element names. Please inform the administrator');	
+							return redirect()->back()->withInput();
+						}
+						
 						$filepath = './assets/uploads/slides';
-						$overwrite = false;
-						$count = $count + 1;
+						$overwrite = true;
+						
+						$fileName = $slug . $imagePosition . "." . $file->guessExtension();
 					}
-					$fileName = $slug . $count . "." . $file->guessExtension();
+					
 					$file->move($filepath, $fileName, $overwrite);
 					
 					if( ! $file->hasMoved()){
@@ -221,7 +231,7 @@ class Collections extends BaseController
 			
 		}
 		else{
-			$cleantitle = strtolower(url_title($this->request->getPost('title')));
+			
 
 			/*$config['upload_path'] = './assets/uploads/display';
             $config['allowed_types'] = 'jpg|png';               
@@ -231,15 +241,29 @@ class Collections extends BaseController
 			
 			$files = $this->request->getFiles();
 			
+			
+			$slideCounter = 0;
 			foreach($files as $key => $file){
+				
+				
 			
 				if($file->isValid()){
 					if($key == 'display'){
+					
+						$cleantitle = strtolower(url_title($this->request->getPost('title')) . ".jpg");
 						$filepath = './assets/uploads/display';
+						$overwrite = true;
+						$file->move($filepath,$cleantitle,$overwrite);
+						
 					}else{
+						
+						$cleantitle = strtolower(url_title($this->request->getPost('title')) . $slideCounter . ".jpg");
 						$filepath = './assets/uploads/slides';
+						$overwrite = true;
+						$file->move($filepath,$cleantitle, $overwrite);
+						$slideCounter+=1;
 					}
-					$file->move($filepath,$cleantitle);
+					
 					
 					if( ! $file->hasMoved()){
 						$this->session->setFlashdata('message', 'The collection could not upload some or all of the files.');			

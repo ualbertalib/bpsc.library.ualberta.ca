@@ -117,9 +117,9 @@
         <span class="help-block">add up to 6 images for each collection.<br/><strong>570px by 570px</strong></span>
     </div>
     <div class="span6">
-    <div id="input1" style="margin-bottom:4px;" class="clonedInput ">
-        <input type="file" name="slide1" id="slide1" size="20" class="slides"/>
-        <input type="text" name="caption1" id="caption1" class="span10 captions"  value="<?php if(!empty($_POST['caption1'])){echo ($_POST['caption1']);} ?>"/>
+    <div id="input0" style="margin-bottom:4px;" class="clonedInput">
+        <input type="file" name="slide0" id="slide0" size="20" class="slides"/>
+        <input type="text" name="caption0" id="caption0" class="span10 captions"  value="<?php if(!empty($_POST['caption0'])){echo ($_POST['caption0']);} ?>"/>
           <label for="caption" class="span10 caption-label">Image Caption</label>
     </div>
 </div>
@@ -160,7 +160,7 @@
           });
 
             $('#btnAdd').click(function() {
-                var num     = $('.clonedInput').length; // how many "duplicatable" input fields we currently have
+                var num     = $('.clonedInput').length - 1 ; // how many "duplicatable" input fields we currently have
                 var newNum  = new Number(num + 1);      // the numeric ID of the new input field being added
  
                 // create the new element via clone(), and manipulate it's ID using newNum value
@@ -182,7 +182,7 @@
             });
  
             $('#btnDel').click(function() {
-                var num = $('.clonedInput').length; // how many "duplicatable" input fields we currently have
+                var num = $('.clonedInput').length - 1; // how many "duplicatable" input fields we currently have
                 $('#input' + num).remove();     // remove the last element
  
               

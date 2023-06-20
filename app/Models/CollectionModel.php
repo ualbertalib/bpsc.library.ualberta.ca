@@ -15,7 +15,7 @@ class CollectionModel extends Model
 	protected $useAutoIncrement = true;
 	
 			
-	protected $allowedFields = array('title' , 'slug', 'collector' , 'external_url', 'catalogue_id', 'collection_type',	'subjects', 'short_description', 'on_now_dates', 'essay', 'caption1', 'caption2', 'caption3', 'caption4', 'caption5', 'caption6');
+	protected $allowedFields = array('title' , 'slug', 'collector' , 'external_url', 'catalogue_id', 'collection_type',	'subjects', 'short_description', 'on_now_dates', 'essay','caption0', 'caption1', 'caption2', 'caption3', 'caption4', 'caption5', 'caption6');
 				
 	
 
@@ -59,7 +59,7 @@ class CollectionModel extends Model
 	
 	public function set_collection($request){
 	
-		$slug = url_title($request->getPost('title'), '-');
+		$slug = strtolower(url_title($request->getPost('title'), '-'));
 
 		$data = array(
 			'title' => $request->getPost('title'),
@@ -71,6 +71,7 @@ class CollectionModel extends Model
 			'subjects' => $request->getPost('subjects'),
 			'short_description' => $request->getPost('short_description'),
 			'essay' => $request->getPost('essay'),
+			'caption0' => $request->getPost('caption0'),
 			'caption1' => $request->getPost('caption1'),
 			'caption2' => $request->getPost('caption2'),
 			'caption3' => $request->getPost('caption3'),
@@ -99,6 +100,7 @@ class CollectionModel extends Model
 			'subjects' => $request->getPost('subjects'),
 			'short_description' => $request->getPost('short_description'),
 			'essay' => $request->getPost('essay'),
+			'caption0' => $request->getPost('caption0'),
 			'caption1' => $request->getPost('caption1'),
 			'caption2' => $request->getPost('caption2'),
 			'caption3' => $request->getPost('caption3'),
