@@ -12,7 +12,7 @@
                 
                 </div>
           
-    <div class="span2 front">
+    <div class="span2 front hidden-phone">
      
           <?php if (!empty($on_now)): ?>
             <?php foreach ($on_now as $on_now_item): ?>
