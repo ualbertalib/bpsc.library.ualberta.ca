@@ -18,6 +18,9 @@
 <li>Rare materials should be handled only with freshly-washed hands.</li>
 <li>Rare materials may be photographed on the condition that no flash is used, but instructors may not be photographed or recorded without prior permission.</li>
 </ul>
+
 </div>
-<p class="sm-workshop">Advance registration is required and numbers are strictly limited. Workshops are open to University of Alberta students (both graduate and undergraduate), and sometimes to staff, faculty, and others, as indicated. Each individual may sign up for a maximum of two Peel Workshops per term. Those who register and then find that they cannot attend should cancel their registration at least 24 hours in advance.</p>
+
 </div>
+<div class="row">
+<p class="sm-workshop">Advance registration is required and numbers are strictly limited. Workshops are open to University of Alberta students (both graduate and undergraduate), staff, faculty, and alumni. Each individual may sign up for a maximum of two Peel Workshops per term. Those who register and then find that they cannot attend should cancel their registration as soon as possible to allow someone on the waiting list to take their place.</p></div>
