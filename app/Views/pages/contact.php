@@ -38,7 +38,7 @@
 				</div>
 				<div class="span3">
 					<strong>Jeff Papineau</strong><br />
-					Library Assistant<br />
+					Special Collections Coordinator<br />
 					<a href="mailto:jeff.papineau@ualberta.ca">jeff.papineau@ualberta.ca</a><br />
 					
 					<br />
