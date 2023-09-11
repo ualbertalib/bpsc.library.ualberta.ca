@@ -25,7 +25,7 @@
 <p> Books housed in Bruce Peel Special Collections are listed in the <a href="https://www.library.ualberta.ca/">U of A Library catalogue</a>. 
 	To view materials held in Bruce Peel Special Collections, please write to us at <a href="mailto:bpsc@ualberta.ca">bpsc@ualberta.ca</a> to request 
 	an appointment well in advance, listing the requested materials including author, title, and call number for each item, and indicating which 
-	weekday afternoons would work (appointments are generally available Monday-Thursday 1-4pm).
+	weekday afternoons would work (appointments are generally available Tuesday-Friday 1-4pm).
 You can narrow your search to the Peel library by selecting “University of Alberta Bruce Peel Special Collections” under “Libraries.”  The 
 library’s archival collections (i.e., photographs, correspondence, diaries, business records, etc.) are rarely listed in the library catalogue. 
 Researchers can search for such materials using print finding aids in the Peel library 
@@ -55,8 +55,8 @@ If you require research assistance, please feel free to contact a member of the 
 
 <p>The following are general rules for using library materials housed in the Peel library. For more specific guidelines for <a href="#books">handling books</a>,  <a href="#artbooks">artists’ books</a>, <a href="#archives">archives</a>, and <a href="#photos">photographic materials</a>, please follow the links.</p> 
 <ul>
-<li>The Gregory Javitch Reading Room is reserved for those consulting rare or archival materials.</li>
-<li>Valid university or government-issued photo identification (e.g., ONEcard, driver’s license, passport, or citizenship card with photo) is required in order to access library materials. Photo identification will be held at the reference desk until all materials have been returned.</li> 
+<li>Both the Gregory Javitch Reading Room and the Ernest (Ernie) B. Ingles Reading Room are reserved for those consulting rare or archival materials.</li>
+<li>Valid university or government-issued photo identification (e.g., ONEcard, driver’s license, passport, or citizenship card with photo) is required in order to access library materials.</li> 
 <li>No food (gum and candies included) or drink is permitted.</li> 
 <li>All bags, briefcases, laptop sleeves, backpacks, etc. must be left at the reference desk. The library is not responsible for the loss of personal items, so please exercise care to safeguard personal property (e.g., do not bring valuables into the library). </li>  
 <li>Library materials are to be handled with freshly washed hands (no hand sanitizer or lotion). Washrooms are located on the same level as the Peel library. In cases where gloves are required for handling they will be provided by library staff.</li>  
@@ -135,7 +135,7 @@ If you require research assistance, please feel free to contact a member of the 
 
 	<div class="span3 getting">
 <h3 class="no-back">Hours</h3>
-<p>The Peel library is open by appointment only.  For information about current services, including requesting a research appointment, check the NEWS section on the main page of the <strong><a href="https://bpsc.library.ualberta.ca/">Peel website</a></strong>.</p>
+<p>For information about Peel's hours and services, including requesting a research appointment, check the <strong><a href="https://library.ualberta.ca/locations/bpsc">BPSC location</a> webpage.</p>
 
 <h3 class="no-back">Location</h3>
 <p>The University of Alberta is accessible via <a href="https://www.edmonton.ca/edmonton-transit-system-ets.aspx">Edmonton Transit Service</a>, either through the LRT (University Station) 
@@ -153,8 +153,8 @@ If you require research assistance, please feel free to contact a member of the 
 <ul>
 	<li>Researchers who are University of Alberta alumni can apply for an <a href="https://alumni.library.ualberta.ca/">Alumni ONEcard</a>. </li> 
 <li>Researchers with library privileges at another Canadian academic institution can apply for a borrower card under one of several <a href="https://www.library.ualberta.ca/services/library-cards-and-borrowing/other-patrons">reciprocal agreements.</a></li>
-<li>Researchers who are residents of Canada can apply for an External Borrower Card even if they are not students, staff, or alumni at the University of Alberta.</li>
-<li>Academic Visitors who plan to spend more than a month at the University of Alberta in order to collaborate with U of A researchers may want to check with the University of Alberta's Academic Visitor Office to learn about the campus privileges, including library privileges, that are available to researchers who meet certain criteria.</li>
+<li>Researchers who are residents of Canada can apply for an <a href="https://www.library.ualberta.ca/services/library-cards-and-borrowing/visitors">External Borrower Card</a> even if they are not students, staff, or alumni at the University of Alberta.</li>
+<li>Academic Visitors who plan to spend more than a month at the University of Alberta in order to collaborate with U of A researchers may want to check with the <a href="https://www.ualberta.ca/research/research-support/academic-visitor-office/resources-for-academic-visitors.html">University of Alberta's Academic Visitor Office</a> to learn about the campus privileges, including library privileges, that are available to researchers who meet certain criteria.</li>
 	</ul>
 
 

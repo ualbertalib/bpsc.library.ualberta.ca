@@ -7,9 +7,7 @@
 		<p>Thanks to visionary collectors and generous donors, a range of important collections in Bruce Peel Special Collections treat numerous local and international subjects, from the Indigenous peoples of North and South America to Historic Entomology and from Book History to the Chinese Experience in Canada.</p> 
 
 		<p>Bruce Braden Peel (1916–1998) was Chief Librarian at the University of Alberta from 1955 to 1982. 
-			The publication of his <em>A Bibliography of the Prairie Provinces</em> in 1956 was a landmark achievement that 
-			documents the early settlement and publishing history of western Canada, and his bibliography continues to 
-			grow today as an online database called "<a href="http://peel.library.ualberta.ca/index.html">Peel's Prairie Provinces</a>." Named to honour Peel's accomplishments, 
+			The publication of his <em>A Bibliography of the Prairie Provinces</em> in 1956 was a landmark achievement that documents the early settlement and publishing history of western Canada, and his bibliography continues to grow today as an online resource called "<a href="https://library.ualberta.ca/peel">Peel's Prairie Provinces</a>." Named to honour Peel's accomplishments, 
 			Bruce Peel Special Collections houses a world-class collection of more than 100,000 rare books 
 			and a significant collection of archival materials. Located in the basement of the Rutherford 
 			South building on the main university campus, researchers and visitors are welcome to visit Special Collections 
@@ -46,10 +44,16 @@
  
 <p>Please consult this <a href="http://www.rbms.info/yob.shtml">online guide</a> sponsored by the Rare Books and Manuscripts Section of the Association of College and Research Libraries, the Antiquarian Booksellers’ Association of America, and the Rare Book School at the University of Virginia.</p>
 
- <p class="question">What is the difference between the Peel library and Peel's Prairie Provinces database? </p>
+ <p class="question"> What is the difference between the Peel library and Peel's Prairie Provinces digital resource?</p>
+
+<p>Researchers often mistakenly imagine that the library and the digital resource are one and the same because both are named to honour Bruce Peel. <a href="https://library.ualberta.ca/peel">Peel’s Prairie Provinces</a> is a digital resource that includes anything that has been published in or about the Prairie Provinces. It is a digital version of a print bibliography. Each item is listed in the database as an aid to researchers whether or not a copy of the item is held by one of the libraries at the University of Alberta. Where possible, the database includes digital copies of items that are full-text searchable. If you wish to find a print copy of an item 
+	listed in the database, you can look for it in the 
+	University of Alberta <a href="https://www.library.ualberta.ca">library catalogue</a>. If the item you seek is not available through the University of Alberta Library, 
+	you can search for books in libraries around the world using <a href="http://firstsearch.oclc.org/fsip?autho=100338439">OCLC WorldCat</a> aand for archival materials (letters, photographs, documents, etc.) in local institutions through the Archives Society of Alberta's <a href="http://www.albertaonrecord.ca/">Alberta on Record</a> database. 	Bruce Peel Special Collections is one of many libraries that may hold a print copy of an item that you find listed in the <a href="http://peel.library.ualberta.ca">Peel’s Prairie Provinces</a> digital resource.</p>
+
 
 <p>Researchers often mistakenly imagine that the library and the database are one and the same because 
-	both are named to honour Bruce Peel. <a href="http://peel.library.ualberta.ca/index.html">Peel’s 
+	both are named to honour Bruce Peel. <a href="http://peel.library.ualberta.ca">Peel’s 
 	Prairie Provinces database</a> is a growing source of information about everything that has been 
 	published in or about the Prairie Provinces.  It is a digital version of a print bibliography.  
 	Each item is listed in the database as an aid to researchers whether or not a copy of the item 
@@ -60,7 +64,7 @@
 	If the item you seek is not available through the University of Alberta Library, 
 	you can search for books in libraries around the world using <a href="http://firstsearch.oclc.org/fsip?autho=100338439">OCLC WorldCat</a>
 	and for archival materials (letters, photographs, documents, etc.) in local institutions through the Archives Society of Alberta's <a href="http://www.albertaonrecord.ca/">Alberta on Record</a> database. 
-	Bruce Peel Special Collections is one of many libraries that may hold a print copy of an item that you find listed in the <a href="http://peel.library.ualberta.ca/index.html">Peel’s Prairie Provinces database</a>.</p>
+	Bruce Peel Special Collections is one of many libraries that may hold a print copy of an item that you find listed in the <a href="http://peel.library.ualberta.ca">Peel’s Prairie Provinces</a> digital resource.</p>
 
 <p class="question">How much is my old book worth?</p>
  
