@@ -30,6 +30,23 @@
 <li><a href="https://www.youtube.com/watch?v=UOv0SOQ8B68&feature=youtu.be">Introduction to Handling Rare Materials</a> (from Harvard University Special Collections)</li> 
 <li><a href="https://www.youtube.com/watch?v=aHVjQb4izSw&feature=youtu.be">Handling Rare Books</a> and <a href="https://www.youtube.com/watch?v=8RWAOajffZg&feature=youtu.be">Handling Archival Collections</a> (from Special Collections at University of San Antonio)</li> 
 </ul>
+		<h2>Bruce Peel Special Collections is not the same as Peel's Prairie Provinces</h2>
+
+<p>Researchers often mistakenly imagine that the special collections library and the digital resource are one and the same because 
+	both are named to honour Bruce Peel. The Peel library preserves rare print materials that may have been produced anywhere 
+	in the world, largely before 1800, while <a href="https://library.ualberta.ca/peel">Peel’s 
+	Peel’s Prairie Provinces</a> is a digital resource intended to include anything 
+	published in or about the Prairie Provinces, i.e., largely after 1800.</p>
+
+<p>The print items that are listed and/or digitized in <a href="https://library.ualberta.ca/peel">Peel’s 
+	Peel’s Prairie Provinces</a> may be held by any library in Canada and beyond. 
+	The Peel library is one of the many libraries that may hold a print copy of an item that is listed/digitized in Peel’s 
+	Prairie Provinces (such as the <a href="https://library.ualberta.ca/peel/postcards">Postcard Collection</a>), but the majority of materials included are held elsewhere. A digital 
+	version of a print bibliography, Peel's Prairie Provinces is more than a bibliographic listing because, in many cases, it 
+	includes digital copies of print originals. To find the print original for an item included in the database, look for it 
+	at <a href="https://library-archives.canada.ca/eng/services/public/visit/Pages/ottawa.aspx">Library and Archives Canada</a> or in the University of Alberta <a href="https://www.library.ualberta.ca">library catalogue</a> or search for books in libraries around 
+	the world using <a href="http://firstsearch.oclc.org/fsip?autho=100338439">OCLC WorldCat</a>. To find archival materials (such as unpublished letters, photographs, diaries, 
+	documents, etc.), it may be helpful to search provincial databases, such as the Archives Society of Alberta's <a href="http://www.albertaonrecord.ca/">Alberta on Record</a>. </p>
 <video width="650" height="400" controls>
   <source src="/assets/bpsc-vid.mp4" type="video/mp4">
 	Your browser does not support the video tag.</source>
@@ -40,45 +57,30 @@
 </div>
 <div class="span5 getting">
 	<h3>FAQs</h3>
-  <p class="question">Where can I find answers to frequently asked questions about rare and older books and their values?</p>
+	 <a href="#value">Where can I find answers to frequently asked questions about rare and older books and their values?</a>
+	<a href="#worth">How much is my old book worth?</a>
+	<a href="#cash">Do you accept cash donations?</a> 
+	<a href="#rare">Do you accept donations of rare books?</a>
+	<a href="#what">What does the Peel library collect?</a>
+  <p class="question" id="value">Where can I find answers to frequently asked questions about rare and older books and their values?</p>
  
 <p>Please consult this <a href="http://www.rbms.info/yob.shtml">online guide</a> sponsored by the Rare Books and Manuscripts Section of the Association of College and Research Libraries, the Antiquarian Booksellers’ Association of America, and the Rare Book School at the University of Virginia.</p>
 
- <p class="question"> What is the difference between the Peel library and Peel's Prairie Provinces digital resource?</p>
-
-<p>Researchers often mistakenly imagine that the library and the digital resource are one and the same because both are named to honour Bruce Peel. <a href="https://library.ualberta.ca/peel">Peel’s Prairie Provinces</a> is a digital resource that includes anything that has been published in or about the Prairie Provinces. It is a digital version of a print bibliography. Each item is listed in the database as an aid to researchers whether or not a copy of the item is held by one of the libraries at the University of Alberta. Where possible, the database includes digital copies of items that are full-text searchable. If you wish to find a print copy of an item 
-	listed in the database, you can look for it in the 
-	University of Alberta <a href="https://www.library.ualberta.ca">library catalogue</a>. If the item you seek is not available through the University of Alberta Library, 
-	you can search for books in libraries around the world using <a href="http://firstsearch.oclc.org/fsip?autho=100338439">OCLC WorldCat</a> aand for archival materials (letters, photographs, documents, etc.) in local institutions through the Archives Society of Alberta's <a href="http://www.albertaonrecord.ca/">Alberta on Record</a> database. 	Bruce Peel Special Collections is one of many libraries that may hold a print copy of an item that you find listed in the <a href="http://peel.library.ualberta.ca">Peel’s Prairie Provinces</a> digital resource.</p>
-
-
-<p>Researchers often mistakenly imagine that the library and the database are one and the same because 
-	both are named to honour Bruce Peel. <a href="http://peel.library.ualberta.ca">Peel’s 
-	Prairie Provinces database</a> is a growing source of information about everything that has been 
-	published in or about the Prairie Provinces.  It is a digital version of a print bibliography.  
-	Each item is listed in the database as an aid to researchers whether or not a copy of the item 
-	is held by one of the libraries at the University of Alberta.  Where possible, the database includes 
-	digital copies of items that are full-text searchable.  If you wish to find a print copy of an item 
-	listed in the database, you can look for it in the 
-	University of Alberta <a href="https://www.library.ualberta.ca">library catalogue</a>. 
-	If the item you seek is not available through the University of Alberta Library, 
-	you can search for books in libraries around the world using <a href="http://firstsearch.oclc.org/fsip?autho=100338439">OCLC WorldCat</a>
-	and for archival materials (letters, photographs, documents, etc.) in local institutions through the Archives Society of Alberta's <a href="http://www.albertaonrecord.ca/">Alberta on Record</a> database. 
-	Bruce Peel Special Collections is one of many libraries that may hold a print copy of an item that you find listed in the <a href="http://peel.library.ualberta.ca">Peel’s Prairie Provinces</a> digital resource.</p>
-
-<p class="question">How much is my old book worth?</p>
+<p class="question" id="worth">How much is my old book worth?</p>
  
 <p>Many of us own old books that are not old enough or rare enough to have become valuable to collectors. These books may have value that is deeply personal and goes well beyond the resale value. In general, first editions tend to have significantly more monetary value than reprints, but this is just one of many factors that determine value. Other key factors include rarity, market demand, and the condition of a particular copy.</p>
 <p>If you are just trying to get a general idea of value, you can find useful information by searching the Internet for book dealers who have listed similar items available for sale. A useful website for this is <a href="http://www.abebooks.com">www.abebooks.com</a>. There is often significant variation in the listed prices, even for copies of the same edition. Such price variations may be due to the condition of specific copies, among other things. If you are looking up your own books, please keep in mind that these are retail prices; an individual with a copy to sell to a dealer would be paid significantly less.</p>
-<p>Members of the Antiquarian Booksellers’ Association of Canada (ABAC) actively buy, sell, evaluate, and appraise rare and modern books in their respective subject areas, so it is a good idea to have a look at the member directory on the <a href="http://www.abac.org/home.php">ABAC website</a> if you require a professional book evaluation or appraisal.</p> 
+<p>Members of the Antiquarian Booksellers’ Association of Canada (ABAC) actively buy, sell, evaluate, and appraise rare and modern books in their respective subject areas, so it is a good idea to have a look at the member directory on the <a href="https://abac.org/en/">ABAC website</a> if you require a professional book evaluation or appraisal.</p> 
 
-<p class="question">Do you accept donations of rare books?</p>
+	<p class="question" id="cash">Do you accept cash donations?</p> 
+	<p>The generosity of donors supports Peel's programs and operations in a variety of ways. The best way to donate cash is to <a href="https://ualberta.alumniq.com/giving/to/libraries_museums">give to the library online</a>.</p>
+<p class="question" id="rare">Do you accept donations of rare books?</p>
  
 <p>The generosity of donors plays an instrumental role in the development of our research collections. To discuss whether the Peel library is the best place for your rare book(s), please contact Robert Desmarais, Head, Special Collections, at <a href="mailto:robert.desmarais@ualberta.ca">robert.desmarais@ualberta.ca</a>. </p>
  
 
 
-<p class="question">What does the Peel library collect?</p>
+<p class="question" id="what">What does the Peel library collect?</p>
 <p>In accordance with the <a href="https://www.library.ualberta.ca/about-us/collection/collection-policy">University of Alberta Library Collection Development Policy</a>, the Peel library acquires materials by purchase or donation to support research and teaching at the University of Alberta, which includes a wide variety of formats: printed books, manuscripts, photographs, prints and drawings, maps, and print ephemera (e.g., posters, playbills, postcards, advertisements, etc.). Donations of gifts-in-kind are also an integral part of the Peel library’s collection development policy. In this regard, the Head of Special Collections works with donors to acquire books and collections that offer substantial research potential based on one or more of the following criteria:</p>
 <ol class="collect-info"> <li>books or ephemera printed before 1800 anywhere;</li> 
 <li>books or ephemera printed before 1867 in Canada; </li> 
