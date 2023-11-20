@@ -57,11 +57,11 @@
 </div>
 <div class="span5 getting">
 	<h3>FAQs</h3>
-	 <a href="#value">Where can I find answers to frequently asked questions about rare and older books and their values?</a><br/>
+	<p><a href="#value">Where can I find answers to frequently asked questions about rare and older books and their values?</a><br/>
 	<a href="#worth">How much is my old book worth?</a><br/>
 	<a href="#cash">Do you accept cash donations?</a> <br/>
 	<a href="#rare">Do you accept donations of rare books?</a><br/>
-	<a href="#what">What does the Peel library collect?</a><br/>
+	<a href="#what">What does the Peel library collect?</a></p>
   <p class="question" id="value">Where can I find answers to frequently asked questions about rare and older books and their values?</p>
  
 <p>Please consult this <a href="http://www.rbms.info/yob.shtml">online guide</a> sponsored by the Rare Books and Manuscripts Section of the Association of College and Research Libraries, the Antiquarian Booksellers’ Association of America, and the Rare Book School at the University of Virginia.</p>
