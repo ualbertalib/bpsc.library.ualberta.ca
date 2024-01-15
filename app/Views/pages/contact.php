@@ -30,10 +30,6 @@
 					<a href="mailto:linda.quirk@ualberta.ca">linda.quirk@ualberta.ca</a><br />
 					
 					<br />
-					<strong>Cori Sanderson</strong><br />
-					Temporary Librarian (Archival Collections)<br />
-					<a href="mailto:cfsander@ualberta.ca">cfsander@ualberta.ca</a><br />
-					<br />
 					
 				</div>
 				<div class="span3">
