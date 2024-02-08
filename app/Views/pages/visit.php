@@ -25,8 +25,8 @@
 <p> Books housed in Bruce Peel Special Collections are listed in the <a href="https://www.library.ualberta.ca/">U of A Library catalogue</a>.
 	To view materials held in Bruce Peel Special Collections, please write to us at <a href="mailto:bpsc@ualberta.ca">bpsc@ualberta.ca</a> to request
 	an appointment well in advance, listing the requested materials including author, title, and call number for each item, and indicating which
-	weekday afternoons would work (appointments are generally available Tuesday-Friday 1-4pm).
-You can narrow your search to the Peel library by selecting “University of Alberta Bruce Peel Special Collections” under “Libraries.”  The
+	weekday afternoons would work (appointments are generally available Tuesday–Friday 1–4pm from September through March).
+You can narrow your search to the Peel library by selecting “U of A Bruce Peel Special Collections” under “Library Location.”  The
 library’s archival collections (i.e., photographs, correspondence, diaries, business records, etc.) are rarely listed in the library catalogue.
 Researchers can search for such materials using print finding aids in the Peel library
 	or <a href="https://discoverarchives.library.ualberta.ca/index.php/bruce-peel-special-collections">digital finding aids</a>. Researchers should be
@@ -145,9 +145,7 @@ If you require research assistance, please feel free to contact a member of the 
 	The basement can be reached via the staircases on the west and east sides of the main level of Rutherford South.</p>
 
 <h3 class="no-back">Accessibility</h3>
-<p>The only elevator that services Peel's basement location is currently out-of-service while people at Facilities & Operations await a backordered part, and we do not expect that the repair will
-	be made until early in 2024. We apologize for any inconvenience.
-	Peel's front doors can be accessed via stairs as usual. Please write to us at <a href='mailto:bpsc@ualberta.ca'>bpsc@ualberta.ca</a> if you have any questions or concerns..</p>
+<p>Bruce Peel Special Collections is located in the basement of Rutherford South, which can be accessed via a ramp in the Rutherford Galleria. After entering the main floor lobby in Rutherford South from the Galleria, take either set of stairs to get down to the basement level or use the elevator which is off a hallway that begins in the far right corner of the lobby and goes to the left. After taking the elevator to the basement level, exit the elevator vestibule and turn right. Ring the doorbell for access. Up-to-date information about Peel's hours and services can be found on our <a href="https://bpsclibrarynews.blogspot.com/2021/07/peel-reopens-on-august-16th-with.html">hours and services webpage</a>. Please write to us at <a href='mailto:bpsc@ualberta.ca'>bpsc@ualberta.ca</a> if you have any questions or concerns.</p>
 
 		<h3 class="no-back">Visiting Researchers</h3>
 <p>All researchers are welcome to make use of rare materials in the supervised reading room in Bruce Peel Special Collections upon presenting a University of Alberta ONEcard or government-issued photo ID, always provided that they follow proper handling and other protocols as directed.  Although nothing additional is needed for access to Bruce Peel Special Collections, visiting researchers who may want access to other libraries or resources at the University of Alberta should consider the following options:</p>
