@@ -13,7 +13,7 @@
 			Located in the basement of the Rutherford South building on the main university campus, everyone is welcome to visit
 			Special Collections (also called the "Peel library") to browse the <a href='/exhibits'>current exhibition</a>, to participate in a <a href='/info/workshops'>Peel Workshop</a>, or to
 			examine rare materials (<a target='_blank' href='http://bpsclibrarynews.blogspot.com/2021/07/peel-reopens-on-august-16th-with.html'>by appointment</a>) in the Gregory
-			Javitch Reading Room or the Ernest (Ernie) B. Ingles Reading Room on weekday afternoons throughout the year. </p>
+			Javitch Reading Room or the Ernest (Ernie) B. Ingles Reading Room on weekday afternoons from September through March. </p>
 
 
 		<p>The Peel library is a climate-controlled space: ideally maintaining a steady temperature (18-20°C) and relative humidity (45-55%) all year
@@ -35,12 +35,10 @@
 
 <p>Researchers often mistakenly imagine that the special collections library and the digital resource are one and the same because
 	both are named to honour Bruce Peel. The Peel library preserves rare print materials that may have been produced anywhere
-	in the world, largely before 1800, while <a href="https://library.ualberta.ca/peel">Peel’s
-	Peel’s Prairie Provinces</a> is a digital resource intended to include anything
+	in the world, largely before 1800, while <a href="https://library.ualberta.ca/peel">Peel’s Prairie Provinces</a> is a digital resource intended to include anything
 	published in or about the Prairie Provinces, i.e., largely after 1800.</p>
 
-<p>The print items that are listed and/or digitized in <a href="https://library.ualberta.ca/peel">Peel’s
-	Peel’s Prairie Provinces</a> may be held by any library in Canada and beyond.
+<p>The print items that are listed and/or digitized in <a href="https://library.ualberta.ca/peel">Peel’s Prairie Provinces</a> may be held by any library in Canada and beyond.
 	The Peel library is one of the many libraries that may hold a print copy of an item that is listed/digitized in Peel’s
 	Prairie Provinces (such as the <a href="https://library.ualberta.ca/peel/postcards">Postcard Collection</a>), but the majority of materials included are held elsewhere. A digital
 	version of a print bibliography, Peel's Prairie Provinces is more than a bibliographic listing because, in many cases, it
