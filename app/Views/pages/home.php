@@ -6,13 +6,10 @@
       <div class="container">
       <div class="span7 front" style='height: 400px'><!-- Height overide  custom.css -->
 
-                 <p class="welcome">Thanks to visionary collectors and generous donors, Bruce Peel Special Collections houses a world-class collection of more than 100,000 rare books and a significant collection of archival materials that explore a range of local and international subjects. The Peel library is open most weekday afternoons during the academic year for students, faculty, staff, and visitors to browse the current exhibition or examine rare materials in the <a href="https://bpsc.library.ualberta.ca/info/visit">reading rooms</a>.</p>
-                   <p class="welcome">TO VIEW MATERIALS HELD IN BRUCE PEEL SPECIAL COLLECTIONS, please write to us at <a href="mailto:bpsc@ualberta.ca">bpsc@ualberta.ca</a> to request an appointment well
-			   in advance, listing the requested materials including author, title, and call number for each item, and indicating which weekday afternoons would work (appointments are generally available Tuesday–Friday 1–4pm from September through March each year).</p>
-
-	<p class="welcome"><strong>Don’t miss out! If you want to view the current exhibition (<em>Mercantile Mobility</em>) or examine rare materials in one of Peel’s reading rooms, then you will need to do so before 30 March 2024 because Peel’s doors are closed and services significantly reduced during the summer months (April–August) to allow the team to focus on backend operations.</strong></p>
-
-
+<p class="welcome">Thanks to visionary collectors and generous donors, Bruce Peel Special Collections houses a world-class collection of more than 100,000 rare books and a significant collection of archival materials that explore a range of local and international subjects. The Peel library is open most weekday afternoons during the academic year for students, faculty, staff, and visitors to browse the current exhibition or examine rare materials in the <a href="https://bpsc.library.ualberta.ca/info/visit">reading rooms</a>. TO VIEW MATERIALS HELD IN BRUCE PEEL SPECIAL COLLECTIONS, please write to us at <a href="mailto:bpsc@ualberta.ca">bpsc@ualberta.ca</a> to request an appointment well in advance, listing the requested materials including author, title, and call number for each item (appointments are generally available Tuesday–Friday 1–4pm from September through March each year).</p>
+	      
+<p class="welcome"><strong>Don’t miss out! If you want to view the current exhibition (<em>Mercantile Mobility</em>) or examine rare materials in one of Peel’s reading rooms, then you will need to do so before 30 March 2024 because Peel’s doors are closed and services significantly reduced during the summer months (April–August) to allow the team to focus on backend operations.</strong></p>
+   
 
                 </div>
 
