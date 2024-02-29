@@ -4,7 +4,7 @@ namespace App\Controllers;
 use \App\Models\ExhibitModel;
 
 class Exhibits extends BaseController
-{
+{ 
 	  protected $helpers = ['url', 'form'];
 	  protected $exhibitModel;
 	  protected $data;
@@ -91,9 +91,8 @@ class Exhibits extends BaseController
 	
 	public function store(){
 	
-		/*$this->form_validation->set_rules('title', 'Title', 'required');
-		$this->form_validation->set_rules('short_description', 'Short Description', 'max_length[80]');
-		$this->form_validation->set_rules('on_now_details', 'Short Description', 'max_length[160]');*/
+		//$overwriteFile - This is creating a new exhibition so there shouldn't already be an image file that exists, if there is then don't overwrite as there is probably a duplicate exhibit or collection that should be resolved first
+		 $overwriteFile = false; 
 		
 		$validation = \Config\Services::validation();
 		$validationRules = ['title'=>"required", "short_description"=>'max_length[80]', "on_now_details"=>'max_length[80]'];
@@ -168,7 +167,7 @@ class Exhibits extends BaseController
 							
 							
 						}else{
-							$this->upload($validationRule, $cleantitle);
+							$this->upload($validationRule, $cleantitle, $overwriteFile);
 						}
 						
 					}
@@ -179,7 +178,7 @@ class Exhibits extends BaseController
 					$session = \Config\Services::session();
 					$session->setFlashdata('message', 'Your exhibit was created.');
 
-					return redirect()->to("admin/exhibits/edit/" . $id);
+					return redirect()->to('/admin');
 					//redirect('exhibits');
 			}
 	}
@@ -221,33 +220,121 @@ class Exhibits extends BaseController
 	
 	public function update($slug){
 		
+		$validation = \Config\Services::validation();
 		
 		$data['exhibit_item'] = $this->exhibitModel->get_exhibit($slug);
-		$validation = \Config\Services::validation();
-		$validationRules = ['title'=>"required", "short_description"=>'max_length[80]', "on_now_details"=>'max_length[80]'];
-		$validation->setRules($validationRules);
 		
-		if (! $this->validate($validationRules)) {
 		
-			$data['errors'] =  $this->validator->getErrors();
-			return view('common/header',$data) . view('exhibits/edit',$data) .  view('common/footer',$data);
-            
-        }	
-		else{
-			
-				
-				$files = $this->request->getFiles();
-					
-					
-					if($files['display']->isValid() && $files['display']->getName() != ''){
-						
-						$validationRule ['display'] = [ 'label' => 'Display File',
+		$validationRules['title']=['label'=>'Title', 'rules'=>['required']];
+		
+		$validationRule ['on_now_display'] = [ 'label' => 'On Now File',
+							'rules' => [                    
+							'is_image[on_now_display]',
+							'mime_in[on_now_display,image/jpg,image/jpeg,image/png]',
+							'max_size[on_now_display,800]',
+							'max_dims[on_now_display,270,192]',
+						]];		
+		
+		$validationRules['display'] = [ 'label' => 'Display File',
 							'rules' => [                    
 							'is_image[display]',
 							'mime_in[display,image/jpg,image/jpeg,image/png]',
 							'max_size[display,800]',
 							'max_dims[display,130,160]',
 						]];
+						
+		
+		
+		
+		$validationRules['short_description'] = ["rules"=>'max_length[80]', 'label'=>'Short Description'];
+		$validationRules['on_now_details'] = ['rules'=>'max_length[80]', 'label'=>'On Now Details'];
+		
+		
+		$validation->setRules($validationRules);
+		
+		if (! $this->validate($validationRules)) {
+		
+			$data['errors'] =  $this->validator->getErrors();
+			//return view('common/header',$data) . view('exhibits/edit',$data) .  view('common/footer',$data);
+			return redirect()->back()->withInput();
+            
+        }	
+		else{
+			
+				
+				$files = $this->request->getFiles();
+				
+				foreach($files as $key => $file)
+				{
+					if($file->isValid()){
+						
+						if($key == 'on_now_display'){
+							$filepath = './assets/uploads/display';
+							$overwrite = true;
+							$fileName = $slug . "." . $file->guessExtension();
+						}elseif($key == 'display'){
+							$filepath = './assets/uploads/display';
+							$overwrite = true;
+							$fileName = $slug . "." . $file->guessExtension();
+						}else{ 
+							// This section is for slides/
+							
+							$imagePosition = str_replace('slide','',$key);
+							$i = $imagePosition;
+							
+							$validationRules['slide' . $i] = [ 'label' => 'Slide Image',
+								'rules' => [                    
+								"is_image[slide{$i}]",
+								"mime_in[slide{$i},image/jpg,image/jpeg,image/png]",
+								"max_size[slide{$i},800]",
+								"max_dims[slide{$i},570,570]",
+							]];		
+							$validation->setRules($validationRules);
+		
+							if(! is_numeric($imagePosition))
+							{
+								$this->session->setFlashdata('message', 'There is a problem with the file input element names. Please inform the administrator');	
+								return redirect()->back()->withInput();
+							}
+							$filepath = './assets/uploads/slides';
+							$overwrite = true;
+							
+							$fileName = $slug . $imagePosition . "." . $file->guessExtension();
+							
+						
+						}
+						if (! $this->validate($validationRules)) {
+		
+							$data['errors'] =  $this->validator->getErrors();
+							//return view('common/header',$data) . view('exhibits/edit',$data) .  view('common/footer',$data);
+							return redirect()->back()->withInput();
+						
+						}	
+						
+						$file->move($filepath, $fileName, $overwrite);
+						
+						if( ! $file->hasMoved())
+						{
+							$this->session->setFlashdata('message', 'The Exhibit could not upload some or all of the files.');									
+							return redirect()->back()->withInput();
+						}
+						
+					}
+				}
+				
+				
+					$this->exhibitModel->set_onnow_exhibit($this->request);
+					$id = $this->exhibitModel->updateExhibit($this->request, $slug);
+					$session = \Config\Services::session();
+					$session->setFlashdata('message', 'Your exhibit was update.');
+
+					
+					return redirect()->to("admin/exhibits/edit/" . $slug);
+					
+				/*	
+					if($files['display']->isValid() && $files['display']->getName() != ''){
+						
+						
 						
 					}
 					
@@ -280,8 +367,6 @@ class Exhibits extends BaseController
 					}
 					
 									
-					
-					// If not set then that means there are no files to upload
 					if( isset($validationRule)){
 						if (! $this->validate($validationRule)) {
 						
@@ -300,15 +385,8 @@ class Exhibits extends BaseController
 							
 						}
 						
-					}
+					}*/
 
-					$this->exhibitModel->set_onnow_exhibit($this->request);
-					$id = $this->exhibitModel->updateExhibit($this->request, $slug);
-					$session = \Config\Services::session();
-					$session->setFlashdata('message', 'Your exhibit was update.');
-
-					
-					return redirect()->to("admin/exhibits/edit/" . $slug);
 			}
 		
 	}
@@ -368,11 +446,12 @@ class Exhibits extends BaseController
 		
 			$session = \Config\Services::session();
 		
-		
+	
 		$path_to_file = './assets/uploads/slides/'.$image.'.jpg';
 		if(unlink($path_to_file)) {
      		$session->setFlashdata('message', 'This exhibit slide was deleted.');
-     		return redirect('exhibits/edit/'.$slug);
+     		return redirect()->to('/admin/exhibits/edit/'.$slug);
+			
 		}
 		else{
      		echo 'errors occured unable to delete slide image';
