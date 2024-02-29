@@ -119,7 +119,7 @@
 
   <?php 
 		$slideCounter=0;
-        for($i = 0; $i < 6; $i++) {
+        for($i = 0; $i <= 6; $i++) {
           $slug = $collection_item['slug'];
           $image = $collection_item['slug'].$i;
           if (file_exists("assets/uploads/slides/".$image.".jpg")){
