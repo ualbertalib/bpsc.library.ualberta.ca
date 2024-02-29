@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 class Collections extends BaseController
 {
-	  protected $helpers = ['url', 'form','ckeditor_helper'];
+	  protected $helpers = ['url', 'form','ckeditor_helper','func_helper'];
 	  
 	  protected $data;
 	  protected $session;
@@ -127,7 +127,7 @@ class Collections extends BaseController
 							'max_dims[display,130,160]',
 						]];
 		for($i=1; $i<=6; $i++){				
-			$validationRule['slide' . $i] = [ 'label' => 'Display Image',
+			$validationRule['slide' . $i] = [ 'label' => 'Slide Image',
 							'rules' => [                    
 							"is_image[slide{$i}]",
 							"mime_in[slide{$i},image/jpg,image/jpeg,image/png]",
@@ -152,6 +152,7 @@ class Collections extends BaseController
 						
 			$files = $this->request->getFiles();
 			$count = 0;
+			
 			foreach($files as $key => $file){
 			
 				if($file->isValid()){
@@ -176,6 +177,8 @@ class Collections extends BaseController
 						$overwrite = true;
 						
 						$fileName = $slug . $imagePosition . "." . $file->guessExtension();
+						
+						
 					}
 					
 					$file->move($filepath, $fileName, $overwrite);
@@ -185,6 +188,9 @@ class Collections extends BaseController
 						
 					}
 					
+				}else{
+				
+				
 				}
 			}
 			
