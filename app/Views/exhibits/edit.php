@@ -16,7 +16,7 @@
 
 <?php print_r(validation_list_errors()); ?>
 
-
+ 
 
 <?php $slug=$exhibit_item['slug'] ?>
 <?php echo form_open_multipart('/admin/exhibits/edit/' . $slug) ?>
@@ -174,13 +174,9 @@
            <hr/>
         <div class="row-fluid top-margin">
            <h3>Slide Images</h3> 
-           <?php if (file_exists("assets/uploads/slides/".$exhibit_item['slug'].".jpg")): ?>
-              <div class='row-fluid'><div class='span6'><img src="/assets/uploads/slides/<?php echo $exhibit_item['slug']; ?>.jpg" class="slide-edit" /></div><div class='span6'> <a href='/admin/exhibits/deleteslideimage/<?php echo $exhibit_item['slug']; ?>/<?php echo $exhibit_item['slug']; ?>' class='myButton' id='actions' onclick='return confirm("Delete Image?");'>Delete Image</a></div></div>
-            <div class='row-fluid'><div class='span2'><label for="caption" class="caption-label">Image Caption</label></div><div class='span6'><input type='text' name='caption1' id='caption1' class='captions' value='<?php echo set_value('caption1', $exhibit_item['caption1'])?>'/></div> </div>
-          <hr/>
-          <?php endif?> 
+           
   <?php 
-        for($i = 0; $i < 6; $i++) {
+        /*for($i = 0; $i < 6; $i++) {
           $slug = $exhibit_item['slug'];
           $image = $exhibit_item['slug'].$i;
           if (file_exists("assets/uploads/slides/".$image.".jpg")){
@@ -195,7 +191,23 @@
         }
          if (!file_exists("assets/uploads/slides/".$slug.".jpg")){
           $cap = 0;
-         }
+         }*/
+		 
+		 
+		 $slideCounter=0;
+        for($i = 0; $i <= 6; $i++) {
+          $slug = $exhibit_item['slug'];
+          $image = $exhibit_item['slug'].$i;
+          if (file_exists("assets/uploads/slides/".$image.".jpg")){
+            
+            $capname = 'caption'.$i;
+            echo ("<div class='row-fluid'><div class='span6'><img src='/assets/uploads/slides/".$image.".jpg' class='slide-edit' /></div><div class='span6'> <a href='/admin/exhibits/deleteslideimage/".$slug."/".$image."' class='myButton' id='actions' onclick='return confirm(\"Delete Image?\");'>Delete Image</a></div></div>");
+            echo ("<div class='row-fluid'><div class='span2'><label for='caption' class='caption-label'>Image Caption</label></div><div class='span6'><input type='text' name='".$capname."' id='".$capname."' class='captions' value='".set_value($capname, $exhibit_item[$capname])."'/></div></div> <hr/>");
+			$slideCounter = $i+1; 
+          }
+        }
+		
+		
     ?>
   </div>
         <div class="row-fluid">
@@ -205,8 +217,8 @@
               </div>
  <div class="span6">
     <div id="input1" style="margin-bottom:4px;" class="clonedInput">
-        <input type="file" name="slide<?php echo $cap+1; ?>" id="slide<?php echo $cap+1; ?>" size="20" class="slides"/>
-        <input type="text" name="caption<?php echo $cap+1; ?>" id="caption<?php echo $cap+1; ?>" class="span10 captions" />
+        <input type="file" name="slide<?php echo $slideCounter; ?>" id="slide<?php echo $slideCounter; ?>" size="20" class="slides"/>
+        <input type="text" name="caption<?php echo $slideCounter; ?>" id="caption<?php echo $slideCounter; ?>" class="span10 captions" />
           <label for="caption" class="span10 caption-label">Image Caption</label>
     </div>
 </div>
@@ -233,7 +245,7 @@
 <div class="row-fluid top-margin">
     
 <div class="span12">
-  <input type="submit" name="submit" value="Update Collection" class="myButton" id="submit"/> 
+  <input type="submit" name="submit" value="Update Exhibit" class="myButton" id="submit"/> 
 </div>
     </div>
 

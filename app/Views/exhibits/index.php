@@ -32,7 +32,7 @@
            <p class="info">
                <?php if($on_now_item['exhibit_type'] != '1'): ?>
                 
-                <?php endif?>   <img src="/assets/uploads/display/<?php echo $on_now_item['slug']; ?>.jpg" class="on-now-image" />
+                <?php endif?>   <img src="/assets/uploads/onnow/<?php echo $on_now_item['slug']; ?>.jpg" class="on-now-image" />
                    
                      <?php if($on_now_item['exhibit_type'] != '1'): ?>
                  
