@@ -5,7 +5,7 @@ use \App\Models\ExhibitModel;
 
 class Exhibits extends BaseController
 { 
-	  protected $helpers = ['url', 'form'];
+	  protected $helpers = ['url', 'form','func_helper'];
 	  protected $exhibitModel;
 	  protected $data;
 	public function __construct(){
@@ -326,7 +326,7 @@ class Exhibits extends BaseController
 					$this->exhibitModel->set_onnow_exhibit($this->request);
 					$id = $this->exhibitModel->updateExhibit($this->request, $slug);
 					$session = \Config\Services::session();
-					$session->setFlashdata('message', 'Your exhibit was update.');
+					$session->setFlashdata('message', 'Your exhibit was updated.');
 
 					
 					return redirect()->to("admin/exhibits/edit/" . $slug);
