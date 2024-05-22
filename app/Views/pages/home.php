@@ -4,15 +4,25 @@
 
     <div class="row-fluid main-content">
       <div class="container">
-      <div class="span7 front" style='height: 400px'><!-- Height overide  custom.css -->
+      <div class="span7 front" style='height: 550px'><!-- Height overide  custom.css -->
 
-<p class="welcome">Thanks to visionary collectors and generous donors, Bruce Peel Special Collections houses a world-class collection of more than 100,000 rare books and a significant collection of archival materials that explore a range of local and international subjects. The Peel library is open most weekday afternoons during the academic year for students, faculty, staff, and visitors to browse the current exhibition or examine rare materials in the <a href="https://bpsc.library.ualberta.ca/info/visit">reading rooms</a>. TO VIEW MATERIALS HELD IN BRUCE PEEL SPECIAL COLLECTIONS, please write to us at <a href="mailto:bpsc@ualberta.ca">bpsc@ualberta.ca</a> to request an appointment well in advance, listing the requested materials including author, title, and call number for each item (appointments are generally available Tuesday–Friday 1–4pm from September through March each year).</p>
+<p class="welcome">
+	Thanks to visionary collectors and generous donors, Bruce Peel Special Collections houses a world-class collection of more than 100,000 rare books and a significant collection of archival materials that explore a range of local and international subjects. The Peel library is open most weekday afternoons during the academic year for students, faculty, staff, and visitors to browse the current exhibition or examine rare materials in the <a href="https://bpsc.library.ualberta.ca/info/visit">reading rooms</a>. TO VIEW MATERIALS HELD IN BRUCE PEEL SPECIAL COLLECTIONS, please write to us at <a href="mailto:bpsc@ualberta.ca">bpsc@ualberta.ca</a> to request an appointment well in advance, listing the requested materials including author, title, and call number for each item (appointments are generally available Tuesday–Friday 1–4pm from September through March each year).
+	</p>
 	      
-<p class="welcome"><strong>NOTICE: Peel’s doors are closed and services significantly reduced during the summer months (April–August) to allow the team to focus on backend operations. Regular service resumes in September.</strong></p>
-   
+<p class="welcome"><strong>The doors are closed at Bruce Peel Special Collections and services significantly reduced from April–August 2024 to allow the team to focus on back end operations. 
+	Further information is available <a href='https://bpsclibrarynews.blogspot.com/2021/07/peel-reopens-on-august-16th-with.html'>here</a>. During this period, 
+	I hope you will be patient with me while I work on a major project as I only expect to read and respond to email approximately once a week. 
+	Full service resumes in September.</strong></p>
 
-                </div>
-
+              
+				
+			<p class="welcome">
+				Opening in September 2024, back by popular demand--<em><a href='https://bpsc.library.ualberta.ca/exhibits'>Collecting Culinaria: 
+				Cookbooks and Domestic Manuals Mainly from the Linda Miron Distad Collection</a></em>--a visually compelling exhibition of books and ephemera relating to the preparation and enjoyment of 
+				food over several centuries.
+				</p>
+  </div>
     <div class="span2 front hidden-phone">
 
           <?php if (!empty($on_now)): ?>
