@@ -30,6 +30,11 @@
 					<a href="mailto:linda.quirk@ualberta.ca">linda.quirk@ualberta.ca</a><br />
 					
 					<br />
+					<strong>Maia Trotter</strong><br />
+					Metadata Technician<br />
+					<a href="mailto:mjtrotte@ualberta.ca">mjtrotte@ualberta.ca</a><br />
+					
+					<br />
 					
 				</div>
 				<div class="span3">
