@@ -8,8 +8,6 @@
 
 <p class="welcome">Thanks to visionary collectors and generous donors, Bruce Peel Special Collections houses a world-class collection of more than 100,000 rare books and a significant collection of archival materials that explore a range of local and international subjects. The Peel library is open most weekday afternoons during the academic year for students, faculty, staff, and visitors to browse the current exhibition or examine rare materials in the <a href="https://bpsc.library.ualberta.ca/info/visit">reading rooms</a>. TO VIEW MATERIALS HELD IN BRUCE PEEL SPECIAL COLLECTIONS, please write to us at <a href="mailto:bpsc@ualberta.ca">bpsc@ualberta.ca</a> to request an appointment well in advance, listing the requested materials including author, title, and call number for each item (appointments are generally available Tuesday–Friday 1–4pm from September through March each year).</p>
 	      
-<p class="welcome"><strong>NOTICE: Peel’s doors are closed and services significantly reduced during the summer months (April–August) to allow the team to focus on backend operations. Regular service resumes in September.</strong></p>
-   
 
                 </div>
 

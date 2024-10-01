@@ -29,7 +29,7 @@
 			<p>To maintain the integrity of materials housed at Bruce Peel Special Collections, proper handling procedures must be understood and followed by all. Researchers are encouraged to read the Peel library’s <a href="/info/visit#policy">Reading Room Policies</a> prior to their visit. Instructive resources produced by our colleagues in other special collections libraries, such as those linked here, demonstrate correct handling procedures.</p>
 			<ul class="archive-vids">
 <li><a href="https://www.youtube.com/watch?v=UOv0SOQ8B68&feature=youtu.be">Introduction to Handling Rare Materials</a> (from Harvard University Special Collections)</li>
-<li><a href="https://www.youtube.com/watch?v=aHVjQb4izSw&feature=youtu.be">Handling Rare Books</a> and <a href="https://www.youtube.com/watch?v=8RWAOajffZg&feature=youtu.be">Handling Archival Collections</a> (from Special Collections at University of San Antonio)</li>
+<li><a href="https://www.youtube.com/watch?v=aHVjQb4izSw&feature=youtu.be">Handling Rare Books</a> and <a href="https://www.youtube.com/watch?v=8RWAOajffZg&feature=youtu.be">Handling Archival Collections</a> (from Special Collections, University of Texas at San Antonio)</li>
 </ul>
 		<h2>Bruce Peel Special Collections is not the same as Peel's Prairie Provinces</h2>
 
