@@ -23,15 +23,7 @@
     
     <script src="https://code.jquery.com/jquery.js"></script>
    <script src="/assets/js/home-all-min.js"></script>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-M3EZ4C6RNZ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-M3EZ4C6RNZ');
-</script>
 
   </head>
    <body>   
