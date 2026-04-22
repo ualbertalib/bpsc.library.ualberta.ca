@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of CodeIgniter Shield.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 namespace CodeIgniter\Shield\Collectors;
 
 use CodeIgniter\Debug\Toolbar\Collectors\BaseCollector;
@@ -44,7 +53,7 @@ class Auth extends BaseCollector
      */
     protected $title = 'Auth';
 
-    private ShieldAuth $auth;
+    private readonly ShieldAuth $auth;
 
     public function __construct()
     {
@@ -56,7 +65,7 @@ class Auth extends BaseCollector
      */
     public function getTitleDetails(): string
     {
-        return ShieldAuth::SHIELD_VERSION . ' | ' . get_class($this->auth->getAuthenticator());
+        return ShieldAuth::SHIELD_VERSION . ' | ' . $this->auth->getAuthenticator()::class;
     }
 
     /**
@@ -66,25 +75,24 @@ class Auth extends BaseCollector
     {
         if ($this->auth->loggedIn()) {
             $user        = $this->auth->user();
-            $groups      = $user->getGroups();
-            $permissions = $user->getPermissions();
+            $groups      = implode(', ', $user->getGroups());
+            $permissions = implode(', ', $user->getPermissions());
 
-            $groupsForUser      = implode(', ', $groups);
-            $permissionsForUser = implode(', ', $permissions);
-
-            $html = '<h3>Current User</h3>';
-            $html .= '<table><tbody>';
-            $html .= "<tr><td style='width:150px;'>User ID</td><td>#{$user->id}</td></tr>";
-            $html .= "<tr><td>Username</td><td>{$user->username}</td></tr>";
-            $html .= "<tr><td>Email</td><td>{$user->email}</td></tr>";
-            $html .= "<tr><td>Groups</td><td>{$groupsForUser}</td></tr>";
-            $html .= "<tr><td>Permissions</td><td>{$permissionsForUser}</td></tr>";
-            $html .= '</tbody></table>';
-        } else {
-            $html = '<p>Not logged in.</p>';
+            return <<<HTML
+                    <h3>Current User</h3>
+                    <table>
+                        <tbody>
+                            <tr><td width="150">User ID</td><td>#{$user->id}</td></tr>
+                            <tr><td>Username</td><td>{$user->username}</td></tr>
+                            <tr><td>Email</td><td>{$user->email}</td></tr>
+                            <tr><td>Groups</td><td>{$groups}</td></tr>
+                            <tr><td>Permissions</td><td>{$permissions}</td></tr>
+                        </tbody>
+                    </table>
+                HTML;
         }
 
-        return $html;
+        return '<p>Not logged in.</p>';
     }
 
     /**

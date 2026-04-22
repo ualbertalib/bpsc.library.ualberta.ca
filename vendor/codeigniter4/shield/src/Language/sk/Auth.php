@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of CodeIgniter Shield.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 return [
     // Exceptions
     'unknownAuthenticator'  => '{0} nie je platný autentifikátor.',
@@ -16,16 +25,21 @@ return [
     'badToken'              => 'Prístupový token je neplatný.',
     'oldToken'              => 'Platnosť prístupového tokenu vypršala.',
     'noUserEntity'          => 'Na overenie hesla je potrebné zadať entitu používateľa.',
-    'invalidEmail'          => 'Nie je možné overiť, či sa e-mailová adresa zhoduje so zaznamenaným e-mailom.',
+    'invalidEmail'          => 'Nie je možné overiť, či sa e-mailová adresa "{0}" zhoduje s e-mailom v databáze.',
     'unableSendEmailToUser' => 'Ľutujeme, pri odosielaní e-mailu sa vyskytol problém. Nepodarilo sa nám odoslať e-mail na adresu „{0}".',
     'throttled'             => 'Z tejto adresy IP bolo odoslaných príliš veľa žiadostí. Môžete to skúsiť znova o {0} sekúnd.',
     'notEnoughPrivilege'    => 'Nemáte potrebné povolenie na vykonanie požadovanej operácie.',
+    // JWT Exceptions
+    'invalidJWT'     => 'Neplatný token.',
+    'expiredJWT'     => 'Platnosť tokenu vypršala.',
+    'beforeValidJWT' => 'Token ešte nie je dostupný.',
 
     'email'           => 'Emailová adresa',
     'username'        => 'Používateľské meno',
     'password'        => 'Heslo',
     'passwordConfirm' => 'Heslo (znova)',
     'haveAccount'     => 'Máte už účet?',
+    'token'           => 'Token',
 
     // Buttons
     'confirm' => 'Potvrdiť',
@@ -47,7 +61,9 @@ return [
     'magicLinkExpired'   => 'Ľutujeme, platnosť odkazu vypršala.',
     'checkYourEmail'     => 'Skontrolujte e-mail',
     'magicLinkDetails'   => 'Práve sme vám poslali e-mail s odkazom na prihlásenie. Platí iba {0} minút.',
+    'magicLinkDisabled'  => 'Použitie magického linku momentálne nie je povolené.',
     'successLogout'      => 'Úspešne ste sa odhlásili.',
+    'backToLogin'        => 'Späť na prihlásenie',
 
     // Passwords
     'errorPasswordLength'       => 'Heslá musia mať aspoň {0, number} znakov.',

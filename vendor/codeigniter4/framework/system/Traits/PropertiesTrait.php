@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -45,7 +47,7 @@ trait PropertiesTrait
     final public function getPublicProperties(): array
     {
         $worker = new class () {
-            public function getProperties($obj)
+            public function getProperties(object $obj): array
             {
                 return get_object_vars($obj);
             }
@@ -69,7 +71,6 @@ trait PropertiesTrait
                 continue;
             }
 
-            $property->setAccessible(true);
             $properties[] = $property;
         }
 

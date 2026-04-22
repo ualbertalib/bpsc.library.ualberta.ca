@@ -14,8 +14,10 @@
       <?php endif?>
 
        <h1>Exhibitions</h1>
-   <p class="top-margin">Bruce Peel Special Collections has offered a fascinating array of exhibitions since moving to the basement of Rutherford South in 1984. Numerous awards, for exhibition catalogues (see <a href="/exhibits/past">previous in-house exhibitions</a>) and for digital exhibitions (<a href="https://omeka.library.ualberta.ca/exhibits/show/tinctor/imagining">Tinctor's Foul Treatise</a> and <a href="https://omeka.library.ualberta.ca/exhibits/show/photograpies/intro">Photographies</a>) demonstrate that the exhibitions produced by the Peel library are some of the best in North America. Exhibition catalogues are distributed internationally by University of Alberta Press and continue to be actively used by local researchers. For information on past exhibitions, as well as the availability and prices of past exhibition catalogues, follow the link below.</p>
- <a href="/exhibits/past" class="myButton" id="past">Previous In-House Exhibitions</a>
+   <p class="top-margin">Bruce Peel Special Collections has offered a fascinating array of exhibitions since moving to the basement of Rutherford South in 1984. Numerous awards, for exhibition catalogues (see <a href="/exhibits/past">past in-house exhibitions</a>) and for digital exhibitions (<a href="https://omeka.library.ualberta.ca/exhibits/show/tinctor/imagining">Tinctor's Foul Treatise</a> and <a href="https://omeka.library.ualberta.ca/exhibits/show/photograpies/intro">Photographies</a>) demonstrate that the exhibitions produced by the Peel library are some of the best in North America. Exhibition catalogues are distributed internationally by University of Alberta Press and continue to be actively used by local researchers. For information on past exhibitions, as well as the availability and prices of past exhibition catalogues, follow the link below.</p>
+ <a href="/exhibits/past" class="myButton" id="past">Past In-House Exhibitions</a>
+ 
+ <a href="/exhibits/upcoming" class="myButton" id="Upcoming">Upcoming In-House Exhibitions</a>
 
 </div>
          <div class="row-fluid">
@@ -32,7 +34,7 @@
            <p class="info">
                <?php if($on_now_item['exhibit_type'] != '1'): ?>
                 
-                <?php endif?>   <img src="/assets/uploads/display/<?php echo $on_now_item['slug']; ?>.jpg" class="on-now-image" />
+                <?php endif?>   <img style="width: 180px;" src="/assets/uploads/onnow/<?php echo $on_now_item['slug']; ?>.jpg" class="on-now-image" />
                    
                      <?php if($on_now_item['exhibit_type'] != '1'): ?>
                  

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -13,9 +15,12 @@ namespace CodeIgniter\Debug\Toolbar\Collectors;
 
 use CodeIgniter\Database\Query;
 use CodeIgniter\I18n\Time;
+use Config\Toolbar;
 
 /**
  * Collector for the Database tab of the Debug Toolbar.
+ *
+ * @see \CodeIgniter\Debug\Toolbar\Collectors\DatabaseTest
  */
 class Database extends BaseCollector
 {
@@ -74,11 +79,13 @@ class Database extends BaseCollector
      * The static method used during Events to collect
      * data.
      *
-     * @internal param $ array \CodeIgniter\Database\Query
+     * @internal
+     *
+     * @return void
      */
     public static function collect(Query $query)
     {
-        $config = config('Toolbar');
+        $config = config(Toolbar::class);
 
         // Provide default in case it's not set
         $max = $config->maxQueries ?: 100;
@@ -97,7 +104,7 @@ class Database extends BaseCollector
             static::$queries[] = [
                 'query'     => $query,
                 'string'    => $queryString,
-                'duplicate' => in_array($queryString, array_column(static::$queries, 'string', null), true),
+                'duplicate' => in_array($queryString, array_column(static::$queries, 'string'), true),
                 'trace'     => $backtrace,
             ];
         }
@@ -140,8 +147,7 @@ class Database extends BaseCollector
      */
     public function display(): array
     {
-        $data            = [];
-        $data['queries'] = array_map(static function (array $query) {
+        return ['queries' => array_map(static function (array $query): array {
             $isDuplicate = $query['duplicate'] === true;
 
             $firstNonSystemLine = '';
@@ -156,7 +162,7 @@ class Database extends BaseCollector
                 }
 
                 // find the first trace line that does not originate from `system/`
-                if ($firstNonSystemLine === '' && strpos($line['file'], 'SYSTEMPATH') === false) {
+                if ($firstNonSystemLine === '' && ! str_contains($line['file'], 'SYSTEMPATH')) {
                     $firstNonSystemLine = $line['file'];
                 }
 
@@ -188,9 +194,7 @@ class Database extends BaseCollector
                 'trace-file' => $firstNonSystemLine,
                 'qid'        => md5($query['query'] . Time::now()->format('0.u00 U')),
             ];
-        }, static::$queries);
-
-        return $data;
+        }, static::$queries)];
     }
 
     /**
@@ -211,7 +215,7 @@ class Database extends BaseCollector
         $this->getConnections();
 
         $queryCount      = count(static::$queries);
-        $uniqueCount     = count(array_filter(static::$queries, static fn ($query) => $query['duplicate'] === false));
+        $uniqueCount     = count(array_filter(static::$queries, static fn ($query): bool => $query['duplicate'] === false));
         $connectionCount = count($this->connections);
 
         return sprintf(
@@ -221,7 +225,7 @@ class Database extends BaseCollector
             $uniqueCount,
             $uniqueCount > 1 ? 'of them' : '',
             $connectionCount,
-            $connectionCount > 1 ? 's' : ''
+            $connectionCount > 1 ? 's' : '',
         );
     }
 
@@ -230,7 +234,7 @@ class Database extends BaseCollector
      */
     public function isEmpty(): bool
     {
-        return empty(static::$queries);
+        return static::$queries === [];
     }
 
     /**
@@ -246,8 +250,17 @@ class Database extends BaseCollector
     /**
      * Gets the connections from the database config
      */
-    private function getConnections()
+    private function getConnections(): void
     {
         $this->connections = \Config\Database::getConnections();
+    }
+
+    /**
+     * Reset collector state for worker mode.
+     * Clears collected queries between requests.
+     */
+    public function reset(): void
+    {
+        static::$queries = [];
     }
 }

@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of CodeIgniter Shield.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 namespace CodeIgniter\Shield\Authentication\Passwords;
 
 use CodeIgniter\Shield\Authentication\AuthenticationException;
@@ -28,7 +37,7 @@ class CompositionValidator extends BaseValidator implements ValidatorInterface
      */
     public function check(string $password, ?User $user = null): Result
     {
-        if (empty($this->config->minimumPasswordLength)) {
+        if ($this->config->minimumPasswordLength === 0) {
             throw AuthenticationException::forUnsetPasswordLength();
         }
 

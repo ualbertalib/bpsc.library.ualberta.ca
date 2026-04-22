@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -12,6 +14,7 @@
 namespace CodeIgniter\Encryption;
 
 use CodeIgniter\Encryption\Exceptions\EncryptionException;
+use SensitiveParameter;
 
 /**
  * CodeIgniter Encryption Handler
@@ -30,7 +33,7 @@ interface EncrypterInterface
      *
      * @throws EncryptionException
      */
-    public function encrypt($data, $params = null);
+    public function encrypt(#[SensitiveParameter] $data, #[SensitiveParameter] $params = null);
 
     /**
      * Decrypt - convert ciphertext into plaintext
@@ -42,5 +45,5 @@ interface EncrypterInterface
      *
      * @throws EncryptionException
      */
-    public function decrypt($data, $params = null);
+    public function decrypt($data, #[SensitiveParameter] $params = null);
 }

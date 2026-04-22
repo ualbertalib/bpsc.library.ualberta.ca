@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -17,12 +19,17 @@ use CodeIgniter\Database\BaseResult;
 use CodeIgniter\Database\Exceptions\DatabaseException;
 use CodeIgniter\Database\Exceptions\DataException;
 use CodeIgniter\Database\Query;
+use CodeIgniter\Database\RawSql;
+use CodeIgniter\DataCaster\Cast\CastInterface;
+use CodeIgniter\DataConverter\DataConverter;
+use CodeIgniter\Entity\Cast\CastInterface as EntityCastInterface;
+use CodeIgniter\Entity\Entity;
+use CodeIgniter\Exceptions\InvalidArgumentException;
 use CodeIgniter\Exceptions\ModelException;
 use CodeIgniter\I18n\Time;
 use CodeIgniter\Pager\Pager;
 use CodeIgniter\Validation\ValidationInterface;
-use Config\Services;
-use InvalidArgumentException;
+use Config\Feature;
 use ReflectionClass;
 use ReflectionException;
 use ReflectionProperty;
@@ -31,7 +38,7 @@ use stdClass;
 /**
  * The BaseModel class provides a number of convenient features that
  * makes working with a databases less painful. Extending this class
- * provide means of implementing various database systems
+ * provide means of implementing various database systems.
  *
  * It will:
  *      - simplifies pagination
@@ -41,19 +48,37 @@ use stdClass;
  *      - ensure validation is run against objects when saving items
  *      - process various callbacks
  *      - allow intermingling calls to the db connection
+ *
+ * @phpstan-type row_array               array<int|string, float|int|null|object|string|bool>
+ * @phpstan-type event_data_beforeinsert array{data: row_array}
+ * @phpstan-type event_data_afterinsert  array{id: int|string, data: row_array, result: bool}
+ * @phpstan-type event_data_beforefind   array{id?: int|string, method: string, singleton: bool, limit?: int, offset?: int}
+ * @phpstan-type event_data_afterfind    array{id: int|string|null|list<int|string>, data: row_array|list<row_array>|object|null, method: string, singleton: bool}
+ * @phpstan-type event_data_beforeupdate array{id: null|list<int|string>, data: row_array}
+ * @phpstan-type event_data_afterupdate  array{id: null|list<int|string>, data: row_array|object, result: bool}
+ * @phpstan-type event_data_beforedelete array{id: null|list<int|string>, purge: bool}
+ * @phpstan-type event_data_afterdelete  array{id: null|list<int|string>, data: null, purge: bool, result: bool}
  */
 abstract class BaseModel
 {
     /**
      * Pager instance.
-     * Populated after calling $this->paginate()
+     *
+     * Populated after calling `$this->paginate()`.
      *
      * @var Pager
      */
     public $pager;
 
     /**
-     * Last insert ID
+     * Database Connection.
+     *
+     * @var BaseConnection
+     */
+    protected $db;
+
+    /**
+     * Last insert ID.
      *
      * @var int|string
      */
@@ -63,33 +88,63 @@ abstract class BaseModel
      * The Database connection group that
      * should be instantiated.
      *
-     * @var string
-     * @phpstan-var non-empty-string
+     * @var non-empty-string|null
      */
     protected $DBGroup;
 
     /**
      * The format that the results should be returned as.
-     * Will be overridden if the as* methods are used.
      *
-     * @var string
+     * Will be overridden if the `$this->asArray()`, `$this->asObject()` methods are used.
+     *
+     * @var 'array'|'object'|class-string
      */
     protected $returnType = 'array';
 
     /**
-     * If this model should use "softDeletes" and
-     * simply set a date when rows are deleted, or
-     * do hard deletes.
+     * The temporary format of the result.
+     *
+     * Used by `$this->asArray()` and `$this->asObject()` to provide
+     * temporary overrides of model default.
+     *
+     * @var 'array'|'object'|class-string
+     */
+    protected $tempReturnType;
+
+    /**
+     * Array of column names and the type of value to cast.
+     *
+     * @var array<string, string> Array order `['column' => 'type']`.
+     */
+    protected array $casts = [];
+
+    /**
+     * Custom convert handlers.
+     *
+     * @var array<string, class-string<CastInterface|EntityCastInterface>> Array order `['type' => 'classname']`.
+     */
+    protected array $castHandlers = [];
+
+    protected ?DataConverter $converter = null;
+
+    /**
+     * Determines whether the model should protect field names during
+     * mass assignment operations such as $this->insert(), $this->update().
+     *
+     * When set to `true`, only the fields explicitly defined in the `$allowedFields`
+     * property will be allowed for mass assignment. This helps prevent
+     * unintended modification of database fields and improves security
+     * by avoiding mass assignment vulnerabilities.
      *
      * @var bool
      */
-    protected $useSoftDeletes = false;
+    protected $protectFields = true;
 
     /**
      * An array of field names that are allowed
      * to be set by the user in inserts/updates.
      *
-     * @var array
+     * @var list<string>
      */
     protected $allowedFields = [];
 
@@ -105,70 +160,68 @@ abstract class BaseModel
      * The type of column that created_at and updated_at
      * are expected to.
      *
-     * Allowed: 'datetime', 'date', 'int'
-     *
-     * @var string
+     * @var 'date'|'datetime'|'int'
      */
     protected $dateFormat = 'datetime';
 
     /**
-     * The column used for insert timestamps
+     * The column used for insert timestamps.
      *
      * @var string
      */
     protected $createdField = 'created_at';
 
     /**
-     * The column used for update timestamps
+     * The column used for update timestamps.
      *
      * @var string
      */
     protected $updatedField = 'updated_at';
 
     /**
-     * Used by withDeleted to override the
-     * model's softDelete setting.
+     * If this model should use "softDeletes" and
+     * simply set a date when rows are deleted, or
+     * do hard deletes.
+     *
+     * @var bool
+     */
+    protected $useSoftDeletes = false;
+
+    /**
+     * Used by $this->withDeleted() to override the
+     * model's "softDelete" setting.
      *
      * @var bool
      */
     protected $tempUseSoftDeletes;
 
     /**
-     * The column used to save soft delete state
+     * The column used to save soft delete state.
      *
      * @var string
      */
     protected $deletedField = 'deleted_at';
 
     /**
-     * Used by asArray and asObject to provide
-     * temporary overrides of model default.
-     *
-     * @var string
+     * Whether to allow inserting empty data.
      */
-    protected $tempReturnType;
+    protected bool $allowEmptyInserts = false;
 
     /**
-     * Whether we should limit fields in inserts
-     * and updates to those available in $allowedFields or not.
-     *
-     * @var bool
+     * Whether to update Entity's only changed data.
      */
-    protected $protectFields = true;
+    protected bool $updateOnlyChanged = true;
 
     /**
-     * Database Connection
+     * Rules used to validate data in insert(), update(), save(),
+     * insertBatch(), and updateBatch() methods.
      *
-     * @var BaseConnection
-     */
-    protected $db;
-
-    /**
-     * Rules used to validate data in insert, update, and save methods.
-     * The array must match the format of data passed to the Validation
+     * The array must match the format of data passed to the `Validation`
      * library.
      *
-     * @var array|string
+     * @see https://codeigniter4.github.io/userguide/models/model.html#setting-validation-rules
+     *
+     * @var array<string, array<string, array<string, string>|string>|string>|string
      */
     protected $validationRules = [];
 
@@ -176,12 +229,14 @@ abstract class BaseModel
      * Contains any custom error messages to be
      * used during data validation.
      *
-     * @var array
+     * @var array<string, array<string, string>> The column is used as the keys.
      */
     protected $validationMessages = [];
 
     /**
-     * Skip the model's validation. Used in conjunction with skipValidation()
+     * Skip the model's validation.
+     *
+     * Used in conjunction with `$this->skipValidation()`
      * to skip data validation for any future calls.
      *
      * @var bool
@@ -199,7 +254,7 @@ abstract class BaseModel
     /**
      * Our validator instance.
      *
-     * @var ValidationInterface
+     * @var ValidationInterface|null
      */
     protected $validation;
 
@@ -217,108 +272,103 @@ abstract class BaseModel
      */
 
     /**
-     * Whether to trigger the defined callbacks
+     * Whether to trigger the defined callbacks.
      *
      * @var bool
      */
     protected $allowCallbacks = true;
 
     /**
-     * Used by allowCallbacks() to override the
-     * model's allowCallbacks setting.
+     * Used by $this->allowCallbacks() to override the
+     * model's $allowCallbacks setting.
      *
      * @var bool
      */
     protected $tempAllowCallbacks;
 
     /**
-     * Callbacks for beforeInsert
+     * Callbacks for "beforeInsert" event.
      *
-     * @var array
+     * @var list<string>
      */
     protected $beforeInsert = [];
 
     /**
-     * Callbacks for afterInsert
+     * Callbacks for "afterInsert" event.
      *
-     * @var array
+     * @var list<string>
      */
     protected $afterInsert = [];
 
     /**
-     * Callbacks for beforeUpdate
+     * Callbacks for "beforeUpdate" event.
      *
-     * @var array
+     * @var list<string>
      */
     protected $beforeUpdate = [];
 
     /**
-     * Callbacks for afterUpdate
+     * Callbacks for "afterUpdate" event.
      *
-     * @var array
+     * @var list<string>
      */
     protected $afterUpdate = [];
 
     /**
-     * Callbacks for beforeInsertBatch
+     * Callbacks for "beforeInsertBatch" event.
      *
-     * @var array
+     * @var list<string>
      */
     protected $beforeInsertBatch = [];
 
     /**
-     * Callbacks for afterInsertBatch
+     * Callbacks for "afterInsertBatch" event.
      *
-     * @var array
+     * @var list<string>
      */
     protected $afterInsertBatch = [];
 
     /**
-     * Callbacks for beforeUpdateBatch
+     * Callbacks for "beforeUpdateBatch" event.
      *
-     * @var array
+     * @var list<string>
      */
     protected $beforeUpdateBatch = [];
 
     /**
-     * Callbacks for afterUpdateBatch
+     * Callbacks for "afterUpdateBatch" event.
      *
-     * @var array
+     * @var list<string>
      */
     protected $afterUpdateBatch = [];
 
     /**
-     * Callbacks for beforeFind
+     * Callbacks for "beforeFind" event.
      *
-     * @var array
+     * @var list<string>
      */
     protected $beforeFind = [];
 
     /**
-     * Callbacks for afterFind
+     * Callbacks for "afterFind" event.
      *
-     * @var array
+     * @var list<string>
      */
     protected $afterFind = [];
 
     /**
-     * Callbacks for beforeDelete
+     * Callbacks for "beforeDelete" event.
      *
-     * @var array
+     * @var list<string>
      */
     protected $beforeDelete = [];
 
     /**
-     * Callbacks for afterDelete
+     * Callbacks for "afterDelete" event.
      *
-     * @var array
+     * @var list<string>
      */
     protected $afterDelete = [];
-
-    /**
-     * Whether to allow inserting empty data.
-     */
-    protected bool $allowEmptyInserts = false;
 
     public function __construct(?ValidationInterface $validation = null)
     {
@@ -326,41 +376,61 @@ abstract class BaseModel
         $this->tempUseSoftDeletes = $this->useSoftDeletes;
         $this->tempAllowCallbacks = $this->allowCallbacks;
 
-        /**
-         * @var ValidationInterface|null $validation
-         */
-        $validation ??= Services::validation(null, false);
         $this->validation = $validation;
 
         $this->initialize();
+        $this->createDataConverter();
+    }
+
+    /**
+     * Creates DataConverter instance.
+     */
+    protected function createDataConverter(): void
+    {
+        if ($this->useCasts()) {
+            $this->converter = new DataConverter(
+                $this->casts,
+                $this->castHandlers,
+                $this->db,
+            );
+        }
+    }
+
+    /**
+     * Are casts used?
+     */
+    protected function useCasts(): bool
+    {
+        return $this->casts !== [];
     }
 
     /**
      * Initializes the instance with any additional steps.
      * Optionally implemented by child classes.
+     *
+     * @return void
      */
     protected function initialize()
     {
     }
 
     /**
-     * Fetches the row of database.
-     * This method works only with dbCalls.
+     * Fetches the row(s) of database with a primary key
+     * matching $id.
+     * This method works only with DB calls.
      *
-     * @param bool                  $singleton Single or multiple results
-     * @param array|int|string|null $id        One primary key or an array of primary keys
+     * @param bool                             $singleton Single or multiple results.
+     * @param int|list<int|string>|string|null $id        One primary key or an array of primary keys.
      *
-     * @return array|object|null The resulting row of data, or null.
+     * @return ($singleton is true ? object|row_array|null : list<object|row_array>) The resulting row of data or `null`.
      */
     abstract protected function doFind(bool $singleton, $id = null);
 
     /**
      * Fetches the column of database.
-     * This method works only with dbCalls.
+     * This method works only with DB calls.
      *
-     * @param string $columnName Column Name
-     *
-     * @return array|null The resulting row of data, or null if no data found.
+     * @return list<row_array>|null The resulting row of data or `null` if no data found.
      *
      * @throws DataException
      */
@@ -368,172 +438,160 @@ abstract class BaseModel
 
     /**
      * Fetches all results, while optionally limiting them.
-     * This method works only with dbCalls.
+     * This method works only with DB calls.
      *
-     * @param int $limit  Limit
-     * @param int $offset Offset
-     *
-     * @return array
+     * @return list<object|row_array>
      */
-    abstract protected function doFindAll(int $limit = 0, int $offset = 0);
+    abstract protected function doFindAll(?int $limit = null, int $offset = 0);
 
     /**
      * Returns the first row of the result set.
-     * This method works only with dbCalls.
+     * This method works only with DB calls.
      *
-     * @return array|object|null
+     * @return object|row_array|null
      */
     abstract protected function doFirst();
 
     /**
      * Inserts data into the current database.
-     * This method works only with dbCalls.
+     * This method works only with DB calls.
      *
-     * @param array $data Data
+     * @param row_array $row
      *
      * @return bool
      */
-    abstract protected function doInsert(array $data);
+    abstract protected function doInsert(array $row);
 
     /**
      * Compiles batch insert and runs the queries, validating each row prior.
-     * This method works only with dbCalls.
+     * This method works only with DB calls.
      *
-     * @param array|null $set       An associative array of insert values
-     * @param bool|null  $escape    Whether to escape values
-     * @param int        $batchSize The size of the batch to run
-     * @param bool       $testing   True means only number of records is returned, false will execute the query
+     * @param list<object|row_array>|null $set       An associative array of insert values.
+     * @param bool|null                   $escape    Whether to escape values.
+     * @param int                         $batchSize The size of the batch to run.
+     * @param bool                        $testing   `true` means only number of records is returned, `false` will execute the query.
      *
-     * @return bool|int Number of rows inserted or FALSE on failure
+     * @return false|int|list<string> Number of rows affected or `false` on failure, SQL array when test mode
      */
     abstract protected function doInsertBatch(?array $set = null, ?bool $escape = null, int $batchSize = 100, bool $testing = false);
 
     /**
      * Updates a single record in the database.
-     * This method works only with dbCalls.
+     * This method works only with DB calls.
      *
-     * @param array|int|string|null $id   ID
-     * @param array|null            $data Data
+     * @param int|list<int|string>|string|null $id
+     * @param row_array|null                   $row
      */
-    abstract protected function doUpdate($id = null, $data = null): bool;
+    abstract protected function doUpdate($id = null, $row = null): bool;
 
     /**
      * Compiles an update and runs the query.
-     * This method works only with dbCalls.
+     * This method works only with DB calls.
      *
-     * @param array|null  $set       An associative array of update values
-     * @param string|null $index     The where key
-     * @param int         $batchSize The size of the batch to run
-     * @param bool        $returnSQL True means SQL is returned, false will execute the query
+     * @param list<object|row_array>|null $set       An associative array of update values.
+     * @param string|null                 $index     The where key.
+     * @param int                         $batchSize The size of the batch to run.
+     * @param bool                        $returnSQL `true` means SQL is returned, `false` will execute the query.
      *
-     * @return false|int|string[] Number of rows affected or FALSE on failure, SQL array when testMode
+     * @return false|int|list<string> Number of rows affected or `false` on failure, SQL array when test mode
      *
      * @throws DatabaseException
      */
     abstract protected function doUpdateBatch(?array $set = null, ?string $index = null, int $batchSize = 100, bool $returnSQL = false);
 
     /**
-     * Deletes a single record from the database where $id matches.
-     * This method works only with dbCalls.
+     * Deletes a single record from the database where $id matches
+     * the table's primary key.
+     * This method works only with DB calls.
      *
-     * @param array|int|string|null $id    The rows primary key(s)
-     * @param bool                  $purge Allows overriding the soft deletes setting.
+     * @param int|list<int|string>|string|null $id    The rows primary key(s).
+     * @param bool                             $purge Allows overriding the soft deletes setting.
      *
-     * @return bool|string
+     * @return bool|string Returns a SQL string if in test mode.
      *
      * @throws DatabaseException
      */
     abstract protected function doDelete($id = null, bool $purge = false);
 
     /**
-     * Permanently deletes all rows that have been marked as deleted.
-     * through soft deletes (deleted = 1).
-     * This method works only with dbCalls.
+     * Permanently deletes all rows that have been marked as deleted
+     * through soft deletes (value of column $deletedField is not null).
+     * This method works only with DB calls.
      *
-     * @return bool|string Returns a string if in test mode.
+     * @return bool|string Returns a SQL string if in test mode.
      */
     abstract protected function doPurgeDeleted();
 
     /**
-     * Works with the find* methods to return only the rows that
-     * have been deleted.
-     * This method works only with dbCalls.
+     * Works with the $this->find* methods to return only the rows that
+     * have been deleted (value of column $deletedField is not null).
+     * This method works only with DB calls.
+     *
+     * @return void
      */
     abstract protected function doOnlyDeleted();
 
     /**
      * Compiles a replace and runs the query.
-     * This method works only with dbCalls.
+     * This method works only with DB calls.
      *
-     * @param array|null $data      Data
-     * @param bool       $returnSQL Set to true to return Query String
+     * @param row_array|null $row
+     * @param bool           $returnSQL `true` means SQL is returned, `false` will execute the query.
      *
      * @return BaseResult|false|Query|string
      */
-    abstract protected function doReplace(?array $data = null, bool $returnSQL = false);
+    abstract protected function doReplace(?array $row = null, bool $returnSQL = false);
 
     /**
      * Grabs the last error(s) that occurred from the Database connection.
-     * This method works only with dbCalls.
+     * This method works only with DB calls.
      *
-     * @return array|null
+     * @return array<string, string>
      */
     abstract protected function doErrors();
 
     /**
-     * Returns the id value for the data array or object.
+     * Public getter to return the ID value for the data array or object.
+     * For example with SQL this will return `$data->{$this->primaryKey}`.
      *
-     * @param array|object $data Data
+     * @param object|row_array $row
      *
-     * @return array|int|string|null
-     *
-     * @deprecated Add an override on getIdValue() instead. Will be removed in version 5.0.
+     * @return int|string|null
      */
-    abstract protected function idValue($data);
-
-    /**
-     * Public getter to return the id value using the idValue() method.
-     * For example with SQL this will return $data->$this->primaryKey.
-     *
-     * @param array|object $data
-     *
-     * @return array|int|string|null
-     *
-     * @todo: Make abstract in version 5.0
-     */
-    public function getIdValue($data)
-    {
-        return $this->idValue($data);
-    }
+    abstract public function getIdValue($row);
 
     /**
      * Override countAllResults to account for soft deleted accounts.
-     * This method works only with dbCalls.
+     * This method works only with DB calls.
      *
-     * @param bool $reset Reset
-     * @param bool $test  Test
+     * @param bool $reset When `false`, the `$tempUseSoftDeletes` will be
+     *                    dependent on `$useSoftDeletes` value because we don't
+     *                    want to add the same "where" condition for the second time.
+     * @param bool $test  `true` returns the number of all records, `false` will execute the query.
      *
-     * @return int|string
+     * @return int|string Returns a SQL string if in test mode.
      */
     abstract public function countAllResults(bool $reset = true, bool $test = false);
 
     /**
      * Loops over records in batches, allowing you to operate on them.
-     * This method works only with dbCalls.
+     * This method works only with DB calls.
      *
-     * @param int     $size     Size
-     * @param Closure $userFunc Callback Function
+     * @param Closure(array<string, string>|object): mixed $userFunc
+     *
+     * @return void
      *
      * @throws DataException
+     * @throws InvalidArgumentException if $size is not a positive integer
      */
     abstract public function chunk(int $size, Closure $userFunc);
 
     /**
      * Fetches the row of database.
      *
-     * @param array|int|string|null $id One primary key or an array of primary keys
+     * @param int|list<int|string>|string|null $id One primary key or an array of primary keys.
      *
-     * @return array|object|null The resulting row of data, or null.
+     * @return ($id is int|string ? object|row_array|null :  list<object|row_array>)
      */
     public function find($id = null)
     {
@@ -547,7 +605,7 @@ abstract class BaseModel
                 'singleton' => $singleton,
             ]);
 
-            if (! empty($eventData['returnData'])) {
+            if (isset($eventData['returnData']) && $eventData['returnData'] === true) {
                 return $eventData['data'];
             }
         }
@@ -573,33 +631,33 @@ abstract class BaseModel
     /**
      * Fetches the column of database.
      *
-     * @param string $columnName Column Name
-     *
-     * @return array|null The resulting row of data, or null if no data found.
+     * @return list<bool|float|int|list<mixed>|object|string|null>|null The resulting row of data, or `null` if no data found.
      *
      * @throws DataException
      */
     public function findColumn(string $columnName)
     {
-        if (strpos($columnName, ',') !== false) {
+        if (str_contains($columnName, ',')) {
             throw DataException::forFindColumnHaveMultipleColumns();
         }
 
         $resultSet = $this->doFindColumn($columnName);
 
-        return $resultSet ? array_column($resultSet, $columnName) : null;
+        return $resultSet !== null ? array_column($resultSet, $columnName) : null;
     }
 
     /**
      * Fetches all results, while optionally limiting them.
      *
-     * @param int $limit  Limit
-     * @param int $offset Offset
-     *
-     * @return array
+     * @return list<object|row_array>
      */
-    public function findAll(int $limit = 0, int $offset = 0)
+    public function findAll(?int $limit = null, int $offset = 0)
     {
+        $limitZeroAsAll = config(Feature::class)->limitZeroAsAll ?? true;
+        if ($limitZeroAsAll) {
+            $limit ??= 0;
+        }
+
         if ($this->tempAllowCallbacks) {
             // Call the before event and check for a return
             $eventData = $this->trigger('beforeFind', [
@@ -609,7 +667,7 @@ abstract class BaseModel
                 'singleton' => false,
             ]);
 
-            if (! empty($eventData['returnData'])) {
+            if (isset($eventData['returnData']) && $eventData['returnData'] === true) {
                 return $eventData['data'];
             }
         }
@@ -636,7 +694,7 @@ abstract class BaseModel
     /**
      * Returns the first row of the result set.
      *
-     * @return array|object|null
+     * @return object|row_array|null
      */
     public function first()
     {
@@ -647,7 +705,7 @@ abstract class BaseModel
                 'singleton' => true,
             ]);
 
-            if (! empty($eventData['returnData'])) {
+            if (isset($eventData['returnData']) && $eventData['returnData'] === true) {
                 return $eventData['data'];
             }
         }
@@ -671,25 +729,27 @@ abstract class BaseModel
 
     /**
      * A convenience method that will attempt to determine whether the
-     * data should be inserted or updated. Will work with either
-     * an array or object. When using with custom class objects,
+     * data should be inserted or updated.
+     *
+     * Will work with either an array or object.
+     * When using with custom class objects,
      * you must ensure that the class will provide access to the class
      * variables, even if through a magic method.
      *
-     * @param array|object $data Data
+     * @param object|row_array $row
      *
      * @throws ReflectionException
      */
-    public function save($data): bool
+    public function save($row): bool
     {
-        if (empty($data)) {
+        if ((array) $row === []) {
             return true;
         }
 
-        if ($this->shouldUpdate($data)) {
-            $response = $this->update($this->getIdValue($data), $data);
+        if ($this->shouldUpdate($row)) {
+            $response = $this->update($this->getIdValue($row), $row);
         } else {
-            $response = $this->insert($data, false);
+            $response = $this->insert($row, false);
 
             if ($response !== false) {
                 $response = true;
@@ -701,13 +761,15 @@ abstract class BaseModel
 
     /**
      * This method is called on save to determine if entry have to be updated.
-     * If this method returns false insert operation will be executed
+     * If this method returns `false` insert operation will be executed.
      *
-     * @param array|object $data Data
+     * @param object|row_array $row
      */
-    protected function shouldUpdate($data): bool
+    protected function shouldUpdate($row): bool
     {
-        return ! empty($this->getIdValue($data));
+        $id = $this->getIdValue($row);
+
+        return ! in_array($id, [null, [], ''], true);
     }
 
     /**
@@ -721,17 +783,78 @@ abstract class BaseModel
     }
 
     /**
+     * Validates that the primary key values are valid for update/delete/insert operations.
+     * Throws exception if invalid.
+     *
+     * @param bool $allowArray Whether to allow array of IDs (true for update/delete, false for insert)
+     *
+     * @phpstan-assert non-zero-int|non-empty-list<int|string>|RawSql|non-falsy-string $id
+     * @throws         InvalidArgumentException
+     */
+    protected function validateID(mixed $id, bool $allowArray = true): void
+    {
+        if (is_array($id)) {
+            // Check if arrays are allowed
+            if (! $allowArray) {
+                throw new InvalidArgumentException(
+                    'Invalid primary key: only a single value is allowed, not an array.',
+                );
+            }
+
+            // Check for empty array
+            if ($id === []) {
+                throw new InvalidArgumentException('Invalid primary key: cannot be an empty array.');
+            }
+
+            // Validate each ID in the array recursively
+            foreach ($id as $key => $valueId) {
+                if (is_array($valueId)) {
+                    throw new InvalidArgumentException(
+                        sprintf('Invalid primary key at index %s: nested arrays are not allowed.', $key),
+                    );
+                }
+
+                // Recursive call for each value (single values only in recursion)
+                $this->validateID($valueId, false);
+            }
+
+            return;
+        }
+
+        // Allow RawSql objects for complex scenarios
+        if ($id instanceof RawSql) {
+            return;
+        }
+
+        // Check for invalid single values
+        if (in_array($id, [null, 0, '0', '', true, false], true)) {
+            $type = is_bool($id) ? 'boolean ' . var_export($id, true) : var_export($id, true);
+
+            throw new InvalidArgumentException(
+                sprintf('Invalid primary key: %s is not allowed.', $type),
+            );
+        }
+
+        // Only allow int and string at this point
+        if (! is_int($id) && ! is_string($id)) {
+            throw new InvalidArgumentException(
+                sprintf('Invalid primary key: must be int or string, %s given.', get_debug_type($id)),
+            );
+        }
+    }
+
+    /**
      * Inserts data into the database. If an object is provided,
      * it will attempt to convert it to an array.
      *
-     * @param array|object|null $data     Data
-     * @param bool              $returnID Whether insert ID should be returned or not.
+     * @param object|row_array|null $row
+     * @param bool                  $returnID Whether insert ID should be returned or not.
      *
-     * @return bool|int|string insert ID or true on success. false on failure.
+     * @return ($returnID is true ? false|int|string : bool)
      *
      * @throws ReflectionException
      */
-    public function insert($data = null, bool $returnID = true)
+    public function insert($row = null, bool $returnID = true)
     {
         $this->insertID = 0;
 
@@ -739,10 +862,10 @@ abstract class BaseModel
         $cleanValidationRules       = $this->cleanValidationRules;
         $this->cleanValidationRules = false;
 
-        $data = $this->transformDataToArray($data, 'insert');
+        $row = $this->transformDataToArray($row, 'insert');
 
         // Validate data before saving.
-        if (! $this->skipValidation && ! $this->validate($data)) {
+        if (! $this->skipValidation && ! $this->validate($row)) {
             // Restore $cleanValidationRules
             $this->cleanValidationRules = $cleanValidationRules;
 
@@ -754,26 +877,20 @@ abstract class BaseModel
 
         // Must be called first, so we don't
         // strip out created_at values.
-        $data = $this->doProtectFields($data);
+        $row = $this->doProtectFieldsForInsert($row);
 
         // doProtectFields() can further remove elements from
-        // $data so we need to check for empty dataset again
-        if (! $this->allowEmptyInserts && empty($data)) {
+        // $row, so we need to check for empty dataset again
+        if (! $this->allowEmptyInserts && $row === []) {
             throw DataException::forEmptyDataset('insert');
         }
 
         // Set created_at and updated_at with same time
         $date = $this->setDate();
+        $row  = $this->setCreatedField($row, $date);
+        $row  = $this->setUpdatedField($row, $date);
 
-        if ($this->useTimestamps && $this->createdField && ! array_key_exists($this->createdField, $data)) {
-            $data[$this->createdField] = $date;
-        }
-
-        if ($this->useTimestamps && $this->updatedField && ! array_key_exists($this->updatedField, $data)) {
-            $data[$this->updatedField] = $date;
-        }
-
-        $eventData = ['data' => $data];
+        $eventData = ['data' => $row];
 
         if ($this->tempAllowCallbacks) {
             $eventData = $this->trigger('beforeInsert', $eventData);
@@ -804,14 +921,48 @@ abstract class BaseModel
     }
 
     /**
+     * Set datetime to created field.
+     *
+     * @param row_array  $row
+     * @param int|string $date Timestamp or datetime string.
+     *
+     * @return row_array
+     */
+    protected function setCreatedField(array $row, $date): array
+    {
+        if ($this->useTimestamps && $this->createdField !== '' && ! array_key_exists($this->createdField, $row)) {
+            $row[$this->createdField] = $date;
+        }
+
+        return $row;
+    }
+
+    /**
+     * Set datetime to updated field.
+     *
+     * @param row_array  $row
+     * @param int|string $date Timestamp or datetime string
+     *
+     * @return row_array
+     */
+    protected function setUpdatedField(array $row, $date): array
+    {
+        if ($this->useTimestamps && $this->updatedField !== '' && ! array_key_exists($this->updatedField, $row)) {
+            $row[$this->updatedField] = $date;
+        }
+
+        return $row;
+    }
+
+    /**
      * Compiles batch insert runs the queries, validating each row prior.
      *
-     * @param array|null $set       an associative array of insert values
-     * @param bool|null  $escape    Whether to escape values
-     * @param int        $batchSize The size of the batch to run
-     * @param bool       $testing   True means only number of records is returned, false will execute the query
+     * @param list<object|row_array>|null $set       An associative array of insert values.
+     * @param bool|null                   $escape    Whether to escape values.
+     * @param int                         $batchSize The size of the batch to run.
+     * @param bool                        $testing   `true` means only number of records is returned, `false` will execute the query.
      *
-     * @return bool|int Number of rows inserted or FALSE on failure
+     * @return false|int|list<string> Number of rows inserted or `false` on failure.
      *
      * @throws ReflectionException
      */
@@ -823,19 +974,7 @@ abstract class BaseModel
 
         if (is_array($set)) {
             foreach ($set as &$row) {
-                // If $data is using a custom class with public or protected
-                // properties representing the collection elements, we need to grab
-                // them as an array.
-                if (is_object($row) && ! $row instanceof stdClass) {
-                    $row = $this->objectToArray($row, false, true);
-                }
-
-                // If it's still a stdClass, go ahead and convert to
-                // an array so doProtectFields and other model methods
-                // don't have to do special checks.
-                if (is_object($row)) {
-                    $row = (array) $row;
-                }
+                $row = $this->transformDataToArray($row, 'insert');
 
                 // Validate every row.
                 if (! $this->skipValidation && ! $this->validate($row)) {
@@ -847,18 +986,12 @@ abstract class BaseModel
 
                 // Must be called first so we don't
                 // strip out created_at values.
-                $row = $this->doProtectFields($row);
+                $row = $this->doProtectFieldsForInsert($row);
 
                 // Set created_at and updated_at with same time
                 $date = $this->setDate();
-
-                if ($this->useTimestamps && $this->createdField && ! array_key_exists($this->createdField, $row)) {
-                    $row[$this->createdField] = $date;
-                }
-
-                if ($this->useTimestamps && $this->updatedField && ! array_key_exists($this->updatedField, $row)) {
-                    $row[$this->updatedField] = $date;
-                }
+                $row  = $this->setCreatedField($row, $date);
+                $row  = $this->setUpdatedField($row, $date);
             }
         }
 
@@ -892,45 +1025,43 @@ abstract class BaseModel
      * Updates a single record in the database. If an object is provided,
      * it will attempt to convert it into an array.
      *
-     * @param array|int|string|null $id
-     * @param array|object|null     $data
+     * @param int|list<int|string>|RawSql|string|null $id
+     * @param object|row_array|null                   $row
      *
      * @throws ReflectionException
      */
-    public function update($id = null, $data = null): bool
+    public function update($id = null, $row = null): bool
     {
-        if (is_bool($id)) {
-            throw new InvalidArgumentException('update(): argument #1 ($id) should not be boolean.');
+        if ($id !== null) {
+            if (! is_array($id)) {
+                $id = [$id];
+            }
+
+            $this->validateID($id);
         }
 
-        if (is_numeric($id) || is_string($id)) {
-            $id = [$id];
-        }
-
-        $data = $this->transformDataToArray($data, 'update');
+        $row = $this->transformDataToArray($row, 'update');
 
         // Validate data before saving.
-        if (! $this->skipValidation && ! $this->validate($data)) {
+        if (! $this->skipValidation && ! $this->validate($row)) {
             return false;
         }
 
         // Must be called first, so we don't
         // strip out updated_at values.
-        $data = $this->doProtectFields($data);
+        $row = $this->doProtectFields($row);
 
         // doProtectFields() can further remove elements from
-        // $data, so we need to check for empty dataset again
-        if (empty($data)) {
+        // $row, so we need to check for empty dataset again
+        if ($row === []) {
             throw DataException::forEmptyDataset('update');
         }
 
-        if ($this->useTimestamps && $this->updatedField && ! array_key_exists($this->updatedField, $data)) {
-            $data[$this->updatedField] = $this->setDate();
-        }
+        $row = $this->setUpdatedField($row, $this->setDate());
 
         $eventData = [
             'id'   => $id,
-            'data' => $data,
+            'data' => $row,
         ];
 
         if ($this->tempAllowCallbacks) {
@@ -955,12 +1086,12 @@ abstract class BaseModel
     /**
      * Compiles an update and runs the query.
      *
-     * @param array|null  $set       An associative array of update values
-     * @param string|null $index     The where key
-     * @param int         $batchSize The size of the batch to run
-     * @param bool        $returnSQL True means SQL is returned, false will execute the query
+     * @param list<object|row_array>|null $set       An associative array of insert values.
+     * @param string|null                 $index     The where key.
+     * @param int                         $batchSize The size of the batch to run.
+     * @param bool                        $returnSQL `true` means SQL is returned, `false` will execute the query.
      *
-     * @return false|int|string[] Number of rows affected or FALSE on failure, SQL array when testMode
+     * @return false|int|list<string> Number of rows affected or `false` on failure, SQL array when test mode.
      *
      * @throws DatabaseException
      * @throws ReflectionException
@@ -969,40 +1100,51 @@ abstract class BaseModel
     {
         if (is_array($set)) {
             foreach ($set as &$row) {
-                // If $data is using a custom class with public or protected
-                // properties representing the collection elements, we need to grab
-                // them as an array.
-                if (is_object($row) && ! $row instanceof stdClass) {
-                    $row = $this->objectToArray($row, true, true);
+                // Save the index value from the original row because
+                // transformDataToArray() may strip it when updateOnlyChanged
+                // is true.
+                $updateIndex = null;
+
+                if ($this->updateOnlyChanged) {
+                    if (is_array($row)) {
+                        $updateIndex = $row[$index] ?? null;
+                    } elseif ($row instanceof Entity) {
+                        $updateIndex = $row->toRawArray()[$index] ?? null;
+                    } elseif (is_object($row)) {
+                        $updateIndex = $row->{$index} ?? null;
+                    }
                 }
 
-                // If it's still a stdClass, go ahead and convert to
-                // an array so doProtectFields and other model methods
-                // don't have to do special checks.
-                if (is_object($row)) {
-                    $row = (array) $row;
-                }
+                $row = $this->transformDataToArray($row, 'update');
 
                 // Validate data before saving.
                 if (! $this->skipValidation && ! $this->validate($row)) {
                     return false;
                 }
 
-                // Save updateIndex for later
-                $updateIndex = $row[$index] ?? null;
+                // When updateOnlyChanged is true, restore the pre-extracted
+                // index into $row. Otherwise read it from the transformed row.
+                if ($updateIndex !== null) {
+                    $row[$index] = $updateIndex;
+                } else {
+                    $updateIndex = $row[$index] ?? null;
+                }
+
+                if ($updateIndex === null) {
+                    throw new InvalidArgumentException(
+                        'The index ("' . $index . '") for updateBatch() is missing in the data: '
+                        . json_encode($row),
+                    );
+                }
 
                 // Must be called first so we don't
                 // strip out updated_at values.
                 $row = $this->doProtectFields($row);
 
                 // Restore updateIndex value in case it was wiped out
-                if ($updateIndex !== null) {
-                    $row[$index] = $updateIndex;
-                }
+                $row[$index] = $updateIndex;
 
-                if ($this->useTimestamps && $this->updatedField && ! array_key_exists($this->updatedField, $row)) {
-                    $row[$this->updatedField] = $this->setDate();
-                }
+                $row = $this->setUpdatedField($row, $this->setDate());
             }
         }
 
@@ -1032,21 +1174,21 @@ abstract class BaseModel
     /**
      * Deletes a single record from the database where $id matches.
      *
-     * @param array|int|string|null $id    The rows primary key(s)
-     * @param bool                  $purge Allows overriding the soft deletes setting.
+     * @param int|list<int|string>|RawSql|string|null $id    The rows primary key(s).
+     * @param bool                                    $purge Allows overriding the soft deletes setting.
      *
-     * @return BaseResult|bool
+     * @return bool|string Returns a SQL string if in test mode.
      *
      * @throws DatabaseException
      */
     public function delete($id = null, bool $purge = false)
     {
-        if (is_bool($id)) {
-            throw new InvalidArgumentException('delete(): argument #1 ($id) should not be boolean.');
-        }
+        if ($id !== null) {
+            if (! is_array($id)) {
+                $id = [$id];
+            }
 
-        if ($id && (is_numeric($id) || is_string($id))) {
-            $id = [$id];
+            $this->validateID($id);
         }
 
         $eventData = [
@@ -1076,9 +1218,9 @@ abstract class BaseModel
 
     /**
      * Permanently deletes all rows that have been marked as deleted
-     * through soft deletes (deleted = 1).
+     * through soft deletes (value of column $deletedField is not null).
      *
-     * @return bool|string Returns a string if in test mode.
+     * @return bool|string Returns a SQL string if in test mode.
      */
     public function purgeDeleted()
     {
@@ -1093,8 +1235,6 @@ abstract class BaseModel
      * Sets $useSoftDeletes value so that we can temporarily override
      * the soft deletes settings. Can be used for all find* methods.
      *
-     * @param bool $val Value
-     *
      * @return $this
      */
     public function withDeleted(bool $val = true)
@@ -1105,7 +1245,7 @@ abstract class BaseModel
     }
 
     /**
-     * Works with the find* methods to return only the rows that
+     * Works with the $this->find* methods to return only the rows that
      * have been deleted.
      *
      * @return $this
@@ -1121,41 +1261,46 @@ abstract class BaseModel
     /**
      * Compiles a replace and runs the query.
      *
-     * @param array|null $data      Data
-     * @param bool       $returnSQL Set to true to return Query String
+     * @param row_array|null $row
+     * @param bool           $returnSQL `true` means SQL is returned, `false` will execute the query.
      *
      * @return BaseResult|false|Query|string
      */
-    public function replace(?array $data = null, bool $returnSQL = false)
+    public function replace(?array $row = null, bool $returnSQL = false)
     {
         // Validate data before saving.
-        if ($data && ! $this->skipValidation && ! $this->validate($data)) {
+        if (($row !== null) && ! $this->skipValidation && ! $this->validate($row)) {
             return false;
         }
 
-        if ($this->useTimestamps && $this->updatedField && ! array_key_exists($this->updatedField, (array) $data)) {
-            $data[$this->updatedField] = $this->setDate();
-        }
+        $row = (array) $row;
+        $row = $this->setCreatedField($row, $this->setDate());
+        $row = $this->setUpdatedField($row, $this->setDate());
 
-        return $this->doReplace($data, $returnSQL);
+        return $this->doReplace($row, $returnSQL);
     }
 
     /**
-     * Grabs the last error(s) that occurred. If data was validated,
-     * it will first check for errors there, otherwise will try to
-     * grab the last error from the Database connection.
+     * Grabs the last error(s) that occurred.
+     *
+     * If data was validated, it will first check for errors there,
+     *  otherwise will try to grab the last error from the Database connection.
      *
      * The return array should be in the following format:
-     *  ['source' => 'message']
+     *  `['source' => 'message']`.
      *
-     * @param bool $forceDB Always grab the db error, not validation
+     * @param bool $forceDB Always grab the DB error, not validation.
      *
-     * @return array<string,string>
+     * @return array<string, string>
      */
     public function errors(bool $forceDB = false)
     {
+        if ($this->validation === null) {
+            return $this->doErrors();
+        }
+
         // Do we have validation errors?
-        if (! $forceDB && ! $this->skipValidation && ($errors = $this->validation->getErrors())) {
+        if (! $forceDB && ! $this->skipValidation && ($errors = $this->validation->getErrors()) !== []) {
             return $errors;
         }
 
@@ -1167,19 +1312,19 @@ abstract class BaseModel
      * Expects a GET variable (?page=2) that specifies the page of results
      * to display.
      *
-     * @param int|null $perPage Items per page
+     * @param int|null $perPage Items per page.
      * @param string   $group   Will be used by the pagination library to identify a unique pagination set.
-     * @param int|null $page    Optional page number (useful when the page number is provided in different way)
-     * @param int      $segment Optional URI segment number (if page number is provided by URI segment)
+     * @param int|null $page    Optional page number (useful when the page number is provided in different way).
+     * @param int      $segment Optional URI segment number (if page number is provided by URI segment).
      *
-     * @return array|null
+     * @return list<object|row_array>
      */
     public function paginate(?int $perPage = null, string $group = 'default', ?int $page = null, int $segment = 0)
     {
         // Since multiple models may use the Pager, the Pager must be shared.
-        $pager = Services::pager();
+        $pager = service('pager');
 
-        if ($segment) {
+        if ($segment !== 0) {
             $pager->setSegment($segment, $group);
         }
 
@@ -1195,7 +1340,7 @@ abstract class BaseModel
     /**
      * It could be used when you have to change default or override current allowed fields.
      *
-     * @param array $allowedFields Array with names of fields
+     * @param list<string> $allowedFields Array with names of fields.
      *
      * @return $this
      */
@@ -1210,8 +1355,6 @@ abstract class BaseModel
      * Sets whether or not we should whitelist data set during
      * updates or inserts against $this->availableFields.
      *
-     * @param bool $protect Value
-     *
      * @return $this
      */
     public function protect(bool $protect = true)
@@ -1222,47 +1365,67 @@ abstract class BaseModel
     }
 
     /**
-     * Ensures that only the fields that are allowed to be updated
-     * are in the data array.
+     * Ensures that only the fields that are allowed to be updated are
+     * in the data array.
      *
-     * Used by insert() and update() to protect against mass assignment
-     * vulnerabilities.
+     * @used-by update() to protect against mass assignment vulnerabilities.
+     * @used-by updateBatch() to protect against mass assignment vulnerabilities.
      *
-     * @param array $data Data
+     * @param row_array $row
+     *
+     * @return row_array
      *
      * @throws DataException
      */
-    protected function doProtectFields(array $data): array
+    protected function doProtectFields(array $row): array
     {
         if (! $this->protectFields) {
-            return $data;
+            return $row;
         }
 
-        if (empty($this->allowedFields)) {
+        if ($this->allowedFields === []) {
             throw DataException::forInvalidAllowedFields(static::class);
         }
 
-        foreach (array_keys($data) as $key) {
+        foreach (array_keys($row) as $key) {
             if (! in_array($key, $this->allowedFields, true)) {
-                unset($data[$key]);
+                unset($row[$key]);
             }
         }
 
-        return $data;
+        return $row;
     }
 
     /**
-     * Sets the date or current date if null value is passed.
+     * Ensures that only the fields that are allowed to be inserted are in
+     * the data array.
      *
-     * @param int|null $userData An optional PHP timestamp to be converted.
+     * @used-by insert() to protect against mass assignment vulnerabilities.
+     * @used-by insertBatch() to protect against mass assignment vulnerabilities.
+     *
+     * @param row_array $row
+     *
+     * @return row_array
+     *
+     * @throws DataException
+     */
+    protected function doProtectFieldsForInsert(array $row): array
+    {
+        return $this->doProtectFields($row);
+    }
+
+    /**
+     * Sets the timestamp or current timestamp if null value is passed.
+     *
+     * @param int|null $userDate An optional PHP timestamp to be converted
      *
      * @return int|string
      *
      * @throws ModelException
      */
-    protected function setDate(?int $userData = null)
+    protected function setDate(?int $userDate = null)
     {
-        $currentDate = $userData ?? Time::now()->getTimestamp();
+        $currentDate = $userDate ?? Time::now()->getTimestamp();
 
         return $this->intToDate($currentDate);
     }
@@ -1274,11 +1437,9 @@ abstract class BaseModel
      * used by inheriting classes.
      *
      * The available time formats are:
-     *  - 'int'      - Stores the date as an integer timestamp
-     *  - 'datetime' - Stores the data in the SQL datetime format
+     *  - 'int'      - Stores the date as an integer timestamp.
+     *  - 'datetime' - Stores the data in the SQL datetime format.
      *  - 'date'     - Stores the date (only) in the SQL date format.
-     *
-     * @param int $value value
      *
      * @return int|string
      *
@@ -1286,54 +1447,36 @@ abstract class BaseModel
      */
     protected function intToDate(int $value)
     {
-        switch ($this->dateFormat) {
-            case 'int':
-                return $value;
-
-            case 'datetime':
-                return date('Y-m-d H:i:s', $value);
-
-            case 'date':
-                return date('Y-m-d', $value);
-
-            default:
-                throw ModelException::forNoDateFormat(static::class);
-        }
+        return match ($this->dateFormat) {
+            'int'      => $value,
+            'datetime' => date($this->db->dateFormat['datetime'], $value),
+            'date'     => date($this->db->dateFormat['date'], $value),
+            default    => throw ModelException::forNoDateFormat(static::class),
+        };
     }
 
     /**
      * Converts Time value to string using $this->dateFormat.
      *
      * The available time formats are:
-     *  - 'int'      - Stores the date as an integer timestamp
-     *  - 'datetime' - Stores the data in the SQL datetime format
+     *  - 'int'      - Stores the date as an integer timestamp.
+     *  - 'datetime' - Stores the data in the SQL datetime format.
      *  - 'date'     - Stores the date (only) in the SQL date format.
-     *
-     * @param Time $value value
      *
      * @return int|string
      */
     protected function timeToDate(Time $value)
     {
-        switch ($this->dateFormat) {
-            case 'datetime':
-                return $value->format('Y-m-d H:i:s');
-
-            case 'date':
-                return $value->format('Y-m-d');
-
-            case 'int':
-                return $value->getTimestamp();
-
-            default:
-                return (string) $value;
-        }
+        return match ($this->dateFormat) {
+            'datetime' => $value->format($this->db->dateFormat['datetime']),
+            'date'     => $value->format($this->db->dateFormat['date']),
+            'int'      => $value->getTimestamp(),
+            default    => (string) $value,
+        };
     }
 
     /**
-     * Set the value of the skipValidation flag.
-     *
-     * @param bool $skip Value
+     * Set the value of the $skipValidation flag.
      *
      * @return $this
      */
@@ -1345,10 +1488,10 @@ abstract class BaseModel
     }
 
     /**
-     * Allows to set validation messages.
+     * Allows to set (and reset) validation messages.
      * It could be used when you have to change default or override current validate messages.
      *
-     * @param array $validationMessages Value
+     * @param array<string, array<string, string>> $validationMessages
      *
      * @return $this
      */
@@ -1363,8 +1506,7 @@ abstract class BaseModel
      * Allows to set field wise validation message.
      * It could be used when you have to change default or override current validate messages.
      *
-     * @param string $field         Field Name
-     * @param array  $fieldMessages Validation messages
+     * @param array<string, string> $fieldMessages
      *
      * @return $this
      */
@@ -1376,10 +1518,10 @@ abstract class BaseModel
     }
 
     /**
-     * Allows to set validation rules.
+     * Allows to set (and reset) validation rules.
      * It could be used when you have to change default or override current validate rules.
      *
-     * @param array $validationRules Value
+     * @param array<string, array<string, array<string, string>|string>|string> $validationRules
      *
      * @return $this
      */
@@ -1394,13 +1536,25 @@ abstract class BaseModel
      * Allows to set field wise validation rules.
      * It could be used when you have to change default or override current validate rules.
      *
-     * @param string       $field      Field Name
-     * @param array|string $fieldRules Validation rules
+     * @param array<string, array<string, string>|string>|string $fieldRules
      *
      * @return $this
      */
     public function setValidationRule(string $field, $fieldRules)
     {
+        $rules = $this->validationRules;
+
+        // ValidationRules can be either a string, which is the group name,
+        // or an array of rules.
+        if (is_string($rules)) {
+            $this->ensureValidation();
+
+            [$rules, $customErrors] = $this->validation->loadRuleGroup($rules);
+
+            $this->validationRules = $rules;
+            $this->validationMessages += $customErrors;
+        }
+
         $this->validationRules[$field] = $fieldRules;
 
         return $this;
@@ -1409,8 +1563,6 @@ abstract class BaseModel
     /**
      * Should validation rules be removed before saving?
      * Most handy when doing updates.
-     *
-     * @param bool $choice Value
      *
      * @return $this
      */
@@ -1422,42 +1574,54 @@ abstract class BaseModel
     }
 
     /**
-     * Validate the data against the validation rules (or the validation group)
+     * Validate the row data against the validation rules (or the validation group)
      * specified in the class property, $validationRules.
      *
-     * @param array|object $data Data
+     * @param object|row_array $row
      */
-    public function validate($data): bool
+    public function validate($row): bool
     {
+        if ($this->skipValidation) {
+            return true;
+        }
+
         $rules = $this->getValidationRules();
 
-        if ($this->skipValidation || empty($rules) || empty($data)) {
+        if ($rules === []) {
             return true;
         }
 
         // Validation requires array, so cast away.
-        if (is_object($data)) {
-            $data = (array) $data;
+        if (is_object($row)) {
+            $row = (array) $row;
         }
 
-        $rules = $this->cleanValidationRules ? $this->cleanValidationRules($rules, $data) : $rules;
-
-        // If no data existed that needs validation
-        // our job is done here.
-        if (empty($rules)) {
+        if ($row === []) {
             return true;
         }
 
+        $rules = $this->cleanValidationRules ? $this->cleanValidationRules($rules, $row) : $rules;
+
+        // If no data existed that needs validation
+        // our job is done here.
+        if ($rules === []) {
+            return true;
+        }
+
+        $this->ensureValidation();
+
         $this->validation->reset()->setRules($rules, $this->validationMessages);
 
-        return $this->validation->run($data, null, $this->DBGroup);
+        return $this->validation->run($row, null, $this->DBGroup);
     }
 
     /**
      * Returns the model's defined validation rules so that they
      * can be used elsewhere, if needed.
      *
-     * @param array $options Options
+     * @param array{only?: list<string>, except?: list<string>} $options Filter the list of rules
+     *
+     * @return array<string, array<string, array<string, string>|string>|string>
      */
     public function getValidationRules(array $options = []): array
     {
@@ -1466,7 +1630,11 @@ abstract class BaseModel
         // ValidationRules can be either a string, which is the group name,
         // or an array of rules.
         if (is_string($rules)) {
-            $rules = $this->validation->loadRuleGroup($rules);
+            $this->ensureValidation();
+
+            [$rules, $customErrors] = $this->validation->loadRuleGroup($rules);
+
+            $this->validationMessages += $customErrors;
         }
 
         if (isset($options['except'])) {
@@ -1478,9 +1646,18 @@ abstract class BaseModel
         return $rules;
     }
 
+    protected function ensureValidation(): void
+    {
+        if ($this->validation === null) {
+            $this->validation = service('validation', null, false);
+        }
+    }
+
     /**
      * Returns the model's validation messages, so they
      * can be used elsewhere, if needed.
+     *
+     * @return array<string, array<string, string>>
      */
     public function getValidationMessages(): array
     {
@@ -1492,17 +1669,19 @@ abstract class BaseModel
      * currently so that rules don't block updating when only updating
      * a partial row.
      *
-     * @param array      $rules Array containing field name and rule
-     * @param array|null $data  Data
+     * @param array<string, array<string, array<string, string>|string>|string> $rules
+     * @param row_array                                                         $row
+     *
+     * @return array<string, array<string, array<string, string>|string>|string>
      */
-    protected function cleanValidationRules(array $rules, ?array $data = null): array
+    protected function cleanValidationRules(array $rules, array $row): array
     {
-        if (empty($data)) {
+        if ($row === []) {
             return [];
         }
 
         foreach (array_keys($rules) as $field) {
-            if (! array_key_exists($field, $data)) {
+            if (! array_key_exists($field, $row)) {
                 unset($rules[$field]);
             }
         }
@@ -1513,8 +1692,6 @@ abstract class BaseModel
     /**
      * Sets $tempAllowCallbacks value so that we can temporarily override
      * the setting. Resets after the next method that uses triggers.
-     *
-     * @param bool $val value
      *
      * @return $this
      */
@@ -1540,17 +1717,19 @@ abstract class BaseModel
      *
      * If callbacks are not allowed then returns $eventData immediately.
      *
-     * @param string $event     Event
-     * @param array  $eventData Event Data
+     * @template TEventData of array<string, mixed>
      *
-     * @return array
+     * @param string     $event     Valid property of the model event: $this->before*, $this->after*, etc.
+     * @param TEventData $eventData
+     *
+     * @return TEventData
      *
      * @throws DataException
      */
     protected function trigger(string $event, array $eventData)
     {
         // Ensure it's a valid event
-        if (! isset($this->{$event}) || empty($this->{$event})) {
+        if (! isset($this->{$event}) || $this->{$event} === []) {
             return $eventData;
         }
 
@@ -1583,7 +1762,7 @@ abstract class BaseModel
      * class vars with the same name as the collection columns,
      * or at least allows them to be created.
      *
-     * @param string $class Class Name
+     * @param 'object'|class-string $class
      *
      * @return $this
      */
@@ -1597,63 +1776,74 @@ abstract class BaseModel
     /**
      * Takes a class and returns an array of its public and protected
      * properties as an array suitable for use in creates and updates.
-     * This method uses objectToRawArray() internally and does conversion
-     * to string on all Time instances
+     * This method uses `$this->objectToRawArray()` internally and does conversion
+     * to string on all Time instances.
      *
-     * @param object|string $data        Data
-     * @param bool          $onlyChanged Only Changed Property
-     * @param bool          $recursive   If true, inner entities will be cast as array as well
+     * @param object $object
+     * @param bool   $onlyChanged Returns only the changed properties.
+     * @param bool   $recursive   If `true`, inner entities will be cast as array as well.
      *
-     * @return array Array
+     * @return array<string, mixed>
      *
      * @throws ReflectionException
      */
-    protected function objectToArray($data, bool $onlyChanged = true, bool $recursive = false): array
+    protected function objectToArray($object, bool $onlyChanged = true, bool $recursive = false): array
     {
-        $properties = $this->objectToRawArray($data, $onlyChanged, $recursive);
+        $properties = $this->objectToRawArray($object, $onlyChanged, $recursive);
 
         // Convert any Time instances to appropriate $dateFormat
-        if ($properties) {
-            $properties = array_map(function ($value) {
-                if ($value instanceof Time) {
-                    return $this->timeToDate($value);
-                }
+        return $this->timeToString($properties);
+    }
 
-                return $value;
-            }, $properties);
+    /**
+     * Convert any Time instances to appropriate $dateFormat.
+     *
+     * @param array<string, mixed> $properties
+     *
+     * @return array<string, mixed>
+     */
+    protected function timeToString(array $properties): array
+    {
+        if ($properties === []) {
+            return [];
         }
 
-        return $properties;
+        return array_map(function ($value) {
+            if ($value instanceof Time) {
+                return $this->timeToDate($value);
+            }
+
+            return $value;
+        }, $properties);
     }
 
     /**
      * Takes a class and returns an array of its public and protected
      * properties as an array with raw values.
      *
-     * @param object|string $data        Data
-     * @param bool          $onlyChanged Only Changed Property
-     * @param bool          $recursive   If true, inner entities will be casted as array as well
+     * @param object $object
+     * @param bool   $onlyChanged Returns only the changed properties.
+     * @param bool   $recursive   If `true`, inner entities will be cast as array as well.
      *
-     * @return array|null Array
+     * @return array<string, mixed> Array with raw values
      *
      * @throws ReflectionException
      */
-    protected function objectToRawArray($data, bool $onlyChanged = true, bool $recursive = false): ?array
+    protected function objectToRawArray($object, bool $onlyChanged = true, bool $recursive = false): array
     {
-        if (method_exists($data, 'toRawArray')) {
-            $properties = $data->toRawArray($onlyChanged, $recursive);
+        // Entity::toRawArray() returns array
+        if (method_exists($object, 'toRawArray')) {
+            $properties = $object->toRawArray($onlyChanged, $recursive);
         } else {
-            $mirror = new ReflectionClass($data);
+            $mirror = new ReflectionClass($object);
             $props  = $mirror->getProperties(ReflectionProperty::IS_PUBLIC | ReflectionProperty::IS_PROTECTED);
 
             $properties = [];
 
             // Loop over each property,
-            // saving the name/value in a new array we can return.
+            // saving the name/value in a new array we can return
             foreach ($props as $prop) {
-                // Must make protected values accessible.
-                $prop->setAccessible(true);
-                $properties[$prop->getName()] = $prop->getValue($data);
+                $properties[$prop->getName()] = $prop->getValue($object);
             }
         }
 
@@ -1663,53 +1853,73 @@ abstract class BaseModel
     /**
      * Transform data to array.
      *
-     * @param array|object|null $data Data
-     * @param string            $type Type of data (insert|update)
+     * @param object|row_array|null $row
+     *
+     * @return array<int|string, mixed>
      *
      * @throws DataException
      * @throws InvalidArgumentException
      * @throws ReflectionException
+     *
+     * @used-by insert()
+     * @used-by insertBatch()
+     * @used-by update()
+     * @used-by updateBatch()
      */
-    protected function transformDataToArray($data, string $type): array
+    protected function transformDataToArray($row, string $type): array
     {
         if (! in_array($type, ['insert', 'update'], true)) {
             throw new InvalidArgumentException(sprintf('Invalid type "%s" used upon transforming data to array.', $type));
         }
 
-        if (! $this->allowEmptyInserts && empty($data)) {
+        if (! $this->allowEmptyInserts && ($row === null || (array) $row === [])) {
             throw DataException::forEmptyDataset($type);
         }
 
-        // If $data is using a custom class with public or protected
+        // If it validates with entire rules, all fields are needed.
+        if ($this->skipValidation === false && $this->cleanValidationRules === false) {
+            $onlyChanged = false;
+        } else {
+            $onlyChanged = ($type === 'update' && $this->updateOnlyChanged);
+        }
+
+        if ($this->useCasts()) {
+            if (is_array($row)) {
+                $row = $this->converter->toDataSource($row);
+            } elseif ($row instanceof stdClass) {
+                $row = (array) $row;
+                $row = $this->converter->toDataSource($row);
+            } elseif ($row instanceof Entity) {
+                $row = $this->converter->extract($row, $onlyChanged);
+            } elseif (is_object($row)) {
+                $row = $this->converter->extract($row, $onlyChanged);
+            }
+        }
+        // If $row is using a custom class with public or protected
         // properties representing the collection elements, we need to grab
         // them as an array.
-        if (is_object($data) && ! $data instanceof stdClass) {
-            // If it validates with entire rules, all fields are needed.
-            $onlyChanged = ($this->skipValidation === false && $this->cleanValidationRules === false)
-                ? false : ($type === 'update');
-
-            $data = $this->objectToArray($data, $onlyChanged, true);
+        elseif (is_object($row) && ! $row instanceof stdClass) {
+            $row = $this->objectToArray($row, $onlyChanged, true);
         }
 
         // If it's still a stdClass, go ahead and convert to
         // an array so doProtectFields and other model methods
         // don't have to do special checks.
-        if (is_object($data)) {
-            $data = (array) $data;
+        if (is_object($row)) {
+            $row = (array) $row;
         }
 
-        // If it's still empty here, means $data is no change or is empty object
-        if (! $this->allowEmptyInserts && empty($data)) {
+        // If it's still empty here, means $row is no change or is empty object
+        if (! $this->allowEmptyInserts && ($row === null || $row === [])) {
             throw DataException::forEmptyDataset($type);
         }
 
-        return $data;
+        // Convert any Time instances to appropriate $dateFormat
+        return $this->timeToString($row);
     }
 
     /**
-     * Provides the db connection and model's properties.
-     *
-     * @param string $name Name
+     * Provides the DB connection and model's properties.
      *
      * @return mixed
      */
@@ -1723,9 +1933,7 @@ abstract class BaseModel
     }
 
     /**
-     * Checks for the existence of properties across this model, and db connection.
-     *
-     * @param string $name Name
+     * Checks for the existence of properties across this model, and DB connection.
      */
     public function __isset(string $name): bool
     {
@@ -1739,10 +1947,9 @@ abstract class BaseModel
     /**
      * Provides direct access to method in the database connection.
      *
-     * @param string $name   Name
-     * @param array  $params Params
+     * @param array<int|string, mixed> $params
      *
-     * @return $this|null
+     * @return mixed
      */
     public function __call(string $name, array $params)
     {
@@ -1754,59 +1961,6 @@ abstract class BaseModel
     }
 
     /**
-     * Replace any placeholders within the rules with the values that
-     * match the 'key' of any properties being set. For example, if
-     * we had the following $data array:
-     *
-     * [ 'id' => 13 ]
-     *
-     * and the following rule:
-     *
-     *  'required|is_unique[users,email,id,{id}]'
-     *
-     * The value of {id} would be replaced with the actual id in the form data:
-     *
-     *  'required|is_unique[users,email,id,13]'
-     *
-     * @param array $rules Validation rules
-     * @param array $data  Data
-     *
-     * @codeCoverageIgnore
-     *
-     * @deprecated use fillPlaceholders($rules, $data) from Validation instead
-     */
-    protected function fillPlaceholders(array $rules, array $data): array
-    {
-        $replacements = [];
-
-        foreach ($data as $key => $value) {
-            $replacements['{' . $key . '}'] = $value;
-        }
-
-        if (! empty($replacements)) {
-            foreach ($rules as &$rule) {
-                if (is_array($rule)) {
-                    foreach ($rule as &$row) {
-                        // Should only be an `errors` array
-                        // which doesn't take placeholders.
-                        if (is_array($row)) {
-                            continue;
-                        }
-
-                        $row = strtr($row, $replacements);
-                    }
-
-                    continue;
-                }
-
-                $rule = strtr($rule, $replacements);
-            }
-        }
-
-        return $rules;
-    }
-
-    /**
      * Sets $allowEmptyInserts.
      */
     public function allowEmptyInserts(bool $value = true): self
@@ -1814,5 +1968,26 @@ abstract class BaseModel
         $this->allowEmptyInserts = $value;
 
         return $this;
+    }
+
+    /**
+     * Converts database data array to return type value.
+     *
+     * @param array<string, mixed>          $row        Raw data from database.
+     * @param 'array'|'object'|class-string $returnType
+     *
+     * @return array<string, mixed>|object
+     */
+    protected function convertToReturnType(array $row, string $returnType): array|object
+    {
+        if ($returnType === 'array') {
+            return $this->converter->fromDataSource($row);
+        }
+
+        if ($returnType === 'object') {
+            return (object) $this->converter->fromDataSource($row);
+        }
+
+        return $this->converter->reconstruct($returnType, $row);
     }
 }

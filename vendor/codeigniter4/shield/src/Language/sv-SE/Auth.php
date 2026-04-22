@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of CodeIgniter Shield.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 return [
     // Exceptions
     'unknownAuthenticator'  => '{0} är inte en giltig autentiseringsmetod.',
@@ -16,16 +25,21 @@ return [
     'badToken'              => 'Access token är ogiltig.',
     'oldToken'              => 'Access token har gått ut.',
     'noUserEntity'          => 'User Entity måste anges för lösenordsvalidering.',
-    'invalidEmail'          => 'Kan inte verifiera att epostadressen stämmer med den sparade.',
+    'invalidEmail'          => '(To be translated) Unable to verify the email address "{0}" matches the email on record.',
     'unableSendEmailToUser' => 'Det var inte möjligt att skicka epost. Det gick inte att skicka till "{0}".',
     'throttled'             => 'För många anrop från denna IP-adress. Du kan försöka igen om {0} sekunder.',
     'notEnoughPrivilege'    => 'Du har inte nödvändiga rättigheter för detta kommando.',
+    // JWT Exceptions
+    'invalidJWT'     => '(To be translated) The token is invalid.',
+    'expiredJWT'     => '(To be translated) The token has expired.',
+    'beforeValidJWT' => '(To be translated) The token is not yet available.',
 
     'email'           => 'Epostadress',
     'username'        => 'Användarnamn',
     'password'        => 'Lösenord',
     'passwordConfirm' => 'Lösenord (igen)',
     'haveAccount'     => 'Har du redan ett konto?',
+    'token'           => '(To be translated) Token',
 
     // Buttons
     'confirm' => 'Bekräfta',
@@ -47,7 +61,9 @@ return [
     'magicLinkExpired'   => 'Tyvärr, länken har gått ut.',
     'checkYourEmail'     => 'Kontrollera din epost!',
     'magicLinkDetails'   => 'En login-länk har skickats med epost. Den gäller bara i {0} minuter.',
+    'magicLinkDisabled'  => '(To be translated) Use of MagicLink is currently not allowed.',
     'successLogout'      => 'Du har loggats ut.',
+    'backToLogin'        => 'Tillbaka till inloggning',
 
     // Passwords
     'errorPasswordLength'       => 'Lösenordet måste vara minst {0, number} tecken långt.',

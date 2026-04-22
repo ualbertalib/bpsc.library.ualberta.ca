@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of CodeIgniter Shield.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 namespace CodeIgniter\Shield\Authentication;
 
 use CodeIgniter\Shield\Authentication\Passwords\ValidatorInterface;
@@ -17,11 +26,8 @@ use CodeIgniter\Shield\Result;
  */
 class Passwords
 {
-    protected Auth $config;
-
-    public function __construct(Auth $config)
+    public function __construct(protected Auth $config)
     {
-        $this->config = $config;
     }
 
     /**
@@ -63,10 +69,10 @@ class Passwords
     {
         return password_hash(
             base64_encode(
-                hash('sha384', $password, true)
+                hash('sha384', $password, true),
             ),
             $this->config->hashAlgorithm,
-            $this->getHashOptions()
+            $this->getHashOptions(),
         );
     }
 
@@ -79,21 +85,6 @@ class Passwords
     public function verify(string $password, string $hash): bool
     {
         return password_verify($password, $hash);
-    }
-
-    /**
-     * Verifies a password against a previously hashed password.
-     *
-     * @param string $password The password we're checking
-     * @param string $hash     The previously hashed password
-     *
-     * @deprecated This is only for backward compatibility.
-     */
-    public function verifyDanger(string $password, string $hash): bool
-    {
-        return password_verify(base64_encode(
-            hash('sha384', $password, true)
-        ), $hash);
     }
 
     /**
@@ -118,7 +109,7 @@ class Passwords
 
         $password = trim($password);
 
-        if (empty($password)) {
+        if ($password === '') {
             return new Result([
                 'success' => false,
                 'reason'  => lang('Auth.errorPasswordEmpty'),
@@ -130,7 +121,7 @@ class Passwords
             $class = new $className($this->config);
 
             $result = $class->check($password, $user);
-            if (! $result->isOk()) {
+            if (! $result->isOK()) {
                 return $result;
             }
         }
@@ -143,7 +134,7 @@ class Passwords
     /**
      * Returns the validation rule for max length.
      */
-    public static function getMaxLenghtRule(): string
+    public static function getMaxLengthRule(): string
     {
         if (config('Auth')->hashAlgorithm === PASSWORD_BCRYPT) {
             return 'max_byte[72]';

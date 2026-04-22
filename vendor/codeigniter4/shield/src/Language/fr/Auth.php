@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of CodeIgniter Shield.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 return [
     // Exceptions
     'unknownAuthenticator'  => '{0} n\'est pas un authentificateur valide.',
@@ -16,16 +25,21 @@ return [
     'badToken'              => 'Le jeton d\'accès est invalide.',
     'oldToken'              => 'Le jeton d\'accès a expiré.',
     'noUserEntity'          => 'User Entity doit être fournie pour la validation du mot de passe.',
-    'invalidEmail'          => 'Impossible de vérifier que l\'adresse email existe.',
+    'invalidEmail'          => '(To be translated) Unable to verify the email address "{0}" matches the email on record.',
     'unableSendEmailToUser' => 'Désolé, il y a eu un problème lors de l\'envoi de l\'email. Nous ne pouvons pas envoyer un email à "{0}".',
     'throttled'             => 'Trop de requêtes faites depuis cette adresse IP. Vous pouvez réessayer dans {0} secondes.',
     'notEnoughPrivilege'    => 'Vous n\'avez pas l\'autorisation nécessaire pour effectuer l\'opération souhaitée.',
+    // JWT Exceptions
+    'invalidJWT'     => '(To be translated) The token is invalid.',
+    'expiredJWT'     => '(To be translated) The token has expired.',
+    'beforeValidJWT' => '(To be translated) The token is not yet available.',
 
     'email'           => 'Adresse email',
     'username'        => 'Identifiant',
     'password'        => 'Mot de passe',
     'passwordConfirm' => 'Mot de passe (répéter)',
     'haveAccount'     => 'Vous avez déjà un compte ?',
+    'token'           => '(To be translated) Token',
 
     // Buttons
     'confirm' => 'Confirmer',
@@ -47,7 +61,9 @@ return [
     'magicLinkExpired'   => 'Désolé, le lien a expiré.',
     'checkYourEmail'     => 'Vérifier votre email !',
     'magicLinkDetails'   => 'Nous venons de vous envoyer un email contenant un lien de connexion. Il n\'est valable que {0} minutes.',
+    'magicLinkDisabled'  => '(To be translated) Use of MagicLink is currently not allowed.',
     'successLogout'      => 'Vous avez été déconnecté avec succès.',
+    'backToLogin'        => 'Retour à la connexion',
 
     // Passwords
     'errorPasswordLength'       => 'Le mot de passe doit contenir au moins {0, number} caractères.',

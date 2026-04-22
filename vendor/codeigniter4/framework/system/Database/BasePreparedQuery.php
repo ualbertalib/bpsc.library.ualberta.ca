@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -12,15 +14,15 @@
 namespace CodeIgniter\Database;
 
 use ArgumentCountError;
-use BadMethodCallException;
 use CodeIgniter\Database\Exceptions\DatabaseException;
 use CodeIgniter\Events\Events;
+use CodeIgniter\Exceptions\BadMethodCallException;
 use ErrorException;
 
 /**
- * @template TConnection of object|resource
- * @template TStatement of object|resource
- * @template TResult of object|resource
+ * @template TConnection
+ * @template TStatement
+ * @template TResult
  *
  * @implements PreparedQueryInterface<TConnection, TStatement, TResult>
  */
@@ -29,8 +31,7 @@ abstract class BasePreparedQuery implements PreparedQueryInterface
     /**
      * The prepared statement itself.
      *
-     * @var object|resource|null
-     * @phpstan-var TStatement|null
+     * @var TStatement|null
      */
     protected $statement;
 
@@ -59,8 +60,7 @@ abstract class BasePreparedQuery implements PreparedQueryInterface
     /**
      * A reference to the db connection to use.
      *
-     * @var BaseConnection
-     * @phpstan-var BaseConnection<TConnection, TResult>
+     * @var BaseConnection<TConnection, TResult>
      */
     protected $db;
 
@@ -80,10 +80,10 @@ abstract class BasePreparedQuery implements PreparedQueryInterface
      */
     public function prepare(string $sql, array $options = [], string $queryClass = Query::class)
     {
-        // We only supports positional placeholders (?)
-        // in order to work with the execute method below, so we
-        // need to replace our named placeholders (:name)
-        $sql = preg_replace('/:[^\s,)]+/', '?', $sql);
+        // We only support positional placeholders (?), so convert
+        // named placeholders (:name or :name:) while leaving dialect
+        // syntax like PostgreSQL casts (::type) untouched.
+        $sql = preg_replace('/(?<!:):([a-zA-Z_]\w*):?(?!:)/', '?', $sql);
 
         /** @var Query $query */
         $query = new $queryClass($this->db);
@@ -110,8 +110,7 @@ abstract class BasePreparedQuery implements PreparedQueryInterface
      * Takes a new set of data and runs it against the currently
      * prepared query. Upon success, will return a Results object.
      *
-     * @return bool|ResultInterface
-     * @phpstan-return bool|ResultInterface<TConnection, TResult>
+     * @return bool|ResultInterface<TConnection, TResult>
      *
      * @throws DatabaseException
      */
@@ -135,9 +134,7 @@ abstract class BasePreparedQuery implements PreparedQueryInterface
             $query->setDuration($startTime, $startTime);
 
             // This will trigger a rollback if transactions are being used
-            if ($this->db->transDepth !== 0) {
-                $this->db->transStatus = false;
-            }
+            $this->db->handleTransStatus();
 
             if ($this->db->DBDebug) {
                 // We call this function in order to roll-back queries
@@ -175,7 +172,7 @@ abstract class BasePreparedQuery implements PreparedQueryInterface
         // Let others do something with this query
         Events::trigger('DBQuery', $query);
 
-        if ($this->db->isWriteType($query)) {
+        if ($this->db->isWriteType((string) $query)) {
             return true;
         }
 
@@ -256,5 +253,13 @@ abstract class BasePreparedQuery implements PreparedQueryInterface
     public function getErrorMessage(): string
     {
         return $this->errorString;
+    }
+
+    /**
+     * Whether the input contain binary data.
+     */
+    protected function isBinary(string $input): bool
+    {
+        return mb_detect_encoding($input, 'UTF-8', true) === false;
     }
 }

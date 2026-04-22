@@ -2,18 +2,33 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of CodeIgniter Shield.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 namespace CodeIgniter\Shield\Models;
 
+use CodeIgniter\Database\RawSql;
 use CodeIgniter\I18n\Time;
 use CodeIgniter\Shield\Authentication\Authenticators\AccessTokens;
+use CodeIgniter\Shield\Authentication\Authenticators\HmacSha256;
 use CodeIgniter\Shield\Authentication\Authenticators\Session;
+use CodeIgniter\Shield\Authentication\HMAC\HmacEncrypter;
 use CodeIgniter\Shield\Authentication\Passwords;
 use CodeIgniter\Shield\Entities\AccessToken;
 use CodeIgniter\Shield\Entities\User;
 use CodeIgniter\Shield\Entities\UserIdentity;
 use CodeIgniter\Shield\Exceptions\LogicException;
 use CodeIgniter\Shield\Exceptions\ValidationException;
+use Exception;
 use Faker\Generator;
+use InvalidArgumentException;
+use ReflectionException;
 
 class UserIdentityModel extends BaseModel
 {
@@ -83,7 +98,7 @@ class UserIdentityModel extends BaseModel
     {
         if ($user->id === null) {
             throw new LogicException(
-                '"$user->id" is null. You should not use the incomplete User object.'
+                '"$user->id" is null. You should not use the incomplete User object.',
             );
         }
     }
@@ -91,15 +106,15 @@ class UserIdentityModel extends BaseModel
     /**
      * Create an identity with 6 digits code for auth action
      *
-     * @phpstan-param array{type: string, name: string, extra: string} $data
-     * @param callable $codeGenerator generate secret code
+     * @param array{type: string, name: string, extra: string} $data
+     * @param callable                                         $codeGenerator generate secret code
      *
      * @return string secret
      */
     public function createCodeIdentity(
         User $user,
         array $data,
-        callable $codeGenerator
+        callable $codeGenerator,
     ): string {
         $this->checkUserId($user);
 
@@ -131,10 +146,13 @@ class UserIdentityModel extends BaseModel
     /**
      * Generates a new personal access token for the user.
      *
-     * @param string   $name   Token name
-     * @param string[] $scopes Permissions the token grants
+     * @param string       $name      Token name
+     * @param list<string> $scopes    Permissions the token grants
+     * @param Time         $expiresAt Expiration date
+     *
+     * @throws InvalidArgumentException
      */
-    public function generateAccessToken(User $user, string $name, array $scopes = ['*']): AccessToken
+    public function generateAccessToken(User $user, string $name, array $scopes = ['*'], ?Time $expiresAt = null): AccessToken
     {
         $this->checkUserId($user);
 
@@ -145,6 +163,7 @@ class UserIdentityModel extends BaseModel
             'user_id' => $user->id,
             'name'    => $name,
             'secret'  => hash('sha256', $rawToken = random_string('crypto', 64)),
+            'expires' => $expiresAt,
             'extra'   => serialize($scopes),
         ]);
 
@@ -197,7 +216,7 @@ class UserIdentityModel extends BaseModel
     }
 
     /**
-     * @return AccessToken[]
+     * @return list<AccessToken>
      */
     public function getAllAccessTokens(User $user): array
     {
@@ -209,6 +228,170 @@ class UserIdentityModel extends BaseModel
             ->orderBy($this->primaryKey)
             ->asObject(AccessToken::class)
             ->findAll();
+    }
+
+    /**
+     * Updates or sets expiration date of users' AccessToken or HMAC Token by ID.
+     *
+     * @param Time  $expiresAt Expiration date
+     * @param mixed $id
+     *
+     * @return bool Returns true if expiration date was set or updated.
+     */
+    public function setIdentityExpirationById($id, User $user, ?Time $expiresAt = null): bool
+    {
+        $this->checkUserId($user);
+
+        return $this->where('user_id', $user->id)
+            ->where('id', $id)
+            ->set(['expires' => $expiresAt])
+            ->update();
+    }
+
+    // HMAC
+    /**
+     * Find and Retrieve the HMAC AccessToken based on Token alone
+     *
+     * @return ?AccessToken Full HMAC Access Token object
+     */
+    public function getHmacTokenByKey(string $key): ?AccessToken
+    {
+        return $this
+            ->where('type', HmacSha256::ID_TYPE_HMAC_TOKEN)
+            ->where('secret', $key)
+            ->asObject(AccessToken::class)
+            ->first();
+    }
+
+    /**
+     * Generates a new personal access token for the user.
+     *
+     * @param string       $name      Token name
+     * @param list<string> $scopes    Permissions the token grants
+     * @param Time         $expiresAt Expiration date
+     *
+     * @throws Exception
+     * @throws InvalidArgumentException
+     * @throws ReflectionException
+     */
+    public function generateHmacToken(User $user, string $name, array $scopes = ['*'], ?Time $expiresAt = null): AccessToken
+    {
+        $this->checkUserId($user);
+
+        $encrypter    = new HmacEncrypter();
+        $rawSecretKey = $encrypter->generateSecretKey();
+        $secretKey    = $encrypter->encrypt($rawSecretKey);
+
+        $return = $this->insert([
+            'type'    => HmacSha256::ID_TYPE_HMAC_TOKEN,
+            'user_id' => $user->id,
+            'name'    => $name,
+            'secret'  => bin2hex(random_bytes(16)), // Key
+            'secret2' => $secretKey,
+            'expires' => $expiresAt,
+            'extra'   => serialize($scopes),
+        ]);
+
+        $this->checkQueryReturn($return);
+
+        /** @var AccessToken $token */
+        $token = $this
+            ->asObject(AccessToken::class)
+            ->find($this->getInsertID());
+
+        $token->rawSecretKey = $rawSecretKey;
+
+        return $token;
+    }
+
+    /**
+     * Retrieve Token object for selected HMAC Token.
+     * Note: These tokens are not hashed as they are considered shared secrets.
+     *
+     * @param User   $user User Object
+     * @param string $key  HMAC Key String
+     *
+     * @return ?AccessToken Full HMAC Access Token
+     */
+    public function getHmacToken(User $user, string $key): ?AccessToken
+    {
+        $this->checkUserId($user);
+
+        return $this->where('user_id', $user->id)
+            ->where('type', HmacSha256::ID_TYPE_HMAC_TOKEN)
+            ->where('secret', $key)
+            ->asObject(AccessToken::class)
+            ->first();
+    }
+
+    /**
+     * Given the ID, returns the given access token.
+     *
+     * @param int|string $id
+     * @param User       $user User Object
+     *
+     * @return ?AccessToken Full HMAC Access Token
+     */
+    public function getHmacTokenById($id, User $user): ?AccessToken
+    {
+        $this->checkUserId($user);
+
+        return $this->where('user_id', $user->id)
+            ->where('type', HmacSha256::ID_TYPE_HMAC_TOKEN)
+            ->where('id', $id)
+            ->asObject(AccessToken::class)
+            ->first();
+    }
+
+    /**
+     * Retrieve all HMAC tokes for users
+     *
+     * @param User $user User object
+     *
+     * @return list<AccessToken>
+     */
+    public function getAllHmacTokens(User $user): array
+    {
+        $this->checkUserId($user);
+
+        return $this
+            ->where('user_id', $user->id)
+            ->where('type', HmacSha256::ID_TYPE_HMAC_TOKEN)
+            ->orderBy($this->primaryKey)
+            ->asObject(AccessToken::class)
+            ->findAll();
+    }
+
+    /**
+     * Delete any HMAC tokens for the given key.
+     *
+     * @param User   $user User object
+     * @param string $key  HMAC Key
+     */
+    public function revokeHmacToken(User $user, string $key): void
+    {
+        $this->checkUserId($user);
+
+        $return = $this->where('user_id', $user->id)
+            ->where('type', HmacSha256::ID_TYPE_HMAC_TOKEN)
+            ->where('secret', $key)
+            ->delete();
+
+        $this->checkQueryReturn($return);
+    }
+
+    /**
+     * Revokes all access tokens for this user.
+     */
+    public function revokeAllHmacTokens(User $user): void
+    {
+        $this->checkUserId($user);
+
+        $return = $this->where('user_id', $user->id)
+            ->where('type', HmacSha256::ID_TYPE_HMAC_TOKEN)
+            ->delete();
+
+        $this->checkQueryReturn($return);
     }
 
     /**
@@ -228,7 +411,7 @@ class UserIdentityModel extends BaseModel
     /**
      * Returns all identities.
      *
-     * @return UserIdentity[]
+     * @return list<UserIdentity>
      */
     public function getIdentities(User $user): array
     {
@@ -238,9 +421,9 @@ class UserIdentityModel extends BaseModel
     }
 
     /**
-     * @param int[]|string[] $userIds
+     * @param list<int>|list<string> $userIds
      *
-     * @return UserIdentity[]
+     * @return list<UserIdentity>
      */
     public function getIdentitiesByUserIds(array $userIds): array
     {
@@ -263,9 +446,9 @@ class UserIdentityModel extends BaseModel
     /**
      * Returns all identities for the specific types.
      *
-     * @param string[] $types
+     * @param list<string> $types
      *
-     * @return UserIdentity[]
+     * @return list<UserIdentity>
      */
     public function getIdentitiesByTypes(User $user, array $types): array
     {
@@ -286,7 +469,7 @@ class UserIdentityModel extends BaseModel
      */
     public function touchIdentity(UserIdentity $identity): void
     {
-        $identity->last_used_at = Time::now()->format('Y-m-d H:i:s');
+        $identity->last_used_at = Time::now();
 
         $return = $this->save($identity);
 
@@ -320,6 +503,21 @@ class UserIdentityModel extends BaseModel
     }
 
     /**
+     * Delete any access tokens for the given secret token.
+     */
+    public function revokeAccessTokenBySecret(User $user, string $secretToken): void
+    {
+        $this->checkUserId($user);
+
+        $return = $this->where('user_id', $user->id)
+            ->where('type', AccessTokens::ID_TYPE_ACCESS_TOKEN)
+            ->where('secret', $secretToken)
+            ->delete();
+
+        $this->checkQueryReturn($return);
+    }
+
+    /**
      * Revokes all access tokens for this user.
      */
     public function revokeAllAccessTokens(User $user): void
@@ -336,7 +534,7 @@ class UserIdentityModel extends BaseModel
     /**
      * Force password reset for multiple users.
      *
-     * @param int[]|string[] $userIds
+     * @param list<int>|list<string> $userIds
      */
     public function forceMultiplePasswordReset(array $userIds): void
     {
@@ -351,7 +549,7 @@ class UserIdentityModel extends BaseModel
     /**
      * Force global password reset.
      * This is useful for enforcing a password reset
-     * for ALL users incase of a security breach.
+     * for ALL users in case of a security breach.
      */
     public function forceGlobalPasswordReset(): void
     {
@@ -370,16 +568,16 @@ class UserIdentityModel extends BaseModel
      * Override the Model's `update()` method.
      * Throws an Exception when it fails.
      *
-     * @param array|int|string|null $id
-     * @param array|object|null     $data
+     * @param int|list<int|string>|RawSql|string|null $id
+     * @param array|object|null                       $row
      *
      * @return true if the update is successful
      *
      * @throws ValidationException
      */
-    public function update($id = null, $data = null): bool
+    public function update($id = null, $row = null): bool
     {
-        $result = parent::update($id, $data);
+        $result = parent::update($id, $row);
 
         $this->checkQueryReturn($result);
 

@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of CodeIgniter Shield.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 namespace CodeIgniter\Shield\Filters;
 
 use CodeIgniter\Filters\FilterInterface;
@@ -39,8 +48,6 @@ class SessionAuth implements FilterInterface
             return;
         }
 
-        helper('setting');
-
         /** @var Session $authenticator */
         $authenticator = auth('session')->getAuthenticator();
 
@@ -61,10 +68,12 @@ class SessionAuth implements FilterInterface
             }
 
             if ($user !== null && ! $user->isActivated()) {
-                $authenticator->logout();
-
-                return redirect()->route('login')
-                    ->with('error', lang('Auth.activationBlocked'));
+                // If an action has been defined for register, start it up.
+                $hasAction = $authenticator->startUpAction('register', $user);
+                if ($hasAction) {
+                    return redirect()->route('auth-action-show')
+                        ->with('error', lang('Auth.activationBlocked'));
+                }
             }
 
             return;
@@ -75,14 +84,18 @@ class SessionAuth implements FilterInterface
                 ->with('error', $authenticator->getPendingMessage());
         }
 
+        if (uri_string() !== route_to('login')) {
+            $session = session();
+            $session->setTempdata('beforeLoginUrl', current_url(), 300);
+        }
+
         return redirect()->route('login');
     }
 
     /**
      * We don't have anything to do here.
      *
-     * @param Response|ResponseInterface $response
-     * @param array|null                 $arguments
+     * @param array|null $arguments
      */
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null): void
     {

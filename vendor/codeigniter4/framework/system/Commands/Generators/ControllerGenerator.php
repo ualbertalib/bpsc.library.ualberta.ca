@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -56,7 +58,7 @@ class ControllerGenerator extends BaseCommand
     /**
      * The Command's Arguments
      *
-     * @var array
+     * @var array<string, string>
      */
     protected $arguments = [
         'name' => 'The controller class name.',
@@ -65,7 +67,7 @@ class ControllerGenerator extends BaseCommand
     /**
      * The Command's Options
      *
-     * @var array
+     * @var array<string, string>
      */
     protected $options = [
         '--bare'      => 'Extends from CodeIgniter\Controller instead of BaseController.',
@@ -85,7 +87,7 @@ class ControllerGenerator extends BaseCommand
         $this->template  = 'controller.tpl.php';
 
         $this->classNameLang = 'CLI.generator.className.controller';
-        $this->execute($params);
+        $this->generateClass($params);
     }
 
     /**
@@ -128,7 +130,7 @@ class ControllerGenerator extends BaseCommand
             $class,
             ['{useStatement}', '{extends}'],
             [$useStatement, $extends],
-            ['type' => $rest]
+            ['type' => $rest],
         );
     }
 }

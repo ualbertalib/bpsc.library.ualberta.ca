@@ -1,9 +1,12 @@
-<h2>Previous In-House Exhibitions<a href="/exhibits" class="myButton" id="back">Back to Exhibitions</a></h2>
+<h2>Past In-House Exhibitions<a href="/exhibits" class="myButton" id="back">Back to Exhibitions</a></h2>
 
 	<?php foreach ($exhibits as $exhibit_item): ?>
        <?php if ($exhibit_item['subjects'] == 'past'){ ?>
+	   <a name="<?= $exhibit_item['slug'] ?>"></a>
       		<div class="row-fluid past-ex">
+			
          		<div class="span3">
+				
 					<?php if (file_exists("assets/uploads/slides/".$exhibit_item['slug'].".jpg")){ ?>
                 		<img src="/assets/uploads/slides/<?php echo $exhibit_item['slug'] ?>.jpg"/>						
 					<?php }elseif (file_exists("assets/uploads/slides/".$exhibit_item['slug']."0.jpg")){ ?>	

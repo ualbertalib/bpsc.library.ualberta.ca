@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of CodeIgniter Shield.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 return [
     // Exceptions
     'unknownAuthenticator'  => '{0} nije validan autentikator.',
@@ -16,16 +25,21 @@ return [
     'badToken'              => 'Pristupni token nije validan.',
     'oldToken'              => 'Pristupni token je istekao.',
     'noUserEntity'          => 'Korisnički entitet mora postojati za verifikaciju naloga.',
-    'invalidEmail'          => 'Nije moguće potvrditi email adresu ne postoje pogodci u bazi podataka.',
+    'invalidEmail'          => '(To be translated) Unable to verify the email address "{0}" matches the email on record.',
     'unableSendEmailToUser' => 'Žao nam je ali slanje email poruke nije moguće. Nismo u mogućnosti poslati poruku na "{0}".',
     'throttled'             => 'Preveliki broj zahteva sa vaše IP adrese. Možete pokušati ponovo za {0} secondi.',
     'notEnoughPrivilege'    => 'Nemate dovoljan nivo autorizacije za zahtevanu akciju.',
+    // JWT Exceptions
+    'invalidJWT'     => '(To be translated) The token is invalid.',
+    'expiredJWT'     => '(To be translated) The token has expired.',
+    'beforeValidJWT' => '(To be translated) The token is not yet available.',
 
     'email'           => 'E-mail Adresa',
     'username'        => 'Korisničko ime',
     'password'        => 'Lozinka',
     'passwordConfirm' => 'Lozinka (ponovo)',
     'haveAccount'     => 'Već imate nalog?',
+    'token'           => '(To be translated) Token',
 
     // Buttons
     'confirm' => 'Potvrdi',
@@ -47,7 +61,9 @@ return [
     'magicLinkExpired'   => 'Žao nam je, link je istekao.',
     'checkYourEmail'     => 'Proverite Vaš email!',
     'magicLinkDetails'   => 'Upravo smo Vam poslali pristupni link. Pristupni link će biti validan još samo {0} minuta.',
+    'magicLinkDisabled'  => '(To be translated) Use of MagicLink is currently not allowed.',
     'successLogout'      => 'Uspešno ste se odjavili sa sistema.',
+    'backToLogin'        => 'Nazad na prijavljivanje',
 
     // Passwords
     'errorPasswordLength'       => 'Lozinka mora biti najmanje {0, number} znakova dužine.',

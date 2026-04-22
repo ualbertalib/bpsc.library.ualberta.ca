@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -13,15 +15,18 @@ namespace CodeIgniter\Session\Handlers\Database;
 
 use CodeIgniter\Database\BaseBuilder;
 use CodeIgniter\Session\Handlers\DatabaseHandler;
-use ReturnTypeWillChange;
 
 /**
  * Session handler for Postgre
+ *
+ * @see \CodeIgniter\Session\Handlers\Database\PostgreHandlerTest
  */
 class PostgreHandler extends DatabaseHandler
 {
     /**
      * Sets SELECT clause
+     *
+     * @return void
      */
     protected function setSelect(BaseBuilder $builder)
     {
@@ -31,7 +36,7 @@ class PostgreHandler extends DatabaseHandler
     /**
      * Decodes column data
      *
-     * @param mixed $data
+     * @param string $data
      *
      * @return false|string
      */
@@ -53,11 +58,8 @@ class PostgreHandler extends DatabaseHandler
      *
      * @param int $max_lifetime Sessions that have not updated
      *                          for the last max_lifetime seconds will be removed.
-     *
-     * @return false|int Returns the number of deleted sessions on success, or false on failure.
      */
-    #[ReturnTypeWillChange]
-    public function gc($max_lifetime)
+    public function gc($max_lifetime): false|int
     {
         $separator = '\'';
         $interval  = implode($separator, ['', "{$max_lifetime} second", '']);
@@ -71,7 +73,7 @@ class PostgreHandler extends DatabaseHandler
     protected function lockSession(string $sessionID): bool
     {
         $arg = "hashtext('{$sessionID}')" . ($this->matchIP ? ", hashtext('{$this->ipAddress}')" : '');
-        if ($this->db->simpleQuery("SELECT pg_advisory_lock({$arg})")) {
+        if ($this->db->simpleQuery("SELECT pg_advisory_lock({$arg})") !== false) {
             $this->lock = $arg;
 
             return true;
@@ -89,7 +91,7 @@ class PostgreHandler extends DatabaseHandler
             return true;
         }
 
-        if ($this->db->simpleQuery("SELECT pg_advisory_unlock({$this->lock})")) {
+        if ($this->db->simpleQuery("SELECT pg_advisory_unlock({$this->lock})") !== false) {
             $this->lock = false;
 
             return true;

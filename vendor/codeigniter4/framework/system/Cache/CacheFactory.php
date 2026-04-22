@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -18,6 +20,8 @@ use Config\Cache;
 
 /**
  * A factory for loading the desired
+ *
+ * @see \CodeIgniter\Cache\CacheFactoryTest
  */
 class CacheFactory
 {
@@ -38,6 +42,9 @@ class CacheFactory
     /**
      * Attempts to create the desired cache handler, based upon the
      *
+     * @param non-empty-string|null $handler
+     * @param non-empty-string|null $backup
+     *
      * @return CacheInterface
      */
     public static function getHandler(Cache $config, ?string $handler = null, ?string $backup = null)
@@ -50,8 +57,8 @@ class CacheFactory
             throw CacheException::forNoBackup();
         }
 
-        $handler = ! empty($handler) ? $handler : $config->handler;
-        $backup  = ! empty($backup) ? $backup : $config->backupHandler;
+        $handler ??= $config->handler;
+        $backup ??= $config->backupHandler;
 
         if (! array_key_exists($handler, $config->validHandlers) || ! array_key_exists($backup, $config->validHandlers)) {
             throw CacheException::forHandlerNotFound();
@@ -68,7 +75,7 @@ class CacheFactory
             }
         }
 
-        // If $adapter->initialization throws a CriticalError exception, we will attempt to
+        // If $adapter->initialize() throws a CriticalError exception, we will attempt to
         // use the $backup handler, if that also fails, we resort to the dummy handler.
         try {
             $adapter->initialize();

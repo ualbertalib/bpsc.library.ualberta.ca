@@ -78,7 +78,7 @@
     <label for="collection_type">Exhibition Type</label> 
      </div>
      <div class="span8 checks">
-   <ul class="types">
+   <ul>
   
             <?php foreach ($ex_subjects_array as $type): ?>
                <li><input type="checkbox" id="<?php echo $type ?>" value="<?php echo $type ?>" class="sub-checkbox"/>

@@ -1,0 +1,30 @@
+<h2>Upcoming In-House Exhibitions<a href="/exhibits" class="myButton" id="back">Back to Exhibitions</a></h2>
+
+	<?php foreach ($exhibits as $exhibit_item): ?>
+       <?php if ( str_contains($exhibit_item['subjects'],'upcoming')){ ?>
+	   <a name="<?= $exhibit_item['slug'] ?>"></a>
+      		<div class="row-fluid past-ex">
+			
+         		<div class="span3">
+				
+					<?php if (file_exists("assets/uploads/slides/".$exhibit_item['slug'].".jpg")){ ?>
+                		<img src="/assets/uploads/slides/<?php echo $exhibit_item['slug'] ?>.jpg"/>						
+					<?php }elseif (file_exists("assets/uploads/slides/".$exhibit_item['slug']."0.jpg")){ ?>	
+							<img src="/assets/uploads/slides/<?php echo $exhibit_item['slug'] ?>0.jpg"/>
+					<?php }elseif (file_exists("assets/uploads/slides/".$exhibit_item['slug']."1.jpg")){ ?>	
+							<img src="/assets/uploads/slides/<?php echo $exhibit_item['slug'] ?>1.jpg"/>
+              		<?php }else{ ?>
+                		<img src="/assets/img/noimage.jpg"/>
+              		<?php }?>
+                </div>
+                <div class="span9 info">
+                	<h2><?php echo $exhibit_item['title'] ?></h2>
+                        <?php echo $exhibit_item['essay'] ?>
+                </div>
+            </div>
+	   <?php } ?>
+    <?php endforeach ?>
+ 
+         
+   
+    

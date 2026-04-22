@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of CodeIgniter Shield.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 namespace CodeIgniter\Shield\Entities;
 
 use CodeIgniter\Entity\Entity;
@@ -71,14 +80,14 @@ class Group extends Entity
         $this->populatePermissions();
 
         // Check exact match
-        if (! empty($this->permissions) && in_array($permission, $this->permissions, true)) {
+        if ($this->permissions !== null && $this->permissions !== [] && in_array($permission, $this->permissions, true)) {
             return true;
         }
 
         // Check wildcard match
         $check = substr($permission, 0, strpos($permission, '.')) . '.*';
 
-        return ! empty($this->permissions) && in_array($check, $this->permissions, true);
+        return $this->permissions !== null && $this->permissions !== [] && in_array($check, $this->permissions, true);
     }
 
     /**

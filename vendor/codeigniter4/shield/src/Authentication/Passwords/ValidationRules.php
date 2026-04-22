@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of CodeIgniter Shield.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 namespace CodeIgniter\Shield\Authentication\Passwords;
 
 use CodeIgniter\HTTP\IncomingRequest;
@@ -39,20 +48,21 @@ class ValidationRules
         if (function_exists('auth') && auth()->user()) {
             $user = auth()->user();
         } else {
-            $user = empty($data) ? $this->buildUserFromRequest() : $this->buildUserFromData($data);
+            /** @phpstan-ignore-next-line */
+            $user = $data === [] ? $this->buildUserFromRequest() : $this->buildUserFromData($data);
         }
 
         $result = $checker->check($value, $user);
 
-        if (! $result->isOk()) {
-            if (empty($data)) {
+        if (! $result->isOK()) {
+            if ($data === []) {
                 $error1 = $result->reason();
             } else {
                 $error2 = $result->reason();
             }
         }
 
-        return $result->isOk();
+        return $result->isOK();
     }
 
     /**
@@ -65,6 +75,10 @@ class ValidationRules
 
     /**
      * Builds a new user instance from the global request.
+     *
+     * @deprecated This will be removed soon.
+     *
+     * @see https://github.com/codeigniter4/shield/pull/747#discussion_r1198778666
      */
     protected function buildUserFromRequest(): User
     {
@@ -97,10 +111,9 @@ class ValidationRules
      */
     protected function prepareValidFields(): array
     {
-        $config   = config('Auth');
-        $fields   = array_merge($config->validFields, $config->personalFields);
-        $fields[] = 'password';
+        $config = config('Auth');
+        $fields = array_merge($config->validFields, $config->personalFields, ['email', 'password']);
 
-        return $fields;
+        return array_unique($fields);
     }
 }

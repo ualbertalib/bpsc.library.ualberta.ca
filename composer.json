@@ -9,10 +9,10 @@
         "ext-intl": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
-        "codeigniter4/framework": "^4.3",
+        "codeigniter4/framework": "^4.7",
         "codeigniter4/shield": "^1.0@beta",
         "laminas/laminas-escaper": "^2.9",
-        "psr/log": "^1.1"
+        "psr/log": "^3.0"
     },
     "require-dev": {
         "kint-php/kint": "^5.0.3",

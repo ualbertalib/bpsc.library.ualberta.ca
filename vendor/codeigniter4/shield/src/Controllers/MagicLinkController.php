@@ -2,10 +2,20 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of CodeIgniter Shield.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 namespace CodeIgniter\Shield\Controllers;
 
 use App\Controllers\BaseController;
 use CodeIgniter\Events\Events;
+use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\I18n\Time;
@@ -34,8 +44,9 @@ class MagicLinkController extends BaseController
 
     public function __construct()
     {
-        helper('setting');
-        $providerClass  = setting('Auth.userProvider');
+        /** @var class-string<UserModel> $providerClass */
+        $providerClass = setting('Auth.userProvider');
+
         $this->provider = new $providerClass();
     }
 
@@ -47,6 +58,10 @@ class MagicLinkController extends BaseController
      */
     public function loginView()
     {
+        if (! setting('Auth.allowMagicLinkLogins')) {
+            return redirect()->route('login')->with('error', lang('Auth.magicLinkDisabled'));
+        }
+
         if (auth()->loggedIn()) {
             return redirect()->to(config('Auth')->loginRedirect());
         }
@@ -63,9 +78,13 @@ class MagicLinkController extends BaseController
      */
     public function loginAction()
     {
+        if (! setting('Auth.allowMagicLinkLogins')) {
+            return redirect()->route('login')->with('error', lang('Auth.magicLinkDisabled'));
+        }
+
         // Validate email format
         $rules = $this->getValidationRules();
-        if (! $this->validate($rules)) {
+        if (! $this->validateData($this->request->getPost(), $rules, [], config('Auth')->DBGroup)) {
             return redirect()->route('magic-link')->with('errors', $this->validator->getErrors());
         }
 
@@ -74,7 +93,7 @@ class MagicLinkController extends BaseController
         $user  = $this->provider->findByCredentials(['email' => $email]);
 
         if ($user === null) {
-            return redirect()->route('magic-link')->with('error', lang('Auth.invalidEmail'));
+            return redirect()->route('magic-link')->with('error', lang('Auth.invalidEmail', [$email]));
         }
 
         /** @var UserIdentityModel $identityModel */
@@ -91,7 +110,7 @@ class MagicLinkController extends BaseController
             'user_id' => $user->id,
             'type'    => Session::ID_TYPE_MAGIC_LINK,
             'secret'  => $token,
-            'expires' => Time::now()->addSeconds(setting('Auth.magicLinkLifetime'))->format('Y-m-d H:i:s'),
+            'expires' => Time::now()->addSeconds(setting('Auth.magicLinkLifetime')),
         ]);
 
         /** @var IncomingRequest $request */
@@ -102,10 +121,16 @@ class MagicLinkController extends BaseController
         $date      = Time::now()->toDateTimeString();
 
         // Send the user an email with the code
-        $email = emailer()->setFrom(setting('Email.fromEmail'), setting('Email.fromName') ?? '');
+        helper('email');
+        $email = emailer(['mailType' => 'html'])
+            ->setFrom(setting('Email.fromEmail'), setting('Email.fromName') ?? '');
         $email->setTo($user->email);
         $email->setSubject(lang('Auth.magicLinkSubject'));
-        $email->setMessage($this->view(setting('Auth.views')['magic-link-email'], ['token' => $token, 'ipAddress' => $ipAddress, 'userAgent' => $userAgent, 'date' => $date]));
+        $email->setMessage($this->view(
+            setting('Auth.views')['magic-link-email'],
+            ['token' => $token, 'user' => $user, 'ipAddress' => $ipAddress, 'userAgent' => $userAgent, 'date' => $date],
+            ['debug' => false],
+        ));
 
         if ($email->send(false) === false) {
             log_message('error', $email->printDebugger(['headers']));
@@ -132,6 +157,14 @@ class MagicLinkController extends BaseController
      */
     public function verify(): RedirectResponse
     {
+        if (! setting('Auth.allowMagicLinkLogins')) {
+            return redirect()->route('login')->with('error', lang('Auth.magicLinkDisabled'));
+        }
+
+        if ($this->request->getUserAgent()->isRobot()) {
+            throw PageNotFoundException::forPageNotFound();
+        }
+
         $token = $this->request->getGet('token');
 
         /** @var UserIdentityModel $identityModel */
@@ -195,7 +228,7 @@ class MagicLinkController extends BaseController
     private function recordLoginAttempt(
         string $identifier,
         bool $success,
-        $userId = null
+        $userId = null,
     ): void {
         /** @var LoginModel $loginModel */
         $loginModel = model(LoginModel::class);
@@ -206,23 +239,19 @@ class MagicLinkController extends BaseController
             $success,
             $this->request->getIPAddress(),
             (string) $this->request->getUserAgent(),
-            $userId
+            $userId,
         );
     }
 
     /**
      * Returns the rules that should be used for validation.
      *
-     * @return array<string, array<string, array<string>|string>>
-     * @phpstan-return array<string, array<string, string|list<string>>>
+     * @return array<string, array<string, list<string>|string>>
      */
     protected function getValidationRules(): array
     {
         return [
-            'email' => [
-                'label' => 'Auth.email',
-                'rules' => config('AuthSession')->emailValidationRules,
-            ],
+            'email' => config('Auth')->emailValidationRules,
         ];
     }
 }

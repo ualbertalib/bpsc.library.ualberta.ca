@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -15,6 +17,8 @@ use DateTime;
 
 /**
  * History collector
+ *
+ * @see \CodeIgniter\Debug\Toolbar\Collectors\HistoryTest
  */
 class History extends BaseCollector
 {
@@ -60,6 +64,8 @@ class History extends BaseCollector
      *
      * @param string $current Current history time
      * @param int    $limit   Max history files
+     *
+     * @return void
      */
     public function setFiles(string $current, int $limit = 20)
     {
@@ -84,7 +90,7 @@ class History extends BaseCollector
             $contents = @json_decode($contents);
             if (json_last_error() === JSON_ERROR_NONE) {
                 preg_match('/debugbar_(.*)\.json$/s', $filename, $time);
-                $time = sprintf('%.6f', $time[1] ?? 0);
+                $time = sprintf('%.6F', $time[1] ?? 0);
 
                 // Debugbar files shown in History Collector
                 $files[] = [
@@ -124,7 +130,7 @@ class History extends BaseCollector
      */
     public function isEmpty(): bool
     {
-        return empty($this->files);
+        return $this->files === [];
     }
 
     /**

@@ -28,13 +28,15 @@
 					<strong>Linda Quirk</strong><br />
 					Special Collections Librarian<br />
 					<a href="mailto:linda.quirk@ualberta.ca">linda.quirk@ualberta.ca</a><br />
+					(Research leave: 09/25-06/26)<br>
 					
 					<br />
-					<strong>Maia Trotter</strong><br />
-					Metadata Technician<br />
-					<a href="mailto:mjtrotte@ualberta.ca">mjtrotte@ualberta.ca</a><br />
 					
-					<br />
+					<strong>Sarah Severson</strong><br />
+					Digitization & Special Collections Librarian<br />
+					<a href="mailto:sarah.severson@ualberta.ca">sarah.severson@ualberta.ca</a> <br>
+					<br>
+			
 					
 				</div>
 				<div class="span3">
@@ -48,6 +50,15 @@
 					<a href="mailto:carolyn.morgan@ualberta.ca">carolyn.morgan@ualberta.ca</a><br />
 					
 					<br />
+					
+					<strong>Maia Trotter</strong><br />
+					Metadata Technician<br />
+					<a href="mailto:mjtrotte@ualberta.ca">mjtrotte@ualberta.ca</a><br />
+					
+					
+					<br />
+					
+					
 				</div>
 				<div class="span3">
 					
@@ -58,7 +69,7 @@
 					
 					<strong>Michaela Stang</strong><br />
 					Reference & Processing Specialist<br />
-					<a href="mailto:mmstang@ualberta.ca">mmstang@ualberta.ca</a>
+					(Currently on leave)<br />
 					<br />
 					
 				</div>
@@ -74,7 +85,8 @@
 			<ul class="bottom-margin">
 				<li class="first"><strong>Photography and Scanning:</strong> Jeff Papineau</li>
 				<li><strong>Editing/Proofreading:</strong> Robert Desmarais, Linda Quirk, Cheryl Cundell, Samantha Nugent, and Winston Pei</li>
-				<li><strong>Content:</strong> Linda Quirk, Carolyn Morgan, Jesse Carson, Michaela Stang, Cori Sanderson, Kymberly Sobchyshyn, Colette Leung, Michele Pagliuso, Denis Lacroix, Lynn McPherson, Louis Chor, Paul Gifford, and Sara Tokay.</li>
+				<li><strong>Content:</strong> Linda Quirk, Carolyn Morgan, Jesse Carson, Michaela Stang, Cori Sanderson, Kymberly Sobchyshyn, Colette Leung, Michele Pagliuso, Denis Lacroix, 
+				Lynn McPherson, Louis Chor, Paul Gifford, Sara Tokay, Maia Trotter, and Natasha D'Amours.</li>
 				<li><strong>Web Programming and Design:</strong> Natasha Nunn</li>
 			</ul>
 		</div>

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -16,6 +18,8 @@ use CodeIgniter\HTTP\ResponseInterface;
 
 /**
  * An extendable controller to provide a RESTful API for a resource.
+ *
+ * @see \CodeIgniter\RESTful\ResourceControllerTest
  */
 class ResourceController extends BaseResource
 {
@@ -102,7 +106,7 @@ class ResourceController extends BaseResource
     /**
      * Set/change the expected response representation for returned objects
      *
-     * @param string $format json/xml
+     * @param 'json'|'xml' $format Response format
      *
      * @return void
      */

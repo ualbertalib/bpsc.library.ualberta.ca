@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -53,7 +55,7 @@ class CommandGenerator extends BaseCommand
     /**
      * The Command's Arguments
      *
-     * @var array
+     * @var array<string, string>
      */
     protected $arguments = [
         'name' => 'The command class name.',
@@ -62,12 +64,12 @@ class CommandGenerator extends BaseCommand
     /**
      * The Command's Options
      *
-     * @var array
+     * @var array<string, string>
      */
     protected $options = [
         '--command'   => 'The command name. Default: "command:name"',
         '--type'      => 'The command type. Options [basic, generator]. Default: "basic".',
-        '--group'     => 'The command group. Default: [basic -> "CodeIgniter", generator -> "Generators"].',
+        '--group'     => 'The command group. Default: [basic -> "App", generator -> "Generators"].',
         '--namespace' => 'Set root namespace. Default: "APP_NAMESPACE".',
         '--suffix'    => 'Append the component title to the class name (e.g. User => UserCommand).',
         '--force'     => 'Force overwrite existing file.',
@@ -83,7 +85,7 @@ class CommandGenerator extends BaseCommand
         $this->template  = 'command.tpl.php';
 
         $this->classNameLang = 'CLI.generator.className.command';
-        $this->execute($params);
+        $this->generateClass($params);
     }
 
     /**
@@ -106,14 +108,14 @@ class CommandGenerator extends BaseCommand
         }
 
         if (! is_string($group)) {
-            $group = $type === 'generator' ? 'Generators' : 'CodeIgniter';
+            $group = $type === 'generator' ? 'Generators' : 'App';
         }
 
         return $this->parseTemplate(
             $class,
             ['{group}', '{command}'],
             [$group, $command],
-            ['type' => $type]
+            ['type' => $type],
         );
     }
 }

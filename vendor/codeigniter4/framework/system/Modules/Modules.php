@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -15,6 +17,8 @@ namespace CodeIgniter\Modules;
  * Modules Class
  *
  * @see https://codeigniter.com/user_guide/general/modules.html
+ *
+ * @phpstan-consistent-constructor
  */
 class Modules
 {
@@ -35,9 +39,14 @@ class Modules
     /**
      * Auto-Discover Rules Handler
      *
-     * @var array
+     * @var list<string>
      */
     public $aliases = [];
+
+    public function __construct()
+    {
+        // For @phpstan-consistent-constructor
+    }
 
     /**
      * Should the application auto-discover the requested resource.
@@ -49,5 +58,18 @@ class Modules
         }
 
         return in_array(strtolower($alias), $this->aliases, true);
+    }
+
+    public static function __set_state(array $array)
+    {
+        $obj = new static();
+
+        $properties = array_keys(get_object_vars($obj));
+
+        foreach ($properties as $property) {
+            $obj->{$property} = $array[$property];
+        }
+
+        return $obj;
     }
 }

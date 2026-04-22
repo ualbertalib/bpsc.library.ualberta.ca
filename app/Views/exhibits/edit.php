@@ -25,7 +25,10 @@
   <div class="span6">
     <div class="row-fluid">
       <label class="cr">
-        <input type="checkbox" name="on_now" value="1" id="on-now" <?php if(!empty($exhibit_item['on_now'])&&($exhibit_item['on_now']==1)){echo "checked=checked";} ?>>I would like this exhibit to be on the ON NOW exhibit on the home page.
+	
+        <input type="checkbox" name="on_now" value="1" id="on-now" 
+ <?= (!empty($exhibit_item['on_now']) && $exhibit_item['on_now'] == 1) ? 'checked' : '' ?>>I would like this exhibit to be on the ON NOW exhibit on the home page. 
+
       </label>
     </div>
     <div class="row-fluid on-now-info">
@@ -73,7 +76,7 @@
     <label for="collection_type">Exhibition Type</label> 
      </div>
      <div class="span8 checks">
-   <ul class="types">
+   <ul>
   
             <?php foreach ($ex_subjects_array as $type): ?>
                <li><input type="checkbox" id="<?php echo $type ?>" value="<?php echo $type ?>" class="sub-checkbox" 

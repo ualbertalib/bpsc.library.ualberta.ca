@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of CodeIgniter Shield.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 namespace CodeIgniter\Shield\Authentication\Passwords;
 
 use CodeIgniter\Shield\Entities\User;
@@ -72,16 +81,14 @@ class NothingPersonalValidator extends BaseValidator implements ValidatorInterfa
             $needles = $this->strip_explode($userName);
 
             // extract local-part and domain parts from email as separate needles
-            [
-                $localPart,
-                $domain,
-            ] = explode('@', $email);
+            [$localPart, $domain] = explode('@', $email) + [1 => null];
+
             // might be john.doe@example.com and we want all the needles we can get
             $emailParts = $this->strip_explode($localPart);
-            if (! empty($domain)) {
+            if ($domain !== null && $domain !== '') {
                 $emailParts[] = $domain;
             }
-            $needles = array_merge($needles, $emailParts);
+            $needles = [...$needles, ...$emailParts];
 
             // Get any other "personal" fields defined in config
             $personalFields = $this->config->personalFields;
@@ -124,8 +131,8 @@ class NothingPersonalValidator extends BaseValidator implements ValidatorInterfa
                     }
 
                     // look both ways in case password is subset of needle
-                    if (strpos($haystack, $needle) !== false
-                        || strpos($needle, $haystack) !== false) {
+                    if (str_contains($haystack, $needle)
+                        || str_contains($needle, $haystack)) {
                         $valid = false;
                         break 2;
                     }
@@ -185,11 +192,13 @@ class NothingPersonalValidator extends BaseValidator implements ValidatorInterfa
      *
      * Replaces all non-word characters and underscores in $str with a space.
      * Then it explodes that result using the space for a delimiter.
+     *
+     * @return array<int, string>
      */
     protected function strip_explode(string $str): array
     {
         $stripped = preg_replace('/[\W_]+/', ' ', $str);
-        $parts    = explode(' ', trim($stripped));
+        $parts    = explode(' ', trim((string) $stripped));
 
         // If it's not already there put the untouched input at the top of the array
         if (! in_array($str, $parts, true)) {

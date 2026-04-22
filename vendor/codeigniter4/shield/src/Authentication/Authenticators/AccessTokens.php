@@ -2,12 +2,22 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of CodeIgniter Shield.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 namespace CodeIgniter\Shield\Authentication\Authenticators;
 
 use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\I18n\Time;
 use CodeIgniter\Shield\Authentication\AuthenticationException;
 use CodeIgniter\Shield\Authentication\AuthenticatorInterface;
+use CodeIgniter\Shield\Config\Auth;
 use CodeIgniter\Shield\Entities\User;
 use CodeIgniter\Shield\Exceptions\InvalidArgumentException;
 use CodeIgniter\Shield\Models\TokenLoginModel;
@@ -19,18 +29,15 @@ class AccessTokens implements AuthenticatorInterface
 {
     public const ID_TYPE_ACCESS_TOKEN = 'access_token';
 
-    /**
-     * The persistence engine
-     */
-    protected UserModel $provider;
-
     protected ?User $user = null;
     protected TokenLoginModel $loginModel;
 
-    public function __construct(UserModel $provider)
-    {
-        $this->provider = $provider;
-
+    /**
+     * @param UserModel $provider The persistence engine
+     */
+    public function __construct(
+        protected UserModel $provider,
+    ) {
         $this->loginModel = model(TokenLoginModel::class);
     }
 
@@ -42,6 +49,8 @@ class AccessTokens implements AuthenticatorInterface
      */
     public function attempt(array $credentials): Result
     {
+        $config = config('AuthToken');
+
         /** @var IncomingRequest $request */
         $request = service('request');
 
@@ -51,21 +60,36 @@ class AccessTokens implements AuthenticatorInterface
         $result = $this->check($credentials);
 
         if (! $result->isOK()) {
-            // Always record a login attempt, whether success or not.
-            $this->loginModel->recordLoginAttempt(
-                self::ID_TYPE_ACCESS_TOKEN,
-                $credentials['token'] ?? '',
-                false,
-                $ipAddress,
-                $userAgent
-            );
+            if ($config->recordLoginAttempt >= Auth::RECORD_LOGIN_ATTEMPT_FAILURE) {
+                // Record all failed login attempts.
+                $this->loginModel->recordLoginAttempt(
+                    self::ID_TYPE_ACCESS_TOKEN,
+                    $credentials['token'] ?? '',
+                    false,
+                    $ipAddress,
+                    $userAgent,
+                );
+            }
 
             return $result;
         }
 
-        $user = $result->extraInfo();
+        $user  = $result->extraInfo();
+        $token = $user->getAccessToken($this->getBearerToken());
 
         if ($user->isBanned()) {
+            if ($config->recordLoginAttempt >= Auth::RECORD_LOGIN_ATTEMPT_FAILURE) {
+                // Record a banned login attempt.
+                $this->loginModel->recordLoginAttempt(
+                    self::ID_TYPE_ACCESS_TOKEN,
+                    $token->name ?? '',
+                    false,
+                    $ipAddress,
+                    $userAgent,
+                    $user->id,
+                );
+            }
+
             $this->user = null;
 
             return new Result([
@@ -74,20 +98,21 @@ class AccessTokens implements AuthenticatorInterface
             ]);
         }
 
-        $user = $user->setAccessToken(
-            $user->getAccessToken($this->getBearerToken())
-        );
+        $user = $user->setAccessToken($token);
 
         $this->login($user);
 
-        $this->loginModel->recordLoginAttempt(
-            self::ID_TYPE_ACCESS_TOKEN,
-            $credentials['token'] ?? '',
-            true,
-            $ipAddress,
-            $userAgent,
-            $this->user->id
-        );
+        if ($config->recordLoginAttempt === Auth::RECORD_LOGIN_ATTEMPT_ALL) {
+            // Record a successful login attempt.
+            $this->loginModel->recordLoginAttempt(
+                self::ID_TYPE_ACCESS_TOKEN,
+                $token->name ?? '',
+                true,
+                $ipAddress,
+                $userAgent,
+                $this->user->id,
+            );
+        }
 
         return $result;
     }
@@ -104,12 +129,15 @@ class AccessTokens implements AuthenticatorInterface
         if (! array_key_exists('token', $credentials) || empty($credentials['token'])) {
             return new Result([
                 'success' => false,
-                'reason'  => lang('Auth.noToken', [config('Auth')->authenticatorHeader['tokens']]),
+                'reason'  => lang(
+                    'Auth.noToken',
+                    [config('AuthToken')->authenticatorHeader['tokens']],
+                ),
             ]);
         }
 
-        if (strpos($credentials['token'], 'Bearer') === 0) {
-            $credentials['token'] = trim(substr($credentials['token'], 6));
+        if (str_starts_with((string) $credentials['token'], 'Bearer')) {
+            $credentials['token'] = trim(substr((string) $credentials['token'], 6));
         }
 
         /** @var UserIdentityModel $identityModel */
@@ -126,10 +154,12 @@ class AccessTokens implements AuthenticatorInterface
 
         assert($token->last_used_at instanceof Time || $token->last_used_at === null);
 
-        // Hasn't been used in a long time
+        // Is expired ?
         if (
-            $token->last_used_at
-            && $token->last_used_at->isBefore(Time::now()->subSeconds(config('Auth')->unusedTokenLifetime))
+            $token->expires instanceof Time
+            && $token->expires->isBefore(
+                Time::now(),
+            )
         ) {
             return new Result([
                 'success' => false,
@@ -137,7 +167,20 @@ class AccessTokens implements AuthenticatorInterface
             ]);
         }
 
-        $token->last_used_at = Time::now()->format('Y-m-d H:i:s');
+        // Hasn't been used in a long time
+        if (
+            $token->last_used_at
+            && $token->last_used_at->isBefore(
+                Time::now()->subSeconds(config('AuthToken')->unusedTokenLifetime),
+            )
+        ) {
+            return new Result([
+                'success' => false,
+                'reason'  => lang('Auth.oldToken'),
+            ]);
+        }
+
+        $token->last_used_at = Time::now();
 
         if ($token->hasChanged()) {
             $identityModel->save($token);
@@ -160,7 +203,7 @@ class AccessTokens implements AuthenticatorInterface
      */
     public function loggedIn(): bool
     {
-        if (! empty($this->user)) {
+        if ($this->user instanceof User) {
             return true;
         }
 
@@ -168,7 +211,9 @@ class AccessTokens implements AuthenticatorInterface
         $request = service('request');
 
         return $this->attempt([
-            'token' => $request->getHeaderLine(config('Auth')->authenticatorHeader['tokens']),
+            'token' => $request->getHeaderLine(
+                config('AuthToken')->authenticatorHeader['tokens'],
+            ),
         ])->isOK();
     }
 
@@ -191,12 +236,12 @@ class AccessTokens implements AuthenticatorInterface
     {
         $user = $this->provider->findById($userId);
 
-        if (empty($user)) {
+        if (! $user instanceof User) {
             throw AuthenticationException::forInvalidUser();
         }
 
         $user->setAccessToken(
-            $user->getAccessToken($this->getBearerToken())
+            $user->getAccessToken($this->getBearerToken()),
         );
 
         $this->login($user);
@@ -226,7 +271,7 @@ class AccessTokens implements AuthenticatorInterface
         /** @var IncomingRequest $request */
         $request = service('request');
 
-        $header = $request->getHeaderLine(config('Auth')->authenticatorHeader['tokens']);
+        $header = $request->getHeaderLine(config('AuthToken')->authenticatorHeader['tokens']);
 
         if (empty($header)) {
             return null;
@@ -242,7 +287,7 @@ class AccessTokens implements AuthenticatorInterface
     {
         if (! $this->user instanceof User) {
             throw new InvalidArgumentException(
-                __METHOD__ . '() requires logged in user before calling.'
+                __METHOD__ . '() requires logged in user before calling.',
             );
         }
 

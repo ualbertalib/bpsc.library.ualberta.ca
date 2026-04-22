@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -21,5 +23,5 @@ interface AutoRouterInterface
      *
      * @return array [directory_name, controller_name, controller_method, params]
      */
-    public function getRoute(string $uri): array;
+    public function getRoute(string $uri, string $httpVerb): array;
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -15,6 +17,8 @@ use CodeIgniter\Log\Exceptions\LogException;
 
 /**
  * Log handler that writes to PHP's `error_log()`
+ *
+ * @see \CodeIgniter\Log\Handlers\ErrorlogHandlerTest
  */
 class ErrorlogHandler extends BaseHandler
 {
@@ -34,14 +38,14 @@ class ErrorlogHandler extends BaseHandler
      * Says where the error should go. Currently supported are
      * 0 (`TYPE_OS`) and 4 (`TYPE_SAPI`).
      *
-     * @var int
+     * @var 0|4
      */
     protected $messageType = 0;
 
     /**
      * Constructor.
      *
-     * @param mixed[] $config
+     * @param array{handles?: list<string>, messageType?: int} $config
      */
     public function __construct(array $config = [])
     {
@@ -74,6 +78,8 @@ class ErrorlogHandler extends BaseHandler
 
     /**
      * Extracted call to `error_log()` in order to be tested.
+     *
+     * @param 0|4 $messageType
      *
      * @codeCoverageIgnore
      */

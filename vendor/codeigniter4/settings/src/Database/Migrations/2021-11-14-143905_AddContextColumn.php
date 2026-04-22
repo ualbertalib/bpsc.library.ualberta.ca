@@ -1,14 +1,28 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CodeIgniter\Settings\Database\Migrations;
 
+use CodeIgniter\Database\Forge;
 use CodeIgniter\Database\Migration;
+use CodeIgniter\Settings\Config\Settings;
 
 class AddContextColumn extends Migration
 {
-    public function up()
+    private readonly Settings $config;
+
+    public function __construct(?Forge $forge = null)
     {
-        $this->forge->addColumn(config('Settings')->database['table'], [
+        $this->config  = config('Settings');
+        $this->DBGroup = $this->config->database['group'] ?? null;
+
+        parent::__construct($forge);
+    }
+
+    public function up(): void
+    {
+        $this->forge->addColumn($this->config->database['table'], [
             'context' => [
                 'type'       => 'varchar',
                 'constraint' => 255,
@@ -18,8 +32,8 @@ class AddContextColumn extends Migration
         ]);
     }
 
-    public function down()
+    public function down(): void
     {
-        $this->forge->dropColumn(config('Settings')->database['table'], 'context');
+        $this->forge->dropColumn($this->config->database['table'], 'context');
     }
 }

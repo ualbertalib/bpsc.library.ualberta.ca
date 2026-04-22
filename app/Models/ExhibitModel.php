@@ -11,8 +11,7 @@ class ExhibitModel extends Model
 	protected $returnType = 'array';
 	protected $useAutoIncrement = true;
 	protected $allowedFields = array('title' , 'slug', 'exhibitor' , 'external_url', 'exhibit_type', 'subjects',
-				'short_description', 'on_now', 'on_now_details', 'on_now_dates', 'essay', 'exhibit_year', 'caption0',
-				'caption1', 'caption2', 'caption3', 'caption4', 'caption5', 'caption6');
+				'short_description', 'on_now', 'on_now_details', 'on_now_dates', 'essay', 'exhibit_year', 'caption1', 'caption2', 'caption3', 'caption4', 'caption5', 'caption6');
 				
 	protected $db;
 	
@@ -53,6 +52,14 @@ class ExhibitModel extends Model
 		return $query;
 	}
 	
+	public function get_upcoming()
+	{
+		
+		$query = $this->where('subjects', 'upcoming')->orderBy('exhibit_year','desc')->orderBy('title','asc')->findAll();
+		
+		return $query;
+	}
+	
 	
 	/**
 	* reset what's currently On Now to 0
@@ -80,10 +87,12 @@ class ExhibitModel extends Model
 	*   Insert into exhibit table
 	*/
 	public function set_exhibit($request){
+		
 		//$this->load->helper('url');
 
 		//$slug = strtolower(url_title($this->input->post('title'), 'dash', TRUE));
 		$slug = strtolower(url_title($request->getPost('title'), '-', TRUE));
+
 
 
 		$data = array(
@@ -94,12 +103,11 @@ class ExhibitModel extends Model
 			'exhibit_type'  => $request->getPost('exhibit_type'),
 			'subjects'  => $request->getPost('subjects'),
 			'short_description' => $request->getPost('short_description'),
-			'on_now' => ($request->getPost('on_now') ?? 0),
+			'on_now' => $request->getPost('on_now') ?? '',
 			'on_now_details' => $request->getPost('on_now_details'),
 			'on_now_dates' => $request->getPost('on_now_dates'),
 			'essay' => $request->getPost('essay'),
 			'exhibit_year' => $request->getPost('exhibit_year'),
-			'caption0' => $request->getPost('caption0'),
 			'caption1' => $request->getPost('caption1'),
 			'caption2' => $request->getPost('caption2'),
 			'caption3' => $request->getPost('caption3'),
@@ -107,7 +115,7 @@ class ExhibitModel extends Model
 			'caption5' => $request->getPost('caption5'),
 			'caption6' => $request->getPost('caption6')
 			);
-		
+
 		// if insert is successful
 		$this->insert($data, false);
 		$insertId = $this->getInsertID();
@@ -132,7 +140,6 @@ class ExhibitModel extends Model
 			'on_now_dates' => $request->getPost('on_now_dates'),
 			'essay' => $request->getPost('essay'),
 			'exhibit_year' => $request->getPost('exhibit_year'),
-			'caption0' => $request->getPost('caption0'),
 			'caption1' => $request->getPost('caption1'),
 			'caption2' => $request->getPost('caption2'),
 			'caption3' => $request->getPost('caption3'),

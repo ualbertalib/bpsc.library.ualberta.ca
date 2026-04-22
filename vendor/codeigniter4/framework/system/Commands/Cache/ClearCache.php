@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -14,6 +16,7 @@ namespace CodeIgniter\Commands\Cache;
 use CodeIgniter\Cache\CacheFactory;
 use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
+use Config\Cache;
 
 /**
  * Clears current cache.
@@ -51,7 +54,7 @@ class ClearCache extends BaseCommand
     /**
      * the Command's Arguments
      *
-     * @var array
+     * @var array<string, string>
      */
     protected $arguments = [
         'driver' => 'The cache driver to use',
@@ -62,7 +65,7 @@ class ClearCache extends BaseCommand
      */
     public function run(array $params)
     {
-        $config  = config('Cache');
+        $config  = config(Cache::class);
         $handler = $params[0] ?? $config->handler;
 
         if (! array_key_exists($handler, $config->validHandlers)) {

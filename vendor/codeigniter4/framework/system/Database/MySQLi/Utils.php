@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -36,7 +38,7 @@ class Utils extends BaseUtils
     /**
      * Platform dependent version of the backup function.
      *
-     * @return mixed
+     * @return never
      */
     public function _backup(?array $prefs = null)
     {

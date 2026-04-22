@@ -2,8 +2,18 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of CodeIgniter Shield.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 namespace CodeIgniter\Shield\Entities;
 
+use CodeIgniter\Entity\Entity;
 use CodeIgniter\I18n\Time;
 use CodeIgniter\Shield\Authentication\Passwords;
 
@@ -32,13 +42,11 @@ class UserIdentity extends Entity
      */
     protected $casts = [
         'id'          => '?integer',
-        'force_reset' => 'int_bool',
+        'force_reset' => 'int-bool',
     ];
 
     /**
-     * @var string[]
-     * @phpstan-var list<string>
-     * @psalm-var list<string>
+     * @var list<string>
      */
     protected $dates = [
         'expires',

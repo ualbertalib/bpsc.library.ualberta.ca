@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -17,6 +19,7 @@ namespace CodeIgniter\Validation;
  * Provides validation methods for common credit-card inputs.
  *
  * @see http://en.wikipedia.org/wiki/Credit_card_number
+ * @see \CodeIgniter\Validation\CreditCardRulesTest
  */
 class CreditCardRules
 {
@@ -184,7 +187,7 @@ class CreditCardRules
         }
 
         // If empty, it's not a card type we recognize, or invalid type.
-        if (empty($info)) {
+        if ($info === null) {
             return false;
         }
 
@@ -214,7 +217,7 @@ class CreditCardRules
         $validPrefix = false;
 
         foreach ($prefixes as $prefix) {
-            if (strpos($ccNumber, $prefix) === 0) {
+            if (str_starts_with($ccNumber, $prefix)) {
                 $validPrefix = true;
                 break;
             }
@@ -236,8 +239,6 @@ class CreditCardRules
 
     /**
      * Checks the given number to see if the number passing a Luhn check.
-     *
-     * @param string $number
      */
     protected function isValidLuhn(?string $number = null): bool
     {

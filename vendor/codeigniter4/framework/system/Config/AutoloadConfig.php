@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -12,6 +14,7 @@
 namespace CodeIgniter\Config;
 
 use Laminas\Escaper\Escaper;
+use Laminas\Escaper\EscaperInterface;
 use Laminas\Escaper\Exception\ExceptionInterface;
 use Laminas\Escaper\Exception\InvalidArgumentException as EscaperInvalidArgumentException;
 use Laminas\Escaper\Exception\RuntimeException;
@@ -45,8 +48,7 @@ class AutoloadConfig
      * but this should be done prior to creating any namespaced classes,
      * else you will need to modify all of those classes for this to work.
      *
-     * @var array<string, array<int, string>|string>
-     * @phpstan-var array<string, string|list<string>>
+     * @var array<string, list<string>|string>
      */
     public $psr4 = [];
 
@@ -72,8 +74,7 @@ class AutoloadConfig
      * that will be autoloaded. This can be useful for bootstrap operations
      * or for loading functions.
      *
-     * @var array<int, string>
-     * @phpstan-var list<string>
+     * @var list<string>
      */
     public $files = [];
 
@@ -92,7 +93,7 @@ class AutoloadConfig
      */
     protected $corePsr4 = [
         'CodeIgniter' => SYSTEMPATH,
-        'App'         => APPPATH, // To ensure filters, etc still found,
+        'Config'      => APPPATH . 'Config',
     ];
 
     /**
@@ -105,7 +106,7 @@ class AutoloadConfig
      * searched for within one or more directories as they would if they
      * were being autoloaded through a namespace.
      *
-     * @var array<string, string>
+     * @var array<class-string, string>
      */
     protected $coreClassmap = [
         AbstractLogger::class                  => SYSTEMPATH . 'ThirdParty/PSR/Log/AbstractLogger.php',
@@ -119,6 +120,7 @@ class AutoloadConfig
         ExceptionInterface::class              => SYSTEMPATH . 'ThirdParty/Escaper/Exception/ExceptionInterface.php',
         EscaperInvalidArgumentException::class => SYSTEMPATH . 'ThirdParty/Escaper/Exception/InvalidArgumentException.php',
         RuntimeException::class                => SYSTEMPATH . 'ThirdParty/Escaper/Exception/RuntimeException.php',
+        EscaperInterface::class                => SYSTEMPATH . 'ThirdParty/Escaper/EscaperInterface.php',
         Escaper::class                         => SYSTEMPATH . 'ThirdParty/Escaper/Escaper.php',
     ];
 

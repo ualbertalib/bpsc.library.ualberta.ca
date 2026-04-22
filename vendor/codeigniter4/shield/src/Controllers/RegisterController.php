@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of CodeIgniter Shield.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 namespace CodeIgniter\Shield\Controllers;
 
 use App\Controllers\BaseController;
@@ -10,12 +19,11 @@ use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Shield\Authentication\Authenticators\Session;
-use CodeIgniter\Shield\Authentication\Passwords;
-use CodeIgniter\Shield\Config\Auth;
 use CodeIgniter\Shield\Entities\User;
 use CodeIgniter\Shield\Exceptions\ValidationException;
 use CodeIgniter\Shield\Models\UserModel;
 use CodeIgniter\Shield\Traits\Viewable;
+use CodeIgniter\Shield\Validation\ValidationRules;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -28,27 +36,16 @@ class RegisterController extends BaseController
 {
     use Viewable;
 
-    protected $helpers = ['setting'];
-
-    /**
-     * Auth Table names
-     */
-    private array $tables;
-
     public function initController(
         RequestInterface $request,
         ResponseInterface $response,
-        LoggerInterface $logger
+        LoggerInterface $logger,
     ): void {
         parent::initController(
             $request,
             $response,
-            $logger
+            $logger,
         );
-
-        /** @var Auth $authConfig */
-        $authConfig   = config('Auth');
-        $this->tables = $authConfig->tables;
     }
 
     /**
@@ -100,14 +97,13 @@ class RegisterController extends BaseController
         // like the password, can only be validated properly here.
         $rules = $this->getValidationRules();
 
-        if (! $this->validate($rules)) {
+        if (! $this->validateData($this->request->getPost(), $rules, [], config('Auth')->DBGroup)) {
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
 
         // Save the user
         $allowedPostFields = array_keys($rules);
-        $user              = $this->getUserEntity();
-        $user->fill($this->request->getPost($allowedPostFields));
+        $user              = $users->createNewUser($this->request->getPost($allowedPostFields));
 
         // Workaround for email only registration/login
         if ($user->username === null) {
@@ -116,7 +112,7 @@ class RegisterController extends BaseController
 
         try {
             $users->save($user);
-        } catch (ValidationException $e) {
+        } catch (ValidationException) {
             return redirect()->back()->withInput()->with('errors', $users->errors());
         }
 
@@ -136,7 +132,7 @@ class RegisterController extends BaseController
         // If an action has been defined for register, start it up.
         $hasAction = $authenticator->startUpAction('register', $user);
         if ($hasAction) {
-            return redirect()->to('auth/a/show');
+            return redirect()->route('auth-action-show');
         }
 
         // Set the user active
@@ -163,49 +159,25 @@ class RegisterController extends BaseController
 
     /**
      * Returns the Entity class that should be used
+     *
+     * @deprecated 1.2.0 No longer used.
      */
     protected function getUserEntity(): User
     {
-        return new User();
+        $userProvider = $this->getUserProvider();
+
+        return $userProvider->createNewUser();
     }
 
     /**
      * Returns the rules that should be used for validation.
      *
-     * @return array<string, array<string, array<string>|string>>
-     * @phpstan-return array<string, array<string, string|list<string>>>
+     * @return array<string, array<string, list<string>|string>>
      */
     protected function getValidationRules(): array
     {
-        $registrationUsernameRules = array_merge(
-            config('AuthSession')->usernameValidationRules,
-            [sprintf('is_unique[%s.username]', $this->tables['users'])]
-        );
-        $registrationEmailRules = array_merge(
-            config('AuthSession')->emailValidationRules,
-            [sprintf('is_unique[%s.secret]', $this->tables['identities'])]
-        );
+        $rules = new ValidationRules();
 
-        return setting('Validation.registration') ?? [
-            'username' => [
-                'label' => 'Auth.username',
-                'rules' => $registrationUsernameRules,
-            ],
-            'email' => [
-                'label' => 'Auth.email',
-                'rules' => $registrationEmailRules,
-            ],
-            'password' => [
-                'label'  => 'Auth.password',
-                'rules'  => 'required|' . Passwords::getMaxLenghtRule() . '|strong_password',
-                'errors' => [
-                    'max_byte' => 'Auth.errorPasswordTooLongBytes',
-                ],
-            ],
-            'password_confirm' => [
-                'label' => 'Auth.passwordConfirm',
-                'rules' => 'required|matches[password]',
-            ],
-        ];
+        return $rules->getRegistrationRules();
     }
 }

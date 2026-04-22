@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of CodeIgniter Shield.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 return [
     // Exceptions
     'unknownAuthenticator'  => '{0} ist kein gültiger Authentifikator.',
@@ -16,16 +25,21 @@ return [
     'badToken'              => 'Das Zugriffstoken ist ungültig.',
     'oldToken'              => 'Das Zugriffstoken ist abgelaufen.',
     'noUserEntity'          => 'Die Benutzerentität muss für die Passwortüberprüfung angegeben werden.',
-    'invalidEmail'          => 'Es konnte nicht überprüft werden, ob die E-Mail-Adresse mit der gespeicherten übereinstimmt.',
+    'invalidEmail'          => 'Es konnte kein Benutzer mit der E-Mail "{0}" gefunden werden.',
     'unableSendEmailToUser' => 'Leider gab es ein Problem beim Senden der E-Mail. Wir konnten keine E-Mail an "{0}" senden.',
     'throttled'             => 'Es wurden zu viele Anfragen von dieser IP-Adresse gestellt. Sie können es in {0} Sekunden erneut versuchen.',
     'notEnoughPrivilege'    => 'Sie haben nicht die erforderliche Berechtigung, um den gewünschten Vorgang auszuführen.',
+    // JWT Exceptions
+    'invalidJWT'     => 'Der Token ist ungültig.',
+    'expiredJWT'     => 'Der Token ist abgelaufen.',
+    'beforeValidJWT' => 'Der Token ist noch nicht verfügbar.',
 
     'email'           => 'E-Mail-Adresse',
     'username'        => 'Benutzername',
     'password'        => 'Passwort',
     'passwordConfirm' => 'Passwort (erneut)',
     'haveAccount'     => 'Haben Sie bereits ein Konto?',
+    'token'           => 'Token',
 
     // Buttons
     'confirm' => 'Bestätigen',
@@ -47,7 +61,9 @@ return [
     'magicLinkExpired'   => 'Sorry, der Link ist abgelaufen.',
     'checkYourEmail'     => 'Prüfen Sie Ihre E-Mail!',
     'magicLinkDetails'   => 'Wir haben Ihnen gerade eine E-Mail mit einem Login-Link geschickt. Er ist nur für {0} Minuten gültig.',
+    'magicLinkDisabled'  => 'Die Verwendung von MagicLink ist derzeit nicht erlaubt.',
     'successLogout'      => 'Sie haben sich erfolgreich abgemeldet.',
+    'backToLogin'        => 'Zurück zur Anmeldung',
 
     // Passwords
     'errorPasswordLength'       => 'Passwörter müssen mindestens {0, number} Zeichen lang sein.',

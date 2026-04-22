@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CodeIgniter\Settings\Handlers;
 
 use RuntimeException;
@@ -27,10 +29,8 @@ abstract class BaseHandler
      * @param mixed $value
      *
      * @throws RuntimeException
-     *
-     * @return void
      */
-    public function set(string $class, string $property, $value = null, ?string $context = null)
+    public function set(string $class, string $property, $value = null, ?string $context = null): void
     {
         throw new RuntimeException('Set method not implemented for current Settings handler.');
     }
@@ -42,12 +42,30 @@ abstract class BaseHandler
      * Must throw RuntimeException for any failures.
      *
      * @throws RuntimeException
-     *
-     * @return void
      */
-    public function forget(string $class, string $property, ?string $context = null)
+    public function forget(string $class, string $property, ?string $context = null): void
     {
         throw new RuntimeException('Forget method not implemented for current Settings handler.');
+    }
+
+    /**
+     * All handlers MUST support flushing all values.
+     *
+     * @throws RuntimeException
+     */
+    public function flush(): void
+    {
+        throw new RuntimeException('Flush method not implemented for current Settings handler.');
+    }
+
+    /**
+     * All handlers that support deferWrites MUST support this method.
+     *
+     * @throws RuntimeException
+     */
+    public function persistPendingProperties(): void
+    {
+        throw new RuntimeException('PersistPendingProperties method not implemented for current Settings handler.');
     }
 
     /**
@@ -144,9 +162,10 @@ abstract class BaseHandler
                     if ('"' !== substr($data, -2, 1)) {
                         return false;
                     }
-                } elseif (false === strpos($data, '"')) {
+                } elseif (! str_contains($data, '"')) {
                     return false;
                 }
+
                 // Or else fall through.
                 // no break
             case 'a':

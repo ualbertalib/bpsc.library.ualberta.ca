@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -15,6 +17,8 @@ use CodeIgniter\HTTP\ResponseInterface;
 
 /**
  * An extendable controller to help provide a UI for a resource.
+ *
+ * @see \CodeIgniter\RESTful\ResourcePresenterTest
  */
 class ResourcePresenter extends BaseResource
 {

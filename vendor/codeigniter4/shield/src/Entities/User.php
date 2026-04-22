@@ -2,12 +2,23 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of CodeIgniter Shield.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 namespace CodeIgniter\Shield\Entities;
 
 use CodeIgniter\Database\Exceptions\DataException;
+use CodeIgniter\Entity\Entity;
 use CodeIgniter\I18n\Time;
 use CodeIgniter\Shield\Authentication\Authenticators\Session;
 use CodeIgniter\Shield\Authentication\Traits\HasAccessTokens;
+use CodeIgniter\Shield\Authentication\Traits\HasHmacTokens;
 use CodeIgniter\Shield\Authorization\Traits\Authorizable;
 use CodeIgniter\Shield\Models\LoginModel;
 use CodeIgniter\Shield\Models\UserIdentityModel;
@@ -16,24 +27,25 @@ use CodeIgniter\Shield\Traits\Bannable;
 use CodeIgniter\Shield\Traits\Resettable;
 
 /**
- * @property string|null         $email
- * @property int|string|null     $id
- * @property UserIdentity[]|null $identities
- * @property Time|null           $last_active
- * @property string|null         $password
- * @property string|null         $password_hash
- * @property string|null         $username
+ * @property string|null             $email
+ * @property int|string|null         $id
+ * @property list<UserIdentity>|null $identities
+ * @property Time|null               $last_active
+ * @property string|null             $password
+ * @property string|null             $password_hash
+ * @property string|null             $username
  */
 class User extends Entity
 {
     use Authorizable;
     use HasAccessTokens;
+    use HasHmacTokens;
     use Resettable;
     use Activatable;
     use Bannable;
 
     /**
-     * @var UserIdentity[]|null
+     * @var list<UserIdentity>|null
      */
     private ?array $identities = null;
 
@@ -42,9 +54,7 @@ class User extends Entity
     private ?string $password_hash = null;
 
     /**
-     * @var string[]
-     * @phpstan-var list<string>
-     * @psalm-var list<string>
+     * @var list<string>
      */
     protected $dates = [
         'created_at',
@@ -58,7 +68,7 @@ class User extends Entity
      */
     protected $casts = [
         'id'          => '?integer',
-        'active'      => 'int_bool',
+        'active'      => 'int-bool',
         'permissions' => 'array',
         'groups'      => 'array',
     ];
@@ -96,7 +106,7 @@ class User extends Entity
      *
      * @param string $type 'all' returns all identities.
      *
-     * @return UserIdentity[]
+     * @return list<UserIdentity>
      */
     public function getIdentities(string $type = 'all'): array
     {
@@ -115,6 +125,11 @@ class User extends Entity
         }
 
         return $identities;
+    }
+
+    public function setIdentities(array $identities): void
+    {
+        $this->identities = $identities;
     }
 
     /**
@@ -149,7 +164,7 @@ class User extends Entity
      */
     public function saveEmailIdentity(): bool
     {
-        if (empty($this->email) && empty($this->password) && empty($this->password_hash)) {
+        if (($this->email === null || $this->email === '') && ($this->password === null || $this->password === '') && ($this->password_hash === null || $this->password_hash === '')) {
             return true;
         }
 
@@ -166,15 +181,15 @@ class User extends Entity
             $identity = $this->getEmailIdentity();
         }
 
-        if (! empty($this->email)) {
+        if ($this->email !== null && $this->email !== '') {
             $identity->secret = $this->email;
         }
 
-        if (! empty($this->password)) {
+        if ($this->password !== null && $this->password !== '') {
             $identity->secret2 = service('passwords')->hash($this->password);
         }
 
-        if (! empty($this->password_hash) && empty($this->password)) {
+        if ($this->password_hash !== null && $this->password_hash !== '' && ($this->password === null || $this->password === '')) {
             $identity->secret2 = $this->password_hash;
         }
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -11,7 +13,9 @@
 
 namespace CodeIgniter\Router;
 
+use Closure;
 use CodeIgniter\Exceptions\PageNotFoundException;
+use CodeIgniter\HTTP\ResponseInterface;
 
 /**
  * Router for Auto-Routing
@@ -19,68 +23,47 @@ use CodeIgniter\Exceptions\PageNotFoundException;
 final class AutoRouter implements AutoRouterInterface
 {
     /**
-     * List of controllers registered for the CLI verb that should not be accessed in the web.
-     *
-     * @var class-string[]
-     */
-    private array $protectedControllers;
-
-    /**
      * Sub-directory that contains the requested controller class.
      * Primarily used by 'autoRoute'.
      */
     private ?string $directory = null;
 
-    /**
-     * The name of the controller class.
-     */
-    private string $controller;
-
-    /**
-     * The name of the method to use.
-     */
-    private string $method;
-
-    /**
-     * Whether dashes in URI's should be converted
-     * to underscores when determining method names.
-     */
-    private bool $translateURIDashes;
-
-    /**
-     * HTTP verb for the request.
-     */
-    private string $httpVerb;
-
-    /**
-     * Default namespace for controllers.
-     */
-    private string $defaultNamespace;
-
     public function __construct(
-        array $protectedControllers,
-        string $defaultNamespace,
-        string $defaultController,
-        string $defaultMethod,
-        bool $translateURIDashes,
-        string $httpVerb
+        /**
+         * List of CLI routes that do not contain '*' routes.
+         *
+         * @var array<string, (Closure(mixed...): (ResponseInterface|string|void))|string> [routeKey => handler]
+         */
+        private readonly array $cliRoutes,
+        /**
+         * Default namespace for controllers.
+         */
+        private readonly string $defaultNamespace,
+        /**
+         * The name of the controller class.
+         */
+        private string $controller,
+        /**
+         * The name of the method to use.
+         */
+        private string $method,
+        /**
+         * Whether dashes in URI's should be converted
+         * to underscores when determining method names.
+         */
+        private bool $translateURIDashes,
     ) {
-        $this->protectedControllers = $protectedControllers;
-        $this->defaultNamespace     = $defaultNamespace;
-        $this->translateURIDashes   = $translateURIDashes;
-        $this->httpVerb             = $httpVerb;
-
-        $this->controller = $defaultController;
-        $this->method     = $defaultMethod;
     }
 
     /**
      * Attempts to match a URI path against Controllers and directories
      * found in APPPATH/Controllers, to find a matching route.
      *
+     * @param string $httpVerb HTTP verb like `GET`,`POST`
+     *
      * @return array [directory_name, controller_name, controller_method, params]
      */
-    public function getRoute(string $uri): array
+    public function getRoute(string $uri, string $httpVerb): array
     {
         $segments = explode('/', $uri);
 
@@ -89,7 +72,7 @@ final class AutoRouter implements AutoRouterInterface
 
         // If we don't have any segments left - use the default controller;
         // If not empty, then the first segment should be the controller
-        if (! empty($segments)) {
+        if ($segments !== []) {
             $this->controller = ucfirst(array_shift($segments));
         }
 
@@ -102,7 +85,7 @@ final class AutoRouter implements AutoRouterInterface
         // Use the method name if it exists.
         // If it doesn't, no biggie - the default method name
         // has already been set.
-        if (! empty($segments)) {
+        if ($segments !== []) {
             $this->method = array_shift($segments) ?: $this->method;
         }
 
@@ -114,49 +97,65 @@ final class AutoRouter implements AutoRouterInterface
         /** @var array $params An array of params to the controller method. */
         $params = [];
 
-        if (! empty($segments)) {
+        if ($segments !== []) {
             $params = $segments;
         }
 
         // Ensure routes registered via $routes->cli() are not accessible via web.
-        if ($this->httpVerb !== 'cli') {
+        if ($httpVerb !== 'CLI') {
             $controller = '\\' . $this->defaultNamespace;
 
-            $controller .= $this->directory ? str_replace('/', '\\', $this->directory) : '';
+            $controller .= $this->directory !== null ? str_replace('/', '\\', $this->directory) : '';
             $controller .= $controllerName;
 
             $controller = strtolower($controller);
+            $methodName = strtolower($this->methodName());
 
-            foreach ($this->protectedControllers as $controllerInRoute) {
-                if (! is_string($controllerInRoute)) {
-                    continue;
-                }
-                if (strtolower($controllerInRoute) !== $controller) {
-                    continue;
-                }
+            foreach ($this->cliRoutes as $handler) {
+                if (is_string($handler)) {
+                    $handler = strtolower($handler);
 
-                throw new PageNotFoundException(
-                    'Cannot access the controller in a CLI Route. Controller: ' . $controllerInRoute
-                );
+                    // Like $routes->cli('hello/(:segment)', 'Home::$1')
+                    if (str_contains($handler, '::$')) {
+                        throw new PageNotFoundException(
+                            'Cannot access CLI Route: ' . $uri,
+                        );
+                    }
+
+                    if (str_starts_with($handler, $controller . '::' . $methodName)) {
+                        throw new PageNotFoundException(
+                            'Cannot access CLI Route: ' . $uri,
+                        );
+                    }
+
+                    if ($handler === $controller) {
+                        throw new PageNotFoundException(
+                            'Cannot access CLI Route: ' . $uri,
+                        );
+                    }
+                }
             }
         }
 
         // Load the file so that it's available for CodeIgniter.
         $file = APPPATH . 'Controllers/' . $this->directory . $controllerName . '.php';
-        if (is_file($file)) {
-            include_once $file;
+
+        if (! is_file($file)) {
+            throw PageNotFoundException::forControllerNotFound($this->controller, $this->method);
         }
+
+        include_once $file;
 
         // Ensure the controller stores the fully-qualified class name
         // We have to check for a length over 1, since by default it will be '\'
-        if (strpos($this->controller, '\\') === false && strlen($this->defaultNamespace) > 1) {
+        if (! str_contains($this->controller, '\\') && strlen($this->defaultNamespace) > 1) {
             $this->controller = '\\' . ltrim(
                 str_replace(
                     '/',
                     '\\',
-                    $this->defaultNamespace . $this->directory . $controllerName
+                    $this->defaultNamespace . $this->directory . $controllerName,
                 ),
-                '\\'
+                '\\',
             );
         }
 
@@ -185,7 +184,7 @@ final class AutoRouter implements AutoRouterInterface
      */
     private function scanControllers(array $segments): array
     {
-        $segments = array_filter($segments, static fn ($segment) => $segment !== '');
+        $segments = array_filter($segments, static fn ($segment): bool => $segment !== '');
         // numerically reindex the array, removing gaps
         $segments = array_values($segments);
 
@@ -200,7 +199,7 @@ final class AutoRouter implements AutoRouterInterface
 
         while ($c-- > 0) {
             $segmentConvert = ucfirst(
-                $this->translateURIDashes ? str_replace('-', '_', $segments[0]) : $segments[0]
+                $this->translateURIDashes ? str_replace('-', '_', $segments[0]) : $segments[0],
             );
             // as soon as we encounter any segment that is not PSR-4 compliant, stop searching
             if (! $this->isValidSegment($segmentConvert)) {
@@ -240,10 +239,12 @@ final class AutoRouter implements AutoRouterInterface
      * @param bool $validate if true, checks to make sure $dir consists of only PSR4 compliant segments
      *
      * @deprecated This method should be removed.
+     *
+     * @return void
      */
     public function setDirectory(?string $dir = null, bool $append = false, bool $validate = true)
     {
-        if (empty($dir)) {
+        if ((string) $dir === '') {
             $this->directory = null;
 
             return;
@@ -259,7 +260,7 @@ final class AutoRouter implements AutoRouterInterface
             }
         }
 
-        if ($append !== true || empty($this->directory)) {
+        if (! $append || ((string) $this->directory === '')) {
             $this->directory = trim($dir, '/') . '/';
         } else {
             $this->directory .= trim($dir, '/') . '/';
@@ -274,7 +275,7 @@ final class AutoRouter implements AutoRouterInterface
      */
     public function directory(): string
     {
-        return ! empty($this->directory) ? $this->directory : '';
+        return ((string) $this->directory !== '') ? $this->directory : '';
     }
 
     private function controllerName(): string

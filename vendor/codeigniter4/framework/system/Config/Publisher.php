@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -26,7 +28,7 @@ class Publisher extends BaseConfig
      * result in a PublisherException. Files that do no fit the
      * pattern will cause copy/merge to fail.
      *
-     * @var array<string,string>
+     * @var array<string, string>
      */
     public $restrictions = [
         ROOTPATH => '*',
@@ -36,7 +38,7 @@ class Publisher extends BaseConfig
     /**
      * Disables Registrars to prevent modules from altering the restrictions.
      */
-    final protected function registerProperties()
+    final protected function registerProperties(): void
     {
     }
 }

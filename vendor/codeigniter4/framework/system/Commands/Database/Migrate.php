@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -13,7 +15,7 @@ namespace CodeIgniter\Commands\Database;
 
 use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
-use Config\Services;
+use CodeIgniter\CLI\SignalTrait;
 use Throwable;
 
 /**
@@ -21,6 +23,8 @@ use Throwable;
  */
 class Migrate extends BaseCommand
 {
+    use SignalTrait;
+
     /**
      * The group the command is lumped under
      * when listing commands.
@@ -53,7 +57,7 @@ class Migrate extends BaseCommand
     /**
      * the Command's Options
      *
-     * @var array
+     * @var array<string, string>
      */
     protected $options = [
         '-n'    => 'Set migration namespace',
@@ -66,7 +70,7 @@ class Migrate extends BaseCommand
      */
     public function run(array $params)
     {
-        $runner = Services::migrations();
+        $runner = service('migrations');
         $runner->clearCliMessages();
 
         CLI::write(lang('Migrations.latest'), 'yellow');
@@ -81,9 +85,11 @@ class Migrate extends BaseCommand
                 $runner->setNamespace($namespace);
             }
 
-            if (! $runner->latest($group)) {
-                CLI::error(lang('Migrations.generalFault'), 'light_gray', 'red'); // @codeCoverageIgnore
-            }
+            $this->withSignalsBlocked(static function () use ($runner, $group): void {
+                if (! $runner->latest($group)) {
+                    CLI::error(lang('Migrations.generalFault'), 'light_gray', 'red'); // @codeCoverageIgnore
+                }
+            });
 
             $messages = $runner->getCliMessages();
 

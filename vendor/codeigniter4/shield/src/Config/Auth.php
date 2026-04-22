@@ -2,12 +2,23 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of CodeIgniter Shield.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 namespace CodeIgniter\Shield\Config;
 
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Shield\Authentication\Actions\ActionInterface;
 use CodeIgniter\Shield\Authentication\AuthenticatorInterface;
 use CodeIgniter\Shield\Authentication\Authenticators\AccessTokens;
+use CodeIgniter\Shield\Authentication\Authenticators\HmacSha256;
+use CodeIgniter\Shield\Authentication\Authenticators\JWT;
 use CodeIgniter\Shield\Authentication\Authenticators\Session;
 use CodeIgniter\Shield\Authentication\Passwords\CompositionValidator;
 use CodeIgniter\Shield\Authentication\Passwords\DictionaryValidator;
@@ -22,6 +33,17 @@ class Auth extends BaseConfig
      * ////////////////////////////////////////////////////////////////////
      * AUTHENTICATION
      * ////////////////////////////////////////////////////////////////////
+     */
+
+    // Constants for Record Login Attempts. Do not change.
+    public const RECORD_LOGIN_ATTEMPT_NONE    = 0; // Do not record at all
+    public const RECORD_LOGIN_ATTEMPT_FAILURE = 1; // Record only failures
+    public const RECORD_LOGIN_ATTEMPT_ALL     = 2; // Record all login attempts
+
+    /**
+     * --------------------------------------------------------------------
+     * View files
+     * --------------------------------------------------------------------
      */
     public array $views = [
         'login'                       => '\CodeIgniter\Shield\Views\login',
@@ -39,40 +61,10 @@ class Auth extends BaseConfig
 
     /**
      * --------------------------------------------------------------------
-     * Customize Name of Shield Tables
-     * --------------------------------------------------------------------
-     * Only change if you want to rename the default Shield table names
-     *
-     * It may be necessary to change the names of the tables for
-     * security reasons, to prevent the conflict of table names,
-     * the internal policy of the companies or any other reason.
-     *
-     * - users                  Auth Users Table, the users info is stored.
-     * - auth_identities        Auth Identities Table, Used for storage of passwords, access tokens, social login identities, etc.
-     * - auth_logins            Auth Login Attempts, Table records login attempts.
-     * - auth_token_logins      Auth Token Login Attempts Table, Records Bearer Token type login attempts.
-     * - auth_remember_tokens   Auth Remember Tokens (remember-me) Table.
-     * - auth_groups_users      Groups Users Table.
-     * - auth_permissions_users Users Permissions Table.
-     *
-     * @var array<string, string>
-     */
-    public array $tables = [
-        'users'             => 'users',
-        'identities'        => 'auth_identities',
-        'logins'            => 'auth_logins',
-        'token_logins'      => 'auth_token_logins',
-        'remember_tokens'   => 'auth_remember_tokens',
-        'groups_users'      => 'auth_groups_users',
-        'permissions_users' => 'auth_permissions_users',
-    ];
-
-    /**
-     * --------------------------------------------------------------------
      * Redirect URLs
      * --------------------------------------------------------------------
      * The default URL that a user will be redirected to after various auth
-     * auth actions. This can be either of the following:
+     * actions. This can be either of the following:
      *
      * 1. An absolute URL. E.g. http://example.com OR https://example.com
      * 2. A named route that can be accessed using `route_to()` or `url_to()`
@@ -82,10 +74,12 @@ class Auth extends BaseConfig
      * to apply any logic you may need.
      */
     public array $redirects = [
-        'register'    => '/',
-        'login'       => '/',
-        'logout'      => 'login',
-        'force_reset' => '/',
+        'register'          => '/',
+        'login'             => '/',
+        'logout'            => 'login',
+        'force_reset'       => '/',
+        'permission_denied' => '/',
+        'group_denied'      => '/',
     ];
 
     /**
@@ -100,6 +94,11 @@ class Auth extends BaseConfig
      * Available actions with Shield:
      * - register: \CodeIgniter\Shield\Authentication\Actions\EmailActivator::class
      * - login:    \CodeIgniter\Shield\Authentication\Actions\Email2FA::class
+     *
+     * Custom Actions and Requirements:
+     *
+     * - All actions must implement \CodeIgniter\Shield\Authentication\Actions\ActionInterface.
+     * - Custom actions for "register" must have a class name that ends with the suffix "Activator" (e.g., `CustomSmsActivator`) ensure proper functionality.
      *
      * @var array<string, class-string<ActionInterface>|null>
      */
@@ -122,28 +121,9 @@ class Auth extends BaseConfig
     public array $authenticators = [
         'tokens'  => AccessTokens::class,
         'session' => Session::class,
+        'hmac'    => HmacSha256::class,
+        // 'jwt'     => JWT::class,
     ];
-
-    /**
-     * --------------------------------------------------------------------
-     * Name of Authenticator Header
-     * --------------------------------------------------------------------
-     * The name of Header that the Authorization token should be found.
-     * According to the specs, this should be `Authorization`, but rare
-     * circumstances might need a different header.
-     */
-    public array $authenticatorHeader = [
-        'tokens' => 'Authorization',
-    ];
-
-    /**
-     * --------------------------------------------------------------------
-     * Unused Token Lifetime
-     * --------------------------------------------------------------------
-     * Determines the amount of time, in seconds, that an unused
-     * access token can be used.
-     */
-    public int $unusedTokenLifetime = YEAR;
 
     /**
      * --------------------------------------------------------------------
@@ -162,12 +142,13 @@ class Auth extends BaseConfig
      * when using the 'chain' filter. Each Authenticator listed will be checked.
      * If no match is found, then the next in the chain will be checked.
      *
-     * @var string[]
-     * @phpstan-var list<string>
+     * @var list<string>
      */
     public array $authenticationChain = [
         'session',
         'tokens',
+        'hmac',
+        // 'jwt',
     ];
 
     /**
@@ -183,10 +164,10 @@ class Auth extends BaseConfig
      * Record Last Active Date
      * --------------------------------------------------------------------
      * If true, will always update the `last_active` datetime for the
-     * logged in user on every page request.
-     * This feature only works when session/tokens filter is active.
+     * logged-in user on every page request.
+     * This feature only works when session/tokens/hmac/chain/jwt filter is active.
      *
-     * @see https://codeigniter4.github.io/shield/install/#protect-all-pages for set filters.
+     * @see https://codeigniter4.github.io/shield/quick_start_guide/using_session_auth/#protecting-pages for set filters.
      */
     public bool $recordActiveDate = true;
 
@@ -234,6 +215,43 @@ class Auth extends BaseConfig
 
     /**
      * --------------------------------------------------------------------
+     * The validation rules for username
+     * --------------------------------------------------------------------
+     *
+     * Do not use string rules like `required|valid_email`.
+     *
+     * @var array<string, array<int, string>|string>
+     */
+    public array $usernameValidationRules = [
+        'label' => 'Auth.username',
+        'rules' => [
+            'required',
+            'max_length[30]',
+            'min_length[3]',
+            'regex_match[/\A[a-zA-Z0-9\.]+\z/]',
+        ],
+    ];
+
+    /**
+     * --------------------------------------------------------------------
+     * The validation rules for email
+     * --------------------------------------------------------------------
+     *
+     * Do not use string rules like `required|valid_email`.
+     *
+     * @var array<string, array<int, string>|string>
+     */
+    public array $emailValidationRules = [
+        'label' => 'Auth.email',
+        'rules' => [
+            'required',
+            'max_length[254]',
+            'valid_email',
+        ],
+    ];
+
+    /**
+     * --------------------------------------------------------------------
      * Minimum Password Length
      * --------------------------------------------------------------------
      * The minimum length that a password must be to be accepted.
@@ -250,7 +268,7 @@ class Auth extends BaseConfig
      * You can add custom classes as long as they adhere to the
      * CodeIgniter\Shield\Authentication\Passwords\ValidatorInterface.
      *
-     * @var class-string<ValidatorInterface>[]
+     * @var list<class-string<ValidatorInterface>>
      */
     public array $passwordValidators = [
         CompositionValidator::class,
@@ -351,30 +369,58 @@ class Auth extends BaseConfig
      * --------------------------------------------------------------------
      * The BCRYPT method of hashing allows you to define the "cost"
      * or number of iterations made, whenever a password hash is created.
-     * This defaults to a value of 10 which is an acceptable number.
+     * This defaults to a value of 12 which is an acceptable number.
      * However, depending on the security needs of your application
      * and the power of your hardware, you might want to increase the
      * cost. This makes the hashing process takes longer.
      *
      * Valid range is between 4 - 31.
      */
-    public int $hashCost = 10;
-
-    /**
-     * If you need to support passwords saved in versions prior to Shield v1.0.0-beta.4.
-     * set this to true.
-     *
-     * See https://github.com/codeigniter4/shield/security/advisories/GHSA-c5vj-f36q-p9vg
-     *
-     * @deprecated This is only for backward compatibility.
-     */
-    public bool $supportOldDangerousPassword = false;
+    public int $hashCost = 12;
 
     /**
      * ////////////////////////////////////////////////////////////////////
      * OTHER SETTINGS
      * ////////////////////////////////////////////////////////////////////
      */
+
+    /**
+     * --------------------------------------------------------------------
+     * Customize the DB group used for each model
+     * --------------------------------------------------------------------
+     */
+    public ?string $DBGroup = null;
+
+    /**
+     * --------------------------------------------------------------------
+     * Customize Name of Shield Tables
+     * --------------------------------------------------------------------
+     * Only change if you want to rename the default Shield table names
+     *
+     * It may be necessary to change the names of the tables for
+     * security reasons, to prevent the conflict of table names,
+     * the internal policy of the companies or any other reason.
+     *
+     * - users                  Auth Users Table, the users info is stored.
+     * - auth_identities        Auth Identities Table, Used for storage of passwords, access tokens, social login identities, etc.
+     * - auth_logins            Auth Login Attempts, Table records login attempts.
+     * - auth_token_logins      Auth Token Login Attempts Table, Records Bearer Token type login attempts.
+     * - auth_remember_tokens   Auth Remember Tokens (remember-me) Table.
+     * - auth_groups_users      Groups Users Table.
+     * - auth_permissions_users Users Permissions Table.
+     *
+     * @var array<string, string>
+     */
+    public array $tables = [
+        'users'             => 'users',
+        'identities'        => 'auth_identities',
+        'logins'            => 'auth_logins',
+        'token_logins'      => 'auth_token_logins',
+        'remember_tokens'   => 'auth_remember_tokens',
+        'groups_users'      => 'auth_groups_users',
+        'permissions_users' => 'auth_permissions_users',
+    ];
+
     /**
      * --------------------------------------------------------------------
      * User Provider
@@ -395,7 +441,8 @@ class Auth extends BaseConfig
      */
     public function loginRedirect(): string
     {
-        $url = setting('Auth.redirects')['login'];
+        $session = session();
+        $url     = $session->getTempdata('beforeLoginUrl') ?? setting('Auth.redirects')['login'];
 
         return $this->getUrl($url);
     }
@@ -434,6 +481,28 @@ class Auth extends BaseConfig
     }
 
     /**
+     * Returns the URL the user should be redirected to
+     * if permission denied.
+     */
+    public function permissionDeniedRedirect(): string
+    {
+        $url = setting('Auth.redirects')['permission_denied'];
+
+        return $this->getUrl($url);
+    }
+
+    /**
+     * Returns the URL the user should be redirected to
+     * if group denied.
+     */
+    public function groupDeniedRedirect(): string
+    {
+        $url = setting('Auth.redirects')['group_denied'];
+
+        return $this->getUrl($url);
+    }
+
+    /**
      * Accepts a string which can be an absolute URL or
      * a named route or just a URI path, and returns the
      * full path.
@@ -442,23 +511,10 @@ class Auth extends BaseConfig
      */
     protected function getUrl(string $url): string
     {
-        // To accommodate all url patterns
-        $final_url = '';
-
-        switch (true) {
-            case strpos($url, 'http://') === 0 || strpos($url, 'https://') === 0: // URL begins with 'http' or 'https'. E.g. http://example.com
-                $final_url = $url;
-                break;
-
-            case route_to($url) !== false: // URL is a named-route
-                $final_url = rtrim(url_to($url), '/ ');
-                break;
-
-            default: // URL is a route (URI path)
-                $final_url = rtrim(site_url($url), '/ ');
-                break;
-        }
-
-        return $final_url;
+        return match (true) {
+            str_starts_with($url, 'http://') || str_starts_with($url, 'https://') => $url,
+            route_to($url) !== false                                              => rtrim(url_to($url), '/ '),
+            default                                                               => rtrim(site_url($url), '/ '),
+        };
     }
 }

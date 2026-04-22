@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of CodeIgniter Shield.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 namespace CodeIgniter\Shield\Config;
 
 use CodeIgniter\Config\BaseConfig;
@@ -20,15 +29,16 @@ class AuthGroups extends BaseConfig
      * --------------------------------------------------------------------
      * Groups
      * --------------------------------------------------------------------
-     * An associative array of the available groups in the system, where the keys are
-     * the group names and the values are arrays of the group info.
+     * An associative array of the available groups in the system, where the keys
+     * are the group names and the values are arrays of the group info.
      *
-     * Whatever value you assign as the key will be used to refer to the group when using functions such as:
+     * Whatever value you assign as the key will be used to refer to the group
+     * when using functions such as:
      *      $user->addGroup('superadmin');
      *
      * @var array<string, array<string, string>>
      *
-     * @see https://github.com/codeigniter4/shield/blob/develop/docs/quickstart.md#change-available-groups for more info
+     * @see https://codeigniter4.github.io/shield/quick_start_guide/using_authorization/#change-available-groups for more info
      */
     public array $groups = [
         'superadmin' => [
@@ -57,8 +67,7 @@ class AuthGroups extends BaseConfig
      * --------------------------------------------------------------------
      * Permissions
      * --------------------------------------------------------------------
-     * The available permissions in the system. Each system is defined
-     * where the key is the
+     * The available permissions in the system.
      *
      * If a permission is not listed here it cannot be used.
      */
@@ -77,6 +86,8 @@ class AuthGroups extends BaseConfig
      * Permissions Matrix
      * --------------------------------------------------------------------
      * Maps permissions to groups.
+     *
+     * This defines group-level permissions.
      */
     public array $matrix = [
         'superadmin' => [

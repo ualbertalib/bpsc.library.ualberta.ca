@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of CodeIgniter Shield.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 return [
     // Exceptions
     'unknownAuthenticator'  => '{0} احراز هویت معتبری نمی باشد.',
@@ -16,16 +25,21 @@ return [
     'badToken'              => 'توکن دسترسی معتبر نمی باشد.',
     'oldToken'              => 'توکن دسترسی منقضی شده است.',
     'noUserEntity'          => 'برای اعتبار سنجی هویت کاربر بایستی رمز عبور ارائه شود',
-    'invalidEmail'          => 'امکان تایید ایمیلی که با آدرس ایمیل ثبت شده یکسان نیست، وجود ندارد.',
+    'invalidEmail'          => 'امکان تأیید اینکه آدرس ایمیل با ایمیل «{0}» مطابقت دارد، وجود ندارد.',
     'unableSendEmailToUser' => 'متاسفانه, در ارسال ایمیل مشکلی پیش آمد. ما نتوانستیم ایمیلی را به "{0}" ارسال کنیم.',
     'throttled'             => 'درخواست های بسیار زیادی از این آدرس IP انجام شده است. می توانید بعد از {0} ثانیه دوباره امتحان کنید.',
     'notEnoughPrivilege'    => 'شما مجوز لازم برای انجام عملیات مورد نظر را ندارید.',
+    // JWT Exceptions
+    'invalidJWT'     => 'توکن معتبر نمی باشد.',
+    'expiredJWT'     => 'توکن منقضی شده است.',
+    'beforeValidJWT' => 'در حال حاضر امکان استفاده از توکن وجود ندارد.',
 
     'email'           => 'آدرس ایمیل',
     'username'        => 'نام کاربری',
     'password'        => 'رمز عبور',
     'passwordConfirm' => 'رمز عبور (تکرار)',
     'haveAccount'     => 'از قبل حساب کاربری دارید؟',
+    'token'           => 'توکن',
 
     // Buttons
     'confirm' => 'تایید',
@@ -47,7 +61,9 @@ return [
     'magicLinkExpired'   => 'متاسفانه, لینک منقضی شده است.',
     'checkYourEmail'     => 'ایمیلتان را بررسی کنید!',
     'magicLinkDetails'   => 'ما فقط یک لینک ورود به ایمیلتان ارسال کردیم. این لینک فقط برای {0} دقیقه معتبر خواهد بود.',
+    'magicLinkDisabled'  => 'امکان استفاده از لینک جادویی وجود ندارد.',
     'successLogout'      => 'با موفقیت خارج شدید.',
+    'backToLogin'        => 'بازگشت به ورود به سیستم',
 
     // Passwords
     'errorPasswordLength'       => 'طول رمز های عبور باید حداقل {0, number} کاراکتر باشد.',

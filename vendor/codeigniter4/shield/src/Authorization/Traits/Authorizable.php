@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of CodeIgniter Shield.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 namespace CodeIgniter\Shield\Authorization\Traits;
 
 use CodeIgniter\I18n\Time;
@@ -24,8 +33,6 @@ trait Authorizable
     {
         $this->populateGroups();
 
-        $configGroups = $this->getConfigGroups();
-
         $groupCount = count($this->groupCache);
 
         foreach ($groups as $group) {
@@ -36,8 +43,11 @@ trait Authorizable
                 continue;
             }
 
+            /** @var GroupModel $groupModel */
+            $groupModel = model(GroupModel::class);
+
             // make sure it's a valid group
-            if (! in_array($group, $configGroups, true)) {
+            if (! $groupModel->isValidGroup($group)) {
                 throw AuthorizationException::forUnknownGroup($group);
             }
 
@@ -87,10 +97,11 @@ trait Authorizable
     {
         $this->populateGroups();
 
-        $configGroups = $this->getConfigGroups();
+        /** @var GroupModel $groupModel */
+        $groupModel = model(GroupModel::class);
 
         foreach ($groups as $group) {
-            if (! in_array($group, $configGroups, true)) {
+            if (! $groupModel->isValidGroup($group)) {
                 throw AuthorizationException::forUnknownGroup($group);
             }
         }
@@ -99,6 +110,22 @@ trait Authorizable
         $this->saveGroups();
 
         return $this;
+    }
+
+    /**
+     * Set groups cache manually
+     */
+    public function setGroupsCache(array $groups): void
+    {
+        $this->groupCache = $groups;
+    }
+
+    /**
+     * Set permissions cache manually
+     */
+    public function setPermissionsCache(array $permissions): void
+    {
+        $this->permissionsCache = $permissions;
     }
 
     /**
@@ -226,49 +253,53 @@ trait Authorizable
 
     /**
      * Checks user permissions and their group permissions
-     * to see if the user has a specific permission.
+     * to see if the user has a specific permission or group
+     * of permissions.
      *
-     * @param string $permission string consisting of a scope and action, like `users.create`
+     * @param string $permissions string(s) consisting of a scope and action, like `users.create`
      */
-    public function can(string $permission): bool
+    public function can(string ...$permissions): bool
     {
-        if (strpos($permission, '.') === false) {
-            throw new LogicException(
-                'A permission must be a string consisting of a scope and action, like `users.create`.'
-                . ' Invalid permission: ' . $permission
-            );
-        }
-
+        // Get user's permissions and store in cache
         $this->populatePermissions();
-
-        $permission = strtolower($permission);
-
-        // Check user's permissions
-        if (in_array($permission, $this->permissionsCache, true)) {
-            return true;
-        }
 
         // Check the groups the user belongs to
         $this->populateGroups();
 
-        if (! count($this->groupCache)) {
-            return false;
-        }
+        // Get the group matrix
+        $matrix = setting('AuthGroups.matrix');
 
-        $matrix = function_exists('setting')
-            ? setting('AuthGroups.matrix')
-            : config('AuthGroups')->matrix;
+        foreach ($permissions as $permission) {
+            // Permission must contain a scope and action
+            if (! str_contains($permission, '.')) {
+                throw new LogicException(
+                    'A permission must be a string consisting of a scope and action, like `users.create`.'
+                    . ' Invalid permission: ' . $permission,
+                );
+            }
 
-        foreach ($this->groupCache as $group) {
-            // Check exact match
-            if (isset($matrix[$group]) && in_array($permission, $matrix[$group], true)) {
+            $permission = strtolower($permission);
+
+            // Check user's permissions
+            if (in_array($permission, $this->permissionsCache, true)) {
                 return true;
             }
 
-            // Check wildcard match
-            $check = substr($permission, 0, strpos($permission, '.')) . '.*';
-            if (isset($matrix[$group]) && in_array($check, $matrix[$group], true)) {
-                return true;
+            if (count($this->groupCache) === 0) {
+                return false;
+            }
+
+            foreach ($this->groupCache as $group) {
+                // Check exact match
+                if (isset($matrix[$group]) && in_array($permission, $matrix[$group], true)) {
+                    return true;
+                }
+
+                // Check wildcard match
+                $check = substr($permission, 0, strpos($permission, '.')) . '.*';
+                if (isset($matrix[$group]) && in_array($check, $matrix[$group], true)) {
+                    return true;
+                }
             }
         }
 
@@ -351,7 +382,7 @@ trait Authorizable
     }
 
     /**
-     * @phpstan-param 'group'|'permission' $type
+     * @param 'group'|'permission'       $type
      * @param GroupModel|PermissionModel $model
      */
     private function saveGroupsOrPermissions(string $type, $model, array $cache): void
@@ -378,7 +409,7 @@ trait Authorizable
                 $inserts[] = [
                     'user_id'    => $this->id,
                     $type        => $item,
-                    'created_at' => Time::now()->format('Y-m-d H:i:s'),
+                    'created_at' => Time::now(),
                 ];
             }
 
@@ -387,22 +418,10 @@ trait Authorizable
     }
 
     /**
-     * @return string[]
-     */
-    private function getConfigGroups(): array
-    {
-        return function_exists('setting')
-            ? array_keys(setting('AuthGroups.groups'))
-            : array_keys(config('AuthGroups')->groups);
-    }
-
-    /**
-     * @return string[]
+     * @return list<string>
      */
     private function getConfigPermissions(): array
     {
-        return function_exists('setting')
-            ? array_keys(setting('AuthGroups.permissions'))
-            : array_keys(config('AuthGroups')->permissions);
+        return array_keys(setting('AuthGroups.permissions'));
     }
 }

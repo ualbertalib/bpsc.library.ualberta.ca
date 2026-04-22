@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -11,8 +13,12 @@
 
 namespace CodeIgniter\HTTP;
 
+use CodeIgniter\Exceptions\InvalidArgumentException;
+
 /**
  * An HTTP message
+ *
+ * @see \CodeIgniter\HTTP\MessageTest
  */
 class Message implements MessageInterface
 {
@@ -110,6 +116,13 @@ class Message implements MessageInterface
      */
     public function getHeaderLine(string $name): string
     {
+        if ($this->hasMultipleHeaders($name)) {
+            throw new InvalidArgumentException(
+                'The header "' . $name . '" already has multiple headers.'
+                . ' You cannot use getHeaderLine().',
+            );
+        }
+
         $origName = $this->getHeaderName($name);
 
         if (! array_key_exists($origName, $this->headers)) {

@@ -26,13 +26,80 @@
     
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="/assets/js/all-min.js"></script>
-    <!-- Google tag (gtag.js) -->
-
+    
   </head>
   <body class="creamy">
   <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MX43PRW2" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
+
+<script>
+$(function () {
+
+    $('.dropdown > a').on('click touchstart', function (e) {
+        var $parent = $(this).parent();
+
+        // Only intercept on small screens
+        if (window.innerWidth < 768) {
+
+            if (!$parent.hasClass('open')) {
+                e.preventDefault(); // first click opens menu
+                $('.dropdown').removeClass('open');
+                $parent.addClass('open');
+            }
+            // second click follows link
+        }
+    });
+
+    // Close when clicking/tapping outside
+    $(document).on('click touchstart', function (e) {
+        if (!$(e.target).closest('.dropdown').length) {
+            $('.dropdown').removeClass('open');
+        }
+    });
+
+});
+</script>
+
+
+<style>
+
+/* Open dropdown when .open is present (mobile + narrow screens) */
+.dropdown.open .dropdown-menu {
+    display: block;
+}
+
+/* Enable hover dropdowns */
+@media (min-width: 768px) {
+    .dropdown:hover .dropdown-menu {
+        display: block;
+    }
+}
+
+
+
+
+/* Optional: prevent flicker */
+.dropdown-menu {
+    margin-top: 0;
+}
+.main-nav > li > a {
+    padding-left: 8px;
+    padding-right: 8px;
+}
+.main-nav > li > a {
+    white-space: nowrap;
+}
+
+
+.main-nav .dropdown-menu > li > a {
+	padding: 8px 20px ;   /* default is ~8px 20px */
+	 height: auto;
+	font-size: 18px;     /* optional: slightly smaller text */
+}
+
+</style>
+
 
    <div id="wrap">
       <div class="row-fluid white">
@@ -76,15 +143,24 @@
     <div class="row-fluid">
       <div class="span12 logo-nav">
         <div class="container">
-          <h1 class="span3"><a href="/">Bruce Peel Special Collections</a></h1>
-          <ul class="main-nav span9">
-                <li><a href="/exhibits">Exhibitions</a></li>
-                <li><a href="/collections" class="line">Research <br/> Collections</a></li>
-                <li><a href="/info/workshops" class="line">Peel <br/> Workshops</a></li>
-                <li><a href="/info/visit">Visit</a></li>
-                <li><a href="/info/about" class="line">About<br/> &amp; FAQs</a></li>
-                <li><a href="/info/contact" class="line last">Contact<br/> &amp; Credits</a></li>
-          </ul>
+          <h1 class="span2"><a href="/">Bruce Peel Special Collections</a></h1>
+			<ul class="nav main-nav span9">
+				<li class="dropdown">
+					<a href="/exhibits" class="dropdown-toggle">
+						Exhibitions <b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="/exhibits/past">Past Exhibitions</a></li>
+						<li><a href="/exhibits/upcoming">Upcoming Exhibitions</a></li>
+					</ul>
+				</li>
+
+				<li><a href="/collections" class="line">Research <br> Collections</a></li>
+				<li><a href="/info/workshops" class="line">Peel <br> Workshops</a></li>
+				<li><a href="/info/visit">Visit</a></li>
+				<li><a href="/info/about" class="line">About<br> &amp; FAQs</a></li>
+				<li><a href="/info/contact" class="line last">Contact<br> &amp; Credits</a></li>
+			</ul>
         </div>
       </div>
     </div>

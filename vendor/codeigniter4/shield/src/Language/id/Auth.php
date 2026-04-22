@@ -2,13 +2,22 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of CodeIgniter Shield.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 return [
     // Exceptions
     'unknownAuthenticator'  => '{0} bukan otentikator yang sah.',
     'unknownUserProvider'   => 'Tidak dapat menentukan Penyedia Pengguna yang akan digunakan.',
     'invalidUser'           => 'Tidak dapat menemukan pengguna yang spesifik.',
-    'bannedUser'            => '(To be translated) Can not log you in as you are currently banned.',
-    'logOutBannedUser'      => '(To be translated) You have been logged out because you have been banned.',
+    'bannedUser'            => 'Anda tidak dapat masuk karena saat ini Anda diblokir.',
+    'logOutBannedUser'      => 'Anda telah keluar karena Anda telah diblokir.',
     'badAttempt'            => 'Anda tidak dapat masuk. Harap periksa kredensial Anda.',
     'noPassword'            => 'Tidak dapat memvalidasi pengguna tanpa kata sandi.',
     'invalidPassword'       => 'Anda tidak dapat masuk. Harap periksa kata sandi Anda.',
@@ -16,16 +25,21 @@ return [
     'badToken'              => 'Akses token tidak sah.',
     'oldToken'              => 'Akses token sudah tidak berlaku.',
     'noUserEntity'          => 'Entitas Pengguna harus disediakan untuk validasi kata sandi.',
-    'invalidEmail'          => 'Tidak dapat memverifikasi alamat email yang cocok dengan email yang tercatat.',
+    'invalidEmail'          => 'Tidak dapat memverifikasi alamat email yang cocok dengan email "{0}".',
     'unableSendEmailToUser' => 'Maaf, ada masalah saat mengirim email. Kami tidak dapat mengirim email ke "{0}".',
     'throttled'             => 'Terlalu banyak permintaan yang dibuat dari alamat IP ini. Anda dapat mencoba lagi dalam {0} detik.',
     'notEnoughPrivilege'    => 'Anda tidak memiliki izin yang diperlukan untuk melakukan operasi yang diinginkan.',
+    // JWT Exceptions
+    'invalidJWT'     => 'Token tidak valid.',
+    'expiredJWT'     => 'Token telah kedaluwarsa.',
+    'beforeValidJWT' => 'Token belum tersedia.',
 
     'email'           => 'Alamat Email',
     'username'        => 'Nama Pengguna',
     'password'        => 'Kata Sandi',
     'passwordConfirm' => 'Kata Sandi (lagi)',
     'haveAccount'     => 'Sudah punya akun?',
+    'token'           => 'Token',
 
     // Buttons
     'confirm' => 'Konfirmasi',
@@ -47,7 +61,9 @@ return [
     'magicLinkExpired'   => 'Maaf, tautan sudah tidak berlaku.',
     'checkYourEmail'     => 'Periksa email Anda!',
     'magicLinkDetails'   => 'Kami baru saja mengirimi Anda email dengan tautan Masuk di dalamnya. Ini hanya berlaku selama {0} menit.',
+    'magicLinkDisabled'  => 'Penggunaan MagicLink saat ini tidak diperbolehkan.',
     'successLogout'      => 'Anda telah berhasil keluar.',
+    'backToLogin'        => 'Kembali ke masuk',
 
     // Passwords
     'errorPasswordLength'       => 'Kata sandi harus setidaknya terdiri dari {0, number} karakter.',
@@ -61,10 +77,10 @@ return [
     'errorPasswordPwned'        => 'Kata sandi {0} telah bocor karena pelanggaran data dan telah dilihat {1, number} kali dalam {2} sandi yang disusupi.',
     'suggestPasswordPwned'      => '{0} tidak boleh digunakan sebagai kata sandi. Jika Anda menggunakannya di mana saja, segera ubah.',
     'errorPasswordEmpty'        => 'Kata sandi wajib diisi.',
-    'errorPasswordTooLongBytes' => '(To be translated) Password cannot exceed {param} bytes in length.',
+    'errorPasswordTooLongBytes' => 'Panjang kata sandi tidak boleh lebih dari {param} byte.',
     'passwordChangeSuccess'     => 'Kata sandi berhasil diubah',
     'userDoesNotExist'          => 'Kata sandi tidak diubah. User tidak ditemukan',
-    'resetTokenExpired'         => 'Maaf, token setel ulang Anda sudah habis waktu.',
+    'resetTokenExpired'         => 'Maaf, token setel ulang Anda sudah kedaluwarsa.',
 
     // Email Globals
     'emailInfo'      => 'Beberapa informasi tentang seseorang:',
@@ -74,7 +90,7 @@ return [
 
     // 2FA
     'email2FATitle'       => 'Otentikasi Dua Faktor',
-    'confirmEmailAddress' => 'Alamat email konfirmasi Anda.',
+    'confirmEmailAddress' => 'Konfirmasi alamat email Anda.',
     'emailEnterCode'      => 'Konfirmasi email Anda',
     'emailConfirmCode'    => 'Masukkan kode 6 digit yang baru saja kami kirimkan ke alamat email Anda.',
     'email2FASubject'     => 'Kode otentikasi Anda',
@@ -90,7 +106,7 @@ return [
     'emailActivateMailBody' => 'Silahkan gunakan kode dibawah ini untuk mengaktivasi akun Anda.',
     'invalidActivateToken'  => 'Kode tidak sesuai.',
     'needActivate'          => 'Anda harus menyelesaikan registrasi Anda dengan mengonfirmasi kode yang dikirim ke alamat email Anda.',
-    'activationBlocked'     => '(to be translated) You must activate your account before logging in.',
+    'activationBlocked'     => 'Anda harus mengaktifkan akun Anda sebelum masuk.',
 
     // Groups
     'unknownGroup' => '{0} bukan grup yang sah.',

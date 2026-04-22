@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of CodeIgniter Shield.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 namespace CodeIgniter\Shield\Authentication\Actions;
 
 use CodeIgniter\HTTP\IncomingRequest;
@@ -64,12 +73,12 @@ class Email2FA implements ActionInterface
         }
 
         if (empty($email) || $email !== $user->email) {
-            return redirect()->route('auth-action-show')->with('error', lang('Auth.invalidEmail'));
+            return redirect()->route('auth-action-show')->with('error', lang('Auth.invalidEmail', [$email]));
         }
 
         $identity = $this->getIdentity($user);
 
-        if (empty($identity)) {
+        if (! $identity instanceof UserIdentity) {
             return redirect()->route('auth-action-show')->with('error', lang('Auth.need2FA'));
         }
 
@@ -78,10 +87,16 @@ class Email2FA implements ActionInterface
         $date      = Time::now()->toDateTimeString();
 
         // Send the user an email with the code
-        $email = emailer()->setFrom(setting('Email.fromEmail'), setting('Email.fromName') ?? '');
+        helper('email');
+        $email = emailer(['mailType' => 'html'])
+            ->setFrom(setting('Email.fromEmail'), setting('Email.fromName') ?? '');
         $email->setTo($user->email);
         $email->setSubject(lang('Auth.email2FASubject'));
-        $email->setMessage($this->view(setting('Auth.views')['action_email_2fa_email'], ['code' => $identity->secret, 'ipAddress' => $ipAddress, 'userAgent' => $userAgent, 'date' => $date]));
+        $email->setMessage($this->view(
+            setting('Auth.views')['action_email_2fa_email'],
+            ['code'  => $identity->secret, 'user' => $user, 'ipAddress' => $ipAddress, 'userAgent' => $userAgent, 'date' => $date],
+            ['debug' => false],
+        ));
 
         if ($email->send(false) === false) {
             throw new RuntimeException('Cannot send email for user: ' . $user->email . "\n" . $email->printDebugger(['headers']));
@@ -145,7 +160,7 @@ class Email2FA implements ActionInterface
                 'name'  => 'login',
                 'extra' => lang('Auth.need2FA'),
             ],
-            $generator
+            $generator,
         );
     }
 
@@ -159,7 +174,7 @@ class Email2FA implements ActionInterface
 
         return $identityModel->getIdentityByType(
             $user,
-            $this->type
+            $this->type,
         );
     }
 

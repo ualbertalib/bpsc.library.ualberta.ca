@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CodeIgniter\Settings\Config;
 
 use CodeIgniter\Config\BaseService;
@@ -30,9 +32,6 @@ class Services extends BaseService
             return static::getSharedInstance('settings', $config);
         }
 
-        /** @var SettingsConfig $config */
-        $config = $config ?? config('Settings');
-
-        return new Settings($config);
+        return new Settings($config ?? config('Settings'));
     }
 }

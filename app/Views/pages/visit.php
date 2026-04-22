@@ -6,7 +6,7 @@
 		<h2>Visiting Bruce Peel Special Collections</h2>
 	<div class="row">
 		<ul class="inpage-nav">
-	<li><a href="#finding">Finding Library Materials</a></li>
+	<li><a href="#finding">Finding and Requesting Library Materials</a></li>
 	<li><a href="#using">Using Library Materials</a></li>
 	<li><a href="#policy">Reading Room Policies</a></li>
 	<li><a href="#photopolicy">Photography Policies</a></li>
@@ -20,7 +20,7 @@
 	participate in efforts to update and change these practices as we strive for descriptions that are inclusive, respectful, and do not cause harm.
 	We acknowledge the critical importance of community consultation in these efforts, and as residents on Treaty 6 territory and Métis Region 4 we
 	commit to working together with our local communities to make these changes.</strong></p>
-	<h3><a name="finding"></a>Finding Library Materials</h3>
+	<h3><a name="finding"></a>Finding and Requesting Library Materials</h3>
 <img src="/assets/img/finding.jpg" class="int3 hidden-phone" alt="photograph of the interior of the special collections library"/>
 <p> Books housed in Bruce Peel Special Collections are listed in the <a href="https://www.library.ualberta.ca/">U of A Library catalogue</a>.
 	To view materials held in Bruce Peel Special Collections, please write to us at <a href="mailto:bpsc@ualberta.ca">bpsc@ualberta.ca</a> to request

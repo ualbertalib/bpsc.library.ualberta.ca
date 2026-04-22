@@ -2,10 +2,22 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of CodeIgniter Shield.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 namespace CodeIgniter\Shield\Authentication\Traits;
 
+use CodeIgniter\I18n\Time;
+use CodeIgniter\Shield\Authentication\Authenticators\AccessTokens;
 use CodeIgniter\Shield\Entities\AccessToken;
 use CodeIgniter\Shield\Models\UserIdentityModel;
+use InvalidArgumentException;
 
 /**
  * Trait HasAccessTokens
@@ -25,15 +37,18 @@ trait HasAccessTokens
     /**
      * Generates a new personal access token for this user.
      *
-     * @param string   $name   Token name
-     * @param string[] $scopes Permissions the token grants
+     * @param string       $name      Token name
+     * @param list<string> $scopes    Permissions the token grants
+     * @param Time|null    $expiresAt Expiration date
+     *
+     * @throws InvalidArgumentException
      */
-    public function generateAccessToken(string $name, array $scopes = ['*']): AccessToken
+    public function generateAccessToken(string $name, array $scopes = ['*'], ?Time $expiresAt = null): AccessToken
     {
         /** @var UserIdentityModel $identityModel */
         $identityModel = model(UserIdentityModel::class);
 
-        return $identityModel->generateAccessToken($this, $name, $scopes);
+        return $identityModel->generateAccessToken($this, $name, $scopes, $expiresAt);
     }
 
     /**
@@ -45,6 +60,17 @@ trait HasAccessTokens
         $identityModel = model(UserIdentityModel::class);
 
         $identityModel->revokeAccessToken($this, $rawToken);
+    }
+
+    /**
+     * Delete any access tokens for the given secret token.
+     */
+    public function revokeAccessTokenBySecret(string $secretToken): void
+    {
+        /** @var UserIdentityModel $identityModel */
+        $identityModel = model(UserIdentityModel::class);
+
+        $identityModel->revokeAccessTokenBySecret($this, $secretToken);
     }
 
     /**
@@ -61,7 +87,7 @@ trait HasAccessTokens
     /**
      * Retrieves all personal access tokens for this user.
      *
-     * @return AccessToken[]
+     * @return list<AccessToken>
      */
     public function accessTokens(): array
     {
@@ -77,7 +103,7 @@ trait HasAccessTokens
      */
     public function getAccessToken(?string $rawToken): ?AccessToken
     {
-        if (empty($rawToken)) {
+        if ($rawToken === null || $rawToken === '') {
             return null;
         }
 
@@ -144,5 +170,64 @@ trait HasAccessTokens
         $this->currentAccessToken = $accessToken;
 
         return $this;
+    }
+
+    /**
+     * Checks if the provided Access Token is expired.
+     */
+    public function isAccessTokenExpired(AccessToken $accessToken): bool
+    {
+        return $accessToken->expires instanceof Time && $accessToken->expires->isBefore(Time::now());
+    }
+
+    /**
+     * Sets an expiration for Access Tokens by ID.
+     *
+     * @param int  $id        AccessTokens ID
+     * @param Time $expiresAt Expiration date
+     *
+     * @return bool Returns true if expiration date is set or updated.
+     */
+    public function updateAccessTokenExpiration(int $id, Time $expiresAt): bool
+    {
+        /** @var UserIdentityModel $identityModel */
+        $identityModel = model(UserIdentityModel::class);
+        $result        = $identityModel->setIdentityExpirationById($id, $this, $expiresAt);
+
+        if ($result) {
+            // refresh currentAccessToken with updated data
+            $this->currentAccessToken = $identityModel->getAccessTokenById($id, $this);
+        }
+
+        return $result;
+    }
+
+    /**
+     * Removes the expiration date for Access Tokens by ID.
+     *
+     * @param int $id AccessTokens ID
+     *
+     * @return bool Returns true if expiration date is set or updated.
+     */
+    public function removeAccessTokenExpiration(int $id): bool
+    {
+        /** @var UserIdentityModel $identityModel */
+        $identityModel = model(UserIdentityModel::class);
+        $result        = $identityModel->setIdentityExpirationById($id, $this);
+
+        if ($result) {
+            // refresh currentAccessToken with updated data
+            $this->currentAccessToken = $identityModel->getAccessTokenById($id, $this);
+        }
+
+        return $result;
+    }
+
+    /**
+     * Checks if the access token has a set expiration date
+     */
+    public function canAccessTokenExpire(AccessToken $accessToken): bool
+    {
+        return $accessToken->expires !== null;
     }
 }

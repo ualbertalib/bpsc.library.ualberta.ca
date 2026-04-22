@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -11,6 +13,7 @@
 
 namespace CodeIgniter\HTTP;
 
+use CodeIgniter\Exceptions\InvalidArgumentException;
 use CodeIgniter\HTTP\Exceptions\HTTPException;
 
 /**
@@ -25,7 +28,11 @@ trait MessageTrait
     /**
      * List of all HTTP request headers.
      *
-     * @var array<string, Header>
+     * [name => Header]
+     * or
+     * [name => [Header1, Header2]]
+     *
+     * @var array<string, Header|list<Header>>
      */
     protected $headers = [];
 
@@ -59,7 +66,7 @@ trait MessageTrait
     /**
      * Appends data to the body of the current message.
      *
-     * @param mixed $data
+     * @param string $data
      *
      * @return $this
      */
@@ -79,21 +86,23 @@ trait MessageTrait
      */
     public function populateHeaders(): void
     {
-        $contentType = $_SERVER['CONTENT_TYPE'] ?? getenv('CONTENT_TYPE');
+        $contentType = service('superglobals')->server('CONTENT_TYPE', (string) getenv('CONTENT_TYPE'));
         if (! empty($contentType)) {
             $this->setHeader('Content-Type', $contentType);
         }
         unset($contentType);
 
-        foreach (array_keys($_SERVER) as $key) {
+        $serverArray = service('superglobals')->getServerArray();
+
+        foreach (array_keys($serverArray) as $key) {
             if (sscanf($key, 'HTTP_%s', $header) === 1) {
                 // take SOME_HEADER and turn it into Some-Header
                 $header = str_replace('_', ' ', strtolower($header));
                 $header = str_replace(' ', '-', ucwords($header));
 
-                $this->setHeader($header, $_SERVER[$key]);
+                $this->setHeader($header, $serverArray[$key]);
 
-                // Add us to the header map so we can find them case-insensitively
+                // Add us to the header map, so we can find them case-insensitively
                 $this->headerMap[strtolower($header)] = $header;
             }
         }
@@ -102,7 +111,7 @@ trait MessageTrait
     /**
      * Returns an array containing all Headers.
      *
-     * @return array<string, Header> An array of the Header objects
+     * @return array<string, Header|list<Header>> An array of the Header objects
      */
     public function headers(): array
     {
@@ -122,7 +131,7 @@ trait MessageTrait
      *
      * @param string $name
      *
-     * @return array|Header|null
+     * @return Header|list<Header>|null
      */
     public function header($name)
     {
@@ -140,9 +149,14 @@ trait MessageTrait
      */
     public function setHeader(string $name, $value): self
     {
+        $this->checkMultipleHeaders($name);
+
         $origName = $this->getHeaderName($name);
 
-        if (isset($this->headers[$origName]) && is_array($this->headers[$origName]->getValue())) {
+        if (
+            isset($this->headers[$origName])
+            && is_array($this->headers[$origName]->getValue())
+        ) {
             if (! is_array($value)) {
                 $value = [$value];
             }
@@ -156,6 +170,23 @@ trait MessageTrait
         }
 
         return $this;
+    }
+
+    private function hasMultipleHeaders(string $name): bool
+    {
+        $origName = $this->getHeaderName($name);
+
+        return isset($this->headers[$origName]) && is_array($this->headers[$origName]);
+    }
+
+    private function checkMultipleHeaders(string $name): void
+    {
+        if ($this->hasMultipleHeaders($name)) {
+            throw new InvalidArgumentException(
+                'The header "' . $name . '" already has multiple headers.'
+                . ' You cannot change them. If you really need to change, remove the header first.',
+            );
+        }
     }
 
     /**
@@ -179,11 +210,40 @@ trait MessageTrait
      */
     public function appendHeader(string $name, ?string $value): self
     {
+        $this->checkMultipleHeaders($name);
+
         $origName = $this->getHeaderName($name);
 
         array_key_exists($origName, $this->headers)
             ? $this->headers[$origName]->appendValue($value)
             : $this->setHeader($name, $value);
+
+        return $this;
+    }
+
+    /**
+     * Adds a header (not a header value) with the same name.
+     * Use this only when you set multiple headers with the same name,
+     * typically, for `Set-Cookie`.
+     *
+     * @return $this
+     */
+    public function addHeader(string $name, string $value): static
+    {
+        $origName = $this->getHeaderName($name);
+
+        if (! isset($this->headers[$origName])) {
+            $this->setHeader($name, $value);
+
+            return $this;
+        }
+
+        if (! $this->hasMultipleHeaders($name) && isset($this->headers[$origName])) {
+            $this->headers[$origName] = [$this->headers[$origName]];
+        }
+
+        // Add the header.
+        $this->headers[$origName][] = new Header($origName, $value);
 
         return $this;
     }
@@ -196,6 +256,8 @@ trait MessageTrait
      */
     public function prependHeader(string $name, string $value): self
     {
+        $this->checkMultipleHeaders($name);
+
         $origName = $this->getHeaderName($name);
 
         $this->headers[$origName]->prependValue($value);
@@ -229,7 +291,7 @@ trait MessageTrait
         $version = number_format((float) $version, 1);
 
         if (! in_array($version, $this->validProtocolVersions, true)) {
-            throw HTTPException::forInvalidHTTPProtocol(implode(', ', $this->validProtocolVersions));
+            throw HTTPException::forInvalidHTTPProtocol($version);
         }
 
         $this->protocolVersion = $version;

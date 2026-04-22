@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -16,16 +18,25 @@ namespace CodeIgniter\Exceptions;
  */
 class ModelException extends FrameworkException
 {
+    /**
+     * @return static
+     */
     public static function forNoPrimaryKey(string $modelName)
     {
         return new static(lang('Database.noPrimaryKey', [$modelName]));
     }
 
+    /**
+     * @return static
+     */
     public static function forNoDateFormat(string $modelName)
     {
         return new static(lang('Database.noDateFormat', [$modelName]));
     }
 
+    /**
+     * @return static
+     */
     public static function forMethodNotAvailable(string $modelName, string $methodName)
     {
         return new static(lang('Database.methodNotAvailable', [$modelName, $methodName]));

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -13,7 +15,8 @@ namespace CodeIgniter\Commands\Database;
 
 use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
-use Config\Services;
+use CodeIgniter\CLI\SignalTrait;
+use CodeIgniter\Database\MigrationRunner;
 use Throwable;
 
 /**
@@ -22,6 +25,8 @@ use Throwable;
  */
 class MigrateRollback extends BaseCommand
 {
+    use SignalTrait;
+
     /**
      * The group the command is lumped under
      * when listing commands.
@@ -54,11 +59,10 @@ class MigrateRollback extends BaseCommand
     /**
      * the Command's Options
      *
-     * @var array
+     * @var array<string, string>
      */
     protected $options = [
         '-b' => 'Specify a batch to roll back to; e.g. "3" to return to batch #3',
-        '-g' => 'Set database group',
         '-f' => 'Force command - this option allows you to bypass the confirmation question when running this command in a production environment',
     ];
 
@@ -73,25 +77,35 @@ class MigrateRollback extends BaseCommand
             $force = array_key_exists('f', $params) || CLI::getOption('f');
 
             if (! $force && CLI::prompt(lang('Migrations.rollBackConfirm'), ['y', 'n']) === 'n') {
-                return;
+                return null;
             }
             // @codeCoverageIgnoreEnd
         }
 
-        $runner = Services::migrations();
-        $group  = $params['g'] ?? CLI::getOption('g');
-
-        if (is_string($group)) {
-            $runner->setGroup($group);
-        }
+        /** @var MigrationRunner $runner */
+        $runner = service('migrations');
 
         try {
             $batch = $params['b'] ?? CLI::getOption('b') ?? $runner->getLastBatch() - 1;
+
+            if (is_string($batch)) {
+                if (! ctype_digit($batch)) {
+                    CLI::error('Invalid batch number: ' . $batch, 'light_gray', 'red');
+                    CLI::newLine();
+
+                    return EXIT_ERROR;
+                }
+
+                $batch = (int) $batch;
+            }
+
             CLI::write(lang('Migrations.rollingBack') . ' ' . $batch, 'yellow');
 
-            if (! $runner->regress($batch)) {
-                CLI::error(lang('Migrations.generalFault'), 'light_gray', 'red'); // @codeCoverageIgnore
-            }
+            $this->withSignalsBlocked(static function () use ($runner, $batch): void {
+                if (! $runner->regress($batch)) {
+                    CLI::error(lang('Migrations.generalFault'), 'light_gray', 'red'); // @codeCoverageIgnore
+                }
+            });
 
             $messages = $runner->getCliMessages();
 
@@ -106,5 +120,7 @@ class MigrateRollback extends BaseCommand
             $this->showError($e);
             // @codeCoverageIgnoreEnd
         }
+
+        return null;
     }
 }

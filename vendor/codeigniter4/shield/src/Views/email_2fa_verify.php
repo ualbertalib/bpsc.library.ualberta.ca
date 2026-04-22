@@ -12,7 +12,7 @@
             <p><?= lang('Auth.emailConfirmCode') ?></p>
 
             <?php if (session('error') !== null) : ?>
-            <div class="alert alert-danger"><?= session('error') ?></div>
+            <div class="alert alert-danger"><?= esc(session('error')) ?></div>
             <?php endif ?>
 
             <form action="<?= url_to('auth-action-verify') ?>" method="post">
@@ -21,7 +21,7 @@
                 <!-- Code -->
                 <div class="mb-2">
                     <input type="number" class="form-control" name="token" placeholder="000000"
-                        inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code" required />
+                        inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code" required>
                 </div>
 
                 <div class="d-grid col-8 mx-auto m-3">

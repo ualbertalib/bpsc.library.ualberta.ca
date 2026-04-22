@@ -2,11 +2,19 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of CodeIgniter Shield.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 namespace CodeIgniter\Shield\Models;
 
 use CodeIgniter\I18n\Time;
 use CodeIgniter\Shield\Entities\User;
-use DateTime;
 use Faker\Generator;
 use stdClass;
 
@@ -36,22 +44,22 @@ class RememberModel extends BaseModel
             'user_id'         => 1,
             'selector'        => 'selector',
             'hashedValidator' => 'validator',
-            'expires'         => Time::parse('+1 day')->format('Y-m-d H:i:s'),
+            'expires'         => Time::parse('+1 day'),
         ];
     }
 
     /**
      * Stores a remember-me token for the user.
+     *
+     * @TODO `string $expires` → `Time $expires`
      */
     public function rememberUser(User $user, string $selector, string $hashedValidator, string $expires): void
     {
-        $expires = new DateTime($expires);
-
         $return = $this->insert([
             'user_id'         => $user->id,
             'selector'        => $selector,
             'hashedValidator' => $hashedValidator,
-            'expires'         => $expires->format('Y-m-d H:i:s'),
+            'expires'         => Time::parse($expires),
         ]);
 
         $this->checkQueryReturn($return);

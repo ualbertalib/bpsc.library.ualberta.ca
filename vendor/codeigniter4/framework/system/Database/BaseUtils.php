@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -212,7 +214,11 @@ abstract class BaseUtils
             $line = [];
 
             foreach ($row as $item) {
-                $line[] = $enclosure . str_replace($enclosure, $enclosure . $enclosure, $item ?? '') . $enclosure;
+                $line[] = $enclosure . str_replace(
+                    $enclosure,
+                    $enclosure . $enclosure,
+                    (string) $item,
+                ) . $enclosure;
             }
 
             $out .= implode($delim, $line) . $newline;
@@ -244,7 +250,7 @@ abstract class BaseUtils
             $xml .= $tab . '<' . $element . '>' . $newline;
 
             foreach ($row as $key => $val) {
-                $val = (! empty($val)) ? xml_convert($val) : '';
+                $val = empty($val) ? '' : xml_convert((string) $val);
 
                 $xml .= $tab . $tab . '<' . $key . '>' . $val . '</' . $key . '>' . $newline;
             }
@@ -260,7 +266,7 @@ abstract class BaseUtils
      *
      * @param array|string $params
      *
-     * @return mixed
+     * @return false|never|string
      *
      * @throws DatabaseException
      */
@@ -316,7 +322,7 @@ abstract class BaseUtils
     /**
      * Platform dependent version of the backup function.
      *
-     * @return mixed
+     * @return false|never|string
      */
     abstract public function _backup(?array $prefs = null);
 }

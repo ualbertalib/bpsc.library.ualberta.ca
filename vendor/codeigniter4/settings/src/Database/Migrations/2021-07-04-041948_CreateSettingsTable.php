@@ -1,12 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CodeIgniter\Settings\Database\Migrations;
 
+use CodeIgniter\Database\Forge;
 use CodeIgniter\Database\Migration;
+use CodeIgniter\Settings\Config\Settings;
 
 class CreateSettingsTable extends Migration
 {
-    public function up()
+    private readonly Settings $config;
+
+    public function __construct(?Forge $forge = null)
+    {
+        $this->config  = config('Settings');
+        $this->DBGroup = $this->config->database['group'] ?? null;
+
+        parent::__construct($forge);
+    }
+
+    public function up(): void
     {
         $this->forge->addField('id');
         $this->forge->addField([
@@ -36,11 +50,11 @@ class CreateSettingsTable extends Migration
                 'null' => false,
             ],
         ]);
-        $this->forge->createTable(config('Settings')->database['table'], true);
+        $this->forge->createTable($this->config->database['table'], true);
     }
 
-    public function down()
+    public function down(): void
     {
-        $this->forge->dropTable(config('Settings')->database['table']);
+        $this->forge->dropTable($this->config->database['table']);
     }
 }

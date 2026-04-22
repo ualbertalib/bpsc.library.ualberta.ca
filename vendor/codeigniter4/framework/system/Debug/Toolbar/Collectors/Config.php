@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -12,7 +14,7 @@
 namespace CodeIgniter\Debug\Toolbar\Collectors;
 
 use CodeIgniter\CodeIgniter;
-use Config\Services;
+use Config\App;
 
 /**
  * Debug toolbar configuration
@@ -24,7 +26,7 @@ class Config
      */
     public static function display(): array
     {
-        $config = config('App');
+        $config = config(App::class);
 
         return [
             'ciVersion'   => CodeIgniter::CI_VERSION,
@@ -33,7 +35,7 @@ class Config
             'environment' => ENVIRONMENT,
             'baseURL'     => $config->baseURL,
             'timezone'    => app_timezone(),
-            'locale'      => Services::request()->getLocale(),
+            'locale'      => service('request')->getLocale(),
             'cspEnabled'  => $config->CSPEnabled,
         ];
     }

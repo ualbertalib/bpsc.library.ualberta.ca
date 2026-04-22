@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of CodeIgniter Shield.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 namespace CodeIgniter\Shield\Authentication\Authenticators;
 
 use CodeIgniter\Config\Factories;
@@ -48,11 +57,6 @@ class Session implements AuthenticatorInterface
     private const STATE_LOGGED_IN = 3;
 
     /**
-     * The persistence engine
-     */
-    protected UserModel $provider;
-
-    /**
      * Authenticated or authenticating (pending login) User
      */
     protected ?User $user = null;
@@ -71,12 +75,12 @@ class Session implements AuthenticatorInterface
     protected RememberModel $rememberModel;
     protected UserIdentityModel $userIdentityModel;
 
-    public function __construct(UserModel $provider)
-    {
-        helper('setting');
-
-        $this->provider = $provider;
-
+    /**
+     * @param UserModel $provider The persistence engine
+     */
+    public function __construct(
+        protected UserModel $provider,
+    ) {
         $this->loginModel        = model(LoginModel::class);
         $this->rememberModel     = model(RememberModel::class);
         $this->userIdentityModel = model(UserIdentityModel::class);
@@ -95,8 +99,8 @@ class Session implements AuthenticatorInterface
         if ($securityConfig->csrfProtection === 'cookie') {
             throw new SecurityException(
                 'Config\Security::$csrfProtection is set to \'cookie\'.'
-                . ' Same-site attackers may bypass the CSRF protection.'
-                . ' Please set it to \'session\'.'
+                    . ' Same-site attackers may bypass the CSRF protection.'
+                    . ' Please set it to \'session\'.',
             );
         }
     }
@@ -191,7 +195,7 @@ class Session implements AuthenticatorInterface
     {
         $actionClass = setting('Auth.actions')[$type] ?? null;
 
-        if ($actionClass === null) {
+        if ($actionClass === null || $actionClass === '') {
             return false;
         }
 
@@ -212,7 +216,7 @@ class Session implements AuthenticatorInterface
     public function getAction(): ?ActionInterface
     {
         /** @var class-string<ActionInterface>|null $actionClass */
-        $actionClass = $this->getSessionKey('auth_action');
+        $actionClass = $this->getSessionUserKey('auth_action');
 
         if ($actionClass === null) {
             return null;
@@ -234,7 +238,7 @@ class Session implements AuthenticatorInterface
             throw new LogicException('Cannot get the User.');
         }
 
-        if (empty($token) || $token !== $identity->secret) {
+        if ($token === '' || $token !== $identity->secret) {
             return false;
         }
 
@@ -242,8 +246,8 @@ class Session implements AuthenticatorInterface
         $this->userIdentityModel->deleteIdentitiesByType($user, $identity->type);
 
         // Clean up our session
-        $this->removeSessionKey('auth_action');
-        $this->removeSessionKey('auth_action_message');
+        $this->removeSessionUserKey('auth_action');
+        $this->removeSessionUserKey('auth_action_message');
 
         $this->user = $user;
 
@@ -271,7 +275,7 @@ class Session implements AuthenticatorInterface
         bool $success,
         string $ipAddress,
         string $userAgent,
-        $userId = null
+        $userId = null,
     ): void {
         // Determine the type of ID we're using.
         // Standard fields would be email, username,
@@ -298,7 +302,7 @@ class Session implements AuthenticatorInterface
             $success,
             $ipAddress,
             $userAgent,
-            $userId
+            $userId,
         );
     }
 
@@ -336,30 +340,19 @@ class Session implements AuthenticatorInterface
         /** @var Passwords $passwords */
         $passwords = service('passwords');
 
-        // This is only for supportOldDangerousPassword.
-        $needsRehash = false;
-
         // Now, try matching the passwords.
         if (! $passwords->verify($givenPassword, $user->password_hash)) {
-            if (
-                ! setting('Auth.supportOldDangerousPassword')
-                || ! $passwords->verifyDanger($givenPassword, $user->password_hash) // @phpstan-ignore-line
-            ) {
-                return new Result([
-                    'success' => false,
-                    'reason'  => lang('Auth.invalidPassword'),
-                ]);
-            }
-
-            // Passed with old dangerous password.
-            $needsRehash = true;
+            return new Result([
+                'success' => false,
+                'reason'  => lang('Auth.invalidPassword'),
+            ]);
         }
 
         // Check to see if the password needs to be rehashed.
         // This would be due to the hash algorithm or hash
         // cost changing since the last time that a user
         // logged in.
-        if ($passwords->needsRehash($user->password_hash) || $needsRehash) {
+        if ($passwords->needsRehash($user->password_hash)) {
             $user->password_hash = $passwords->hash($givenPassword);
             $this->provider->save($user);
         }
@@ -391,7 +384,7 @@ class Session implements AuthenticatorInterface
         }
 
         /** @var int|string|null $userId */
-        $userId = $this->getSessionKey('id');
+        $userId = $this->getSessionUserKey('id');
 
         // Has User Info in Session.
         if ($userId !== null) {
@@ -408,7 +401,7 @@ class Session implements AuthenticatorInterface
             }
 
             // If having `auth_action`, it is pending.
-            if ($this->getSessionKey('auth_action')) {
+            if ($this->getSessionUserKey('auth_action')) {
                 $this->userState = self::STATE_PENDING;
 
                 return;
@@ -449,7 +442,7 @@ class Session implements AuthenticatorInterface
             if ($this->getIdentitiesForAction($user) !== []) {
                 // Make pending login state
                 $this->user = $user;
-                $this->setSessionKey('id', $user->id);
+                $this->setSessionUserKey('id', $user->id);
                 $this->setAuthAction();
 
                 return true;
@@ -457,7 +450,7 @@ class Session implements AuthenticatorInterface
         }
 
         // Check the Session
-        if ($this->getSessionKey('auth_action')) {
+        if ($this->getSessionUserKey('auth_action')) {
             return true;
         }
 
@@ -480,7 +473,7 @@ class Session implements AuthenticatorInterface
         $authActions = setting('Auth.actions');
 
         foreach ($authActions as $actionClass) {
-            if ($actionClass === null) {
+            if ($actionClass === null || $actionClass === '') {
                 continue;
             }
 
@@ -489,11 +482,11 @@ class Session implements AuthenticatorInterface
 
             $identity = $this->userIdentityModel->getIdentityByType($this->user, $action->getType());
 
-            if ($identity) {
+            if ($identity instanceof UserIdentity) {
                 $this->userState = self::STATE_PENDING;
 
-                $this->setSessionKey('auth_action', $actionClass);
-                $this->setSessionKey('auth_action_message', $identity->extra);
+                $this->setSessionUserKey('auth_action', $actionClass);
+                $this->setSessionUserKey('auth_action_message', $identity->extra);
 
                 return true;
             }
@@ -505,18 +498,18 @@ class Session implements AuthenticatorInterface
     /**
      * Gets identities for action
      *
-     * @return UserIdentity[]
+     * @return list<UserIdentity>
      */
     private function getIdentitiesForAction(User $user): array
     {
         return $this->userIdentityModel->getIdentitiesByTypes(
             $user,
-            $this->getActionTypes()
+            $this->getActionTypes(),
         );
     }
 
     /**
-     * @return string[]
+     * @return list<string>
      */
     private function getActionTypes(): array
     {
@@ -524,7 +517,7 @@ class Session implements AuthenticatorInterface
         $types   = [];
 
         foreach ($actions as $actionClass) {
-            if ($actionClass === null) {
+            if ($actionClass === null || $actionClass === '') {
                 continue;
             }
 
@@ -565,7 +558,7 @@ class Session implements AuthenticatorInterface
     {
         $this->checkUserState();
 
-        return $this->getSessionKey('auth_action_message') ?? '';
+        return $this->getSessionUserKey('auth_action_message') ?? '';
     }
 
     /**
@@ -648,16 +641,16 @@ class Session implements AuthenticatorInterface
     public function startLogin(User $user): void
     {
         /** @var int|string|null $userId */
-        $userId = $this->getSessionKey('id');
+        $userId = $this->getSessionUserKey('id');
 
         // Check if already logged in.
         if ($userId !== null) {
             throw new LogicException(
                 'The user has User Info in Session, so already logged in or in pending login state.'
-                . ' If a logged in user logs in again with other account, the session data of the previous'
-                . ' user will be used as the new user.'
-                . ' Fix your code to prevent users from logging in without logging out or delete the session data.'
-                . ' user_id: ' . $userId
+                    . ' If a logged in user logs in again with other account, the session data of the previous'
+                    . ' user will be used as the new user.'
+                    . ' Fix your code to prevent users from logging in without logging out or delete the session data.'
+                    . ' user_id: ' . $userId,
             );
         }
 
@@ -672,7 +665,7 @@ class Session implements AuthenticatorInterface
         }
 
         // Let the session know we're logged in
-        $this->setSessionKey('id', $user->id);
+        $this->setSessionUserKey('id', $user->id);
 
         /** @var Response $response */
         $response = service('response');
@@ -684,7 +677,7 @@ class Session implements AuthenticatorInterface
     /**
      * Gets User Info in Session
      */
-    private function getSessionUserInfo(): array
+    protected function getSessionUserInfo(): array
     {
         return session(setting('Auth.sessionConfig')['field']) ?? [];
     }
@@ -692,7 +685,7 @@ class Session implements AuthenticatorInterface
     /**
      * Removes User Info in Session
      */
-    private function removeSessionUserInfo(): void
+    protected function removeSessionUserInfo(): void
     {
         session()->remove(setting('Auth.sessionConfig')['field']);
     }
@@ -702,7 +695,7 @@ class Session implements AuthenticatorInterface
      *
      * @return int|string|null
      */
-    private function getSessionKey(string $key)
+    protected function getSessionUserKey(string $key)
     {
         $sessionUserInfo = $this->getSessionUserInfo();
 
@@ -714,7 +707,7 @@ class Session implements AuthenticatorInterface
      *
      * @param int|string|null $value
      */
-    private function setSessionKey(string $key, $value): void
+    protected function setSessionUserKey(string $key, $value): void
     {
         $sessionUserInfo       = $this->getSessionUserInfo();
         $sessionUserInfo[$key] = $value;
@@ -724,7 +717,7 @@ class Session implements AuthenticatorInterface
     /**
      * Remove the key value in Session User Info
      */
-    private function removeSessionKey(string $key): void
+    protected function removeSessionUserKey(string $key): void
     {
         $sessionUserInfo = $this->getSessionUserInfo();
         unset($sessionUserInfo[$key]);
@@ -742,18 +735,18 @@ class Session implements AuthenticatorInterface
         if ($this->getIdentitiesForAction($user) !== []) {
             throw new LogicException(
                 'The user has identities for action, so cannot complete login.'
-                . ' If you want to start to login with auth action, use startLogin() instead.'
-                . ' Or delete identities for action in database.'
-                . ' user_id: ' . $user->id
+                    . ' If you want to start to login with auth action, use startLogin() instead.'
+                    . ' Or delete identities for action in database.'
+                    . ' user_id: ' . $user->id,
             );
         }
         // Check auth_action in Session
-        if ($this->getSessionKey('auth_action')) {
+        if ($this->getSessionUserKey('auth_action')) {
             throw new LogicException(
                 'The user has auth action in session, so cannot complete login.'
-                . ' If you want to start to login with auth action, use startLogin() instead.'
-                . ' Or delete `auth_action` and `auth_action_message` in session data.'
-                . ' user_id: ' . $user->id
+                    . ' If you want to start to login with auth action, use startLogin() instead.'
+                    . ' Or delete `auth_action` and `auth_action_message` in session data.'
+                    . ' user_id: ' . $user->id,
             );
         }
 
@@ -771,7 +764,7 @@ class Session implements AuthenticatorInterface
 
             // Reset so it doesn't mess up future calls.
             $this->shouldRemember = false;
-        } elseif ($this->getRememberMeToken()) {
+        } elseif ($this->getRememberMeToken() !== null) {
             $this->removeRememberCookie();
 
             // @TODO delete the token record.
@@ -795,7 +788,7 @@ class Session implements AuthenticatorInterface
             setting('Auth.sessionConfig')['rememberCookieName'],
             setting('Cookie.domain'),
             setting('Cookie.path'),
-            setting('Cookie.prefix')
+            setting('Cookie.prefix'),
         );
     }
 
@@ -808,7 +801,7 @@ class Session implements AuthenticatorInterface
     {
         $user = $this->provider->findById($userId);
 
-        if (empty($user)) {
+        if (! $user instanceof User) {
             throw AuthenticationException::forInvalidUser();
         }
 
@@ -831,10 +824,9 @@ class Session implements AuthenticatorInterface
         /** @var \CodeIgniter\Session\Session $session */
         $session     = session();
         $sessionData = $session->get();
-        if (isset($sessionData)) {
-            foreach (array_keys($sessionData) as $key) {
-                $session->remove($key);
-            }
+
+        foreach (array_keys($sessionData) as $key) {
+            $session->remove($key);
         }
 
         // Regenerate the session ID for a touch of added safety.
@@ -898,7 +890,7 @@ class Session implements AuthenticatorInterface
     {
         if (! $this->user instanceof User) {
             throw new InvalidArgumentException(
-                __METHOD__ . '() requires logged in user before calling.'
+                __METHOD__ . '() requires logged in user before calling.',
             );
         }
 
@@ -926,19 +918,22 @@ class Session implements AuthenticatorInterface
             $user,
             $selector,
             $this->hashValidator($validator),
-            $expires
+            $expires->format('Y-m-d H:i:s'),
         );
 
         $this->setRememberMeCookie($rawToken);
     }
 
-    private function calcExpires(): string
+    private function calcExpires(): Time
     {
-        $timestamp = Time::now()->getTimestamp() + setting('Auth.sessionConfig')['rememberLength'];
+        $rememberLength = setting('Auth.sessionConfig')['rememberLength'];
 
-        return Time::createFromTimestamp($timestamp)->format('Y-m-d H:i:s');
+        return Time::now()->addSeconds($rememberLength);
     }
 
+    /**
+     * @param non-empty-string $rawToken
+     */
     private function setRememberMeCookie(string $rawToken): void
     {
         /** @var Response $response */
@@ -954,7 +949,7 @@ class Session implements AuthenticatorInterface
             setting('Cookie.path'),
             setting('Cookie.prefix'),
             setting('Cookie.secure'),                          // Only send over HTTPS?
-            true                                                  // Hide from Javascript?
+            true,                                                  // Hide from Javascript?
         );
     }
 

@@ -11,7 +11,7 @@ class Exhibits extends BaseController
 	public function __construct(){
 	
 		$this->exhibitModel = new ExhibitModel();
-		$this->data['ex_subjects_array'] = array('current', 'online', 'past');
+		$this->data['ex_subjects_array'] = array('current', 'online', 'past','upcoming');
 		
 		$view = \Config\Services::renderer();		
 		$view->setData(['ex_subjects_array'=>$this->data['ex_subjects_array']]);
@@ -43,6 +43,16 @@ class Exhibits extends BaseController
 		
     }
 	
+	public function upcoming()
+    {
+		//$session = \Config\Services::session();
+		$exhibitModel = new \App\Models\ExhibitModel();		
+		$data['exhibits'] = $exhibitModel->get_upcoming();
+
+		return view('common/header', $data) . view('exhibits/upcoming', $data) . view('common/footer');
+		
+    }
+	
 	
 	public function view($slug){
 		//$exhibitModel = new ExhibitModel();
@@ -69,6 +79,7 @@ class Exhibits extends BaseController
 		$this->load->library('upload');
 		$this->load->helper('ckeditor');
 		*/
+		
 		helper('ckeditor_helper');
 
 		
@@ -91,6 +102,7 @@ class Exhibits extends BaseController
 	
 	public function store(){
 	
+
 		//$overwriteFile - This is creating a new exhibition so there shouldn't already be an image file that exists, if there is then don't overwrite as there is probably a duplicate exhibit or collection that should be resolved first
 		 $overwriteFile = false; 
 		
@@ -109,6 +121,8 @@ class Exhibits extends BaseController
 			$this->load->view('exhibits/create');
 			$this->load->view('common/footer');*/
 		}else{
+			
+				
 					$cleantitle = strtolower(url_title($this->request->getVar('title')));
 					
 					$files = $this->request->getFiles();
@@ -137,7 +151,7 @@ class Exhibits extends BaseController
 						]];				
 					}
 					
-					
+				
 					if($this->request->getVar('exhibit_type') == 1){
 						// loop through the slide uploaded file fields
 							for($i = 1; $i < 6; $i++) {
@@ -171,10 +185,12 @@ class Exhibits extends BaseController
 						}
 						
 					}
-					
+						
 
 					$this->exhibitModel->set_onnow_exhibit($this->request);
+					
 					$id = $this->exhibitModel->set_exhibit($this->request);
+					
 					$session = \Config\Services::session();
 					$session->setFlashdata('message', 'Your exhibit was created.');
 

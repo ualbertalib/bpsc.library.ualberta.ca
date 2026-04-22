@@ -2,19 +2,26 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of CodeIgniter Shield.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 namespace CodeIgniter\Shield\Controllers;
 
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\Shield\Authentication\Authenticators\Session;
-use CodeIgniter\Shield\Authentication\Passwords;
 use CodeIgniter\Shield\Traits\Viewable;
+use CodeIgniter\Shield\Validation\ValidationRules;
 
 class LoginController extends BaseController
 {
     use Viewable;
-
-    protected $helpers = ['setting'];
 
     /**
      * Displays the form the login to the site.
@@ -47,11 +54,12 @@ class LoginController extends BaseController
         // like the password, can only be validated properly here.
         $rules = $this->getValidationRules();
 
-        if (! $this->validate($rules)) {
+        if (! $this->validateData($this->request->getPost(), $rules, [], config('Auth')->DBGroup)) {
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
 
-        $credentials             = $this->request->getPost(setting('Auth.validFields'));
+        /** @var array $credentials */
+        $credentials             = $this->request->getPost(setting('Auth.validFields')) ?? [];
         $credentials             = array_filter($credentials);
         $credentials['password'] = $this->request->getPost('password');
         $remember                = (bool) $this->request->getPost('remember');
@@ -76,28 +84,13 @@ class LoginController extends BaseController
     /**
      * Returns the rules that should be used for validation.
      *
-     * @return array<string, array<string, array<string>|string>>
-     * @phpstan-return array<string, array<string, string|list<string>>>
+     * @return array<string, array<string, list<string>|string>>
      */
     protected function getValidationRules(): array
     {
-        return setting('Validation.login') ?? [
-            // 'username' => [
-            //     'label' => 'Auth.username',
-            //     'rules' => config('AuthSession')->usernameValidationRules,
-            // ],
-            'email' => [
-                'label' => 'Auth.email',
-                'rules' => config('AuthSession')->emailValidationRules,
-            ],
-            'password' => [
-                'label'  => 'Auth.password',
-                'rules'  => 'required|' . Passwords::getMaxLenghtRule(),
-                'errors' => [
-                    'max_byte' => 'Auth.errorPasswordTooLongBytes',
-                ],
-            ],
-        ];
+        $rules = new ValidationRules();
+
+        return $rules->getLoginRules();
     }
 
     /**

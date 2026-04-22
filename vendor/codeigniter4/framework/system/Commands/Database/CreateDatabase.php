@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -82,10 +84,7 @@ class CreateDatabase extends BaseCommand
         }
 
         try {
-            /**
-             * @var Database $config
-             */
-            $config = config('Database');
+            $config = config(Database::class);
 
             // Set to an empty database to prevent connection errors.
             $group = ENVIRONMENT === 'testing' ? 'tests' : $config->defaultGroup;
@@ -110,7 +109,7 @@ class CreateDatabase extends BaseCommand
                 $config->{$group}['database'] = $name;
 
                 if ($name !== ':memory:') {
-                    $dbName = strpos($name, DIRECTORY_SEPARATOR) === false ? WRITEPATH . $name : $name;
+                    $dbName = str_contains($name, DIRECTORY_SEPARATOR) ? $name : WRITEPATH . $name;
 
                     if (is_file($dbName)) {
                         CLI::error("Database \"{$dbName}\" already exists.", 'light_gray', 'red');

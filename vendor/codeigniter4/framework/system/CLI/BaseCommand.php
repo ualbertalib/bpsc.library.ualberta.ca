@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -11,6 +13,7 @@
 
 namespace CodeIgniter\CLI;
 
+use Config\Exceptions;
 use Psr\Log\LoggerInterface;
 use ReflectionException;
 use Throwable;
@@ -18,14 +21,14 @@ use Throwable;
 /**
  * BaseCommand is the base class used in creating CLI commands.
  *
- * @property array           $arguments
- * @property Commands        $commands
- * @property string          $description
- * @property string          $group
- * @property LoggerInterface $logger
- * @property string          $name
- * @property array           $options
- * @property string          $usage
+ * @property array<string, string> $arguments
+ * @property Commands              $commands
+ * @property string                $description
+ * @property string                $group
+ * @property LoggerInterface       $logger
+ * @property string                $name
+ * @property array<string, string> $options
+ * @property string                $usage
  */
 abstract class BaseCommand
 {
@@ -61,14 +64,14 @@ abstract class BaseCommand
     /**
      * the Command's options description
      *
-     * @var array
+     * @var array<string, string>
      */
     protected $options = [];
 
     /**
      * the Command's Arguments description
      *
-     * @var array
+     * @var array<string, string>
      */
     protected $arguments = [];
 
@@ -105,7 +108,9 @@ abstract class BaseCommand
     /**
      * Can be used by a command to run other commands.
      *
-     * @return mixed
+     * @param array<int|string, string|null> $params
+     *
+     * @return int|void
      *
      * @throws ReflectionException
      */
@@ -116,55 +121,59 @@ abstract class BaseCommand
 
     /**
      * A simple method to display an error with line/file, in child commands.
+     *
+     * @return void
      */
     protected function showError(Throwable $e)
     {
         $exception = $e;
         $message   = $e->getMessage();
-        $config    = config('Exceptions');
+        $config    = config(Exceptions::class);
 
         require $config->errorViewPath . '/cli/error_exception.php';
     }
 
     /**
      * Show Help includes (Usage, Arguments, Description, Options).
+     *
+     * @return void
      */
     public function showHelp()
     {
         CLI::write(lang('CLI.helpUsage'), 'yellow');
 
-        if (! empty($this->usage)) {
+        if ($this->usage !== null) {
             $usage = $this->usage;
         } else {
             $usage = $this->name;
 
-            if (! empty($this->arguments)) {
+            if ($this->arguments !== []) {
                 $usage .= ' [arguments]';
             }
         }
 
         CLI::write($this->setPad($usage, 0, 0, 2));
 
-        if (! empty($this->description)) {
+        if ($this->description !== null) {
             CLI::newLine();
             CLI::write(lang('CLI.helpDescription'), 'yellow');
             CLI::write($this->setPad($this->description, 0, 0, 2));
         }
 
-        if (! empty($this->arguments)) {
+        if ($this->arguments !== []) {
             CLI::newLine();
             CLI::write(lang('CLI.helpArguments'), 'yellow');
-            $length = max(array_map('strlen', array_keys($this->arguments)));
+            $length = max(array_map(strlen(...), array_keys($this->arguments)));
 
             foreach ($this->arguments as $argument => $description) {
                 CLI::write(CLI::color($this->setPad($argument, $length, 2, 2), 'green') . $description);
             }
         }
 
-        if (! empty($this->options)) {
+        if ($this->options !== []) {
             CLI::newLine();
             CLI::write(lang('CLI.helpOptions'), 'yellow');
-            $length = max(array_map('strlen', array_keys($this->options)));
+            $length = max(array_map(strlen(...), array_keys($this->options)));
 
             foreach ($this->options as $option => $description) {
                 CLI::write(CLI::color($this->setPad($option, $length, 2, 2), 'green') . $description);
@@ -187,6 +196,8 @@ abstract class BaseCommand
     /**
      * Get pad for $key => $value array output
      *
+     * @param array<string, string> $array
+     *
      * @deprecated Use setPad() instead.
      *
      * @codeCoverageIgnore
@@ -205,7 +216,7 @@ abstract class BaseCommand
     /**
      * Makes it simple to access our protected properties.
      *
-     * @return mixed
+     * @return array<string, string>|Commands|LoggerInterface|string|null
      */
     public function __get(string $key)
     {

@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of CodeIgniter Shield.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 namespace CodeIgniter\Shield\Models;
 
 use CodeIgniter\Model;
@@ -16,11 +25,21 @@ abstract class BaseModel extends Model
      */
     protected array $tables;
 
+    protected Auth $authConfig;
+
+    public function __construct()
+    {
+        $this->authConfig = config('Auth');
+
+        if ($this->authConfig->DBGroup !== null) {
+            $this->DBGroup = $this->authConfig->DBGroup;
+        }
+
+        parent::__construct();
+    }
+
     protected function initialize(): void
     {
-        /** @var Auth $authConfig */
-        $authConfig = config('Auth');
-
-        $this->tables = $authConfig->tables;
+        $this->tables = $this->authConfig->tables;
     }
 }

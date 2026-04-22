@@ -10,35 +10,37 @@
                 <h5 class="card-title mb-5"><?= lang('Auth.login') ?></h5>
 
                 <?php if (session('error') !== null) : ?>
-                    <div class="alert alert-danger" role="alert"><?= session('error') ?></div>
+                    <div class="alert alert-danger" role="alert"><?= esc(session('error')) ?></div>
                 <?php elseif (session('errors') !== null) : ?>
                     <div class="alert alert-danger" role="alert">
                         <?php if (is_array(session('errors'))) : ?>
                             <?php foreach (session('errors') as $error) : ?>
-                                <?= $error ?>
+                                <?= esc($error) ?>
                                 <br>
                             <?php endforeach ?>
                         <?php else : ?>
-                            <?= session('errors') ?>
+                            <?= esc(session('errors')) ?>
                         <?php endif ?>
                     </div>
                 <?php endif ?>
 
                 <?php if (session('message') !== null) : ?>
-                <div class="alert alert-success" role="alert"><?= session('message') ?></div>
+                    <div class="alert alert-success" role="alert"><?= esc(session('message')) ?></div>
                 <?php endif ?>
 
                 <form action="<?= url_to('login') ?>" method="post">
                     <?= csrf_field() ?>
 
                     <!-- Email -->
-                    <div class="mb-2">
-                        <input type="email" class="form-control" name="email" inputmode="email" autocomplete="email" placeholder="<?= lang('Auth.email') ?>" value="<?= old('email') ?>" required />
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="floatingEmailInput" name="email" inputmode="email" autocomplete="email" placeholder="<?= lang('Auth.email') ?>" value="<?= old('email') ?>" required>
+                        <label for="floatingEmailInput"><?= lang('Auth.email') ?></label>
                     </div>
 
                     <!-- Password -->
-                    <div class="mb-2">
-                        <input type="password" class="form-control" name="password" inputmode="text" autocomplete="current-password" placeholder="<?= lang('Auth.password') ?>" required />
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control" id="floatingPasswordInput" name="password" inputmode="text" autocomplete="current-password" placeholder="<?= lang('Auth.password') ?>" required>
+                        <label for="floatingPasswordInput"><?= lang('Auth.password') ?></label>
                     </div>
 
                     <!-- Remember me -->

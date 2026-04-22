@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -14,13 +16,11 @@ namespace CodeIgniter\Session\Handlers;
 use CodeIgniter\Database\BaseBuilder;
 use CodeIgniter\Database\BaseConnection;
 use CodeIgniter\Session\Exceptions\SessionException;
-use Config\App as AppConfig;
 use Config\Database;
 use Config\Session as SessionConfig;
-use ReturnTypeWillChange;
 
 /**
- * Base database session handler
+ * Base database session handler.
  *
  * Do not use this class. Use database specific handler class.
  */
@@ -48,51 +48,41 @@ class DatabaseHandler extends BaseHandler
     protected $db;
 
     /**
-     * The database type
+     * The database type.
      *
      * @var string
      */
     protected $platform;
 
     /**
-     * Row exists flag
+     * Row exists flag.
      *
      * @var bool
      */
     protected $rowExists = false;
 
     /**
-     * ID prefix for multiple session cookies
+     * ID prefix for multiple session cookies.
      */
     protected string $idPrefix;
 
     /**
      * @throws SessionException
      */
-    public function __construct(AppConfig $config, string $ipAddress)
+    public function __construct(SessionConfig $config, string $ipAddress)
     {
         parent::__construct($config, $ipAddress);
 
-        /** @var SessionConfig|null $session */
-        $session = config('Session');
-
-        // Store Session configurations
-        if ($session instanceof SessionConfig) {
-            $this->DBGroup = $session->DBGroup ?? config(Database::class)->defaultGroup;
-            // Add sessionCookieName for multiple session cookies.
-            $this->idPrefix = $session->cookieName . ':';
-        } else {
-            // `Config/Session.php` is absence
-            $this->DBGroup = $config->sessionDBGroup ?? config(Database::class)->defaultGroup;
-            // Add sessionCookieName for multiple session cookies.
-            $this->idPrefix = $config->sessionCookieName . ':';
-        }
-
         $this->table = $this->savePath;
-        if (empty($this->table)) {
+
+        if ($this->table === '') {
             throw SessionException::forMissingDatabaseTable();
         }
 
+        // Store Session configurations
+        $this->DBGroup = $config->DBGroup ?? config(Database::class)->defaultGroup;
+        // Add session cookie name for multiple session cookies.
+        $this->idPrefix = $config->cookieName . ':';
         $this->db       = Database::connect($this->DBGroup);
         $this->platform = $this->db->getPlatform();
     }
@@ -105,7 +95,7 @@ class DatabaseHandler extends BaseHandler
      */
     public function open($path, $name): bool
     {
-        if (empty($this->db->connID)) {
+        if ($this->db->connID === false) {
             $this->db->initialize();
         }
 
@@ -116,12 +106,8 @@ class DatabaseHandler extends BaseHandler
      * Reads the session data from the session storage, and returns the results.
      *
      * @param string $id The session ID
-     *
-     * @return false|string Returns an encoded string of the read data.
-     *                      If nothing was read, it must return false.
      */
-    #[ReturnTypeWillChange]
-    public function read($id)
+    public function read($id): false|string
     {
         if ($this->lockSession($id) === false) {
             $this->fingerprint = md5('');
@@ -162,7 +148,9 @@ class DatabaseHandler extends BaseHandler
     }
 
     /**
-     * Sets SELECT clause
+     * Sets SELECT clause.
+     *
+     * @return void
      */
     protected function setSelect(BaseBuilder $builder)
     {
@@ -170,9 +158,9 @@ class DatabaseHandler extends BaseHandler
     }
 
     /**
-     * Decodes column data
+     * Decodes column data.
      *
-     * @param mixed $data
+     * @param string $data
      *
      * @return false|string
      */
@@ -184,8 +172,8 @@ class DatabaseHandler extends BaseHandler
     /**
      * Writes the session data to the session storage.
      *
-     * @param string $id   The session ID
-     * @param string $data The encoded session data
+     * @param string $id   The session ID.
+     * @param string $data The encoded session data.
      */
     public function write($id, $data): bool
     {
@@ -237,7 +225,7 @@ class DatabaseHandler extends BaseHandler
     }
 
     /**
-     * Prepare data to insert/update
+     * Prepare data to insert/update.
      */
     protected function prepareData(string $data): string
     {
@@ -253,9 +241,9 @@ class DatabaseHandler extends BaseHandler
     }
 
     /**
-     * Destroys a session
+     * Destroys a session.
      *
-     * @param string $id The session ID being destroyed
+     * @param string $id The session ID being destroyed.
      */
     public function destroy($id): bool
     {
@@ -288,16 +276,12 @@ class DatabaseHandler extends BaseHandler
      *
      * @return false|int Returns the number of deleted sessions on success, or false on failure.
      */
-    #[ReturnTypeWillChange]
-    public function gc($max_lifetime)
+    public function gc($max_lifetime): false|int
     {
-        $separator = ' ';
-        $interval  = implode($separator, ['', "{$max_lifetime} second", '']);
-
         return $this->db->table($this->table)->where(
             'timestamp <',
-            "now() - INTERVAL {$interval}",
-            false
+            "now() - INTERVAL {$max_lifetime} second",
+            false,
         )->delete() ? 1 : $this->fail();
     }
 

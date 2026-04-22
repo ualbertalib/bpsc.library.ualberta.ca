@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of CodeIgniter Shield.
+ *
+ * (c) CodeIgniter Foundation <admin@codeigniter.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 namespace CodeIgniter\Shield\Models;
 
 use CodeIgniter\Shield\Exceptions\ValidationException;
@@ -32,7 +41,11 @@ trait CheckQueryReturnTrait
 
     protected function checkValidationError(): void
     {
-        $validationErrors = $this->getValidationErrors();
+        if ($this->validation === null) {
+            return;
+        }
+
+        $validationErrors = $this->validation->getErrors();
 
         if ($validationErrors !== []) {
             $message = 'Validation error:';
@@ -43,27 +56,6 @@ trait CheckQueryReturnTrait
 
             throw new ValidationException($message);
         }
-    }
-
-    /**
-     * Gets real validation errors that are not saved in the Session.
-     *
-     * @return string[]
-     */
-    protected function getValidationErrors(): array
-    {
-        // @TODO When CI v4.3 is released, you don't need this hack.
-        //       See https://github.com/codeigniter4/CodeIgniter4/pull/6384
-        return $this->getValidationPropertyErrors();
-    }
-
-    protected function getValidationPropertyErrors(): array
-    {
-        $refClass    = new ReflectionObject($this->validation);
-        $refProperty = $refClass->getProperty('errors');
-        $refProperty->setAccessible(true);
-
-        return $refProperty->getValue($this->validation);
     }
 
     protected function disableDBDebug(): void
@@ -94,10 +86,8 @@ trait CheckQueryReturnTrait
 
     protected function getPropertyDBDebug(): ReflectionProperty
     {
-        $refClass    = new ReflectionObject($this->db);
-        $refProperty = $refClass->getProperty('DBDebug');
-        $refProperty->setAccessible(true);
+        $refClass = new ReflectionObject($this->db);
 
-        return $refProperty;
+        return $refClass->getProperty('DBDebug');
     }
 }

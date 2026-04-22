@@ -1,15 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
+use CodeIgniter\Settings\Settings;
+
 if (! function_exists('setting')) {
     /**
      * Provides a convenience interface to the Settings service.
      *
-     * @param mixed|null $value
+     * @param mixed $value
      *
-     * @return mixed
+     * @return         array|bool|float|int|object|Settings|string|void|null
+     * @phpstan-return ($key is null ? Settings : ($value is null ? array|bool|float|int|object|string|null : void))
      */
     function setting(?string $key = null, $value = null)
     {
+        /** @var Settings $setting */
         $setting = service('settings');
 
         if (empty($key)) {
@@ -22,6 +28,6 @@ if (! function_exists('setting')) {
         }
 
         // Setting the value
-        return $setting->set($key, $value);
+        $setting->set($key, $value);
     }
 }

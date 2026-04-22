@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -8,6 +10,8 @@
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  */
+
+use CodeIgniter\Helpers\Array\ArrayHelper;
 
 // CodeIgniter Array Helpers
 
@@ -20,82 +24,7 @@ if (! function_exists('dot_array_search')) {
      */
     function dot_array_search(string $index, array $array)
     {
-        // See https://regex101.com/r/44Ipql/1
-        $segments = preg_split(
-            '/(?<!\\\\)\./',
-            rtrim($index, '* '),
-            0,
-            PREG_SPLIT_NO_EMPTY
-        );
-
-        $segments = array_map(static fn ($key) => str_replace('\.', '.', $key), $segments);
-
-        return _array_search_dot($segments, $array);
-    }
-}
-
-if (! function_exists('_array_search_dot')) {
-    /**
-     * Used by `dot_array_search` to recursively search the
-     * array with wildcards.
-     *
-     * @internal This should not be used on its own.
-     *
-     * @return mixed
-     */
-    function _array_search_dot(array $indexes, array $array)
-    {
-        // If index is empty, returns null.
-        if ($indexes === []) {
-            return null;
-        }
-
-        // Grab the current index
-        $currentIndex = array_shift($indexes);
-
-        if (! isset($array[$currentIndex]) && $currentIndex !== '*') {
-            return null;
-        }
-
-        // Handle Wildcard (*)
-        if ($currentIndex === '*') {
-            $answer = [];
-
-            foreach ($array as $value) {
-                if (! is_array($value)) {
-                    return null;
-                }
-
-                $answer[] = _array_search_dot($indexes, $value);
-            }
-
-            $answer = array_filter($answer, static fn ($value) => $value !== null);
-
-            if ($answer !== []) {
-                if (count($answer) === 1) {
-                    // If array only has one element, we return that element for BC.
-                    return current($answer);
-                }
-
-                return $answer;
-            }
-
-            return null;
-        }
-
-        // If this is the last index, make sure to return it now,
-        // and not try to recurse through things.
-        if (empty($indexes)) {
-            return $array[$currentIndex];
-        }
-
-        // Do we need to recursively search this value?
-        if (is_array($array[$currentIndex]) && $array[$currentIndex] !== []) {
-            return _array_search_dot($indexes, $array[$currentIndex]);
-        }
-
-        // Otherwise, not found.
-        return null;
+        return ArrayHelper::dotSearch($index, $array);
     }
 }
 
@@ -103,9 +32,9 @@ if (! function_exists('array_deep_search')) {
     /**
      * Returns the value of an element at a key in an array of uncertain depth.
      *
-     * @param mixed $key
+     * @param int|string $key
      *
-     * @return mixed|null
+     * @return array|bool|float|int|object|string|null
      */
     function array_deep_search($key, array $array)
     {
@@ -152,7 +81,7 @@ if (! function_exists('array_sort_by_multiple_keys')) {
     function array_sort_by_multiple_keys(array &$array, array $sortColumns): bool
     {
         // Check if there really are columns to sort after
-        if (empty($sortColumns) || empty($array)) {
+        if ($sortColumns === [] || $array === []) {
             return false;
         }
 
@@ -216,5 +145,21 @@ if (! function_exists('array_flatten_with_dots')) {
         }
 
         return $flattened;
+    }
+}
+
+if (! function_exists('array_group_by')) {
+    /**
+     * Groups all rows by their index values. Result's depth equals number of indexes
+     *
+     * @param array $array        Data array (i.e. from query result)
+     * @param array $indexes      Indexes to group by. Dot syntax used. Returns $array if empty
+     * @param bool  $includeEmpty If true, null and '' are also added as valid keys to group
+     *
+     * @return array Result array where rows are grouped together by indexes values.
+     */
+    function array_group_by(array $array, array $indexes, bool $includeEmpty = false): array
+    {
+        return ArrayHelper::groupBy($array, $indexes, $includeEmpty);
     }
 }

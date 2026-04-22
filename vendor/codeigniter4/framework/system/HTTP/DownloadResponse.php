@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -13,10 +15,13 @@ namespace CodeIgniter\HTTP;
 
 use CodeIgniter\Exceptions\DownloadException;
 use CodeIgniter\Files\File;
+use Config\App;
 use Config\Mimes;
 
 /**
  * HTTP response when a download is requested.
+ *
+ * @see \CodeIgniter\HTTP\DownloadResponseTest
  */
 class DownloadResponse extends Response
 {
@@ -33,7 +38,7 @@ class DownloadResponse extends Response
     /**
      * mime set flag
      */
-    private bool $setMime;
+    private readonly bool $setMime;
 
     /**
      * Download for binary
@@ -64,7 +69,7 @@ class DownloadResponse extends Response
      */
     public function __construct(string $filename, bool $setMime)
     {
-        parent::__construct(config('App'));
+        parent::__construct(config(App::class));
 
         $this->filename = $filename;
         $this->setMime  = $setMime;
@@ -75,10 +80,12 @@ class DownloadResponse extends Response
 
     /**
      * set download for binary string.
+     *
+     * @return void
      */
     public function setBinary(string $binary)
     {
-        if ($this->file !== null) {
+        if ($this->file instanceof File) {
             throw DownloadException::forCannotSetBinary();
         }
 
@@ -87,6 +94,8 @@ class DownloadResponse extends Response
 
     /**
      * set download for file.
+     *
+     * @return void
      */
     public function setFilePath(string $filepath)
     {
@@ -128,12 +137,12 @@ class DownloadResponse extends Response
     /**
      * Set content type by guessing mime type from file extension
      */
-    private function setContentTypeByMimeType()
+    private function setContentTypeByMimeType(): void
     {
         $mime    = null;
         $charset = '';
 
-        if ($this->setMime === true && ($lastDotPosition = strrpos($this->filename, '.')) !== false) {
+        if ($this->setMime && ($lastDotPosition = strrpos($this->filename, '.')) !== false) {
             $mime    = Mimes::guessTypeFromExtension(substr($this->filename, $lastDotPosition + 1));
             $charset = $this->charset;
         }
@@ -162,9 +171,9 @@ class DownloadResponse extends Response
          *
          * Reference: http://digiblog.de/2011/04/19/android-and-the-download-file-headers/
          */
-        // @todo: depend super global
-        if (count($x) !== 1 && isset($_SERVER['HTTP_USER_AGENT'])
-                && preg_match('/Android\s(1|2\.[01])/', $_SERVER['HTTP_USER_AGENT'])) {
+        $userAgent = service('superglobals')->server('HTTP_USER_AGENT');
+        if (count($x) !== 1 && $userAgent !== null
+                && preg_match('/Android\s(1|2\.[01])/', $userAgent)) {
             $x[count($x) - 1] = strtoupper($extension);
             $filename         = implode('.', $x);
         }
@@ -173,22 +182,21 @@ class DownloadResponse extends Response
     }
 
     /**
-     * get Content-Disposition Header string.
+     * Get Content-Disposition Header string.
      */
-    private function getContentDisposition(): string
+    private function getContentDisposition(bool $inline = false): string
     {
-        $downloadFilename = $this->getDownloadFileName();
-
-        $utf8Filename = $downloadFilename;
+        $downloadFilename = $utf8Filename = $this->getDownloadFileName();
+        $disposition      = $inline ? 'inline' : 'attachment';
 
         if (strtoupper($this->charset) !== 'UTF-8') {
             $utf8Filename = mb_convert_encoding($downloadFilename, 'UTF-8', $this->charset);
         }
 
-        $result = sprintf('attachment; filename="%s"', $downloadFilename);
+        $result = sprintf('%s; filename="%s"', $disposition, addslashes($downloadFilename));
 
-        if ($utf8Filename) {
-            $result .= '; filename*=UTF-8\'\'' . rawurlencode($utf8Filename);
+        if ($utf8Filename !== '') {
+            $result .= sprintf('; filename*=UTF-8\'\'%s', rawurlencode($utf8Filename));
         }
 
         return $result;
@@ -234,16 +242,6 @@ class DownloadResponse extends Response
     }
 
     /**
-     * Disables cache configuration.
-     *
-     * @throws DownloadException
-     */
-    public function setCache(array $options = [])
-    {
-        throw DownloadException::forCannotSetCache();
-    }
-
-    /**
      * {@inheritDoc}
      *
      * @return $this
@@ -252,6 +250,13 @@ class DownloadResponse extends Response
      */
     public function send()
     {
+        // Turn off output buffering completely, even if php.ini output_buffering is not off
+        if (ENVIRONMENT !== 'testing') {
+            while (ob_get_level() > 0) {
+                ob_end_clean();
+            }
+        }
+
         $this->buildHeaders();
         $this->sendHeaders();
         $this->sendBody();
@@ -261,6 +266,8 @@ class DownloadResponse extends Response
 
     /**
      * set header for file download.
+     *
+     * @return void
      */
     public function buildHeaders()
     {
@@ -268,11 +275,12 @@ class DownloadResponse extends Response
             $this->setContentTypeByMimeType();
         }
 
-        $this->setHeader('Content-Disposition', $this->getContentDisposition());
-        $this->setHeader('Expires-Disposition', '0');
+        if (! $this->hasHeader('Content-Disposition')) {
+            $this->setHeader('Content-Disposition', $this->getContentDisposition());
+        }
+
         $this->setHeader('Content-Transfer-Encoding', 'binary');
         $this->setHeader('Content-Length', (string) $this->getContentLength());
-        $this->noCache();
     }
 
     /**
@@ -288,7 +296,7 @@ class DownloadResponse extends Response
             return $this->sendBodyByBinary();
         }
 
-        if ($this->file !== null) {
+        if ($this->file instanceof File) {
             return $this->sendBodyByFilePath();
         }
 
@@ -321,6 +329,18 @@ class DownloadResponse extends Response
     private function sendBodyByBinary()
     {
         echo $this->binary;
+
+        return $this;
+    }
+
+    /**
+     * Sets the response header to display the file in the browser.
+     *
+     * @return DownloadResponse
+     */
+    public function inline()
+    {
+        $this->setHeader('Content-Disposition', $this->getContentDisposition(true));
 
         return $this;
     }

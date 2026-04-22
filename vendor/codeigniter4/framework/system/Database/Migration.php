@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -21,7 +23,7 @@ abstract class Migration
     /**
      * The name of the database group to use.
      *
-     * @var string
+     * @var string|null
      */
     protected $DBGroup;
 
@@ -39,22 +41,21 @@ abstract class Migration
      */
     protected $forge;
 
-    /**
-     * Constructor.
-     *
-     * @param Forge $forge
-     */
     public function __construct(?Forge $forge = null)
     {
-        $this->forge = $forge ?? Database::forge($this->DBGroup ?? config('Database')->defaultGroup);
+        if (isset($this->DBGroup)) {
+            $this->forge = Database::forge($this->DBGroup);
+        } elseif ($forge instanceof Forge) {
+            $this->forge = $forge;
+        } else {
+            $this->forge = Database::forge(config(Database::class)->defaultGroup);
+        }
 
         $this->db = $this->forge->getConnection();
     }
 
     /**
      * Returns the database group name this migration uses.
-     *
-     * @return string
      */
     public function getDBGroup(): ?string
     {
@@ -63,11 +64,15 @@ abstract class Migration
 
     /**
      * Perform a migration step.
+     *
+     * @return void
      */
     abstract public function up();
 
     /**
      * Revert a migration step.
+     *
+     * @return void
      */
     abstract public function down();
 }
